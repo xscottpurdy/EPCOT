@@ -439,6 +439,42 @@ function adventureMapBuildToolbar(
 
 }
 
+function adventureMapResolveImageUrl(
+  url
+){
+
+  const value =
+    String(
+      url || ''
+    ).trim();
+
+
+  if(!value){
+    return '';
+  }
+
+
+  const driveMatch =
+    value.match(
+      /drive\.google\.com\/file\/d\/([^/]+)/
+    );
+
+
+  if(driveMatch?.[1]){
+
+    return (
+      'https://drive.google.com/uc?export=view&id=' +
+      encodeURIComponent(
+        driveMatch[1]
+      )
+    );
+
+  }
+
+
+  return value;
+
+}
 
 /* =====================================================
    MAP BOARD MANAGER
@@ -1340,13 +1376,14 @@ this.campaign =
           <div
             class="dm-map-board-eyebrow"
           >
-            ADVENTURE CARTOGRAPHY //
-            ${
-              this.campaign ===
-                'villain'
-                ? 'VILLAIN'
-                : 'HERO'
-            }
+ADVENTURE CARTOGRAPHY //
+${
+  this.campaign === 'villain'
+    ? 'VILLAIN'
+    : this.campaign === 'combined'
+      ? 'EITHER / COMBINED'
+      : 'HERO'
+}
           </div>
 
           <h2>
@@ -1752,10 +1789,12 @@ this.campaign =
                   data-map-stage
                 >
 
-                  <img
-                    src="${adventureMapEscape(
-                      map.image_url
-                    )}"
+<img
+  src="${adventureMapEscape(
+    adventureMapResolveImageUrl(
+      map.image_url
+    )
+  )}"
                     alt="${adventureMapEscape(
                       map.title ||
                       'Adventure Map'
