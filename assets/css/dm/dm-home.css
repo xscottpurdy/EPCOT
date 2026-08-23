@@ -1,0 +1,3646 @@
+/* =====================================================
+   EPCOT DND
+   VISTACORP DM HOME
+
+   TYPOGRAPHY RULES
+
+   Functional text:
+   11px minimum
+
+   Ordinary readable text:
+   12px - 14px
+
+   Important names / headings:
+   15px+
+
+   Decorative machine-code flavor:
+   may use 9px - 10px
+
+   Nothing the DM must actively read should be
+   rendered below 11px.
+   ===================================================== */
+
+
+/* =====================================================
+   HOME LAYOUT
+   ===================================================== */
+
+.dm-home-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:
+    "reality reality"
+    "feeds feeds"
+    "tonight tonight"
+    "adventures adventures"
+    "alerts alerts"
+    "attention attention"
+    "analytics analytics"
+    "system system"
+    "conscience conscience";
+  gap:16px;
+}
+
+.dm-reality-panel{grid-area:reality;}
+.dm-feed-panel{grid-area:feeds;}
+.dm-tonight-panel{grid-area:tonight;}
+.dm-adventures-panel{grid-area:adventures;}
+.dm-alert-panel{grid-area:alerts;}
+.dm-attention-panel{grid-area:attention;}
+.dm-system-panel{grid-area:system;}
+.dm-conscience-panel{grid-area:conscience;}
+
+
+/* =====================================================
+   ANALYTICS DIVIDER
+   ===================================================== */
+
+.dm-home-analytics-divider{
+  grid-area:analytics;
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  min-height:56px;
+  padding:0 18px;
+  overflow:hidden;
+  border:1px solid rgba(214,166,75,.28);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(214,166,75,.08),
+      rgba(45,151,166,.035)
+    );
+}
+
+.dm-home-analytics-divider::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:var(--vc-gold);
+}
+
+.dm-home-analytics-divider span{
+  color:var(--vc-gold-bright);
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+.dm-home-analytics-divider strong{
+  color:var(--vc-cyan);
+  font-family:"Courier New",monospace;
+  font-size:10px;
+  letter-spacing:.12em;
+}
+
+
+/* =====================================================
+   SHARED PANEL ELEMENTS
+   ===================================================== */
+
+.dm-panel-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  padding:17px 18px 14px;
+  border-bottom:1px solid var(--vc-line);
+}
+
+.dm-panel-title{
+  margin:0;
+  color:var(--vc-gold-bright);
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+
+.dm-panel-subtitle{
+  margin-top:5px;
+  color:var(--vc-muted);
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.dm-panel-status,
+.dm-panel-link{
+  color:var(--vc-cyan);
+  font-family:"Courier New",monospace;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.dm-panel-link{
+  border:0;
+  background:transparent;
+  cursor:pointer;
+}
+
+.dm-panel-link:hover{
+  color:var(--vc-gold-bright);
+}
+
+.dm-home-empty,
+.dm-home-error{
+  padding:22px;
+  color:var(--vc-muted);
+  font-size:13px;
+  line-height:1.55;
+}
+
+.dm-home-error{
+  display:grid;
+  gap:7px;
+  border-left:3px solid #9e3d48;
+}
+
+.dm-home-error strong{
+  color:#e7a0a6;
+  font-size:14px;
+}
+
+
+/* =====================================================
+   REALITY CONTROL
+   ===================================================== */
+
+.dm-reality-table-wrap{
+  width:100%;
+}
+
+
+.dm-reality-table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+
+/* =====================================================
+   COLUMN WIDTHS
+   ===================================================== */
+
+.dm-reality-col-explorer{
+  width:24%;
+}
+
+.dm-reality-col-state{
+  width:18%;
+}
+
+.dm-reality-col-control{
+  width:14%;
+}
+
+.dm-reality-col-access{
+  width:16%;
+}
+
+.dm-reality-col-status{
+  width:14%;
+}
+
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.dm-reality-table th{
+  padding:
+    11px
+    8px;
+
+  color:#918d77;
+
+  border-bottom:
+    1px solid
+    var(--vc-line);
+
+  font-size:12px;
+
+  font-weight:850;
+
+  letter-spacing:.07em;
+
+  text-align:center;
+
+  text-transform:uppercase;
+}
+
+
+.dm-reality-table th:first-child{
+  text-align:left;
+}
+
+
+.dm-reality-table td{
+  padding:
+    12px
+    8px;
+
+  border-bottom:
+    1px solid
+    rgba(69,163,177,.11);
+
+  color:#abb9b8;
+
+  font-size:13px;
+
+  vertical-align:middle;
+}
+
+
+.dm-reality-main-row:hover{
+  background:
+    rgba(36,126,141,.035);
+}
+
+
+/* =====================================================
+   EXPLORER
+   ===================================================== */
+
+.dm-explorer-cell{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+
+.dm-explorer-avatar{
+  display:grid;
+  place-items:center;
+
+  width:40px;
+  height:40px;
+
+  flex:0 0 40px;
+
+  border:
+    1px solid
+    var(--vc-line-strong);
+
+  background:#0a2631;
+
+  color:
+    var(--vc-cyan);
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+
+.dm-explorer-cell strong{
+  color:
+    var(--vc-paper);
+
+  font-size:14px;
+}
+
+
+.dm-reality-character-name{
+  margin-top:4px;
+
+  color:
+    var(--vc-muted);
+
+  font-size:12px;
+
+  line-height:1.3;
+}
+
+
+/* =====================================================
+   STATE DISPLAY
+   ===================================================== */
+
+.dm-reality-state-display{
+  display:grid;
+
+  gap:5px;
+
+  min-height:56px;
+
+  padding:
+    9px
+    10px;
+
+  border:
+    1px solid
+    rgba(50,182,205,.28);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(50,182,205,.08),
+      rgba(1,12,18,.6)
+    );
+
+  text-align:center;
+}
+
+
+.dm-reality-state-display.villain{
+  border-color:
+    rgba(215,102,63,.35);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(215,102,63,.08),
+      rgba(1,12,18,.6)
+    );
+}
+
+
+.dm-reality-state-display.free{
+  border-color:
+    rgba(214,166,75,.48);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(214,166,75,.12),
+      rgba(1,12,18,.65)
+    );
+}
+
+
+.dm-reality-state-label{
+  color:
+    var(--vc-muted);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+}
+
+
+.dm-reality-state-display strong{
+  color:
+    var(--vc-cyan-bright);
+
+  font-size:13px;
+
+  line-height:1.25;
+}
+
+
+.dm-reality-state-display.villain strong{
+  color:
+    var(--vc-orange);
+}
+
+
+.dm-reality-state-display.free strong{
+  color:
+    var(--vc-gold-bright);
+}
+
+
+/* =====================================================
+   MECHANICAL LEVER
+   ===================================================== */
+
+.dm-control-lever{
+  display:grid;
+
+  justify-items:center;
+
+  gap:4px;
+
+  width:100%;
+
+  min-width:0;
+
+  padding:
+    4px
+    2px;
+
+  border:0;
+
+  background:transparent;
+
+  color:inherit;
+
+  font:inherit;
+
+  cursor:pointer;
+}
+
+
+/* =====================================================
+   LEVER LABELS
+   ===================================================== */
+
+.dm-control-lever-option{
+  color:
+    #70888e;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.05em;
+
+  line-height:1;
+
+  text-transform:uppercase;
+
+  transition:
+    color .18s ease,
+    text-shadow .18s ease,
+    opacity .18s ease;
+}
+
+
+.dm-control-lever-option.is-selected{
+  color:
+    var(--vc-gold-bright);
+
+  text-shadow:
+    0 0 7px
+    rgba(214,166,75,.28);
+}
+
+
+/* =====================================================
+   LEVER HOUSING
+   ===================================================== */
+
+.dm-control-lever-machine{
+  position:relative;
+
+  display:block;
+
+  width:42px;
+  height:46px;
+
+  border:
+    1px solid
+    rgba(214,166,75,.4);
+
+  border-radius:4px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #18343d,
+      #07171d 52%,
+      #102930
+    );
+
+  box-shadow:
+    inset 1px 1px 0
+    rgba(255,255,255,.08),
+
+    inset -2px -2px 3px
+    rgba(0,0,0,.5),
+
+    0 3px 6px
+    rgba(0,0,0,.28);
+
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    opacity .18s ease;
+}
+
+
+/* =====================================================
+   LEVER SLOT
+   ===================================================== */
+
+.dm-control-lever-slot{
+  position:absolute;
+
+  left:50%;
+  top:7px;
+
+  width:8px;
+  height:31px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius:8px;
+
+  background:#01070b;
+
+  box-shadow:
+    inset 0 0 5px
+    rgba(0,0,0,.95),
+
+    0 0 0 1px
+    rgba(255,255,255,.045);
+}
+
+
+/* =====================================================
+   LEVER ARM
+   ===================================================== */
+
+.dm-control-lever-arm{
+  position:absolute;
+
+  left:50%;
+
+  width:3px;
+  height:20px;
+
+  border-radius:2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #68777b,
+      #d0d5d3,
+      #58666a
+    );
+
+  transform-origin:
+    50%
+    100%;
+
+  transition:
+    top .27s ease,
+    bottom .27s ease,
+    transform .27s
+    cubic-bezier(
+      .18,
+      .82,
+      .28,
+      1.18
+    );
+}
+
+
+/* =====================================================
+   LEVER HANDLE
+   ===================================================== */
+
+.dm-control-lever-knob{
+  position:absolute;
+
+  top:-7px;
+  left:50%;
+
+  width:14px;
+  height:14px;
+
+  transform:
+    translateX(-50%);
+
+  border:
+    1px solid
+    rgba(255,255,255,.2);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 28%,
+      #ef977c,
+      #c64c40 46%,
+      #691e22 100%
+    );
+
+  box-shadow:
+    0 2px 4px
+    rgba(0,0,0,.58);
+
+  transition:
+    transform .18s ease;
+}
+
+
+/* =====================================================
+   LEVER POSITION: UP
+   ===================================================== */
+
+.dm-control-lever.is-up
+.dm-control-lever-arm{
+  top:7px;
+
+  transform:
+    translateX(-50%)
+    rotate(-17deg);
+}
+
+
+/* =====================================================
+   LEVER POSITION: DOWN
+   ===================================================== */
+
+.dm-control-lever.is-down
+.dm-control-lever-arm{
+  bottom:7px;
+
+  transform:
+    translateX(-50%)
+    rotate(17deg);
+}
+
+
+/* =====================================================
+   SCREWS
+   ===================================================== */
+
+.dm-control-lever-screw{
+  position:absolute;
+
+  left:5px;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:#77868a;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(0,0,0,.65);
+}
+
+
+.dm-control-lever-screw.top{
+  top:5px;
+}
+
+
+.dm-control-lever-screw.bottom{
+  bottom:5px;
+}
+
+
+/* =====================================================
+   LEVER INTERACTION
+   ===================================================== */
+
+.dm-control-lever:not(:disabled):hover
+.dm-control-lever-machine{
+  border-color:
+    rgba(214,166,75,.8);
+
+  box-shadow:
+    inset 1px 1px 0
+    rgba(255,255,255,.1),
+
+    inset -2px -2px 3px
+    rgba(0,0,0,.5),
+
+    0 0 12px
+    rgba(214,166,75,.18);
+}
+
+
+.dm-control-lever:not(:disabled):hover
+.dm-control-lever-knob{
+  transform:
+    translateX(-50%)
+    scale(1.1);
+}
+
+
+.dm-control-lever:not(:disabled):active
+.dm-control-lever-machine{
+  transform:
+    translateY(1px);
+}
+
+
+/* =====================================================
+   DISABLED CAMPAIGN / REALITY DURING FREE ACCESS
+   ===================================================== */
+
+.dm-control-lever.is-disabled{
+  cursor:not-allowed;
+}
+
+
+.dm-control-lever.is-disabled
+.dm-control-lever-machine{
+  opacity:.36;
+
+  filter:
+    grayscale(.45);
+}
+
+
+.dm-control-lever.is-disabled
+.dm-control-lever-option{
+  opacity:.35;
+}
+
+
+.dm-control-lever.is-disabled
+.dm-control-lever-option.is-selected{
+  color:
+    #7a8584;
+
+  text-shadow:none;
+}
+
+
+/* =====================================================
+   NETWORK STATUS
+   ===================================================== */
+
+.dm-reality-network-status{
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:7px;
+
+  text-align:center;
+}
+
+
+.dm-reality-network-light{
+  display:block;
+
+  width:11px;
+  height:11px;
+
+  border-radius:50%;
+
+  background:#64d89b;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(100,216,155,.08),
+
+    0 0 10px
+    rgba(100,216,155,.65);
+}
+
+
+.dm-reality-network-status strong{
+  color:
+    #72d9a2;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:10px;
+
+  letter-spacing:.07em;
+}
+
+
+/* =====================================================
+   ASSIGNMENT SUMMARY
+   ===================================================== */
+
+.dm-reality-assignment-row td{
+  padding:
+    9px
+    12px;
+
+  background:
+    rgba(1,10,15,.45);
+
+  border-bottom:
+    1px solid
+    rgba(69,163,177,.15);
+}
+
+
+.dm-reality-assignment-row span{
+  display:inline-block;
+
+  margin-right:24px;
+
+  color:
+    var(--vc-muted);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:11px;
+
+  line-height:1.4;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.dm-panel-footer{
+  padding:
+    13px
+    16px;
+
+  border-top:
+    1px solid
+    var(--vc-line);
+
+  text-align:center;
+}
+
+
+.dm-panel-footer button{
+  border:0;
+
+  background:transparent;
+
+  color:
+    var(--vc-gold);
+
+  font:inherit;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:950px){
+
+  .dm-reality-table th{
+    font-size:11px;
+  }
+
+
+  .dm-reality-table td{
+    padding:
+      10px
+      5px;
+  }
+
+
+  .dm-explorer-avatar{
+    width:34px;
+    height:34px;
+
+    flex-basis:34px;
+  }
+
+
+  .dm-control-lever-machine{
+    width:38px;
+  }
+
+
+  .dm-control-lever-option{
+    font-size:9px;
+  }
+
+
+  .dm-reality-state-display strong{
+    font-size:12px;
+  }
+
+}
+
+/* =====================================================
+   LIVE FIELD FEEDS
+   ===================================================== */
+
+.dm-feed-panel{
+  overflow:hidden;
+  padding-bottom:14px;
+}
+
+.dm-field-header-light{
+  display:inline-block;
+  width:8px;
+  height:8px;
+  margin-right:6px;
+  border-radius:50%;
+  background:#64d89b;
+  box-shadow:
+    0 0 8px
+    rgba(100,216,155,.65);
+}
+
+.dm-field-status-strip{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(115px,1fr)
+    );
+
+  gap:1px;
+
+  margin-bottom:12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  background:
+    rgba(255,255,255,.08);
+
+  overflow:visible;
+
+}
+
+.dm-field-status-strip > div{
+  padding:10px 8px;
+  background:rgba(5,19,28,.82);
+  text-align:center;
+}
+
+.dm-field-status-strip strong{
+  display:block;
+  color:var(--vc-gold-bright);
+  font-size:18px;
+  line-height:1;
+}
+
+.dm-field-status-strip span{
+  display:block;
+  margin-top:5px;
+  opacity:.68;
+  font-family:"Courier New",monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.dm-field-feed-layout{
+  display:grid;
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+  gap:10px;
+  padding:0 14px;
+}
+
+.dm-field-card{
+  min-width:0;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(3,15,23,.62);
+}
+
+.dm-field-hero{
+  border-top:
+    2px solid
+    rgba(45,151,166,.7);
+}
+
+.dm-field-villain{
+  border-top:
+    2px solid
+    rgba(214,166,75,.72);
+}
+
+.dm-field-camera{
+  position:relative;
+  width:100%;
+  height:180px;
+  overflow:hidden;
+  background:#071821;
+}
+
+.dm-field-camera::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 3px,
+      rgba(255,255,255,.025) 4px
+    );
+}
+
+.dm-field-camera img{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+.dm-field-no-image{
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:100%;
+  color:rgba(255,255,255,.35);
+  font-family:"Courier New",monospace;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+
+.dm-field-rec,
+.dm-field-reality{
+  position:absolute;
+  z-index:2;
+  padding:5px 8px;
+  background:rgba(2,11,17,.84);
+  font-family:"Courier New",monospace;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.dm-field-rec{
+  top:9px;
+  left:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.dm-field-reality{
+  right:10px;
+  bottom:9px;
+  color:var(--vc-gold-bright);
+}
+
+.dm-field-rec-light{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#df5d61;
+  box-shadow:
+    0 0 7px
+    rgba(223,93,97,.8);
+  animation:
+    dmFieldPulse
+    1.8s
+    ease-in-out
+    infinite;
+}
+
+@keyframes dmFieldPulse{
+
+  0%,
+  100%{
+    opacity:.45;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+.dm-field-identity{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:10px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.dm-field-player-name{
+  opacity:.62;
+  font-family:"Courier New",monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.dm-field-character-name{
+  margin-top:3px;
+  color:var(--vc-paper);
+  font-size:16px;
+  font-weight:850;
+}
+
+.dm-field-status-light{
+  width:9px;
+  height:9px;
+  flex:0 0 9px;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+}
+
+.dm-field-status-light.is-connected{
+  background:#64d89b;
+  box-shadow:
+    0 0 8px
+    rgba(100,216,155,.55);
+}
+
+.dm-field-performance{
+  padding:0 10px 10px;
+}
+
+.dm-field-core-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:4px;
+  margin-bottom:4px;
+}
+
+.dm-field-skill-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:3px;
+}
+
+.dm-field-stat{
+  min-width:0;
+  padding:7px 3px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.025);
+  text-align:center;
+}
+
+.dm-field-stat span{
+  display:block;
+  opacity:.58;
+  font-family:"Courier New",monospace;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.05em;
+}
+
+.dm-field-stat strong{
+  display:block;
+  margin-top:3px;
+  color:var(--vc-cyan);
+  font-size:13px;
+}
+
+.dm-field-core-stats
+.dm-field-stat strong{
+  color:var(--vc-gold-bright);
+  font-size:14px;
+}
+
+.dm-field-no-record,
+.dm-field-empty{
+  padding:20px;
+  border:1px dashed rgba(255,255,255,.12);
+  opacity:.65;
+  text-align:center;
+  font-family:"Courier New",monospace;
+  font-size:12px;
+  letter-spacing:.05em;
+}
+
+
+/* =====================================================
+   TONIGHT'S CONTROL DECK
+   ===================================================== */
+
+.dm-tonight-panel{
+  overflow:hidden;
+}
+
+.dm-tonight-layout{
+  display:grid;
+  grid-template-columns:
+    minmax(300px,.85fr)
+    minmax(440px,1.15fr);
+  gap:14px;
+  padding:14px;
+}
+
+.dm-tonight-notes,
+.dm-tonight-priorities{
+  padding:14px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(4,18,27,.52);
+}
+
+.dm-tonight-section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.dm-tonight-section-head h3{
+  margin:3px 0 0;
+  color:var(--vc-paper);
+  font-size:18px;
+}
+
+.dm-tonight-kicker{
+  color:var(--vc-gold);
+  font-family:"Courier New",monospace;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+.dm-tonight-format-toolbar{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  padding:7px 8px;
+  border:1px solid rgba(214,166,75,.22);
+  border-bottom:0;
+  background:rgba(214,166,75,.045);
+}
+
+.dm-tonight-format-toolbar button{
+  min-width:34px;
+  min-height:30px;
+  padding:5px 9px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  color:var(--vc-paper);
+  font:inherit;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.dm-tonight-format-toolbar button:hover{
+  border-color:rgba(214,166,75,.45);
+  background:rgba(214,166,75,.09);
+}
+
+.dm-tonight-editor{
+  box-sizing:border-box;
+  width:100%;
+  min-height:220px;
+  max-height:420px;
+  overflow:auto;
+  padding:13px 14px;
+  border:1px solid rgba(214,166,75,.22);
+  outline:none;
+  background:rgba(1,10,16,.58);
+  color:var(--vc-paper);
+  font:inherit;
+  font-size:14px;
+  line-height:1.55;
+}
+
+.dm-tonight-editor:focus{
+  border-color:rgba(214,166,75,.58);
+  box-shadow:
+    0 0 0 2px
+    rgba(214,166,75,.05);
+}
+
+.dm-tonight-editor:empty::before{
+  content:attr(data-placeholder);
+  opacity:.4;
+  pointer-events:none;
+}
+
+.dm-tonight-editor ul,
+.dm-tonight-editor ol{
+  margin:8px 0;
+  padding-left:24px;
+}
+
+.dm-tonight-editor p{
+  margin:0 0 8px;
+}
+
+.dm-tonight-note-help{
+  margin-top:8px;
+  opacity:.58;
+  font-family:"Courier New",monospace;
+  font-size:11px;
+  letter-spacing:.04em;
+}
+
+.dm-tonight-clear{
+  border:1px solid rgba(223,93,97,.3);
+  background:rgba(127,45,55,.18);
+  color:#e9a4a6;
+  padding:7px 10px;
+  font:inherit;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.dm-tonight-clear:hover{
+  background:rgba(127,45,55,.3);
+}
+
+.dm-tonight-campaigns{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.dm-tonight-campaign{
+  min-width:0;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(2,13,20,.45);
+}
+
+.dm-tonight-campaign-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  font-family:"Courier New",monospace;
+  text-transform:uppercase;
+}
+
+.dm-tonight-campaign-head span{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.07em;
+}
+
+.dm-tonight-campaign-head strong{
+  opacity:.62;
+  font-size:10px;
+  letter-spacing:.06em;
+}
+
+.dm-tonight-campaign-head.hero{
+  color:var(--vc-cyan);
+  border-top:
+    2px solid
+    rgba(45,151,166,.7);
+}
+
+.dm-tonight-campaign-head.villain{
+  color:var(--vc-gold-bright);
+  border-top:
+    2px solid
+    rgba(214,166,75,.75);
+}
+
+.dm-tonight-objective-list{
+  display:grid;
+  gap:1px;
+  background:rgba(255,255,255,.06);
+}
+
+.dm-tonight-objective{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:64px;
+  padding:10px;
+  background:rgba(4,18,27,.94);
+}
+
+.dm-tonight-objective.hero{
+  box-shadow:
+    inset 2px 0 0
+    rgba(45,151,166,.45);
+}
+
+.dm-tonight-objective.villain{
+  box-shadow:
+    inset 2px 0 0
+    rgba(214,166,75,.45);
+}
+
+.dm-tonight-objective.is-complete{
+  opacity:.5;
+}
+
+.dm-tonight-objective.is-complete strong{
+  text-decoration:line-through;
+}
+
+.dm-tonight-objective.is-empty{
+  opacity:.45;
+}
+
+.dm-tonight-star{
+  flex:0 0 auto;
+  color:var(--vc-gold-bright);
+  font-size:16px;
+}
+
+.dm-tonight-objective-copy{
+  flex:1;
+  min-width:0;
+}
+
+.dm-tonight-objective-copy strong{
+  display:block;
+  color:var(--vc-paper);
+  font-size:14px;
+}
+
+.dm-tonight-objective-copy span{
+  display:block;
+  margin-top:3px;
+  opacity:.62;
+  font-size:12px;
+}
+
+.dm-tonight-star-count{
+  flex:0 0 auto;
+  min-width:46px;
+  padding:5px 7px;
+  border:1px solid rgba(214,166,75,.18);
+  color:var(--vc-gold-bright);
+  text-align:center;
+  font-size:15px;
+  font-weight:900;
+}
+
+.dm-tonight-star-count span{
+  display:block;
+  margin-top:2px;
+  opacity:.58;
+  font-family:"Courier New",monospace;
+  font-size:9px;
+  letter-spacing:.05em;
+}
+
+
+/* =====================================================
+   CURRENT ADVENTURES
+   ===================================================== */
+
+.dm-adventure-list{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:12px;
+  padding:14px;
+}
+
+.dm-adventure-card{
+  display:grid;
+  grid-template-columns:
+    48px
+    1fr
+    auto;
+  gap:12px;
+  align-items:center;
+  padding:14px;
+  border:1px solid var(--vc-line);
+  background:rgba(5,23,30,.75);
+}
+
+.dm-adventure-symbol{
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  border:1px solid var(--vc-cyan);
+  border-radius:50%;
+  color:var(--vc-cyan-bright);
+  font-size:17px;
+  font-weight:900;
+}
+
+.dm-adventure-card.villain
+.dm-adventure-symbol{
+  border-color:var(--vc-orange);
+  color:var(--vc-orange);
+}
+
+.dm-adventure-type{
+  color:var(--vc-cyan);
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.dm-adventure-card.villain
+.dm-adventure-type{
+  color:var(--vc-orange);
+}
+
+.dm-adventure-name{
+  margin-top:4px;
+  color:var(--vc-cyan-bright);
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.dm-adventure-card.villain
+.dm-adventure-name{
+  color:#e36c52;
+}
+
+.dm-adventure-session{
+  margin-top:7px;
+  color:#a4adaa;
+  font-size:13px;
+  line-height:1.45;
+}
+
+.dm-adventure-open{
+  min-height:40px;
+  padding:0 13px;
+  border:1px solid rgba(214,166,75,.42);
+  background:transparent;
+  color:var(--vc-gold);
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+
+/* =====================================================
+   ALERT FEED
+   ===================================================== */
+
+.dm-alert-list{
+  display:grid;
+}
+
+.dm-alert-row{
+  display:grid;
+  grid-template-columns:
+    40px
+    minmax(0,1fr)
+    110px;
+  gap:12px;
+  align-items:center;
+  width:100%;
+  min-height:70px;
+  padding:10px 16px;
+  border:0;
+  border-bottom:1px solid var(--vc-line);
+  background:transparent;
+  color:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+
+.dm-alert-row:hover{
+  background:rgba(45,151,166,.045);
+}
+
+.dm-alert-avatar{
+  width:36px;
+  height:36px;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--vc-line-strong);
+  border-radius:50%;
+  background:#0a2631;
+  color:var(--vc-cyan);
+  font-size:13px;
+  font-weight:900;
+}
+
+.dm-alert-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.dm-alert-copy{
+  min-width:0;
+}
+
+.dm-alert-heading{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.dm-alert-heading strong{
+  color:var(--vc-paper);
+  font-size:14px;
+}
+
+.dm-alert-heading span{
+  color:var(--vc-muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.dm-alert-campaign.hero{
+  color:var(--vc-cyan);
+}
+
+.dm-alert-campaign.villain{
+  color:var(--vc-orange);
+}
+
+.dm-alert-message{
+  margin-top:5px;
+  color:#b8c0be;
+  font-size:13px;
+  line-height:1.45;
+}
+
+.dm-alert-time{
+  color:var(--vc-muted);
+  font-family:"Courier New",monospace;
+  font-size:11px;
+  line-height:1.3;
+  text-align:right;
+}
+
+
+/* =====================================================
+   ATTENTION REQUIRED
+   ===================================================== */
+
+.dm-attention-panel{
+  border-color:rgba(190,85,76,.35);
+}
+
+.dm-attention-list{
+  display:grid;
+}
+
+.dm-attention-item{
+  display:grid;
+  grid-template-columns:
+    32px
+    1fr
+    auto;
+  gap:12px;
+  align-items:center;
+  min-height:64px;
+  padding:12px 16px;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  background:transparent;
+  color:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+
+.dm-attention-item:hover{
+  background:rgba(255,255,255,.025);
+}
+
+.dm-attention-mark{
+  display:grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  border:1px solid #bd695d;
+  color:#df8a7d;
+  font-size:14px;
+  font-weight:900;
+}
+
+.dm-attention-item strong{
+  display:block;
+  color:#e6c2b8;
+  font-size:14px;
+}
+
+.dm-attention-item small{
+  display:block;
+  margin-top:4px;
+  color:var(--vc-muted);
+  font-size:12px;
+}
+
+.dm-attention-arrow{
+  color:var(--vc-gold);
+  font-size:16px;
+}
+
+
+/* =====================================================
+   SYSTEM OVERVIEW / ANALYTICS
+   ===================================================== */
+
+.dm-kpi-grid{
+  display:grid;
+  grid-template-columns:
+  repeat(5,minmax(0,1fr));
+  gap:1px;
+  border-bottom:1px solid var(--vc-line);
+  background:rgba(255,255,255,.06);
+}
+
+.dm-kpi-card{
+  padding:19px;
+  background:rgba(4,18,27,.92);
+  text-align:center;
+}
+
+.dm-kpi-card strong{
+  display:block;
+  color:var(--vc-gold-bright);
+  font-size:30px;
+  line-height:1;
+}
+
+.dm-kpi-card span{
+  display:block;
+  margin-top:8px;
+  color:var(--vc-muted);
+  font-size:12px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.dm-system-analytics-grid{
+  display:grid;
+  grid-template-columns:
+    1.25fr
+    .75fr;
+  gap:14px;
+  padding:14px;
+}
+
+.dm-level-card{
+  grid-column:1 / -1;
+}
+
+.dm-analytics-card{
+  min-width:0;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(4,18,27,.52);
+}
+
+.dm-analytics-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.dm-analytics-heading > div > span{
+  color:var(--vc-gold);
+  font-family:"Courier New",monospace;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.09em;
+}
+
+.dm-analytics-heading h3{
+  margin:5px 0 0;
+  color:var(--vc-paper);
+  font-size:17px;
+}
+
+.dm-horizontal-bars{
+  display:grid;
+  gap:12px;
+}
+
+.dm-bar-row{
+  display:grid;
+  grid-template-columns:
+    105px
+    minmax(0,1fr)
+    50px;
+  gap:10px;
+  align-items:center;
+}
+
+.dm-bar-label{
+  color:#adb8b6;
+  font-size:13px;
+}
+
+.dm-bar-track{
+  height:12px;
+  overflow:hidden;
+  background:#102a34;
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.dm-bar-track span{
+  display:block;
+  height:100%;
+  background:
+    linear-gradient(
+      90deg,
+      var(--vc-cyan),
+      var(--vc-gold)
+    );
+}
+
+.dm-bar-row strong{
+  color:var(--vc-cyan-bright);
+  font-size:13px;
+  text-align:right;
+}
+
+.dm-ranked-list,
+.dm-personnel-ranking{
+  display:grid;
+  gap:1px;
+  background:rgba(255,255,255,.05);
+}
+
+.dm-ranked-row,
+.dm-personnel-ranking > div{
+  display:grid;
+  grid-template-columns:
+    32px
+    minmax(0,1fr)
+    minmax(100px,.7fr)
+    44px;
+  gap:10px;
+  align-items:center;
+  min-height:44px;
+  padding:8px 10px;
+  background:rgba(4,18,27,.94);
+}
+
+.dm-ranked-row > span,
+.dm-personnel-ranking > div > span{
+  color:var(--vc-muted);
+  font-family:"Courier New",monospace;
+  font-size:11px;
+}
+
+.dm-ranked-row strong,
+.dm-personnel-ranking strong{
+  color:var(--vc-paper);
+  font-size:13px;
+}
+
+.dm-ranked-row small,
+.dm-personnel-ranking small{
+  color:var(--vc-muted);
+  font-size:11px;
+}
+
+.dm-ranked-row b,
+.dm-personnel-ranking b{
+  color:var(--vc-gold-bright);
+  font-size:13px;
+  text-align:right;
+}
+
+.dm-level-table-wrap{
+  overflow-x:auto;
+}
+
+.dm-level-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.dm-level-table th,
+.dm-level-table td{
+  padding:10px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-size:13px;
+  text-align:left;
+}
+
+.dm-level-table th{
+  color:var(--vc-muted);
+  font-size:11px;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+
+.dm-level-table td:nth-child(2),
+.dm-level-table td:nth-child(3){
+  color:var(--vc-cyan-bright);
+  font-weight:800;
+}
+
+
+/* =====================================================
+   CONSCIENCE NETWORK
+   ===================================================== */
+
+.dm-conscience-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+  gap:14px;
+  padding:14px 14px 0;
+}
+
+.dm-donut-card{
+  min-height:450px;
+}
+
+.dm-donut-layout{
+  display:grid;
+  grid-template-columns:
+    minmax(190px,.9fr)
+    minmax(175px,1.1fr);
+  gap:18px;
+  align-items:center;
+}
+
+.dm-donut{
+  position:relative;
+  width:min(290px,100%);
+  aspect-ratio:1;
+  margin:auto;
+  border-radius:50%;
+  filter:
+    drop-shadow(
+      0 0 18px
+      rgba(45,151,166,.08)
+    );
+}
+
+.dm-donut-svg{
+  display:block;
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+
+.dm-donut-track{
+  stroke:rgba(255,255,255,.055);
+}
+
+.dm-donut-segment{
+  cursor:pointer;
+  transform-origin:50px 50px;
+  transition:
+    opacity .18s ease,
+    stroke-width .18s ease,
+    filter .18s ease;
+}
+
+.dm-donut-segment.is-donut-active{
+  stroke-width:16;
+  opacity:1;
+  filter:
+    drop-shadow(
+      0
+      0
+      3px
+      currentColor
+    );
+}
+
+.dm-donut-segment.is-donut-muted{
+  opacity:.2;
+}
+
+.dm-donut-hole{
+  position:absolute;
+  inset:22%;
+  display:grid;
+  place-content:center;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;
+  background:#081c25;
+  text-align:center;
+}
+
+.dm-donut-hole strong{
+  color:var(--vc-gold-bright);
+  font-size:30px;
+  line-height:1;
+}
+
+.dm-donut-hole span{
+  margin-top:6px;
+  color:var(--vc-muted);
+  font-family:"Courier New",monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.dm-donut-legend{
+  display:grid;
+  gap:5px;
+}
+
+.dm-donut-legend-row{
+  display:grid;
+  grid-template-columns:
+    11px
+    minmax(0,1fr)
+    32px
+    48px;
+  gap:8px;
+  align-items:center;
+  min-height:32px;
+  padding:5px 7px;
+  border:1px solid transparent;
+  border-radius:4px;
+  cursor:default;
+  transition:
+    opacity .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    transform .18s ease;
+}
+
+.dm-donut-legend-row i{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+}
+
+.dm-donut-legend-row span{
+  color:#b5bfbd;
+  font-size:12px;
+}
+
+.dm-donut-legend-row strong{
+  color:var(--vc-paper);
+  font-size:12px;
+  text-align:right;
+}
+
+.dm-donut-legend-row small{
+  color:var(--vc-muted);
+  font-size:11px;
+  text-align:right;
+}
+
+.dm-donut-legend-row.is-donut-active{
+  transform:translateX(4px);
+  border-color:rgba(255,255,255,.15);
+  background:rgba(255,255,255,.055);
+}
+
+.dm-donut-legend-row.is-donut-active span,
+.dm-donut-legend-row.is-donut-active strong{
+  color:var(--vc-paper);
+}
+
+.dm-donut-legend-row.is-donut-muted{
+  opacity:.25;
+}
+
+.dm-mini-toggle{
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.dm-mini-toggle button{
+  padding:6px 8px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.03);
+  color:var(--vc-muted);
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+.dm-mini-toggle button.active{
+  border-color:rgba(214,166,75,.5);
+  background:rgba(214,166,75,.1);
+  color:var(--vc-gold-bright);
+}
+
+.dm-conscience-secondary{
+  display:grid;
+  gap:14px;
+  padding:14px;
+}
+
+.dm-relationship-rankings{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.dm-relationship-watch{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.dm-watch-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  padding:11px;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(4,18,27,.72);
+}
+
+.dm-watch-row strong{
+  display:block;
+  color:var(--vc-paper);
+  font-size:13px;
+}
+
+.dm-watch-row > div:first-child span{
+  display:block;
+  margin-top:4px;
+  color:var(--vc-muted);
+  font-size:12px;
+}
+
+.dm-watch-shift{
+  color:var(--vc-gold-bright);
+  font-size:14px;
+  font-weight:900;
+  text-align:right;
+}
+
+.dm-watch-shift.down{
+  color:#d27b68;
+}
+
+.dm-watch-shift small{
+  display:block;
+  margin-top:3px;
+  color:var(--vc-muted);
+  font-size:11px;
+  font-weight:400;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:1180px){
+
+  .dm-conscience-grid{
+    grid-template-columns:1fr;
+  }
+
+  .dm-donut-card{
+    min-height:0;
+  }
+
+  .dm-donut-layout{
+    grid-template-columns:
+      minmax(210px,.7fr)
+      1.3fr;
+  }
+
+}
+
+
+@media(max-width:1050px){
+
+  .dm-field-feed-layout{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .dm-system-analytics-grid{
+    grid-template-columns:1fr;
+  }
+
+  .dm-level-card{
+    grid-column:auto;
+  }
+
+  .dm-tonight-layout{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+@media(max-width:900px){
+
+  .dm-home-grid{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "reality"
+      "feeds"
+      "tonight"
+      "adventures"
+      "alerts"
+      "attention"
+      "analytics"
+      "system"
+      "conscience";
+  }
+
+  .dm-kpi-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .dm-adventure-list{
+    grid-template-columns:1fr;
+  }
+
+  .dm-relationship-rankings{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+@media(max-width:700px){
+
+  .dm-field-feed-layout{
+    grid-template-columns:1fr;
+  }
+
+  .dm-field-camera{
+    height:210px;
+  }
+
+  .dm-tonight-campaigns{
+    grid-template-columns:1fr;
+  }
+
+  .dm-donut-layout{
+    grid-template-columns:1fr;
+  }
+
+  .dm-relationship-watch{
+    grid-template-columns:1fr;
+  }
+
+  .dm-alert-row{
+    grid-template-columns:
+      40px
+      minmax(0,1fr);
+  }
+
+  .dm-alert-time{
+    grid-column:2;
+    text-align:left;
+  }
+
+  .dm-adventure-card{
+    grid-template-columns:
+      48px
+      1fr;
+  }
+
+  .dm-adventure-open{
+    grid-column:1 / -1;
+  }
+
+  .dm-home-analytics-divider{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:5px;
+    padding:14px 18px;
+  }
+
+}
+
+/* =====================================================
+   REALITY CONTROL READABILITY
+   ===================================================== */
+
+.dm-reality-table th{
+
+  font-size:13px;
+
+}
+
+
+.dm-reality-table td{
+
+  font-size:14px;
+
+}
+
+
+.dm-explorer-cell strong{
+
+  font-size:14px;
+
+}
+
+
+.dm-reality-character-name{
+
+  margin-top:3px;
+
+  color:var(--vc-muted);
+
+  font-size:13px;
+
+}
+
+
+.dm-reality-select{
+
+  min-height:34px;
+
+  padding:
+    5px
+    8px;
+
+  font-size:13px;
+
+}
+
+
+.dm-state-pill{
+
+  font-size:12px;
+
+}
+
+
+.dm-reality-icon-button{
+
+  min-height:34px;
+
+  padding:
+    5px
+    9px;
+
+  font-size:12px;
+
+}
+
+
+.dm-visible,
+.dm-hidden-status{
+
+  font-size:12px;
+
+}
+
+
+.dm-reality-assignment-row td{
+
+  padding-top:10px;
+
+  padding-bottom:10px;
+
+}
+
+
+.dm-reality-assignment-row span{
+
+  display:inline-block;
+
+  margin-right:18px;
+
+  font-size:12px;
+
+}
+
+/* =====================================================
+   FIELD FEED PERFORMANCE READABILITY
+   ===================================================== */
+
+.dm-field-performance{
+
+  padding:
+    0
+    12px
+    12px;
+
+}
+
+
+.dm-field-core-stats{
+
+  gap:6px;
+
+  margin-bottom:6px;
+
+}
+
+
+.dm-field-skill-grid{
+
+  gap:5px;
+
+}
+
+
+.dm-field-stat{
+
+  padding:
+    9px
+    5px;
+
+}
+
+
+.dm-field-stat span{
+
+  font-size:12px;
+
+  opacity:.7;
+
+}
+
+
+.dm-field-stat strong{
+
+  margin-top:4px;
+
+  font-size:16px;
+
+}
+
+
+.dm-field-core-stats
+.dm-field-stat strong{
+
+  font-size:17px;
+
+}
+
+/* =====================================================
+   LIVE FIELD FEED TYPOGRAPHY
+   FINAL AUTHORITY
+   ===================================================== */
+
+.dm-field-card .dm-field-player-name{
+  font-size:12px;
+  line-height:1.25;
+}
+
+
+.dm-field-card .dm-field-character-name{
+  font-size:17px;
+  line-height:1.2;
+}
+
+
+.dm-field-card .dm-field-stat span{
+  font-size:13px;
+  line-height:1.1;
+  opacity:.78;
+}
+
+
+.dm-field-card .dm-field-stat strong{
+  margin-top:5px;
+  font-size:18px;
+  line-height:1;
+}
+
+
+.dm-field-card .dm-field-core-stats .dm-field-stat strong{
+  font-size:19px;
+}
+
+
+.dm-field-card .dm-field-stat{
+  padding:10px 6px;
+}
+
+
+.dm-field-card .dm-field-core-stats{
+  gap:6px;
+  margin-bottom:6px;
+}
+
+
+.dm-field-card .dm-field-skill-grid{
+  gap:5px;
+}
+
+/* =====================================================
+   REALITY CONTROL
+   VISTACORP MECHANICAL CONTROLS
+   ===================================================== */
+
+
+/* =====================================================
+   SHARED CONTROL RESET
+   ===================================================== */
+
+.dm-reality-lever,
+.dm-reality-access-switch{
+
+  border:0;
+
+  background:transparent;
+
+  color:inherit;
+
+  font:inherit;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   LOCK LEVER
+   ===================================================== */
+
+.dm-reality-lever{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:5px;
+
+  min-width:64px;
+
+  padding:
+    4px
+    7px;
+
+}
+
+
+/* -----------------------------------------------------
+   METAL BASE
+   ----------------------------------------------------- */
+
+.dm-reality-lever-housing{
+
+  position:relative;
+
+  display:grid;
+
+  place-items:center;
+
+  width:42px;
+
+  height:38px;
+
+  border:
+    1px solid
+    rgba(214,166,75,.42);
+
+  border-radius:4px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #17313a,
+      #07161c 55%,
+      #12252c
+    );
+
+  box-shadow:
+    inset 1px 1px 0
+    rgba(255,255,255,.08),
+
+    inset -2px -2px 3px
+    rgba(0,0,0,.5),
+
+    0 2px 5px
+    rgba(0,0,0,.3);
+
+}
+
+
+.dm-reality-lever-housing::before,
+.dm-reality-lever-housing::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:3px;
+
+  height:3px;
+
+  border-radius:50%;
+
+  background:
+    #708087;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(0,0,0,.6);
+
+}
+
+
+.dm-reality-lever-housing::before{
+
+  top:4px;
+
+  left:4px;
+
+}
+
+
+.dm-reality-lever-housing::after{
+
+  right:4px;
+
+  bottom:4px;
+
+}
+
+
+/* -----------------------------------------------------
+   LEVER SLOT
+   ----------------------------------------------------- */
+
+.dm-reality-lever-slot{
+
+  position:relative;
+
+  display:block;
+
+  width:8px;
+
+  height:25px;
+
+  border-radius:8px;
+
+  background:
+    #01080c;
+
+  box-shadow:
+    inset 0 0 4px
+    rgba(0,0,0,.9),
+
+    0 0 0 1px
+    rgba(255,255,255,.05);
+
+}
+
+
+/* -----------------------------------------------------
+   LEVER ARM
+   ----------------------------------------------------- */
+
+.dm-reality-lever-arm{
+
+  position:absolute;
+
+  left:50%;
+
+  width:3px;
+
+  height:17px;
+
+  transform-origin:
+    50%
+    100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #79878b,
+      #d1d6d4,
+      #637176
+    );
+
+  border-radius:2px;
+
+  transition:
+    transform .28s
+    cubic-bezier(
+      .2,
+      .85,
+      .25,
+      1.2
+    ),
+
+    top .28s ease,
+
+    bottom .28s ease;
+
+}
+
+
+/* -----------------------------------------------------
+   RED KNOB
+   ----------------------------------------------------- */
+
+.dm-reality-lever-knob{
+
+  position:absolute;
+
+  left:50%;
+
+  top:-6px;
+
+  width:12px;
+
+  height:12px;
+
+  transform:
+    translateX(-50%);
+
+  border:
+    1px solid
+    rgba(255,255,255,.2);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #ef8c72,
+      #bc463d 45%,
+      #681e21 100%
+    );
+
+  box-shadow:
+    0 2px 3px
+    rgba(0,0,0,.55);
+
+}
+
+
+/* =====================================================
+   LEVER STATES
+   ===================================================== */
+
+/*
+  LOCKED:
+  lever is pulled DOWN
+*/
+
+.dm-reality-lever.is-locked
+.dm-reality-lever-arm{
+
+  bottom:3px;
+
+  transform:
+    translateX(-50%)
+    rotate(18deg);
+
+}
+
+
+/*
+  OPEN:
+  lever is thrown UP
+*/
+
+.dm-reality-lever.is-open
+.dm-reality-lever-arm{
+
+  top:3px;
+
+  transform:
+    translateX(-50%)
+    rotate(-18deg);
+
+}
+
+
+/* =====================================================
+   LEVER LABEL
+   ===================================================== */
+
+.dm-reality-lever-label{
+
+  color:
+    #9ca9a6;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.06em;
+
+  transition:
+    color .2s ease,
+
+    text-shadow .2s ease;
+
+}
+
+
+.dm-reality-lever.is-locked
+.dm-reality-lever-label{
+
+  color:
+    #df8374;
+
+}
+
+
+.dm-reality-lever.is-open
+.dm-reality-lever-label{
+
+  color:
+    #65d49a;
+
+  text-shadow:
+    0 0 7px
+    rgba(101,212,154,.3);
+
+}
+
+
+/* =====================================================
+   LEVER HOVER
+   ===================================================== */
+
+.dm-reality-lever:hover
+.dm-reality-lever-housing{
+
+  border-color:
+    rgba(214,166,75,.75);
+
+  box-shadow:
+    inset 1px 1px 0
+    rgba(255,255,255,.1),
+
+    inset -2px -2px 3px
+    rgba(0,0,0,.5),
+
+    0 0 10px
+    rgba(214,166,75,.15);
+
+}
+
+
+.dm-reality-lever:hover
+.dm-reality-lever-knob{
+
+  transform:
+    translateX(-50%)
+    scale(1.08);
+
+}
+
+
+/* =====================================================
+   LEVER CLICK
+   ===================================================== */
+
+.dm-reality-lever:active
+.dm-reality-lever-housing{
+
+  transform:
+    translateY(1px);
+
+}
+
+
+/* =====================================================
+   FREE ACCESS CONTROL
+   ===================================================== */
+
+.dm-reality-access-switch{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:5px;
+
+  min-width:58px;
+
+}
+
+
+/* -----------------------------------------------------
+   SWITCH TRACK
+   ----------------------------------------------------- */
+
+.dm-reality-access-track{
+
+  position:relative;
+
+  display:block;
+
+  width:43px;
+
+  height:21px;
+
+  padding:2px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.16);
+
+  border-radius:3px;
+
+  background:
+    linear-gradient(
+      #020b10,
+      #0b2029
+    );
+
+  box-shadow:
+    inset 0 2px 4px
+    rgba(0,0,0,.7);
+
+}
+
+
+/* -----------------------------------------------------
+   SWITCH HANDLE
+   ----------------------------------------------------- */
+
+.dm-reality-access-handle{
+
+  display:block;
+
+  width:15px;
+
+  height:15px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  border-radius:2px;
+
+  background:
+    linear-gradient(
+      #a0aaab,
+      #536269
+    );
+
+  box-shadow:
+    1px 1px 2px
+    rgba(0,0,0,.6);
+
+  transform:
+    translateX(0);
+
+  transition:
+    transform .22s ease,
+
+    background .22s ease,
+
+    box-shadow .22s ease;
+
+}
+
+
+/* -----------------------------------------------------
+   FREE ACCESS ACTIVE
+   ----------------------------------------------------- */
+
+.dm-reality-access-switch.is-active
+.dm-reality-access-track{
+
+  border-color:
+    rgba(214,166,75,.55);
+
+  background:
+    linear-gradient(
+      #251b08,
+      #433010
+    );
+
+}
+
+
+.dm-reality-access-switch.is-active
+.dm-reality-access-handle{
+
+  transform:
+    translateX(20px);
+
+  background:
+    linear-gradient(
+      #f0ca6e,
+      #ad7626
+    );
+
+  box-shadow:
+    0 0 7px
+    rgba(214,166,75,.45);
+
+}
+
+
+/* =====================================================
+   FREE ACCESS LABEL
+   ===================================================== */
+
+.dm-reality-access-label{
+
+  color:
+    var(--vc-muted);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.06em;
+
+}
+
+
+.dm-reality-access-switch.is-active
+.dm-reality-access-label{
+
+  color:
+    var(--vc-gold-bright);
+
+}
+
+
+/* =====================================================
+   FREE ACCESS HOVER
+   ===================================================== */
+
+.dm-reality-access-switch:hover
+.dm-reality-access-track{
+
+  border-color:
+    var(--vc-cyan);
+
+}
+
+
+/* =====================================================
+   MAKE THE SELECTS FEEL LIKE PART OF THE PANEL TOO
+   ===================================================== */
+
+.dm-reality-select{
+
+  min-height:36px;
+
+  padding:
+    6px
+    30px
+    6px
+    10px;
+
+  border:
+    1px solid
+    rgba(50,182,205,.28);
+
+  border-radius:2px;
+
+  background-color:
+    #071b24;
+
+  color:
+    var(--vc-cream);
+
+  font:inherit;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  outline:none;
+
+  cursor:pointer;
+
+}
+
+
+.dm-reality-select:hover{
+
+  border-color:
+    rgba(50,182,205,.58);
+
+  background-color:
+    #09232e;
+
+}
+
+
+.dm-reality-select:focus{
+
+  border-color:
+    var(--vc-gold);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(214,166,75,.07);
+
+}
+
+/* =====================================================
+   CURRENT ADVENTURES
+   STAGE 2 LIVE MODULES
+   ===================================================== */
+
+.dm-current-adventure-loading,
+.dm-current-adventure-error{
+
+  padding:
+    24px
+    18px;
+
+  color:#6f888e;
+
+  font-size:9px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-align:center;
+
+  text-transform:uppercase;
+
+}
+
+
+.dm-current-adventure-error{
+
+  color:#b87770;
+
+}
+
+
+.dm-current-adventure-card{
+
+  align-items:
+    flex-start;
+
+  grid-template-columns:
+    auto
+    minmax(0,1fr)
+    auto;
+
+  gap:12px;
+
+}
+
+
+.dm-current-adventure-main{
+
+  display:grid;
+
+  gap:8px;
+
+  min-width:0;
+
+}
+
+
+.dm-current-adventure-heading{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:
+    space-between;
+
+  gap:12px;
+
+}
+
+
+.dm-current-adventure-chapter{
+
+  margin-top:3px;
+
+  color:#728b90;
+
+  font-size:8px;
+
+  font-weight:900;
+
+  letter-spacing:.06em;
+
+  text-transform:uppercase;
+
+}
+
+
+.dm-current-adventure-position{
+
+  flex:
+    0
+    0
+    auto;
+
+  padding:
+    3px
+    6px;
+
+  border:
+    1px solid
+    rgba(
+      106,
+      216,
+      231,
+      .16
+    );
+
+  color:#68868c;
+
+  font-size:8px;
+
+  font-weight:900;
+
+}
+
+
+.dm-current-adventure-preview{
+
+  position:relative;
+
+  min-height:66px;
+
+  max-height:135px;
+
+  padding:
+    10px
+    12px;
+
+  border:
+    1px solid
+    rgba(
+      106,
+      216,
+      231,
+      .12
+    );
+
+  outline:0;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      .14
+    );
+
+  color:#cbd4ce;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+  overflow:auto;
+
+}
+
+
+.dm-current-adventure-preview:empty::before{
+
+  content:
+    attr(
+      data-placeholder
+    );
+
+  color:#557078;
+
+  font-style:italic;
+
+  pointer-events:none;
+
+}
+
+
+.dm-current-adventure-preview:focus{
+
+  border-color:
+    rgba(
+      106,
+      216,
+      231,
+      .42
+    );
+
+  box-shadow:
+    inset
+    0
+    0
+    0
+    1px
+    rgba(
+      106,
+      216,
+      231,
+      .06
+    );
+
+}
+
+
+.dm-current-adventure-preview h1,
+.dm-current-adventure-preview h2,
+.dm-current-adventure-preview h3{
+
+  margin:
+    4px
+    0
+    6px;
+
+  color:#eee7d5;
+
+  line-height:1.2;
+
+}
+
+
+.dm-current-adventure-preview h1{
+
+  font-size:17px;
+
+}
+
+
+.dm-current-adventure-preview h2{
+
+  font-size:15px;
+
+}
+
+
+.dm-current-adventure-preview h3{
+
+  font-size:13px;
+
+}
+
+
+.dm-current-adventure-preview p{
+
+  margin:
+    0
+    0
+    7px;
+
+}
+
+
+.dm-current-adventure-preview ul,
+.dm-current-adventure-preview ol{
+
+  margin:
+    5px
+    0;
+
+  padding-left:20px;
+
+}
+
+
+.dm-current-adventure-preview blockquote{
+
+  margin:
+    6px
+    0;
+
+  padding-left:9px;
+
+  border-left:
+    2px solid
+    rgba(
+      214,
+      166,
+      75,
+      .55
+    );
+
+}
+
+
+.dm-current-adventure-preview img{
+
+  display:block;
+
+  max-width:100%;
+
+  max-height:90px;
+
+  margin:
+    6px
+    auto;
+
+  object-fit:contain;
+
+}
+
+
+.dm-current-adventure-save{
+
+  color:#617b81;
+
+  font-size:7px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+}
+
+
+.dm-current-adventure-controls{
+
+  display:grid;
+
+  grid-template-columns:
+    auto
+    minmax(110px,1fr)
+    auto;
+
+  gap:6px;
+
+}
+
+
+.dm-adventure-page-mini{
+
+  appearance:none;
+
+  min-height:29px;
+
+  padding:
+    0
+    8px;
+
+  border:
+    1px solid
+    rgba(
+      106,
+      216,
+      231,
+      .17
+    );
+
+  background:#071d26;
+
+  color:#9bb1b3;
+
+  font:inherit;
+
+  font-size:8px;
+
+  font-weight:900;
+
+  letter-spacing:.05em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+.dm-adventure-page-mini:hover:not(:disabled){
+
+  border-color:
+    rgba(
+      106,
+      216,
+      231,
+      .5
+    );
+
+  color:#fff;
+
+}
+
+
+.dm-adventure-page-mini.primary{
+
+  border-color:
+    rgba(
+      214,
+      166,
+      75,
+      .38
+    );
+
+  color:
+    var(--vc-gold-bright);
+
+}
+
+
+.dm-adventure-page-mini:disabled{
+
+  opacity:.3;
+
+  cursor:not-allowed;
+
+}
+
+
+.dm-current-adventure-card.hero
+.dm-current-adventure-preview:focus{
+
+  border-color:
+    rgba(
+      76,
+      192,
+      208,
+      .5
+    );
+
+}
+
+
+.dm-current-adventure-card.villain
+.dm-current-adventure-preview:focus{
+
+  border-color:
+    rgba(
+      188,
+      91,
+      95,
+      .5
+    );
+
+}
+
+
+.dm-current-adventure-card.is-empty{
+
+  align-items:center;
+
+  min-height:88px;
+
+}
+
+
+@media
+(max-width:900px){
+
+  .dm-current-adventure-card{
+
+    grid-template-columns:
+      auto
+      minmax(0,1fr);
+
+  }
+
+
+  .dm-current-adventure-card
+  >
+  .dm-adventure-open{
+
+    grid-column:
+      2;
+
+    justify-self:
+      start;
+
+  }
+
+
+  .dm-current-adventure-controls{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+}

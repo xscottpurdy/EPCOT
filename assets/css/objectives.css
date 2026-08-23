@@ -1,0 +1,916 @@
+/* =====================================================
+   EPCOT DND
+   OBJECTIVES
+   Hero Cast / World Discovery Program
+   ===================================================== */
+
+
+/* =====================================================
+   PAGE
+   ===================================================== */
+
+.objectives-view{
+  width:100%;
+  max-width:1180px;
+  margin:0 auto;
+  padding:28px 26px 70px;
+  box-sizing:border-box;
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.objectives-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:24px;
+
+  margin-bottom:24px;
+}
+
+
+.objectives-heading-group{
+  min-width:0;
+}
+
+
+.objectives-kicker{
+  margin-bottom:7px;
+
+  font-size:0.9rem;
+  font-weight:800;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+
+  color:#52616a;
+}
+
+
+.objectives-title{
+  margin:0;
+
+  font-size:2rem;
+  line-height:1.05;
+  font-weight:900;
+
+  color:#1f2f38;
+}
+
+
+.objectives-subtitle{
+  max-width:680px;
+
+  margin:8px 0 0;
+
+  font-size:1rem;
+  line-height:1.5;
+
+  color:#485962;
+}
+
+
+/* =====================================================
+   HEADER ACTIONS
+   ===================================================== */
+
+.objectives-header-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  align-items:center;
+  gap:10px;
+}
+
+
+.objectives-primary-button,
+.objectives-view-button{
+  min-height:42px;
+
+  padding:10px 16px;
+
+  border:2px solid #304a58;
+  border-radius:9px;
+
+  font:inherit;
+  font-size:0.95rem;
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+
+.objectives-primary-button{
+  background:#304a58;
+  color:#fff;
+}
+
+
+.objectives-view-button{
+  background:#f9f6e8;
+  color:#304a58;
+}
+
+
+.objectives-view-button.active{
+  background:#dce9e7;
+}
+
+
+.objectives-primary-button:hover,
+.objectives-view-button:hover{
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 4px 0 rgba(31,47,56,0.18);
+}
+
+
+.objectives-primary-button:active,
+.objectives-view-button:active{
+  transform:translateY(1px);
+
+  box-shadow:none;
+}
+
+
+/* =====================================================
+   FAVORITE COUNTER
+   ===================================================== */
+
+.objective-favorite-summary{
+  display:flex;
+  justify-content:flex-end;
+
+  margin:-8px 0 16px;
+}
+
+
+#objectiveFavoriteCount{
+  display:inline-flex;
+  align-items:center;
+
+  min-height:32px;
+
+  padding:6px 11px;
+
+  border:1px solid #b9c6c5;
+  border-radius:999px;
+
+  background:#eef3ee;
+
+  font-size:0.9rem;
+  font-weight:800;
+
+  color:#3d4c52;
+}
+
+
+/* =====================================================
+   OBJECTIVES GRID
+   ===================================================== */
+
+.objectives-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+}
+
+
+/* =====================================================
+   OBJECTIVE CARD
+   ===================================================== */
+
+.objective-card{
+  position:relative;
+
+  overflow:hidden;
+
+  padding:20px;
+
+  border:2px solid #97aaa9;
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.97),
+      rgba(247,244,225,0.97)
+    );
+
+  box-shadow:
+    0 5px 0 rgba(50,69,76,0.12);
+}
+
+
+.objective-card::before{
+  content:"";
+
+  position:absolute;
+  top:0;
+  left:0;
+
+  width:100%;
+  height:7px;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #527c7c 0,
+      #527c7c 38px,
+      #e6b960 38px,
+      #e6b960 54px,
+      #789896 54px,
+      #789896 82px
+    );
+}
+
+
+.objective-card.is-complete{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(241,246,240,0.98),
+      rgba(228,238,228,0.98)
+    );
+}
+
+
+.objective-card.is-archived{
+  opacity:0.88;
+
+  border-style:dashed;
+
+  background:#efeee7;
+}
+
+
+/* =====================================================
+   CARD HEADER
+   ===================================================== */
+
+.objective-card-head{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:flex-start;
+  gap:12px;
+
+  padding-top:5px;
+}
+
+
+.objective-card-title-wrap{
+  min-width:0;
+}
+
+
+.objective-card h2{
+  margin:0;
+
+  font-size:1.25rem;
+  line-height:1.2;
+  font-weight:900;
+
+  color:#243a45;
+}
+
+
+.objective-card.is-complete h2{
+  text-decoration:line-through;
+  text-decoration-thickness:2px;
+
+  color:#61716e;
+}
+
+
+/* =====================================================
+   SOURCE BADGE
+   ===================================================== */
+
+.objective-source-badge{
+  display:inline-block;
+
+  margin-top:6px;
+  padding:4px 9px;
+
+  border-radius:999px;
+
+  background:#e0e8e3;
+
+  font-size:0.74rem;
+  font-weight:900;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+
+  color:#52645f;
+}
+
+
+/* =====================================================
+   STAR BUTTONS
+   ===================================================== */
+
+.objective-star,
+.objective-subitem-star{
+  border:none;
+  background:transparent;
+
+  padding:0;
+
+  cursor:pointer;
+
+  color:#7a8585;
+
+  transition:
+    transform 0.14s ease,
+    color 0.14s ease;
+}
+
+
+.objective-star{
+  width:38px;
+  height:38px;
+
+  font-size:1.8rem;
+  line-height:1;
+}
+
+
+.objective-subitem-star{
+  width:32px;
+  height:32px;
+
+  font-size:1.35rem;
+}
+
+
+.objective-star:hover,
+.objective-subitem-star:hover{
+  transform:scale(1.12);
+
+  color:#b37a16;
+}
+
+
+.objective-star.is-starred,
+.objective-subitem-star.is-starred{
+  color:#b37a16;
+}
+
+
+/* =====================================================
+   COMPLETE BUTTON
+   ===================================================== */
+
+.objective-complete-toggle{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  border:2px solid #80999a;
+  border-radius:50%;
+
+  background:#fff;
+
+  font-size:1.1rem;
+  font-weight:900;
+
+  color:#647a7b;
+
+  cursor:pointer;
+}
+
+
+.objective-complete-toggle.is-complete{
+  background:#d5e8da;
+  border-color:#55775f;
+
+  color:#355841;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+   ===================================================== */
+
+.objective-description{
+  margin:16px 0 18px;
+  padding:13px 15px;
+
+  border-left:4px solid #d2a64e;
+
+  background:rgba(255,255,255,0.58);
+
+  font-size:1rem;
+  line-height:1.55;
+
+  color:#34474f;
+}
+
+
+/* =====================================================
+   SUB-OBJECTIVES
+   ===================================================== */
+
+.objective-subitems{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+
+  margin-top:10px;
+}
+
+
+.objective-subitem{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:10px;
+
+  min-height:46px;
+
+  padding:7px 9px;
+
+  border:1px solid #c9d0ca;
+  border-radius:8px;
+
+  background:rgba(255,255,255,0.68);
+}
+
+
+.objective-subitem.is-complete{
+  background:#e5ece5;
+}
+
+
+.objective-subitem-check{
+  width:32px;
+  height:32px;
+
+  display:grid;
+  place-items:center;
+
+  padding:0;
+
+  border:1px solid #879795;
+  border-radius:6px;
+
+  background:#fff;
+
+  font-size:1rem;
+  font-weight:900;
+
+  color:#54686b;
+
+  cursor:pointer;
+}
+
+
+.objective-subitem-check.is-complete{
+  background:#cfe0d3;
+  border-color:#57735d;
+
+  color:#355540;
+}
+
+
+.objective-subitem-name{
+  font-size:0.98rem;
+  line-height:1.35;
+  font-weight:700;
+
+  color:#33464c;
+}
+
+
+.objective-subitem.is-complete
+.objective-subitem-name{
+  text-decoration:line-through;
+
+  color:#708078;
+}
+
+
+.objective-no-subitems{
+  margin-top:12px;
+
+  padding:10px 12px;
+
+  border:1px dashed #bec8c2;
+  border-radius:8px;
+
+  font-size:0.9rem;
+
+  color:#6a7876;
+}
+
+
+/* =====================================================
+   CARD ACTIONS
+   ===================================================== */
+
+.objective-card-actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:9px;
+
+  margin-top:18px;
+  padding-top:14px;
+
+  border-top:1px solid #cbd2cc;
+}
+
+
+.objective-card-actions button{
+  min-height:36px;
+
+  padding:7px 12px;
+
+  border:1px solid #758c8b;
+  border-radius:7px;
+
+  background:#f8f6ea;
+
+  font:inherit;
+  font-size:0.88rem;
+  font-weight:800;
+
+  color:#3b5055;
+
+  cursor:pointer;
+}
+
+
+.objective-card-actions button:hover{
+  background:#e8efea;
+}
+
+
+.objective-archive-date{
+  margin-right:auto;
+
+  font-size:0.85rem;
+  font-weight:700;
+
+  color:#6d7774;
+}
+
+
+/* =====================================================
+   EMPTY / ERROR
+   ===================================================== */
+
+.objectives-empty{
+  padding:38px 24px;
+
+  border:2px dashed #9eb0ad;
+  border-radius:12px;
+
+  background:rgba(249,247,235,0.72);
+
+  text-align:center;
+
+  font-size:1rem;
+  font-weight:700;
+
+  color:#60706f;
+}
+
+
+.objectives-error{
+  border-color:#ad7b76;
+
+  color:#7c4b47;
+}
+
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+
+.objective-modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  background:rgba(31,43,49,0.62);
+}
+
+
+.objective-modal.open{
+  display:flex;
+}
+
+
+.objective-modal-card{
+  width:min(680px,100%);
+  max-height:88vh;
+
+  overflow-y:auto;
+
+  padding:24px;
+
+  border:3px solid #47656c;
+  border-radius:14px;
+
+  background:#f8f5e7;
+
+  box-shadow:
+    0 14px 40px rgba(0,0,0,0.25);
+}
+
+
+.objective-modal-header{
+  margin-bottom:18px;
+}
+
+
+.objective-modal-header h2{
+  margin:0;
+
+  font-size:1.45rem;
+  font-weight:900;
+
+  color:#243b45;
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.objective-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+
+.objective-form label{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+
+  font-size:0.9rem;
+  font-weight:900;
+
+  color:#46585f;
+}
+
+
+.objective-form input,
+.objective-form textarea{
+  width:100%;
+
+  box-sizing:border-box;
+
+  padding:11px 12px;
+
+  border:2px solid #aebcb8;
+  border-radius:8px;
+
+  background:#fff;
+
+  font:inherit;
+  font-size:1rem;
+
+  color:#26393f;
+}
+
+
+.objective-form textarea{
+  min-height:120px;
+
+  resize:vertical;
+
+  line-height:1.45;
+}
+
+
+.objective-form input:focus,
+.objective-form textarea:focus{
+  outline:3px solid rgba(87,129,132,0.22);
+  border-color:#557f82;
+}
+
+
+/* =====================================================
+   SUB-OBJECTIVE EDITOR
+   ===================================================== */
+
+.objective-subeditor-section{
+  padding:14px;
+
+  border:1px solid #bbc6c0;
+  border-radius:9px;
+
+  background:rgba(255,255,255,0.52);
+}
+
+
+.objective-subeditor-title{
+  margin:0 0 10px;
+
+  font-size:1rem;
+  font-weight:900;
+
+  color:#344b52;
+}
+
+
+#objectiveSubitemEditor{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+
+.objective-draft-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+}
+
+
+.objective-draft-row button{
+  min-height:40px;
+
+  padding:7px 10px;
+
+  border:1px solid #a06f68;
+  border-radius:7px;
+
+  background:#f5e7e2;
+
+  font:inherit;
+  font-size:0.85rem;
+  font-weight:800;
+
+  color:#794c46;
+
+  cursor:pointer;
+}
+
+
+.objective-draft-row button:hover{
+  background:#efdbd4;
+}
+
+
+.objective-draft-empty{
+  padding:10px 0;
+
+  font-size:0.9rem;
+
+  color:#6d7773;
+}
+
+
+.objective-add-subitem{
+  margin-top:10px;
+
+  min-height:38px;
+
+  padding:8px 12px;
+
+  border:1px dashed #668283;
+  border-radius:7px;
+
+  background:#eef3ed;
+
+  font:inherit;
+  font-size:0.9rem;
+  font-weight:800;
+
+  color:#405d60;
+
+  cursor:pointer;
+}
+
+
+/* =====================================================
+   MODAL ACTIONS
+   ===================================================== */
+
+.objective-modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+
+  margin-top:22px;
+}
+
+
+.objective-modal-actions button{
+  min-height:42px;
+
+  padding:9px 15px;
+
+  border:2px solid #667d80;
+  border-radius:8px;
+
+  font:inherit;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+
+#cancelObjectiveButton{
+  background:#f8f5e7;
+
+  color:#536569;
+}
+
+
+#saveObjectiveButton{
+  background:#355d68;
+
+  color:#fff;
+}
+
+
+#saveObjectiveButton:disabled{
+  opacity:0.55;
+
+  cursor:default;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width:760px){
+
+  .objectives-view{
+    padding:
+      22px 15px
+      60px;
+  }
+
+
+  .objectives-header{
+    flex-direction:column;
+  }
+
+
+  .objectives-header-actions{
+    justify-content:flex-start;
+  }
+
+
+  .objective-favorite-summary{
+    justify-content:flex-start;
+  }
+
+
+  .objective-card{
+    padding:17px 14px;
+  }
+
+
+  .objective-card-head{
+    grid-template-columns:auto 1fr auto;
+    gap:8px;
+  }
+
+
+  .objective-card h2{
+    font-size:1.12rem;
+  }
+
+
+  .objective-draft-row{
+    grid-template-columns:1fr;
+  }
+
+
+  .objective-draft-row button{
+    justify-self:start;
+  }
+
+
+  .objective-modal-card{
+    padding:18px 15px;
+  }
+
+}

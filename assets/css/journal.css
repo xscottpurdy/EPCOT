@@ -1,0 +1,577 @@
+/* =====================================================
+   EPCOT DND
+   JOURNAL
+   ===================================================== */
+
+
+/* =====================================================
+   PAGE
+   ===================================================== */
+
+.journal-view{
+  color:var(--body-text);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.journal-header{
+  display:flex;
+
+  align-items:flex-end;
+  justify-content:space-between;
+
+  gap:24px;
+
+  margin-bottom:18px;
+
+  padding:
+    22px
+    24px;
+
+  border:
+    1px solid rgba(23,58,86,.16);
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      #d7e4ea 1px,
+      transparent 1px
+    ),
+    #fffef8;
+
+  background-size:
+    100% 28px;
+
+  box-shadow:
+    0 5px 12px rgba(23,58,86,.05);
+}
+
+.journal-kicker{
+  margin-bottom:5px;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  font-weight:800;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+}
+
+.journal-header h1{
+  margin:0;
+
+  color:var(--navy);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:38px;
+
+  line-height:1.1;
+}
+
+.journal-header p{
+  max-width:720px;
+
+  margin:
+    8px 0 0;
+
+  color:var(--body-text);
+
+  font-size:16px;
+
+  line-height:1.55;
+}
+
+
+/* =====================================================
+   LIVE BADGE
+   ===================================================== */
+
+.journal-live-badge{
+  flex:0 0 auto;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:
+    8px
+    12px;
+
+  border-radius:999px;
+
+  background:#e6f4ef;
+
+  color:#236350;
+
+  border:
+    1px solid #b8d9cd;
+
+  font-size:13px;
+
+  font-weight:900;
+
+  letter-spacing:.05em;
+
+  text-transform:uppercase;
+}
+
+.journal-live-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:#2e9d70;
+
+  box-shadow:
+    0 0 0 4px rgba(46,157,112,.14);
+}
+
+
+/* =====================================================
+   COMPOSER
+   ===================================================== */
+
+.journal-composer{
+  display:grid;
+
+  grid-template-columns:
+    58px
+    1fr;
+
+  gap:14px;
+
+  margin-bottom:18px;
+
+  padding:18px;
+
+  border:
+    1px solid rgba(23,58,86,.16);
+
+  border-radius:14px;
+
+  background:#fffef8;
+
+  box-shadow:
+    0 6px 15px rgba(23,58,86,.06);
+}
+
+.journal-composer-avatar,
+.journal-post-avatar{
+  width:54px;
+  height:54px;
+
+  overflow:hidden;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #bfe3dc,
+      #7dbbc4
+    );
+
+  border:
+    2px solid white;
+
+  box-shadow:
+    0 2px 7px rgba(23,58,86,.16);
+}
+
+.journal-composer-avatar img,
+.journal-post-avatar img{
+  width:100%;
+  height:100%;
+
+  display:block;
+
+  object-fit:cover;
+}
+
+.journal-avatar-placeholder{
+  width:100%;
+  height:100%;
+
+  display:grid;
+
+  place-items:center;
+
+  color:var(--navy);
+
+  font-size:20px;
+
+  font-weight:900;
+}
+
+.journal-composer-name{
+  margin-bottom:8px;
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+.journal-composer-name strong{
+  color:var(--navy);
+
+  font-size:15px;
+}
+
+.journal-composer textarea{
+  width:100%;
+
+  min-height:105px;
+
+  resize:vertical;
+
+  padding:
+    12px
+    14px;
+
+  border:
+    1px solid #9dafb9;
+
+  border-radius:11px;
+
+  background:white;
+
+  color:#1d3444;
+
+  font-size:16px;
+
+  line-height:1.55;
+}
+
+.journal-composer textarea:focus{
+  outline:
+    3px solid rgba(39,166,162,.18);
+
+  border-color:var(--teal);
+}
+
+.journal-composer-footer{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-top:10px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.journal-keyboard-hint{
+  margin-left:12px;
+}
+
+#journalPostButton{
+  min-width:100px;
+  min-height:42px;
+
+  padding:
+    8px
+    18px;
+
+  border:
+    1px solid rgba(18,61,99,.25);
+
+  border-radius:9px;
+
+  background:var(--navy);
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+#journalPostButton:hover:not(:disabled){
+  background:#1c5b86;
+}
+
+#journalPostButton:disabled{
+  opacity:.55;
+
+  cursor:not-allowed;
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.journal-search{
+  margin-bottom:18px;
+
+  padding:
+    14px
+    16px;
+
+  border:
+    1px solid rgba(23,58,86,.14);
+
+  border-radius:12px;
+
+  background:#f8f7f1;
+}
+
+.journal-search label{
+  display:block;
+
+  margin-bottom:6px;
+
+  color:var(--navy);
+
+  font-size:13px;
+
+  font-weight:900;
+
+  letter-spacing:.06em;
+
+  text-transform:uppercase;
+}
+
+.journal-search input{
+  width:100%;
+
+  min-height:44px;
+
+  padding:
+    9px
+    12px;
+
+  border:
+    1px solid #9dafb9;
+
+  border-radius:9px;
+
+  background:white;
+
+  color:#1d3444;
+
+  font-size:16px;
+}
+
+.journal-search input:focus{
+  outline:
+    3px solid rgba(39,166,162,.18);
+
+  border-color:var(--teal);
+}
+
+
+/* =====================================================
+   FEED
+   ===================================================== */
+
+.journal-feed{
+  display:grid;
+
+  gap:14px;
+}
+
+
+/* =====================================================
+   POST
+   ===================================================== */
+
+.journal-post{
+  display:grid;
+
+  grid-template-columns:
+    58px
+    1fr;
+
+  gap:14px;
+
+  padding:
+    18px;
+
+  border:
+    1px solid rgba(23,58,86,.15);
+
+  border-radius:14px;
+
+  background:#fffef8;
+
+  box-shadow:
+    0 5px 12px rgba(23,58,86,.05);
+}
+
+.journal-post-heading{
+  display:flex;
+
+  align-items:flex-start;
+  justify-content:space-between;
+
+  gap:15px;
+}
+
+.journal-post-author{
+  color:var(--navy);
+
+  font-size:16px;
+
+  font-weight:900;
+}
+
+.journal-post-meta{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.journal-post-text{
+  margin-top:11px;
+
+  color:#263f52;
+
+  white-space:pre-wrap;
+
+  overflow-wrap:anywhere;
+
+  font-size:16px;
+
+  line-height:1.65;
+}
+
+
+/* =====================================================
+   EMPTY / LOADING
+   ===================================================== */
+
+.journal-empty,
+.journal-loading{
+  padding:
+    34px
+    22px;
+
+  border:
+    1px dashed rgba(23,58,86,.24);
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.65);
+
+  text-align:center;
+
+  color:var(--body-text);
+
+  font-size:15px;
+}
+
+.journal-empty strong{
+  display:block;
+
+  color:var(--navy);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:21px;
+}
+
+.journal-empty p{
+  margin:
+    6px 0 0;
+}
+
+
+/* =====================================================
+   END / INFINITE SCROLL
+   ===================================================== */
+
+.journal-loading-more,
+.journal-end-message{
+  padding:
+    18px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+.journal-scroll-sentinel{
+  height:1px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:750px){
+
+  .journal-header{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .journal-composer,
+  .journal-post{
+    grid-template-columns:
+      46px
+      1fr;
+  }
+
+  .journal-composer-avatar,
+  .journal-post-avatar{
+    width:44px;
+    height:44px;
+  }
+
+}
+
+
+@media(max-width:550px){
+
+  .journal-composer-footer{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  #journalPostButton{
+    width:100%;
+  }
+
+  .journal-keyboard-hint{
+    display:none;
+  }
+
+}

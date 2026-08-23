@@ -1,0 +1,1241 @@
+/* =====================================================
+   EPCOT DND
+   HERO UNBOUND PERSONNEL
+   ===================================================== */
+
+
+/* =====================================================
+   PERSONNEL VIEW
+   ===================================================== */
+
+.unbound-view[hidden]{
+  display:none !important;
+}
+
+
+.people-view{
+
+  margin-left:46px;
+
+  padding:
+    18px
+    20px
+    28px;
+
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.people-header{
+
+  position:relative;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:28px;
+
+  margin-bottom:18px;
+
+  padding:
+    20px 22px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(199,90,145,.08),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      145deg,
+      #09131d,
+      #141425 62%,
+      #0a1b18
+    );
+
+}
+
+
+.people-header::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:10px;
+
+  height:1px;
+
+  opacity:.35;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--pink),
+      var(--teal),
+      transparent
+    );
+
+}
+
+
+.people-kicker{
+
+  color:
+    var(--teal);
+
+  font-size:8px;
+
+  font-weight:800;
+
+  letter-spacing:.17em;
+
+  text-transform:uppercase;
+
+}
+
+
+.people-header h1{
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(--cream);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:31px;
+
+  font-weight:400;
+
+}
+
+
+.people-header p{
+
+  max-width:630px;
+
+  margin:
+    9px 0 0;
+
+  color:#bdb5a6;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+}
+
+
+.people-add-button{
+
+  flex:
+    0 0 auto;
+
+  min-height:40px;
+
+  padding:
+    0 15px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.45);
+
+  background:
+    rgba(199,90,145,.08);
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:8px;
+
+  font-weight:800;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+.people-add-button:hover{
+
+  border-color:
+    var(--pink);
+
+  background:
+    rgba(199,90,145,.15);
+
+}
+
+
+/* =====================================================
+   PERSONNEL GRID
+   ===================================================== */
+
+.npc-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
+
+  gap:16px;
+
+}
+
+
+.npc-card{
+
+  position:relative;
+
+  min-width:0;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  background:
+
+    radial-gradient(
+      circle at 86% 9%,
+      rgba(47,197,191,.05),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      155deg,
+      #0a111a,
+      #161322 65%,
+      #081713
+    );
+
+  box-shadow:
+    0 10px 26px
+    rgba(0,0,0,.22);
+
+}
+
+
+.npc-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  top:0;
+
+  height:2px;
+
+  opacity:.65;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--teal),
+      transparent 35%,
+      var(--pink) 70%,
+      var(--gold)
+    );
+
+}
+
+
+/* =====================================================
+   IMAGE
+   ===================================================== */
+
+.npc-card-image{
+
+  position:relative;
+
+  height:220px;
+
+  overflow:hidden;
+
+  border-bottom:
+    1px solid
+    rgba(224,179,79,.18);
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(199,90,145,.10),
+      transparent 40%
+    ),
+
+    #071018;
+
+}
+
+
+.npc-card-image img{
+
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  background:#071018;
+
+}
+
+
+.npc-image-placeholder{
+
+  display:grid;
+
+  place-items:center;
+
+  width:100%;
+  height:100%;
+
+  color:
+    rgba(47,197,191,.45);
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:52px;
+
+}
+
+
+/* =====================================================
+   RELATIONSHIP
+   ===================================================== */
+
+.npc-relationship{
+
+  position:absolute;
+
+  left:10px;
+  bottom:10px;
+
+  padding:
+    5px 8px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.35);
+
+  background:
+    rgba(7,16,24,.88);
+
+  color:
+    var(--teal);
+
+  font-size:7px;
+
+  font-weight:900;
+
+  letter-spacing:.10em;
+
+  text-transform:uppercase;
+
+}
+
+
+.npc-relationship-friendly,
+.npc-relationship-ally{
+
+  color:#7bd4b4;
+
+  border-color:
+    rgba(77,155,131,.55);
+
+}
+
+
+.npc-relationship-hostile,
+.npc-relationship-enemy{
+
+  color:#dc7080;
+
+  border-color:
+    rgba(186,77,89,.55);
+
+}
+
+
+/* =====================================================
+   CARD BODY
+   Match Cast-side readability scale
+   ===================================================== */
+
+.npc-card-body{
+
+  padding:
+    18px;
+
+}
+
+
+.npc-card-heading{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:14px;
+
+}
+
+
+.npc-name{
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:24px;
+
+  line-height:1.2;
+
+}
+
+
+.npc-title{
+
+  margin-top:5px;
+
+  color:#c0b8a9;
+
+  font-size:12px;
+
+  line-height:1.4;
+
+  letter-spacing:.05em;
+
+  text-transform:uppercase;
+
+}
+
+
+.npc-edit-button{
+
+  flex:
+    0 0 auto;
+
+  padding:
+    8px 10px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+    transparent;
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.npc-tags{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:14px;
+
+}
+
+
+.npc-tags span{
+
+  padding:
+    6px 9px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.19);
+
+  background:
+    rgba(47,197,191,.045);
+
+  color:#a8cfcc;
+
+  font-size:10px;
+
+  line-height:1.3;
+
+  letter-spacing:.05em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   TRAINING / DETAILS
+   ===================================================== */
+
+.npc-training,
+.npc-details{
+
+  margin-top:17px;
+
+  padding-top:15px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.13);
+
+}
+
+
+.npc-small-heading{
+
+  color:
+    var(--teal);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+
+}
+
+
+.npc-training-list{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:9px;
+
+}
+
+
+.npc-training-list span{
+
+  padding:
+    6px 8px;
+
+  border:
+    1px solid
+    rgba(199,90,145,.22);
+
+  color:#d39ab7;
+
+  font-size:11px;
+
+  line-height:1.3;
+
+}
+
+
+.npc-training-list .npc-none{
+
+  border:0;
+
+  padding:0;
+
+  color:#918d83;
+
+  font-size:11px;
+
+}
+
+
+.npc-details-copy{
+
+  min-height:54px;
+
+  margin-top:9px;
+
+  color:#d5ccbb;
+
+  font-size:13px;
+
+  line-height:1.65;
+
+}
+
+
+.npc-details-copy p{
+
+  margin:
+    0 0 8px;
+
+}
+
+
+.npc-details-copy ul,
+.npc-details-copy ol{
+
+  padding-left:22px;
+
+}
+
+
+.npc-details-button{
+
+  margin-top:12px;
+
+  padding:0;
+
+  border:0;
+
+  background:transparent;
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.09em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+/* =====================================================
+   EMPTY / LOADING
+   ===================================================== */
+
+.people-empty-state,
+.people-loading{
+
+  grid-column:
+    1 / -1;
+
+  padding:
+    55px 25px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.25);
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(199,90,145,.05),
+      transparent 35%
+    ),
+
+    #091119;
+
+  color:#aaa293;
+
+  text-align:center;
+
+}
+
+
+.people-empty-state strong{
+
+  display:block;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:18px;
+
+}
+
+
+.people-empty-state p{
+
+  margin:
+    8px 0 0;
+
+  font-size:10px;
+
+}
+
+
+/* =====================================================
+   MODALS
+   ===================================================== */
+
+.people-modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99995;
+
+  display:none;
+
+  place-items:center;
+
+  padding:25px;
+
+  background:
+    rgba(3,7,12,.86);
+
+  backdrop-filter:
+    blur(8px);
+
+}
+
+
+.people-modal.open{
+  display:grid;
+}
+
+
+.people-modal-card{
+
+  width:
+    min(760px,100%);
+
+  max-height:
+    calc(100vh - 50px);
+
+  overflow:auto;
+
+  border:
+    1px solid
+    rgba(224,179,79,.42);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(199,90,145,.07),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      145deg,
+      #0a121b,
+      #151221
+    );
+
+  color:
+    var(--cream);
+
+  box-shadow:
+    0 26px 80px
+    rgba(0,0,0,.60);
+
+}
+
+
+.people-modal-header{
+
+  padding:
+    20px 22px;
+
+  border-bottom:
+    1px solid
+    rgba(224,179,79,.18);
+
+}
+
+
+.people-modal-kicker{
+
+  color:
+    var(--teal);
+
+  font-size:8px;
+
+  font-weight:800;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+}
+
+
+.people-modal-header h2{
+
+  margin:
+    6px 0 0;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:23px;
+
+  font-weight:400;
+
+}
+
+
+.people-modal-header p{
+
+  margin:
+    8px 0 0;
+
+  color:#a59c8d;
+
+  font-size:10px;
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.people-form-section{
+
+  padding:
+    18px 22px;
+
+  border-bottom:
+    1px solid
+    rgba(224,179,79,.13);
+
+}
+
+
+.people-form-section-title{
+
+  margin-bottom:11px;
+
+  color:
+    var(--gold);
+
+  font-size:8px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+}
+
+
+.people-form-help{
+
+  margin:
+    -3px 0 12px;
+
+  color:#7e7a72;
+
+  font-size:9px;
+
+}
+
+
+.people-form-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0,1fr)
+    );
+
+  gap:12px;
+
+}
+
+
+.people-form-grid label{
+
+  display:grid;
+
+  gap:6px;
+
+  color:
+    var(--teal);
+
+  font-size:7px;
+
+  font-weight:800;
+
+  letter-spacing:.10em;
+
+  text-transform:uppercase;
+
+}
+
+
+.people-form-grid input,
+.people-form-grid select{
+
+  width:100%;
+
+  min-height:38px;
+
+  padding:
+    0 10px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:#070e15;
+
+  color:
+    var(--cream);
+
+  font:inherit;
+
+  font-size:10px;
+
+  outline:none;
+
+}
+
+
+.people-form-grid input:focus,
+.people-form-grid select:focus{
+
+  border-color:
+    var(--teal);
+
+}
+
+
+/* =====================================================
+   DETAILS EDITOR
+   ===================================================== */
+
+.npc-details-editor{
+
+  padding:
+    20px 22px;
+
+}
+
+
+.npc-details-editor-label{
+
+  color:
+    var(--gold);
+
+  font-size:8px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+}
+
+
+.npc-editor-toolbar{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:10px;
+
+}
+
+
+.npc-editor-toolbar button{
+
+  min-height:29px;
+
+  padding:
+    0 9px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.25);
+
+  background:
+    rgba(47,197,191,.04);
+
+  color:
+    var(--teal);
+
+  font:inherit;
+
+  font-size:8px;
+
+  cursor:pointer;
+
+}
+
+
+.npc-rich-text-editor{
+
+  min-height:190px;
+
+  margin-top:9px;
+
+  padding:
+    13px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+    #070e15;
+
+  color:
+    #d3c8b4;
+
+  font-size:11px;
+
+  line-height:1.6;
+
+  outline:none;
+
+}
+
+
+.npc-rich-text-editor:empty::before{
+
+  content:
+    attr(data-placeholder);
+
+  color:#555b5c;
+
+}
+
+
+/* =====================================================
+   MODAL ACTIONS
+   ===================================================== */
+
+.people-modal-actions{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:
+    15px 22px;
+
+}
+
+
+.people-modal-actions-right{
+
+  display:flex;
+
+  gap:9px;
+
+}
+
+
+.people-modal-actions button{
+
+  min-height:36px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.30);
+
+  background:
+    transparent;
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:8px;
+
+  font-weight:800;
+
+  letter-spacing:.09em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+.people-modal-actions
+.people-primary-button{
+
+  border-color:
+    rgba(47,197,191,.45);
+
+  background:
+    rgba(47,197,191,.08);
+
+  color:
+    var(--teal);
+
+}
+
+
+.people-modal-actions
+.people-delete-button{
+
+  border-color:
+    rgba(186,77,89,.42);
+
+  color:#d36875;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:1100px){
+
+  .npc-grid{
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      );
+
+  }
+
+}
+
+
+@media(max-width:680px){
+
+  .people-view{
+
+    margin-left:0;
+
+    padding:
+      15px;
+
+  }
+
+
+  .people-header{
+
+    flex-direction:column;
+
+  }
+
+
+  .npc-grid{
+    grid-template-columns:1fr;
+  }
+
+
+  .people-form-grid{
+    grid-template-columns:1fr;
+  }
+
+
+  .people-modal-actions{
+
+    align-items:stretch;
+
+    flex-direction:column;
+
+  }
+
+
+  .people-modal-actions-right{
+
+    width:100%;
+
+  }
+
+
+  .people-modal-actions-right button{
+    flex:1;
+  }
+
+}

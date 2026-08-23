@@ -1,0 +1,2488 @@
+/* =====================================================
+   EPCOT DND
+   HERO UNBOUND HOME
+
+   Mirrors Hero Cast Home structure.
+   Reality changes presentation only.
+   ===================================================== */
+
+
+/* =====================================================
+   HOME VIEW
+   ===================================================== */
+
+#homeView{
+
+  margin-left:46px;
+
+  padding:
+    18px
+    20px
+    28px;
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+   Match Cast positioning
+   ===================================================== */
+
+.home-dashboard{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(320px,.82fr)
+    minmax(0,1.18fr);
+
+  gap:20px;
+
+  align-items:start;
+
+}
+
+
+.home-dashboard-left,
+.home-dashboard-right{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:20px;
+
+  min-width:0;
+
+}
+
+
+/* =====================================================
+   SHARED CARDS
+   ===================================================== */
+
+.home-card{
+
+  position:relative;
+
+  min-width:0;
+
+  border:
+    1px solid
+    rgba(224,179,79,.20);
+
+  background:
+
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(47,197,191,.04),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      150deg,
+      #0a111a,
+      #141522 68%,
+      #08140f
+    );
+
+  box-shadow:
+    0 10px 26px
+    rgba(0,0,0,.22);
+
+}
+
+
+.home-card-inner{
+
+  padding:20px;
+
+}
+
+
+.home-kicker{
+
+  margin-bottom:6px;
+
+  color:
+    var(--teal);
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+
+}
+
+
+.home-card h2{
+
+  margin:
+    0 0 12px;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:24px;
+
+  line-height:1.15;
+
+  font-weight:400;
+
+}
+
+
+/* =====================================================
+   EXPLORER ID
+   ===================================================== */
+
+.home-id-card{
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(47,197,191,.28);
+
+  background:
+
+    radial-gradient(
+      circle at 15% 85%,
+      rgba(199,90,145,.055),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      145deg,
+      #09131d,
+      #141425 62%,
+      #081713
+    );
+
+}
+
+
+.home-id-card::before{
+
+  content:"UNBOUND EXPLORER RECORD";
+
+  display:flex;
+
+  align-items:center;
+
+  height:43px;
+
+  padding:
+    0 18px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      #123a49,
+      #153243,
+      #30162b
+    );
+
+  color:
+    #b8e0dc;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+}
+
+
+.home-id-card::after{
+
+  content:"";
+
+  display:block;
+
+  height:34px;
+
+  margin:
+    3px 18px 16px;
+
+  opacity:.55;
+
+  background:
+
+    repeating-linear-gradient(
+      90deg,
+
+      var(--teal) 0 2px,
+      transparent 2px 6px,
+
+      var(--pink) 6px 8px,
+      transparent 8px 12px,
+
+      var(--gold) 12px 15px,
+      transparent 15px 20px,
+
+      var(--teal) 20px 21px,
+      transparent 21px 26px
+    );
+
+  background-size:
+    32px 100%;
+
+}
+
+
+.home-id-card .home-card-inner{
+
+  position:relative;
+
+  padding:
+    18px
+    18px
+    11px;
+
+}
+
+
+.home-id-card .home-card-inner::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-33px;
+  left:50%;
+
+  width:55px;
+  height:12px;
+
+  transform:
+    translateX(-50%);
+
+  border:
+    2px solid
+    rgba(47,197,191,.62);
+
+  border-radius:999px;
+
+  background:#071018;
+
+}
+
+
+.home-id-card .home-kicker{
+
+  display:none;
+
+}
+
+
+.home-id-layout{
+
+  display:grid;
+
+  grid-template-columns:
+    118px 1fr;
+
+  gap:16px;
+
+  align-items:start;
+
+}
+
+
+.home-student-photo{
+
+  width:118px;
+  height:158px;
+
+  overflow:hidden;
+
+  border:
+    2px solid
+    rgba(199,90,145,.44);
+
+  background:#071018;
+
+  box-shadow:
+    0 6px 15px
+    rgba(0,0,0,.35);
+
+}
+
+
+.home-student-photo img{
+
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  background:#071018;
+
+}
+
+
+.home-photo-placeholder{
+
+  display:grid;
+
+  place-items:center;
+
+  width:100%;
+  height:100%;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(199,90,145,.14),
+      transparent 42%
+    ),
+
+    #071018;
+
+  color:
+    var(--pink);
+
+  font-size:40px;
+
+  font-weight:900;
+
+}
+
+
+.home-id-copy h1{
+
+  margin:
+    0 0 8px;
+
+  color:
+    #f2ece1;
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:26px;
+
+  line-height:1.08;
+
+}
+
+
+.home-id-title{
+
+  display:inline-block;
+
+  margin-bottom:13px;
+
+  padding:
+    5px 8px;
+
+  border:
+    1px solid
+    rgba(199,90,145,.30);
+
+  background:
+    rgba(199,90,145,.08);
+
+  color:
+    #ef9fc4;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.09em;
+
+  text-transform:uppercase;
+
+}
+
+
+.home-id-fields{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0,1fr)
+    );
+
+  gap:
+    10px
+    12px;
+
+}
+
+
+.home-id-field{
+
+  padding-bottom:7px;
+
+  border-bottom:
+    1px solid
+    rgba(47,197,191,.14);
+
+}
+
+
+.home-id-label{
+
+  display:block;
+
+  margin-bottom:3px;
+
+  color:
+    #8fbab7;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+}
+
+
+.home-id-value{
+
+  display:block;
+
+  overflow-wrap:anywhere;
+
+  color:
+    #e8e0d4;
+
+  font-size:13px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   TODAY'S ADVENTURE
+   ===================================================== */
+
+.home-adventure-card{
+
+  min-height:335px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(47,197,191,.20);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 5%,
+      rgba(47,197,191,.045),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      150deg,
+      #091119,
+      #121721
+    );
+
+}
+
+
+.home-adventure-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:27px;
+  top:0;
+  bottom:0;
+
+  width:2px;
+
+  background:
+
+    linear-gradient(
+      var(--pink),
+      var(--teal),
+      var(--gold)
+    );
+
+  opacity:.6;
+
+}
+
+
+.home-adventure-card .home-card-inner{
+
+  padding:
+    20px
+    20px
+    20px
+    43px;
+
+}
+
+
+.home-card-header-row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:14px;
+
+  margin-bottom:13px;
+
+}
+
+
+.home-card-header-row h2{
+
+  margin-bottom:0;
+
+}
+
+
+.home-card-link{
+
+  min-height:34px;
+
+  padding:
+    6px 10px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.30);
+
+  background:
+    rgba(224,179,79,.035);
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+.home-card-link:hover{
+
+  border-color:
+    var(--teal);
+
+  color:
+    var(--teal);
+
+}
+
+
+.home-favorite-objectives{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:9px;
+
+}
+
+
+.home-objective-item{
+
+  display:grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  gap:10px;
+
+  align-items:center;
+
+  min-height:58px;
+
+  padding:
+    9px 11px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.13);
+
+  border-left:
+    4px solid var(--teal);
+
+  background:
+    rgba(4,12,18,.68);
+
+}
+
+
+.home-objective-item:nth-child(2){
+
+  border-left-color:
+    var(--gold);
+
+}
+
+
+.home-objective-item:nth-child(3){
+
+  border-left-color:
+    var(--pink);
+
+}
+
+
+.home-objective-item.is-complete{
+
+  opacity:.62;
+
+}
+
+
+.home-objective-check{
+
+  display:grid;
+
+  place-items:center;
+
+  width:28px;
+  height:28px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.50);
+
+  border-radius:50%;
+
+  color:
+    var(--teal);
+
+  font-weight:900;
+
+}
+
+
+.home-objective-copy{
+
+  min-width:0;
+
+}
+
+
+.home-objective-copy strong{
+
+  display:block;
+
+  color:
+    #ece5d9;
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:14px;
+
+}
+
+
+.home-objective-copy span{
+
+  display:block;
+
+  margin-top:3px;
+
+  overflow:hidden;
+
+  color:
+    #aaa294;
+
+  font-size:12px;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+}
+
+
+.home-objective-star{
+
+  color:
+    var(--gold);
+
+  font-size:18px;
+
+}
+
+
+.home-objectives-empty{
+
+  padding:14px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.14);
+
+  border-left:
+    4px solid
+    var(--teal);
+
+  background:
+    rgba(4,12,18,.60);
+
+  color:#b8b0a3;
+
+}
+
+
+/* =====================================================
+   CORRUPTED WORLD MESSAGE
+
+   HTML text will be changed in the next step.
+   ===================================================== */
+
+.message{
+
+  position:relative;
+
+  min-height:330px;
+
+  padding:
+    26px
+    88px
+    26px
+    24px;
+
+  box-sizing:border-box;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(199,90,145,.30);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(199,90,145,.12),
+      transparent 22%
+    ),
+
+    radial-gradient(
+      circle at 15% 90%,
+      rgba(47,197,191,.07),
+      transparent 26%
+    ),
+
+    linear-gradient(
+      160deg,
+      #071018,
+      #161322 60%,
+      #190d17
+    );
+
+  color:
+    #f0eadf;
+
+  box-shadow:
+    inset 0 0 55px
+    rgba(0,0,0,.28);
+
+}
+
+
+.message::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  opacity:.22;
+
+  background:
+
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 6px,
+      rgba(199,90,145,.12) 6px 7px
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent
+    );
+
+}
+
+
+.tape{
+
+  position:absolute;
+
+  width:105px;
+  height:22px;
+
+  top:-9px;
+  left:50%;
+
+  transform:
+    translateX(-50%)
+    rotate(2deg);
+
+  background:
+    rgba(199,90,145,.34);
+
+}
+
+
+.message .smallcaps{
+
+  position:relative;
+
+  z-index:2;
+
+  color:
+    #8ce0db;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  letter-spacing:.13em;
+
+  text-transform:uppercase;
+
+}
+
+
+.message-quote{
+
+  position:relative;
+
+  z-index:2;
+
+  max-width:340px;
+
+  margin-top:23px;
+
+  color:
+    #f2a6c8;
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:25px;
+
+  line-height:1.3;
+
+  text-shadow:
+    0 0 16px
+    rgba(199,90,145,.16);
+
+}
+
+
+.message-copy{
+
+  position:relative;
+
+  z-index:2;
+
+  max-width:310px;
+
+  margin-top:23px;
+
+  color:
+    #ddd5c8;
+
+  font-size:14px;
+
+  line-height:1.72;
+
+}
+
+
+/* corrupted ornament replaces rocket */
+
+.rocket{
+
+  position:absolute;
+
+  right:33px;
+  bottom:35px;
+
+  width:48px;
+  height:67px;
+
+  border:0;
+
+  border-left:
+    2px solid
+    var(--pink);
+
+  border-bottom:
+    2px solid
+    var(--teal);
+
+  border-radius:0;
+
+  transform:
+    rotate(-18deg);
+
+  opacity:.7;
+
+}
+
+
+.rocket::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:-22px;
+  top:4px;
+
+  width:38px;
+  height:38px;
+
+  border:
+    1px solid
+    var(--gold);
+
+  border-radius:
+    55% 45% 60% 40%;
+
+  transform:
+    rotate(35deg);
+
+}
+
+
+.rocket::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:4px;
+  bottom:-18px;
+
+  width:35px;
+  height:35px;
+
+  border-left:
+    1px solid
+    var(--pink);
+
+  border-radius:
+    0 0 0 100%;
+
+  background:transparent;
+
+}
+
+
+/* =====================================================
+   LATEST TRANSMISSION
+   ===================================================== */
+
+.home-journal-card{
+
+  min-height:650px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(47,197,191,.22);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(47,197,191,.04),
+      transparent 26%
+    ),
+
+    linear-gradient(
+      150deg,
+      #091119,
+      #121621
+    );
+
+}
+
+
+.home-journal-card::before{
+
+  content:"LATEST TRANSMISSION";
+
+  display:block;
+
+  padding:
+    9px 17px;
+
+  border-bottom:
+    1px solid
+    rgba(47,197,191,.20);
+
+  background:
+    rgba(47,197,191,.08);
+
+  color:
+    #8ce0db;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.13em;
+
+}
+
+
+.home-journal-card .home-kicker{
+
+  display:none;
+
+}
+
+
+.home-journal-card h2{
+
+  color:
+    #e9e2d7;
+
+  font-family:inherit;
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+
+.home-latest-journal{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:12px;
+
+  max-height:1000px;
+
+  overflow-y:auto;
+
+  padding:
+    2px 4px 6px 0;
+
+}
+
+
+.home-journal-entry{
+
+  padding-bottom:12px;
+
+  border-bottom:
+    1px solid
+    rgba(224,179,79,.12);
+
+}
+
+
+.home-journal-entry:last-child{
+
+  padding-bottom:0;
+
+  border-bottom:0;
+
+}
+
+
+.home-journal-head{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-bottom:7px;
+
+}
+
+
+.home-journal-avatar{
+
+  width:39px;
+  height:39px;
+
+  flex:
+    0 0 auto;
+
+  border:
+    1px solid
+    rgba(199,90,145,.32);
+
+  border-radius:50%;
+
+  object-fit:cover;
+
+  background:#071018;
+
+}
+
+
+.home-journal-avatar-placeholder{
+
+  display:grid;
+
+  place-items:center;
+
+  background:#071018;
+
+  color:
+    var(--pink);
+
+  font-weight:900;
+
+}
+
+
+.home-journal-head strong{
+
+  display:block;
+
+  color:
+    #ef9fc4;
+
+  font-size:14px;
+
+}
+
+
+.home-journal-head span{
+
+  display:block;
+
+  margin-top:2px;
+
+  color:#918b81;
+
+  font-size:11px;
+
+}
+
+
+.home-journal-content{
+
+  max-height:95px;
+
+  overflow:hidden;
+
+  padding:
+    10px
+    12px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.12);
+
+  background:
+    #060d14;
+
+  color:
+    #ddd5c8;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+  white-space:pre-wrap;
+
+}
+
+
+.home-journal-empty{
+
+  padding:17px;
+
+  border:
+    1px dashed
+    rgba(47,197,191,.22);
+
+  background:
+    rgba(5,12,18,.55);
+
+  color:#aaa294;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   PROGRAM METRICS
+   ===================================================== */
+
+.home-status-card{
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(47,197,191,.25);
+
+  background:
+
+    radial-gradient(
+      circle at 85% 5%,
+      rgba(47,197,191,.05),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      145deg,
+      #091119,
+      #111925
+    );
+
+}
+
+
+.home-status-card::before{
+
+  content:"PROGRAM METRICS // LIVE";
+
+  display:block;
+
+  padding:
+    9px 17px;
+
+  border-bottom:
+    1px solid
+    rgba(47,197,191,.20);
+
+  background:
+    rgba(47,197,191,.07);
+
+  color:
+    #8ce0db;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.13em;
+
+}
+
+
+.home-status-card .home-card-inner{
+
+  padding:
+    17px 18px;
+
+}
+
+
+.home-status-card .home-kicker{
+
+  display:none;
+
+}
+
+
+.home-status-card h2{
+
+  margin-bottom:12px;
+
+  color:
+    #e9e2d7;
+
+  font-family:inherit;
+
+  font-size:17px;
+
+  font-weight:900;
+
+  letter-spacing:.05em;
+
+  text-transform:uppercase;
+
+}
+
+
+.home-status-layout{
+
+  display:grid;
+
+  grid-template-columns:
+    120px 1fr;
+
+  gap:15px;
+
+  align-items:center;
+
+}
+
+
+.home-alignment-wrap{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  text-align:center;
+
+}
+
+
+.home-alignment-meter{
+
+  --alignment-percent:0%;
+
+  position:relative;
+
+  display:grid;
+
+  place-items:center;
+
+  width:110px;
+  height:110px;
+
+  border-radius:50%;
+
+  background:
+
+    conic-gradient(
+      var(--pink)
+        0 var(--alignment-percent),
+
+      rgba(47,197,191,.12)
+        var(--alignment-percent)
+        100%
+    );
+
+  box-shadow:
+    0 0 18px
+    rgba(199,90,145,.08);
+
+}
+
+
+.home-alignment-meter::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:14px;
+
+  border-radius:50%;
+
+  background:
+    #071018;
+
+}
+
+
+.home-alignment-center{
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+
+.home-alignment-value{
+
+  display:block;
+
+  color:
+    #efe9de;
+
+  font-size:19px;
+
+  font-weight:900;
+
+}
+
+
+.home-alignment-small{
+
+  display:block;
+
+  color:
+    #8fbab7;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+}
+
+
+.home-alignment-status{
+
+  margin-top:7px;
+
+  color:
+    #aaa294;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  line-height:1.3;
+
+}
+
+
+.home-status-side{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
+
+}
+
+
+.home-status-block{
+
+  padding:
+    10px 11px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.13);
+
+  background:
+    rgba(4,12,18,.60);
+
+}
+
+
+.home-status-label{
+
+  display:block;
+
+  margin-bottom:5px;
+
+  color:
+    #8fbab7;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.09em;
+
+  text-transform:uppercase;
+
+}
+
+
+.home-exhaustion-hearts{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:2px;
+
+}
+
+
+.home-exhaustion-heart{
+
+  color:#566566;
+
+  font-size:20px;
+
+}
+
+
+.home-exhaustion-heart.is-filled{
+
+  color:
+    #bd4458;
+
+  text-shadow:
+    0 0 8px
+    rgba(189,68,88,.20);
+
+}
+
+
+.home-inspiration-row{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+}
+
+
+.home-inspiration-icon{
+
+  display:grid;
+
+  place-items:center;
+
+  width:34px;
+  height:34px;
+
+  flex:
+    0 0 auto;
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  border-radius:50%;
+
+  background:#080e14;
+
+  color:#77796f;
+
+  font-size:18px;
+
+}
+
+
+.home-inspiration-icon::before{
+
+  content:"✦";
+
+}
+
+
+.home-inspiration-icon.is-active{
+
+  border-color:
+    var(--gold);
+
+  background:
+    rgba(224,179,79,.12);
+
+  color:
+    var(--gold);
+
+  box-shadow:
+    0 0 14px
+    rgba(224,179,79,.15);
+
+}
+
+
+.home-inspiration-label{
+
+  color:
+    #e4ddd1;
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   CORRUPTED STAY CURIOUS
+   ===================================================== */
+
+.home-curious-card{
+
+  width:100%;
+
+  border:0;
+
+  background:transparent;
+
+  box-shadow:none;
+
+}
+
+
+.home-curious-card .home-card-inner{
+
+  position:relative;
+
+  width:100%;
+
+  min-height:280px;
+
+  padding:
+    20px
+    26px
+    100px;
+
+  box-sizing:border-box;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(199,90,145,.30);
+
+  background:
+
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(189,68,88,.12),
+      transparent 34%
+    ),
+
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(47,197,191,.07),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      155deg,
+      #081018,
+      #171320 62%,
+      #120b12
+    );
+
+  box-shadow:
+    0 10px 24px
+    rgba(0,0,0,.26);
+
+  transform:
+    rotate(.25deg);
+
+}
+
+
+.home-curious-card .home-card-inner::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-8px;
+  left:50%;
+
+  width:100px;
+  height:24px;
+
+  transform:
+    translateX(-50%)
+    rotate(-3deg);
+
+  background:
+    rgba(199,90,145,.35);
+
+}
+
+
+.home-curious-card .home-card-inner::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  opacity:.3;
+
+  background:
+
+    radial-gradient(
+      circle at 20% 40%,
+      rgba(199,90,145,.20) 0 2px,
+      transparent 3px
+    ),
+
+    radial-gradient(
+      circle at 78% 58%,
+      rgba(47,197,191,.16) 0 2px,
+      transparent 3px
+    );
+
+  background-size:
+    80px 80px,
+    110px 110px;
+
+}
+
+
+/* =====================================================
+   CORRUPTED STAY LOST LAYOUT
+   ===================================================== */
+
+.home-curious-layout{
+
+  position:relative;
+
+  z-index:2;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:flex-start;
+
+  min-height:275px;
+
+}
+
+
+.home-curious-copy{
+
+  width:100%;
+
+  max-width:620px;
+
+  text-align:center;
+
+}
+
+
+.home-curious-copy h2{
+
+  margin:
+    8px 0 10px;
+
+  color:
+    #ef9fc4;
+
+  font-size:32px;
+
+  text-shadow:
+    0 0 18px
+    rgba(199,90,145,.14);
+
+}
+
+
+.home-curious-copy p{
+
+  margin:0;
+
+  color:
+    #d1c8bb;
+
+  font-size:15px;
+
+}
+
+
+/* =====================================================
+   FOLLOW THE LIGHTS BUTTON
+   ===================================================== */
+
+.future-is-yours-button{
+
+  position:relative;
+
+  left:auto;
+  right:auto;
+  top:auto;
+  bottom:auto;
+
+  z-index:3;
+
+  display:grid;
+
+  place-items:center;
+
+  width:128px;
+  height:128px;
+
+  margin:
+    48px auto 0;
+
+  padding:17px;
+
+  transform:
+    rotate(1deg);
+
+  border:
+    2px solid
+    rgba(239,159,196,.72);
+
+  border-radius:50%;
+
+  background:
+
+    radial-gradient(
+      circle at 35% 30%,
+      #81273d,
+      #4b1728 58%,
+      #180910
+    );
+
+  color:
+    #f8e4ec;
+
+  font:inherit;
+
+  font-size:13px;
+
+  font-weight:900;
+
+  line-height:1.15;
+
+  letter-spacing:.04em;
+
+  text-align:center;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+  box-shadow:
+
+    0 0 0 5px
+    rgba(199,90,145,.06),
+
+    0 0 28px
+    rgba(189,68,88,.18),
+
+    0 9px 0
+    #260b15;
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease;
+
+}
+
+
+.future-is-yours-button:hover{
+
+  transform:
+    translateY(-3px)
+    rotate(-1deg);
+
+  border-color:
+    var(--pink);
+
+  box-shadow:
+
+    0 0 0 6px
+    rgba(199,90,145,.08),
+
+    0 0 38px
+    rgba(189,68,88,.26),
+
+    0 10px 0
+    #260b15;
+
+}
+
+
+.future-is-yours-button:active{
+
+  transform:
+    translateY(4px);
+
+  box-shadow:
+
+    0 0 18px
+    rgba(189,68,88,.20),
+
+    0 3px 0
+    #260b15;
+
+}
+
+
+/* =====================================================
+   FAE CORRUPTION LAYER
+   ===================================================== */
+
+.home-confetti-layer{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99999;
+
+  overflow:hidden;
+
+  pointer-events:none;
+
+}
+
+
+.home-confetti-layer.is-corrupted{
+
+  background:
+    radial-gradient(
+      circle at 50% 75%,
+      rgba(101,14,32,.14),
+      transparent 45%
+    );
+
+  animation:
+    homeCorruptionPulse 3.8s ease-out forwards;
+
+}
+
+
+/* =====================================================
+   CORRUPTION PARTICLES
+   ===================================================== */
+
+.home-confetti-layer.is-corrupted
+.home-confetti-piece{
+
+  position:absolute;
+
+  top:auto;
+
+  opacity:0;
+
+  animation-timing-function:
+    ease-out;
+
+  animation-fill-mode:
+    forwards;
+
+}
+
+
+/* jagged red glass / thorn fragment */
+
+.home-confetti-layer.is-corrupted
+.home-confetti-shard{
+
+  width:7px;
+  height:34px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #d65069,
+      #781c33 55%,
+      #280912
+    );
+
+  clip-path:
+    polygon(
+      42% 0,
+      100% 18%,
+      64% 53%,
+      92% 100%,
+      28% 77%,
+      0 35%
+    );
+
+  box-shadow:
+    0 0 9px
+    rgba(195,45,73,.25);
+
+  animation-name:
+    homeFaeShardRise;
+
+}
+
+
+/* black-red thorn */
+
+.home-confetti-layer.is-corrupted
+.home-confetti-strip{
+
+  width:3px;
+  height:40px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #25070e,
+      #a42b45 45%,
+      #160509
+    );
+
+  clip-path:
+    polygon(
+      50% 0,
+      100% 18%,
+      65% 42%,
+      100% 65%,
+      55% 100%,
+      30% 66%,
+      0 43%,
+      35% 24%
+    );
+
+  animation-name:
+    homeFaeThornRise;
+
+}
+
+
+/* eerie glowing mote, deliberately NOT heart-shaped */
+
+.home-confetti-layer.is-corrupted
+.home-confetti-drop{
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:
+    #d84c69;
+
+  box-shadow:
+
+    0 0 6px
+    #d84c69,
+
+    0 0 14px
+    rgba(216,76,105,.52);
+
+  animation-name:
+    homeFaeMoteRise;
+
+}
+
+
+/* =====================================================
+   COLOR VARIATION
+   ===================================================== */
+
+.home-confetti-layer.is-corrupted
+.home-confetti-color-1{
+
+  filter:
+    brightness(.72)
+    saturate(.95);
+
+}
+
+
+.home-confetti-layer.is-corrupted
+.home-confetti-color-2{
+
+  filter:
+    brightness(1.10)
+    saturate(1.15);
+
+}
+
+
+.home-confetti-layer.is-corrupted
+.home-confetti-color-3{
+
+  filter:
+    brightness(.48)
+    saturate(.8);
+
+}
+
+
+.home-confetti-layer.is-corrupted
+.home-confetti-color-4{
+
+  filter:
+    brightness(.92)
+    saturate(1.4);
+
+}
+
+
+/* =====================================================
+   SHARDS RISE RAPIDLY
+   ===================================================== */
+
+@keyframes homeFaeShardRise{
+
+  0%{
+
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      )
+      rotate(0deg)
+      scale(.2);
+
+    opacity:0;
+
+  }
+
+
+  12%{
+
+    opacity:.9;
+
+  }
+
+
+  65%{
+
+    opacity:.78;
+
+  }
+
+
+  100%{
+
+    transform:
+      translate3d(
+        var(--confetti-drift),
+        -115vh,
+        0
+      )
+      rotate(
+        var(--confetti-spin)
+      )
+      scale(1.1);
+
+    opacity:0;
+
+  }
+
+}
+
+
+/* =====================================================
+   THORNS TWIST UPWARD
+   ===================================================== */
+
+@keyframes homeFaeThornRise{
+
+  0%{
+
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      )
+      rotate(-20deg)
+      scaleY(.25);
+
+    opacity:0;
+
+  }
+
+
+  18%{
+
+    opacity:.75;
+
+  }
+
+
+  100%{
+
+    transform:
+      translate3d(
+        var(--confetti-drift),
+        -110vh,
+        0
+      )
+      rotate(
+        var(--confetti-spin)
+      )
+      scaleY(1.35);
+
+    opacity:0;
+
+  }
+
+}
+
+
+/* =====================================================
+   MOTES FLOAT ERRATICALLY
+   ===================================================== */
+
+@keyframes homeFaeMoteRise{
+
+  0%{
+
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      )
+      scale(.2);
+
+    opacity:0;
+
+  }
+
+
+  18%{
+
+    opacity:1;
+
+  }
+
+
+  45%{
+
+    transform:
+      translate3d(
+        calc(
+          var(--confetti-drift) * -.3
+        ),
+        -38vh,
+        0
+      )
+      scale(1.5);
+
+  }
+
+
+  75%{
+
+    transform:
+      translate3d(
+        calc(
+          var(--confetti-drift) * .5
+        ),
+        -72vh,
+        0
+      )
+      scale(.75);
+
+  }
+
+
+  100%{
+
+    transform:
+      translate3d(
+        var(--confetti-drift),
+        -110vh,
+        0
+      )
+      scale(.2);
+
+    opacity:0;
+
+  }
+
+}
+
+
+/* =====================================================
+   SCREEN CORRUPTION PULSE
+   ===================================================== */
+
+@keyframes homeCorruptionPulse{
+
+  0%{
+
+    background:
+      rgba(80,8,24,0);
+
+    backdrop-filter:
+      none;
+
+  }
+
+
+  8%{
+
+    background:
+      rgba(98,12,31,.12);
+
+    backdrop-filter:
+      brightness(.82)
+      contrast(1.18);
+
+  }
+
+
+  13%{
+
+    background:
+      rgba(8,28,29,.08);
+
+    backdrop-filter:
+      brightness(1.02)
+      contrast(1.06);
+
+  }
+
+
+  19%{
+
+    background:
+      rgba(80,8,24,.09);
+
+    backdrop-filter:
+      brightness(.89)
+      contrast(1.13);
+
+  }
+
+
+  35%{
+
+    background:
+      rgba(45,6,18,.04);
+
+    backdrop-filter:
+      brightness(.96);
+
+  }
+
+
+  100%{
+
+    background:
+      rgba(0,0,0,0);
+
+    backdrop-filter:
+      none;
+
+  }
+
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:1000px){
+
+  .home-dashboard{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .home-dashboard-left,
+  .home-dashboard-right{
+
+    gap:20px;
+
+  }
+
+}
+
+
+@media(max-width:650px){
+
+  #homeView{
+
+    margin-left:0;
+
+    padding:15px;
+
+  }
+
+
+  .home-id-layout{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .home-status-layout{
+
+    grid-template-columns:1fr;
+
+  }
+
+}
+
+
+@media(max-width:560px){
+
+  .home-id-fields{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .message{
+
+    min-height:320px;
+
+    padding-right:65px;
+
+  }
+
+
+  .message-quote{
+
+    max-width:100%;
+
+    font-size:22px;
+
+  }
+
+
+  .message-copy{
+
+    max-width:100%;
+
+    font-size:13px;
+
+  }
+
+}

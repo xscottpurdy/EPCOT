@@ -1,0 +1,1131 @@
+/* =====================================================
+   EPCOT DND
+   HERO UNBOUND OBJECTIVES
+   ===================================================== */
+
+
+/* =====================================================
+   OBJECTIVES VIEW
+   ===================================================== */
+
+.objectives-view{
+
+  margin-left:46px;
+
+  padding:
+    18px
+    20px
+    28px;
+
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.objectives-header{
+
+  position:relative;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:28px;
+
+  margin-bottom:14px;
+
+  padding:
+    20px
+    22px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(199,90,145,.08),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      145deg,
+      #09131d,
+      #141425 62%,
+      #0a1b18
+    );
+
+}
+
+
+.objectives-header::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:10px;
+
+  height:1px;
+
+  opacity:.35;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--pink),
+      var(--teal),
+      transparent
+    );
+
+}
+
+
+.objectives-kicker{
+
+  color:
+    var(--teal);
+
+  font-size:9px;
+
+  font-weight:800;
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+}
+
+
+.objectives-title{
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(--cream);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:31px;
+
+  font-weight:400;
+
+}
+
+
+.objectives-subtitle{
+
+  max-width:650px;
+
+  margin:
+    9px 0 0;
+
+  color:#bdb5a6;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+}
+
+
+/* =====================================================
+   HEADER ACTIONS
+   ===================================================== */
+
+.objectives-header-actions{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  justify-content:flex-end;
+
+  gap:8px;
+
+}
+
+
+.objectives-view-button,
+.objectives-primary-button{
+
+  min-height:40px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.35);
+
+  background:
+    rgba(224,179,79,.035);
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.09em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+.objectives-view-button.active{
+
+  border-color:
+    rgba(47,197,191,.52);
+
+  background:
+    rgba(47,197,191,.10);
+
+  color:
+    var(--teal);
+
+}
+
+
+.objectives-primary-button{
+
+  border-color:
+    rgba(199,90,145,.48);
+
+  background:
+    rgba(199,90,145,.08);
+
+  color:
+    var(--pink);
+
+}
+
+
+/* =====================================================
+   FAVORITE SUMMARY
+   ===================================================== */
+
+.objective-favorite-summary{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  margin:
+    0 0 14px;
+
+  color:#aa9f91;
+
+  font-size:11px;
+
+  letter-spacing:.07em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   GRID
+   ===================================================== */
+
+.objectives-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0,1fr)
+    );
+
+  gap:16px;
+
+}
+
+
+/* =====================================================
+   OBJECTIVE CARD
+   ===================================================== */
+
+.objective-card{
+
+  position:relative;
+
+  min-width:0;
+
+  padding:
+    18px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  background:
+
+    radial-gradient(
+      circle at 87% 12%,
+      rgba(47,197,191,.05),
+      transparent 26%
+    ),
+
+    linear-gradient(
+      155deg,
+      #0a111a,
+      #161322 65%,
+      #081713
+    );
+
+  box-shadow:
+    0 10px 26px
+    rgba(0,0,0,.22);
+
+}
+
+
+.objective-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  top:0;
+
+  height:2px;
+
+  opacity:.6;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--teal),
+      transparent 35%,
+      var(--pink) 72%,
+      var(--gold)
+    );
+
+}
+
+
+.objective-card.is-complete{
+
+  opacity:.74;
+
+}
+
+
+.objective-card.is-archived{
+
+  filter:
+    saturate(.58);
+
+}
+
+
+/* =====================================================
+   CARD HEADER
+   ===================================================== */
+
+.objective-card-head{
+
+  display:grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  gap:12px;
+
+  align-items:start;
+
+}
+
+
+.objective-star,
+.objective-complete-toggle{
+
+  display:grid;
+
+  place-items:center;
+
+  width:34px;
+  height:34px;
+
+  padding:0;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+    rgba(7,14,21,.70);
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:20px;
+
+  cursor:pointer;
+
+}
+
+
+.objective-star.is-starred{
+
+  color:
+    var(--gold);
+
+  text-shadow:
+    0 0 10px
+    rgba(224,179,79,.35);
+
+}
+
+
+.objective-complete-toggle{
+
+  color:
+    var(--teal);
+
+}
+
+
+.objective-complete-toggle.is-complete{
+
+  border-color:
+    rgba(77,155,131,.45);
+
+  color:#79cfb5;
+
+}
+
+
+.objective-card-title-wrap h2{
+
+  margin:0;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:22px;
+
+  line-height:1.2;
+
+  font-weight:400;
+
+}
+
+
+.objective-source-badge{
+
+  display:inline-block;
+
+  margin-top:7px;
+
+  padding:
+    4px 7px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.20);
+
+  background:
+    rgba(47,197,191,.04);
+
+  color:#9fc7c5;
+
+  font-size:9px;
+
+  letter-spacing:.07em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   DESCRIPTION
+   ===================================================== */
+
+.objective-description{
+
+  margin:
+    15px 0 0;
+
+  color:#d2c8b8;
+
+  font-size:13px;
+
+  line-height:1.65;
+
+}
+
+
+/* =====================================================
+   SUB-OBJECTIVES
+   ===================================================== */
+
+.objective-subitems{
+
+  display:grid;
+
+  gap:8px;
+
+  margin-top:16px;
+
+}
+
+
+.objective-subitem{
+
+  display:grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  gap:9px;
+
+  align-items:center;
+
+  padding:
+    9px 10px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.12);
+
+  background:
+    rgba(47,197,191,.025);
+
+}
+
+
+.objective-subitem.is-complete{
+
+  opacity:.62;
+
+}
+
+
+.objective-subitem-check,
+.objective-subitem-star{
+
+  display:grid;
+
+  place-items:center;
+
+  width:27px;
+  height:27px;
+
+  padding:0;
+
+  border:
+    1px solid
+    rgba(224,179,79,.22);
+
+  background:
+    rgba(5,10,16,.56);
+
+  color:
+    var(--teal);
+
+  font:inherit;
+
+  font-size:14px;
+
+  cursor:pointer;
+
+}
+
+
+.objective-subitem-star{
+
+  color:
+    var(--gold);
+
+}
+
+
+.objective-subitem-name{
+
+  color:#cfc6b6;
+
+  font-size:12px;
+
+  line-height:1.45;
+
+}
+
+
+.objective-subitem.is-complete
+.objective-subitem-name{
+
+  text-decoration:
+    line-through;
+
+}
+
+
+.objective-no-subitems{
+
+  margin-top:15px;
+
+  color:#7f7a71;
+
+  font-size:11px;
+
+  font-style:italic;
+
+}
+
+
+/* =====================================================
+   CARD ACTIONS
+   ===================================================== */
+
+.objective-card-actions{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-top:17px;
+
+  padding-top:14px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.12);
+
+}
+
+
+.objective-card-actions button{
+
+  min-height:32px;
+
+  padding:
+    0 10px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+    transparent;
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:9px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+.objective-archive-date{
+
+  margin-right:auto;
+
+  color:#837d73;
+
+  font-size:9px;
+
+}
+
+
+/* =====================================================
+   EMPTY
+   ===================================================== */
+
+.objectives-empty{
+
+  grid-column:
+    1 / -1;
+
+  padding:
+    55px 25px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(199,90,145,.05),
+      transparent 35%
+    ),
+
+    #091119;
+
+  color:#aaa293;
+
+  font-size:13px;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+
+.objective-modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99995;
+
+  display:none;
+
+  place-items:center;
+
+  padding:25px;
+
+  background:
+    rgba(3,7,12,.86);
+
+  backdrop-filter:
+    blur(8px);
+
+}
+
+
+.objective-modal.open{
+  display:grid;
+}
+
+
+.objective-modal-card{
+
+  width:
+    min(700px,100%);
+
+  max-height:
+    calc(100vh - 50px);
+
+  overflow:auto;
+
+  border:
+    1px solid
+    rgba(224,179,79,.42);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(199,90,145,.07),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      145deg,
+      #0a121b,
+      #151221
+    );
+
+  color:
+    var(--cream);
+
+  box-shadow:
+    0 26px 80px
+    rgba(0,0,0,.60);
+
+}
+
+
+.objective-modal-header{
+
+  padding:
+    20px 22px;
+
+  border-bottom:
+    1px solid
+    rgba(224,179,79,.18);
+
+}
+
+
+.objective-modal-header h2{
+
+  margin:0;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:24px;
+
+  font-weight:400;
+
+}
+
+
+/* =====================================================
+   MODAL FORM
+   ===================================================== */
+
+.objective-form{
+
+  display:grid;
+
+  gap:16px;
+
+  padding:
+    20px 22px;
+
+}
+
+
+.objective-form > label{
+
+  display:grid;
+
+  gap:7px;
+
+  color:
+    var(--teal);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:.10em;
+
+  text-transform:uppercase;
+
+}
+
+
+.objective-form input,
+.objective-form textarea{
+
+  width:100%;
+
+  padding:
+    11px 12px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.30);
+
+  background:#070e15;
+
+  color:
+    var(--cream);
+
+  font:inherit;
+
+  font-size:12px;
+
+  outline:none;
+
+}
+
+
+.objective-form textarea{
+
+  min-height:115px;
+
+  resize:vertical;
+
+  line-height:1.55;
+
+}
+
+
+.objective-form input:focus,
+.objective-form textarea:focus{
+
+  border-color:
+    var(--teal);
+
+}
+
+
+/* =====================================================
+   SUB-OBJECTIVE EDITOR
+   ===================================================== */
+
+.objective-subeditor-section{
+
+  padding-top:4px;
+
+}
+
+
+.objective-subeditor-title{
+
+  margin:
+    0 0 10px;
+
+  color:
+    var(--gold);
+
+  font-size:10px;
+
+  letter-spacing:.10em;
+
+  text-transform:uppercase;
+
+}
+
+
+.objective-draft-row{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr auto;
+
+  gap:8px;
+
+  margin-bottom:8px;
+
+}
+
+
+.objective-draft-row button{
+
+  padding:
+    0 10px;
+
+  border:
+    1px solid
+    rgba(186,77,89,.35);
+
+  background:
+    rgba(186,77,89,.05);
+
+  color:#d16d79;
+
+  font:inherit;
+
+  font-size:9px;
+
+  cursor:pointer;
+
+}
+
+
+.objective-draft-empty{
+
+  padding:
+    12px;
+
+  border:
+    1px dashed
+    rgba(224,179,79,.18);
+
+  color:#7f7a71;
+
+  font-size:11px;
+
+}
+
+
+.objective-add-subitem{
+
+  margin-top:8px;
+
+  min-height:35px;
+
+  padding:
+    0 11px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.30);
+
+  background:
+    rgba(47,197,191,.05);
+
+  color:
+    var(--teal);
+
+  font:inherit;
+
+  font-size:9px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   MODAL ACTIONS
+   ===================================================== */
+
+.objective-modal-actions{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:9px;
+
+  padding:
+    15px 22px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.15);
+
+}
+
+
+.objective-modal-actions button{
+
+  min-height:37px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.30);
+
+  background:
+    transparent;
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:9px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+#saveObjectiveButton{
+
+  border-color:
+    rgba(47,197,191,.42);
+
+  background:
+    rgba(47,197,191,.07);
+
+  color:
+    var(--teal);
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:950px){
+
+  .objectives-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+@media(max-width:680px){
+
+  .objectives-view{
+
+    margin-left:0;
+
+    padding:
+      15px;
+
+  }
+
+
+  .objectives-header{
+
+    flex-direction:column;
+
+  }
+
+
+  .objectives-header-actions{
+
+    justify-content:flex-start;
+
+  }
+
+
+  .objective-draft-row{
+
+    grid-template-columns:1fr;
+
+  }
+
+}

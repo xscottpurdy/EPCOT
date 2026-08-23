@@ -1,0 +1,1183 @@
+/* =====================================================
+   EPCOT DND
+   HERO UNBOUND COMPANY FILE
+   MATCHED TO CURRENT UNBOUND VISUAL SYSTEM
+   ===================================================== */
+
+
+/* =====================================================
+   VIEW
+   ===================================================== */
+
+.company-file-view{
+
+  margin-left:46px;
+
+  padding:
+    18px
+    20px
+    28px;
+
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.company-file-header{
+
+  position:relative;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:24px;
+
+  margin-bottom:16px;
+
+  padding:
+    20px
+    22px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(199,90,145,.08),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      145deg,
+      #09131d,
+      #141425 62%,
+      #0a1b18
+    );
+
+}
+
+
+.company-file-header::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:9px;
+
+  height:1px;
+
+  opacity:.35;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--pink),
+      var(--teal),
+      transparent
+    );
+
+}
+
+
+.company-file-kicker{
+
+  color:
+    var(--teal);
+
+  font-size:11px;
+
+  font-weight:800;
+
+  line-height:1.35;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+.company-file-header h1{
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(--cream);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:31px;
+
+  font-weight:400;
+
+}
+
+
+.company-file-header p{
+
+  max-width:660px;
+
+  margin:
+    9px 0 0;
+
+  color:#c9c2b5;
+
+  font-size:14px;
+
+  line-height:1.65;
+
+}
+
+
+.company-file-edit-button{
+
+  flex:
+    0 0 auto;
+
+  min-height:40px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid
+    rgba(199,90,145,.48);
+
+  background:
+    rgba(199,90,145,.09);
+
+  color:
+    #ef9fc4;
+
+  font:inherit;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   PROFILE
+   ===================================================== */
+
+.company-profile{
+
+  display:grid;
+
+  grid-template-columns:
+    220px
+    minmax(0,1fr);
+
+  gap:20px;
+
+  align-items:start;
+
+  margin-bottom:18px;
+
+  padding:
+    18px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.24);
+
+  background:
+
+    radial-gradient(
+      circle at 86% 10%,
+      rgba(47,197,191,.06),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 16% 85%,
+      rgba(199,90,145,.05),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      155deg,
+      #081119,
+      #121727 62%,
+      #081612
+    );
+
+  box-shadow:
+    0 10px 26px
+    rgba(0,0,0,.24);
+
+}
+
+
+/* =====================================================
+   UNBOUND PORTRAIT
+   ===================================================== */
+
+.company-profile-image{
+
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:4 / 5;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(199,90,145,.38);
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(199,90,145,.12),
+      transparent 45%
+    ),
+
+    #071018;
+
+}
+
+
+.company-profile-image img{
+
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  background:#071018;
+
+}
+
+
+.company-file-image-placeholder{
+
+  display:grid;
+
+  place-items:center;
+
+  width:100%;
+  height:100%;
+
+  color:
+    #ef9fc4;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:46px;
+
+}
+
+
+/* =====================================================
+   IDENTITY
+   ===================================================== */
+
+.company-profile-name{
+
+  color:
+    #ef9fc4;
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:27px;
+
+  line-height:1.2;
+
+}
+
+
+.company-profile-title{
+
+  margin-top:5px;
+
+  color:#e0d8c9;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.company-profile-tags{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-top:14px;
+
+}
+
+
+.company-profile-tags span{
+
+  padding:
+    6px
+    9px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.26);
+
+  background:
+    rgba(47,197,191,.06);
+
+  color:#b8e0dc;
+
+  font-size:11px;
+
+  line-height:1.3;
+
+  letter-spacing:.05em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   LANGUAGES
+   ===================================================== */
+
+.company-unbound-language-block{
+
+  margin-top:16px;
+
+  padding-top:14px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.16);
+
+}
+
+
+.company-unbound-language-label{
+
+  color:
+    var(--gold);
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.09em;
+
+  text-transform:uppercase;
+
+}
+
+
+.company-unbound-language-value{
+
+  margin-top:7px;
+
+  color:#e0d8c9;
+
+  font-size:14px;
+
+  line-height:1.65;
+
+}
+
+
+/* =====================================================
+   PERSONAL FILE HEADER
+   ===================================================== */
+
+.company-personal-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:20px;
+
+  margin-bottom:14px;
+
+  padding:
+    17px
+    18px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.20);
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(47,197,191,.05),
+      rgba(199,90,145,.035)
+    ),
+
+    #091119;
+
+}
+
+
+.company-personal-header h2{
+
+  margin:0;
+
+  color:
+    var(--teal);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:23px;
+
+  font-weight:400;
+
+}
+
+
+.company-personal-header p{
+
+  margin:
+    6px 0 0;
+
+  color:#bdb5a7;
+
+  font-size:12px;
+
+  line-height:1.55;
+
+}
+
+
+.company-file-save-button{
+
+  flex:
+    0 0 auto;
+
+  min-height:38px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.42);
+
+  background:
+    rgba(47,197,191,.08);
+
+  color:
+    #8ce0db;
+
+  font:inherit;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   WRITING GRID
+   ===================================================== */
+
+.company-writing-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0,1fr)
+    );
+
+  gap:14px;
+
+}
+
+
+/* =====================================================
+   WRITING CARD
+   ===================================================== */
+
+.company-writing-card{
+
+  min-width:0;
+
+  padding:
+    15px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.18);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 12%,
+      rgba(47,197,191,.035),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      145deg,
+      #0a111a,
+      #131522 72%,
+      #08140f
+    );
+
+  box-shadow:
+    0 7px 18px
+    rgba(0,0,0,.14);
+
+}
+
+
+.company-writing-card.company-wide{
+
+  grid-column:
+    1 / -1;
+
+}
+
+
+.company-writing-title{
+
+  color:
+    #ef9fc4;
+
+  font-size:15px;
+
+  font-weight:800;
+
+  line-height:1.35;
+
+}
+
+
+/* =====================================================
+   TEXT TOOLBAR
+   ===================================================== */
+
+.company-text-toolbar{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:10px;
+
+}
+
+
+.company-text-toolbar button{
+
+  min-height:29px;
+
+  padding:
+    0 9px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.26);
+
+  background:
+    rgba(224,179,79,.045);
+
+  color:
+    #efc86f;
+
+  font:inherit;
+
+  font-size:11px;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   RICH EDITOR
+   ===================================================== */
+
+.company-rich-editor{
+
+  min-height:150px;
+
+  margin-top:9px;
+
+  padding:
+    12px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.22);
+
+  background:
+    #050c12;
+
+  color:
+    #f0eadf;
+
+  font-size:14px;
+
+  line-height:1.7;
+
+  outline:none;
+
+}
+
+
+.company-rich-editor:focus{
+
+  border-color:
+    var(--teal);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(47,197,191,.06);
+
+}
+
+
+.company-rich-editor:empty::before{
+
+  content:
+    attr(data-placeholder);
+
+  color:#747b78;
+
+}
+
+
+/* =====================================================
+   SECRETS
+   ===================================================== */
+
+.company-writing-card.company-secrets{
+
+  border-color:
+    rgba(199,90,145,.28);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(199,90,145,.07),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      145deg,
+      #0a111a,
+      #15121f
+    );
+
+}
+
+
+.company-writing-card.company-secrets
+.company-writing-title{
+
+  color:
+    #ef9fc4;
+
+}
+
+
+/* =====================================================
+   BACKSTORY
+   ===================================================== */
+
+.company-writing-card.company-backstory
+.company-rich-editor{
+
+  min-height:220px;
+
+}
+
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+
+.company-modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99995;
+
+  display:none;
+
+  place-items:center;
+
+  padding:25px;
+
+  background:
+    rgba(3,7,12,.88);
+
+  backdrop-filter:
+    blur(8px);
+
+}
+
+
+.company-modal.open{
+
+  display:grid;
+
+}
+
+
+.company-modal-card{
+
+  width:
+    min(850px,100%);
+
+  max-height:
+    calc(100vh - 50px);
+
+  overflow:auto;
+
+  border:
+    1px solid
+    rgba(224,179,79,.38);
+
+  background:
+
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(199,90,145,.08),
+      transparent 25%
+    ),
+
+    radial-gradient(
+      circle at 10% 95%,
+      rgba(47,197,191,.05),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      145deg,
+      #08111a,
+      #151323
+    );
+
+  color:
+    var(--cream);
+
+  box-shadow:
+    0 26px 80px
+    rgba(0,0,0,.62);
+
+}
+
+
+/* =====================================================
+   MODAL HEADER
+   ===================================================== */
+
+.company-modal-header{
+
+  padding:
+    20px
+    22px;
+
+  border-bottom:
+    1px solid
+    rgba(224,179,79,.18);
+
+}
+
+
+.company-modal-header h2{
+
+  margin:0;
+
+  color:
+    #ef9fc4;
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:24px;
+
+  font-weight:400;
+
+}
+
+
+/* =====================================================
+   EDIT GRID
+   ===================================================== */
+
+.company-edit-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0,1fr)
+    );
+
+  gap:13px;
+
+  padding:
+    20px
+    22px;
+
+}
+
+
+.company-edit-grid label,
+
+.company-language-field{
+
+  display:grid;
+
+  gap:7px;
+
+  color:
+    #8ce0db;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.07em;
+
+  text-transform:uppercase;
+
+}
+
+
+.company-edit-wide{
+
+  grid-column:
+    1 / -1;
+
+}
+
+
+.company-edit-grid input,
+.company-edit-grid select{
+
+  width:100%;
+
+  min-height:40px;
+
+  padding:
+    0 11px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  background:#050c12;
+
+  color:
+    #f0eadf;
+
+  font:inherit;
+
+  font-size:14px;
+
+  outline:none;
+
+}
+
+
+.company-edit-grid input:focus,
+.company-edit-grid select:focus{
+
+  border-color:
+    var(--teal);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(47,197,191,.05);
+
+}
+
+
+/* =====================================================
+   LANGUAGE DROPDOWN
+   ===================================================== */
+
+.company-language-dropdown{
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  background:#050c12;
+
+}
+
+
+.company-language-dropdown summary{
+
+  padding:
+    11px;
+
+  color:
+    #f0eadf;
+
+  font-size:14px;
+
+  cursor:pointer;
+
+}
+
+
+.company-language-options{
+
+  display:grid;
+
+  gap:8px;
+
+  padding:
+    10px
+    12px
+    12px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.13);
+
+}
+
+
+.company-language-options label{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:8px;
+
+  color:#ddd5c7;
+
+  font-size:12px;
+
+  line-height:1.45;
+
+  text-transform:none;
+
+  letter-spacing:0;
+
+}
+
+
+.company-language-options span{
+
+  color:#8e8a82;
+
+}
+
+
+/* =====================================================
+   MODAL ACTIONS
+   ===================================================== */
+
+.company-modal-actions{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:9px;
+
+  padding:
+    15px
+    22px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.15);
+
+}
+
+
+.company-modal-actions button{
+
+  min-height:38px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.30);
+
+  background:
+    transparent;
+
+  color:
+    #efc86f;
+
+  font:inherit;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+.company-modal-actions
+.company-primary{
+
+  border-color:
+    rgba(47,197,191,.42);
+
+  background:
+    rgba(47,197,191,.08);
+
+  color:
+    #8ce0db;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:900px){
+
+  .company-profile{
+
+    grid-template-columns:
+      170px
+      minmax(0,1fr);
+
+  }
+
+}
+
+
+@media(max-width:680px){
+
+  .company-file-view{
+
+    margin-left:0;
+
+    padding:15px;
+
+  }
+
+
+  .company-file-header,
+  .company-personal-header{
+
+    flex-direction:column;
+
+  }
+
+
+  .company-profile{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .company-profile-image{
+
+    width:
+      min(250px,100%);
+
+  }
+
+
+  .company-writing-grid,
+  .company-edit-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .company-writing-card.company-wide,
+  .company-edit-wide{
+
+    grid-column:auto;
+
+  }
+
+
+  .company-file-edit-button,
+  .company-file-save-button{
+
+    width:100%;
+
+  }
+
+}

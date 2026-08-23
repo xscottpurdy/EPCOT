@@ -1,0 +1,8366 @@
+/* =====================================================
+   EPCOT DND
+   VILLAIN CAST WORLD
+
+   VISUAL SKIN ONLY
+
+   Design:
+   - late 80s / early 90s corporate workstation
+   - teal desktop
+   - chunky application windows
+   - CRT black screens
+   - phosphor green text
+   - amber accents
+   - retro OS title bars
+   - NO layout or functionality changes
+   ===================================================== */
+
+
+/* =====================================================
+   CORE TOKENS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]{
+
+  --vc-desktop:#0e7474;
+  --vc-desktop-dark:#0a585a;
+
+  --vc-plastic:#bcb9aa;
+  --vc-plastic-light:#d7d3c3;
+  --vc-plastic-dark:#88877d;
+
+  --vc-frame:#252b25;
+  --vc-frame-light:#373d35;
+
+  --vc-titlebar:#343931;
+  --vc-titlebar-light:#454b41;
+
+  --vc-screen:#031008;
+  --vc-screen-soft:#07170d;
+
+  --vc-green:#74df64;
+  --vc-green-bright:#b6ff9c;
+  --vc-green-muted:#67a861;
+
+  --vc-amber:#d7b55c;
+  --vc-cream:#e8dfc5;
+
+  --vc-text:#d9d6c8;
+  --vc-dark:#252921;
+
+  --vc-border:#52574d;
+  --vc-border-light:#777970;
+
+  --vc-crt-line:rgba(116,223,100,.22);
+
+  --vc-window-shadow:
+    4px 5px 0 rgba(0,0,0,.24),
+    0 12px 24px rgba(0,0,0,.20);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--vc-desktop),
+      var(--vc-desktop-dark)
+    );
+
+  color:
+    var(--vc-dark);
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace;
+
+}
+
+
+/* =====================================================
+   OLD PROTOTYPE / HERO DECORATION
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+> .cast-shell{
+
+  display:none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.spine{
+
+  display:none !important;
+
+}
+
+
+/* =====================================================
+   APPLICATION SHELL
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.hero-shell{
+
+  margin:14px;
+
+  overflow:hidden;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:2px;
+
+  background:
+    var(--vc-plastic);
+
+  box-shadow:
+    7px 8px 0
+    rgba(0,0,0,.20);
+
+}
+
+
+/* =====================================================
+   SCREEN TEXTURE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]::before{
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99999;
+
+  pointer-events:none;
+
+  opacity:.025;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(255,255,255,.12) 0,
+      rgba(255,255,255,.12) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+}
+
+
+/* =====================================================
+   TOP HEADER
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.header{
+
+  position:relative;
+
+  overflow:hidden;
+
+  min-height:160px;
+
+  border-bottom:
+    3px solid
+    var(--vc-border);
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.018) 0,
+      rgba(116,223,100,.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #121812;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.header::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:11px;
+
+  border:
+    1px solid
+    rgba(116,223,100,.17);
+
+  pointer-events:none;
+
+}
+
+
+/* =====================================================
+   HEADER TEXT
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.eyebrow{
+
+  color:
+    var(--vc-green-muted);
+
+  font-family:inherit;
+
+  font-size:10px;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.magic-title{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:inherit;
+
+  font-size:
+    clamp(
+      25px,
+      4vw,
+      42px
+    );
+
+  font-weight:700;
+
+  letter-spacing:.025em;
+
+  text-transform:uppercase;
+
+  text-shadow:
+    0 0 7px
+    rgba(116,223,100,.30);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.magic-title span{
+
+  color:
+    var(--vc-green);
+
+  font:inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.subbrand{
+
+  color:
+    var(--vc-amber);
+
+  font-family:inherit;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   HEADER NOTE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.note{
+
+  transform:none !important;
+
+  border:
+    2px solid
+    var(--vc-border);
+
+  border-radius:0;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+  box-shadow:
+    inset 0 0 14px
+    rgba(116,223,100,.035);
+
+  font-family:inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.note::before{
+
+  display:none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.note::after{
+
+  content:
+    "> INTERNAL MESSAGE";
+
+  display:block;
+
+  margin-top:8px;
+
+  color:
+    var(--vc-green-muted);
+
+  font-size:8px;
+
+  letter-spacing:.12em;
+
+}
+
+
+/* =====================================================
+   NAVIGATION = APPLICATION LAUNCHER
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav{
+
+  border-bottom:
+    2px solid
+    var(--vc-border);
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--vc-plastic-light),
+      var(--vc-plastic)
+    );
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button{
+
+  position:relative;
+
+  border-right:
+    1px solid
+    rgba(0,0,0,.15);
+
+  border-bottom:
+    3px solid
+    transparent;
+
+  border-radius:0 !important;
+
+  background:
+    transparent;
+
+  color:
+    #30342e;
+
+  font-family:inherit;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+
+}
+
+
+/* little retro application glyph */
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button::before{
+
+  display:inline-grid;
+
+  place-items:center;
+
+  width:15px;
+  height:15px;
+
+  margin-right:6px;
+
+  border:
+    1px solid
+    #5d6358;
+
+  background:
+    #d7d4c5;
+
+  color:
+    #255d4c;
+
+  font-size:9px;
+
+  line-height:1;
+
+  vertical-align:middle;
+
+}
+
+
+/* APP ICONS */
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:nth-child(1)::before{
+  content:"⌂";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:nth-child(2)::before{
+  content:"▣";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:nth-child(3)::before{
+  content:"▤";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:nth-child(4)::before{
+  content:"♙";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:nth-child(5)::before{
+  content:"✓";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:nth-child(6)::before{
+  content:"◎";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:nth-child(7)::before{
+  content:"◆";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:nth-child(8)::before{
+  content:"▧";
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button:hover{
+
+  background:
+    rgba(255,255,255,.24);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.nav button.active{
+
+  border-bottom-color:
+    #176d66;
+
+  background:
+    #e3dfd0;
+
+  color:
+    #163d39;
+
+}
+
+
+/* =====================================================
+   MAIN DESKTOP
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.main{
+
+  background:
+
+    radial-gradient(
+      circle at 75% 15%,
+      rgba(255,255,255,.035),
+      transparent 34%
+    ),
+
+    var(--vc-desktop);
+
+}
+
+
+/* =====================================================
+   EVERY MODULE = APPLICATION WINDOW
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section,
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-ability-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-inventory-card{
+
+  position:relative;
+
+  padding-top:27px;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px !important;
+
+  background:
+    var(--vc-plastic);
+
+  color:
+    var(--vc-dark);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+/* =====================================================
+   APPLICATION TITLE BAR
+
+   Decorative only.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-ability-card::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-inventory-card::before{
+
+  content:
+    "WDI SYSTEM";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  top:0;
+
+  height:24px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding-left:9px;
+
+  box-sizing:border-box;
+
+  border-bottom:
+    2px solid
+    #181d18;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    );
+
+  color:
+    var(--vc-cream);
+
+  font-size:
+    8px;
+
+  font-weight:700;
+
+  letter-spacing:.10em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   MIN / MAX / CLOSE BUTTONS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-ability-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-inventory-card::after{
+
+  content:
+    "—   □   ×";
+
+  position:absolute;
+
+  right:5px;
+  top:4px;
+
+  z-index:5;
+
+  height:16px;
+
+  padding:
+    0 4px;
+
+  border:
+    1px solid
+    #70736a;
+
+  background:
+    #c7c4b7;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    10px;
+
+  font-weight:700;
+
+  line-height:
+    14px;
+
+  letter-spacing:
+    3px;
+
+  pointer-events:none;
+
+}
+
+
+/* =====================================================
+   WINDOW CONTENT AREA
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card-inner{
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+  border:
+    1px solid
+    #1b2b1d;
+
+  box-shadow:
+    inset 0 0 20px
+    rgba(0,0,0,.55);
+
+}
+
+
+/* =====================================================
+   REMOVE ALL TAPE / PAPER DECORATIONS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card-inner::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card::before:not(.nothing),
+
+body[data-campaign="villain"][data-reality="cast"]
+.tape{
+
+  /* handled elsewhere */
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.tape{
+
+  display:none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-card
+.home-card-inner::before{
+
+  display:none !important;
+
+}
+
+
+/* =====================================================
+   TEXT HIERARCHY
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section-title,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-heading h1{
+
+  color:
+    var(--vc-amber);
+
+  font-family:inherit;
+
+  font-weight:700;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-kicker,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-kicker,
+
+body[data-campaign="villain"][data-reality="cast"]
+.smallcaps{
+
+  color:
+    var(--vc-green-muted);
+
+  font-family:inherit;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   ID BADGE = COMPUTER MODULE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-card{
+
+  background:
+    var(--vc-plastic);
+
+  color:
+    var(--vc-dark);
+
+  transform:none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-card
+.home-card-inner{
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-card::before{
+
+  content:
+    "EXPLORER_PROFILE.SYS";
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-card
+.home-id-copy h1{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-title{
+
+  display:inline-block;
+
+  padding:
+    6px 10px;
+
+  border:
+    1px solid
+    var(--vc-green-dim);
+
+  border-radius:
+    0;
+
+  background:
+    #071009 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .06em;
+
+  text-shadow:
+    none;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-label{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-value{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:inherit;
+
+}
+
+
+/* =====================================================
+   JOURNAL WINDOW
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-card::before{
+
+  content:
+    "TRANSMISSIONS.LOG";
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-entry{
+
+  border-bottom:
+    1px solid
+    var(--vc-crt-line);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-head strong{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-content{
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/* =====================================================
+   EMPTY JOURNAL STATE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-empty{
+
+  border:
+    1px dashed
+    var(--vc-crt-line);
+
+  border-radius:0;
+
+  background:
+    rgba(116,223,100,.035);
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* =====================================================
+   OBJECTIVES WINDOW
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-adventure-card::before{
+
+  content:
+    "DIRECTIVES.EXE";
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-objective-item{
+
+  border:
+    1px solid
+    var(--vc-crt-line);
+
+  border-radius:0;
+
+  background:
+    rgba(116,223,100,.025);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-objective-copy strong{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-objective-copy span{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* EMPTY OBJECTIVE STATE */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-objectives-empty{
+
+  border:
+    1px dashed
+    var(--vc-crt-line);
+
+  border-left:
+    3px solid
+    var(--vc-green);
+
+  background:
+    rgba(116,223,100,.035);
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* =====================================================
+   PROGRAM METRICS WINDOW
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-card::before{
+
+  content:
+    "PROGRAM_METRICS.SYS";
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-block{
+
+  border:
+    1px solid
+    var(--vc-crt-line);
+
+  border-radius:0;
+
+  background:
+    #07170d;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-label{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-meter{
+
+  border:
+    1px solid
+    var(--vc-crt-line);
+
+  background:
+    #010604;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-value{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-small,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-status{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-inspiration-icon{
+
+  border:
+    1px solid
+    var(--vc-green-muted);
+
+  background:
+    #061009;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-inspiration-label{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+/* =====================================================
+   STAY CURIOUS = CRT TERMINAL
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-card::before{
+
+  content:
+    "FUTURE_PROTOCOL.EXE";
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-card
+.home-card-inner{
+
+  border-radius:
+    18px / 7px;
+
+  background:
+
+    radial-gradient(
+      ellipse at center,
+      rgba(116,223,100,.10),
+      transparent 65%
+    ),
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.035) 0,
+      rgba(116,223,100,.035) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #010704;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-copy h2{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:inherit;
+
+  text-transform:uppercase;
+
+  text-shadow:
+    0 0 9px
+    rgba(116,223,100,.34);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-copy p{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* =====================================================
+   WDP MESSAGE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.message{
+
+  padding-top:31px;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:1px;
+
+  background:
+    var(--vc-plastic);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.message::before{
+
+  content:
+    "WDP_MESSAGE.EXE";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:24px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding-left:9px;
+
+  border-bottom:
+    2px solid
+    #181d18;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    );
+
+  color:
+    var(--vc-cream);
+
+  font-size:8px;
+
+  letter-spacing:.10em;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.message::after{
+
+  content:
+    "—   □   ×";
+
+  position:absolute;
+
+  right:5px;
+  top:4px;
+
+  height:16px;
+
+  padding:
+    0 4px;
+
+  border:
+    1px solid
+    #70736a;
+
+  background:
+    #c7c4b7;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    10px;
+
+  font-weight:700;
+
+  line-height:
+    14px;
+
+  letter-spacing:
+    3px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.message-quote,
+
+body[data-campaign="villain"][data-reality="cast"]
+.message-copy{
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/* =====================================================
+   FUTURE BUTTON
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.future-is-yours-button{
+
+  border:
+    1px solid
+    var(--vc-green);
+
+  border-radius:0;
+
+  background:
+    rgba(116,223,100,.05);
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:inherit;
+
+  font-weight:700;
+
+  letter-spacing:.07em;
+
+  text-transform:uppercase;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.future-is-yours-button:hover{
+
+  background:
+    rgba(116,223,100,.13);
+
+  box-shadow:
+    0 0 8px
+    rgba(116,223,100,.15);
+
+}
+
+
+/* =====================================================
+   CHARACTER / OTHER PAGE PANELS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-hero{
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:1px;
+
+  background:
+    var(--vc-plastic);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-sticky{
+
+  transform:none !important;
+
+  border:
+    2px solid
+    var(--vc-border);
+
+  border-radius:0;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card{
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-name{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-description{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* =====================================================
+   FORMS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+input,
+
+body[data-campaign="villain"][data-reality="cast"]
+textarea,
+
+body[data-campaign="villain"][data-reality="cast"]
+select{
+
+  border:
+    2px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    var(--vc-screen) !important;
+
+  color:
+    var(--vc-green) !important;
+
+  font-family:
+    inherit !important;
+
+}
+
+
+/* =====================================================
+   PLAYER HEADER BUTTONS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#epcotPlayerHeaderControls button{
+
+  border:
+    1px solid
+    var(--vc-green-muted);
+
+  border-radius:0;
+
+  background:
+    #111711;
+
+  color:
+    var(--vc-green);
+
+  font-family:inherit;
+
+  box-shadow:none;
+
+}
+
+
+/* =====================================================
+   DOCK = OLD OS TASKBAR
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.dock{
+
+  position:relative;
+
+  min-height:38px;
+
+  border-top:
+    3px solid
+    #e0ddcf;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #c9c6b8,
+      #aaa79b
+    );
+
+  color:
+    #20241f;
+
+  font-family:
+    inherit;
+
+  box-shadow:
+    inset 0 2px 0
+    rgba(255,255,255,.55);
+
+}
+
+
+/* START BUTTON */
+
+body[data-campaign="villain"][data-reality="cast"]
+.dock-left::before{
+
+  content:
+    "▣ START";
+
+  display:inline-flex;
+
+  align-items:center;
+
+  height:24px;
+
+  margin-right:10px;
+
+  padding:
+    0 9px;
+
+  border:
+    2px outset
+    #dad7c7;
+
+  background:
+    #c4c1b3;
+
+  color:
+    #1b211c;
+
+  font-size:10px;
+
+  font-weight:700;
+
+}
+
+
+/* TURN EXISTING DOTS INTO TASKBAR APP ICONS */
+
+body[data-campaign="villain"][data-reality="cast"]
+.app-dot,
+
+body[data-campaign="villain"][data-reality="cast"]
+.app-square{
+
+  position:relative;
+
+  width:22px;
+  height:22px;
+
+  margin-right:4px;
+
+  border:
+    2px outset
+    #d8d5c6;
+
+  border-radius:0;
+
+  background:
+    #bdb9aa;
+
+}
+
+
+/* small monitor glyph */
+
+body[data-campaign="villain"][data-reality="cast"]
+.app-dot::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.app-square::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:5px;
+  top:4px;
+
+  width:9px;
+  height:7px;
+
+  border:
+    1px solid
+    #30362e;
+
+  background:
+    #0c5551;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.dock-right{
+
+  border:
+    2px inset
+    #d5d2c3;
+
+  padding:
+    4px 8px;
+
+  background:
+    #b9b6a8;
+
+  color:
+    #20251f;
+
+}
+
+
+/* =====================================================
+   BINARY DATA RAIN
+   ===================================================== */
+
+.home-binary-layer{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:50000;
+
+  overflow:hidden;
+
+  pointer-events:none;
+
+  background:
+    rgba(0,8,3,.06);
+
+}
+
+
+.home-binary-stream{
+
+  position:absolute;
+
+  top:-50vh;
+
+  white-space:pre;
+
+  color:#82ff69;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-weight:700;
+
+  line-height:1.15;
+
+  text-align:center;
+
+  text-shadow:
+
+    0 0 4px
+    rgba(130,255,105,.95),
+
+    0 0 10px
+    rgba(80,255,72,.44);
+
+  animation:
+    villainBinaryStreamFall
+    linear
+    forwards;
+
+}
+
+
+.home-binary-stream:nth-child(3n){
+
+  color:#baff9e;
+
+}
+
+
+.home-binary-stream:nth-child(4n){
+
+  color:#3a8735;
+
+}
+
+
+@keyframes villainBinaryStreamFall{
+
+  0%{
+    transform:
+      translateY(0);
+
+    opacity:0;
+  }
+
+  8%{
+    opacity:1;
+  }
+
+  88%{
+    opacity:1;
+  }
+
+  100%{
+
+    transform:
+      translateY(165vh);
+
+    opacity:0;
+  }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  body[data-campaign="villain"][data-reality="cast"]
+  .hero-shell{
+
+    margin:5px;
+
+  }
+
+
+  body[data-campaign="villain"][data-reality="cast"]
+  .magic-title{
+
+    font-size:24px;
+
+  }
+
+}
+
+/* =====================================================
+   VILLAIN CAST HOME
+   FINAL DESKTOP / WINDOW CLEANUP
+   ===================================================== */
+
+
+/* =====================================================
+   1. BLACK DESKTOP
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]{
+
+  --vc-desktop:#050806;
+  --vc-desktop-dark:#010302;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(39,85,52,.10),
+      transparent 42%
+    ),
+    #010302;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.main{
+
+  background:
+
+    linear-gradient(
+      rgba(116,223,100,.012),
+      rgba(116,223,100,.012)
+    ),
+
+    #020503;
+
+}
+
+
+/* =====================================================
+   2. HEADER RIGHT SIDE
+
+   Stop the message and reality status from colliding.
+   Same header layout, cleaner internal positioning.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.sketch-area{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(190px,1fr)
+    minmax(150px,.65fr);
+
+  gap:18px;
+
+  align-items:center;
+
+  min-height:150px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.sketch-line{
+
+  opacity:.32;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.note{
+
+  position:relative;
+
+  right:auto;
+  top:auto;
+
+  width:auto;
+
+  min-height:92px;
+
+  margin:0;
+
+  box-sizing:border-box;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.status{
+
+  position:relative;
+
+  right:auto;
+  bottom:auto;
+
+  min-height:92px;
+
+  padding:14px;
+
+  box-sizing:border-box;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:flex-end;
+
+  justify-content:center;
+
+  border:
+    1px solid
+    rgba(116,223,100,.20);
+
+  background:
+    #030906;
+
+  text-align:right;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.status .big{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:inherit;
+
+  font-size:25px;
+
+  text-shadow:
+    0 0 7px
+    rgba(116,223,100,.25);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.status .small{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* =====================================================
+   3. EVERY HOME WINDOW BODY STAYS CRT BLACK
+
+   This removes those large beige dead zones.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-adventure-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-card{
+
+  background:
+    #151a15;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-adventure-card
+.home-card-inner,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-card
+.home-card-inner,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-card
+.home-card-inner,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-card
+.home-card-inner{
+
+  width:100%;
+
+  min-height:100%;
+
+  box-sizing:border-box;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.022) 0,
+      rgba(116,223,100,.022) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #020804 !important;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/*
+  Today's Adventure has a fixed Hero min-height.
+  Make its inner terminal fill that full height.
+*/
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-adventure-card
+.home-card-inner{
+
+  min-height:
+    308px;
+
+}
+
+
+/* =====================================================
+   4. KILL REMAINING HERO SCRIPT FONTS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card h1,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card h3,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-objective-copy strong,
+
+body[data-campaign="villain"][data-reality="cast"]
+.message-quote,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-content,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-head strong{
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace !important;
+
+  font-style:normal !important;
+
+}
+
+
+/* =====================================================
+   5. TODAY'S ADVENTURE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-adventure-card h2{
+
+  color:
+    var(--vc-amber);
+
+  font-size:22px;
+
+  letter-spacing:.015em;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-adventure-card
+.home-kicker{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-objective-item{
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-objective-copy strong{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-objective-copy span{
+
+  color:
+    #76b470;
+
+}
+
+
+/* =====================================================
+   6. JOURNAL
+
+   Remove the white paper textbox.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-content{
+
+  border:
+    1px solid
+    rgba(116,223,100,.18);
+
+  border-radius:0;
+
+  background:
+    #041008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    inset 0 0 13px
+    rgba(116,223,100,.025);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-head strong{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-head span{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* =====================================================
+   7. PROGRAM METRICS
+
+   Eliminate gray boxes behind green text.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-card{
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-block{
+
+  padding:10px;
+
+  border:
+    1px solid
+    rgba(116,223,100,.18);
+
+  border-radius:0;
+
+  background:
+    #041008 !important;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-label{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-inspiration-label{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-center{
+
+  background:
+    #030b05 !important;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-small,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-status{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* =====================================================
+   8. WDP MESSAGE
+
+   Entire module becomes one CRT application.
+   No beige page underneath.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel.message{
+
+  min-height:330px;
+
+  padding:
+    46px
+    30px
+    30px;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.02) 0,
+      rgba(116,223,100,.02) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #020804 !important;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel.message
+.smallcaps{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.message-quote{
+
+  max-width:520px;
+
+  margin-top:22px;
+
+  padding:0;
+
+  background:none !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-size:
+    24px;
+
+  line-height:1.35;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.message-copy{
+
+  max-width:520px;
+
+  margin-top:24px;
+
+  padding:0;
+
+  background:none !important;
+
+  color:
+    var(--vc-green) !important;
+
+  font-size:13px;
+
+  line-height:1.72;
+
+}
+
+
+/* old Hero rocket feels too whimsical here */
+
+body[data-campaign="villain"][data-reality="cast"]
+.rocket{
+
+  opacity:.16;
+
+}
+
+
+/* =====================================================
+   9. STAY CURIOUS
+
+   Remove every remaining piece of tape.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-card
+.home-card-inner::before{
+
+  content:none !important;
+
+  display:none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-card
+.home-card-inner::after{
+
+  content:none !important;
+
+  display:none !important;
+
+}
+
+
+/* =====================================================
+   10. BUTTONS INSIDE CRT WINDOWS
+
+   Lose the modern rounded white web-button look.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card-link,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-button{
+
+  min-height:30px;
+
+  padding:
+    6px 10px;
+
+  border:
+    2px outset
+    #c9c6b7;
+
+  border-radius:1px !important;
+
+  background:
+    #bdbbad !important;
+
+  color:
+    #17271d !important;
+
+  box-shadow:none;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-size:9px;
+
+  font-weight:700;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card-link:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-button:active{
+
+  border-style:inset;
+
+}
+
+
+/* =====================================================
+   11. WINDOW CHROME A LITTLE STRONGER
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel::before{
+
+  color:
+    #f1ecd9;
+
+  text-shadow:
+    1px 1px 0
+    rgba(0,0,0,.35);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel::after{
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  background:
+    #c5c2b5;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE HEADER
+   ===================================================== */
+
+@media(max-width:800px){
+
+  body[data-campaign="villain"][data-reality="cast"]
+  .sketch-area{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  body[data-campaign="villain"][data-reality="cast"]
+  .status{
+
+    align-items:flex-start;
+
+    text-align:left;
+
+  }
+
+}
+
+/* =====================================================
+   VILLAIN CAST
+   WINDOW CHROME FINAL CLEANUP
+
+   Resets old Hero pseudo-elements so every retro
+   title bar behaves like one coherent OS window.
+   ===================================================== */
+
+
+/* =====================================================
+   1. TITLE BARS
+
+   Completely reset inherited notebook/card decoration.
+   This fixes the odd block colliding with
+   DIRECTIVES.EXE.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-ability-card::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-inventory-card::before{
+
+  position:absolute !important;
+
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:auto !important;
+
+  width:auto !important;
+  height:24px !important;
+
+  margin:0 !important;
+
+  padding:
+    0 9px !important;
+
+  box-sizing:border-box !important;
+
+  display:flex !important;
+
+  align-items:center !important;
+
+  transform:none !important;
+
+  border:
+    0 !important;
+
+  border-bottom:
+    2px solid
+    #181d18 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    ) !important;
+
+  background-size:
+    auto !important;
+
+  color:
+    #f1ecd9 !important;
+
+  box-shadow:
+    none !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-size:
+    8px !important;
+
+  font-weight:
+    700 !important;
+
+  line-height:
+    24px !important;
+
+  letter-spacing:
+    .08em !important;
+
+  text-transform:
+    uppercase !important;
+
+}
+
+
+/* =====================================================
+   2. WINDOW CONTROL STRIP
+
+   Reset old barcodes, stickers, shadows, etc.
+   so — □ × always attaches to the title bar.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-ability-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-inventory-card::after{
+
+  content:
+    "—  □  ×" !important;
+
+  position:absolute !important;
+
+  top:3px !important;
+  right:4px !important;
+  bottom:auto !important;
+  left:auto !important;
+
+  z-index:20 !important;
+
+  display:flex !important;
+
+  align-items:center !important;
+  justify-content:center !important;
+
+  width:auto !important;
+  height:17px !important;
+
+  margin:0 !important;
+
+  padding:
+    0 5px !important;
+
+  box-sizing:border-box !important;
+
+  transform:none !important;
+
+  border:
+    2px outset
+    #d8d4c5 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #c5c2b5 !important;
+
+  background-image:
+    none !important;
+
+  background-size:
+    auto !important;
+
+  color:
+    #222720 !important;
+
+  box-shadow:
+    none !important;
+
+  font-family:
+    Arial,
+    sans-serif !important;
+
+  font-size:
+    9px !important;
+
+  font-weight:
+    700 !important;
+
+  line-height:
+    13px !important;
+
+  letter-spacing:
+    3px !important;
+
+  pointer-events:none;
+
+}
+
+
+/* =====================================================
+   3. SPECIFIC WINDOW TITLES
+
+   Keep our application names after the full reset.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-card::before{
+
+  content:
+    "EXPLORER_PROFILE.SYS" !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-adventure-card::before{
+
+  content:
+    "DIRECTIVES.EXE" !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-journal-card::before{
+
+  content:
+    "TRANSMISSIONS.LOG" !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-status-card::before{
+
+  content:
+    "PROGRAM_METRICS.SYS" !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-curious-card::before{
+
+  content:
+    "FUTURE_PROTOCOL.EXE" !important;
+
+}
+
+
+/* =====================================================
+   4. REMOVE HERO ID BADGE HOLE-PUNCH
+
+   This is the little oval leaking over the top.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-card
+.home-card-inner::before{
+
+  content:none !important;
+
+  display:none !important;
+
+  width:0 !important;
+  height:0 !important;
+
+  border:0 !important;
+
+  background:none !important;
+
+  box-shadow:none !important;
+
+}
+
+
+/* =====================================================
+   5. ALIGNMENT CRT
+
+   Remove the original white circular center.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-meter::before{
+
+  background:
+
+    radial-gradient(
+      circle at 42% 35%,
+      #0a1b0e,
+      #020704 72%
+    ) !important;
+
+  border:
+    1px solid
+    rgba(116,223,100,.16);
+
+  box-shadow:
+
+    inset 0 0 15px
+    rgba(0,0,0,.9),
+
+    inset 0 0 7px
+    rgba(116,223,100,.06);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-value{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  text-shadow:
+    0 0 7px
+    rgba(116,223,100,.30);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-alignment-small{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* =====================================================
+   6. WDP MESSAGE WINDOW CONTROLS
+
+   It has its own pseudo-elements, so pin them using
+   the exact same geometry as every other window.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel.message::before{
+
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:auto !important;
+
+  width:auto !important;
+  height:24px !important;
+
+  margin:0 !important;
+
+  padding:
+    0 9px !important;
+
+  box-sizing:border-box;
+
+  transform:none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.panel.message::after{
+
+  content:
+    "—  □  ×" !important;
+
+  top:3px !important;
+  right:4px !important;
+  bottom:auto !important;
+  left:auto !important;
+
+  width:auto !important;
+  height:17px !important;
+
+  margin:0 !important;
+
+  padding:
+    0 5px !important;
+
+  display:flex !important;
+
+  align-items:center;
+  justify-content:center;
+
+  transform:none !important;
+
+  border:
+    2px outset
+    #d8d4c5 !important;
+
+  background:
+    #c5c2b5 !important;
+
+  color:
+    #222720 !important;
+
+  font-family:
+    Arial,
+    sans-serif !important;
+
+  font-size:
+    9px !important;
+
+  line-height:
+    13px !important;
+
+  letter-spacing:
+    3px !important;
+
+}
+
+
+/* =====================================================
+   7. KEEP WINDOW CONTENT BELOW THE CHROME
+
+   Guarantees titles/content cannot slip under the bar.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card{
+
+  padding-top:
+    27px !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-card
+.home-card-inner{
+
+  position:relative;
+
+  z-index:1;
+
+}
+
+/* =====================================================
+   VILLAIN REALITY STATUS
+   CENTER CONTENT INSIDE OVAL
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.status{
+
+  display:flex !important;
+
+  flex-direction:column !important;
+
+  align-items:center !important;
+
+  justify-content:center !important;
+
+  text-align:center !important;
+
+  padding:
+    12px !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.status .small,
+
+body[data-campaign="villain"][data-reality="cast"]
+.status .big{
+
+  width:100%;
+
+  margin-left:auto;
+  margin-right:auto;
+
+  text-align:center !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.status .big{
+
+  display:block;
+
+  margin-top:4px;
+  margin-bottom:4px;
+
+  line-height:1.05;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.status::before,
+body[data-campaign="villain"][data-reality="cast"]
+.status::after{
+
+  pointer-events:none;
+
+}
+
+/* =====================================================
+   VILLAIN CAST
+   SECONDARY PAGE APPLICATION WINDOWS
+
+   VISUAL ONLY
+
+   Applies the established retro workstation language to:
+   - Company File
+   - Personnel
+   - Objectives
+   - World
+   - Journal
+
+   No layout or functionality changes.
+   ===================================================== */
+
+
+/* =====================================================
+   SHARED PAGE BACKGROUNDS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-view,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-view,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-view,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-view{
+
+  background:
+    #020503 !important;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/* =====================================================
+   SHARED PAGE HEADER WINDOW
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-header,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-header,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-header,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-header{
+
+  position:relative;
+
+  padding:
+    42px 18px
+    18px !important;
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.018) 0,
+      rgba(116,223,100,.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    var(--vc-screen) !important;
+
+  color:
+    var(--vc-green);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+/* shared title bar */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-header::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-header::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-header::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-header::before{
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:25px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding:
+    0 9px;
+
+  box-sizing:border-box;
+
+  border-bottom:
+    2px solid
+    #181d18;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    );
+
+  color:
+    var(--vc-cream);
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-size:
+    8px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .08em;
+
+  text-transform:
+    uppercase;
+
+}
+
+
+/* window controls */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-header::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-header::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-header::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-header::after{
+
+  content:
+    "—  □  ×";
+
+  position:absolute;
+
+  top:3px;
+  right:4px;
+
+  z-index:4;
+
+  height:17px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding:
+    0 5px;
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  background:
+    #c5c2b5;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+  line-height:
+    13px;
+
+  letter-spacing:
+    3px;
+
+}
+
+
+/* actual filenames */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-header::before{
+  content:"PERSONNEL_RECORD.SYS";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-header::before{
+  content:"PERSONNEL_ARCHIVE.EXE";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-header::before{
+  content:"ACTIVE_ASSIGNMENTS.EXE";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-header::before{
+  content:"SHARED_TRANSMISSIONS.LOG";
+}
+
+
+/* =====================================================
+   SHARED PAGE TYPOGRAPHY
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-header h1,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-header h1,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-title,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-header h1{
+
+  color:
+    var(--vc-amber) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+  text-shadow:
+    none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-kicker,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-kicker,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-kicker,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-kicker{
+
+  color:
+    var(--vc-green-muted) !important;
+
+  font-family:
+    inherit !important;
+
+  letter-spacing:
+    .12em;
+
+  text-transform:
+    uppercase;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-header p,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-header p,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-subtitle,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-header p{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* =====================================================
+   SHARED RETRO BUTTONS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-edit-button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-save-button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-add-button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-primary-button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-view-button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-live-badge,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post-action,
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-edit-button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-details-button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-card-actions button{
+
+  border:
+    2px outset
+    #d7d3c4 !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #18231b !important;
+
+  box-shadow:
+    none !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-edit-button:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-file-save-button:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-add-button:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-primary-button:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-view-button:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post-action:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-edit-button:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-details-button:active,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-card-actions button:active{
+
+  border-style:
+    inset !important;
+
+}
+
+
+/* =====================================================
+   COMPANY FILE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-profile{
+
+  position:relative;
+
+  padding:
+    41px 16px
+    16px !important;
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    var(--vc-screen) !important;
+
+  color:
+    var(--vc-green);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-profile::before{
+
+  content:
+    "EXPLORER_PROFILE.DAT";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:25px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding-left:
+    9px;
+
+  border-bottom:
+    2px solid
+    #181d18;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    );
+
+  color:
+    var(--vc-cream);
+
+  font-size:
+    8px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .08em;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-profile::after{
+
+  content:
+    "—  □  ×";
+
+  position:absolute;
+
+  top:3px;
+  right:4px;
+
+  height:17px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding:
+    0 5px;
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  background:
+    #c5c2b5;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    9px;
+
+  line-height:
+    13px;
+
+  letter-spacing:
+    3px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-profile-image{
+
+  border:
+    1px solid
+    var(--vc-green-dim);
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020704;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-profile-name{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    inherit !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-profile-title{
+
+  color:
+    var(--vc-amber) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-profile-tags span{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    rgba(116,223,100,.04);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-physical-item{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    #061009;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-physical-label{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-physical-item strong{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+/* =====================================================
+   COMPANY PERSONAL FILE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-personal-header{
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-personal-header h2{
+
+  color:
+    var(--vc-amber);
+
+  font-family:
+    inherit;
+
+  font-style:
+    normal;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-personal-header p{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-writing-card{
+
+  position:relative;
+
+  padding-top:
+    35px;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-plastic);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-writing-card::before{
+
+  content:
+    "TEXT_RECORD.TXT";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:24px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding-left:
+    8px;
+
+  border-bottom:
+    2px solid
+    #181d18;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    );
+
+  color:
+    var(--vc-cream);
+
+  font-size:
+    8px;
+
+  letter-spacing:
+    .07em;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-writing-card::after{
+
+  content:
+    "—  □  ×";
+
+  position:absolute;
+
+  top:3px;
+  right:4px;
+
+  padding:
+    1px 5px;
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  background:
+    #c5c2b5;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    3px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-writing-title{
+
+  color:
+    var(--vc-amber);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-rich-editor{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-text-toolbar{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  background:
+    #111711;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-text-toolbar button{
+
+  border-radius:
+    0;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/* =====================================================
+   PERSONNEL
+   EMPTY / LOADING
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-empty-state,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-loading{
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.018) 0,
+      rgba(116,223,100,.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    var(--vc-screen);
+
+  color:
+    var(--vc-green-muted);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-empty-state strong{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+/* =====================================================
+   PERSONNEL NPC CARDS
+   FUTURE-PROOFED FOR POPULATED ARCHIVE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-card{
+
+  position:relative;
+
+  padding-top:
+    31px;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-plastic);
+
+  color:
+    var(--vc-dark);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-card::before{
+
+  content:
+    "PERSONNEL_FILE.DAT";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:24px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding-left:
+    8px;
+
+  border-bottom:
+    2px solid
+    #181d18;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    );
+
+  color:
+    var(--vc-cream);
+
+  font-size:
+    8px;
+
+  letter-spacing:
+    .07em;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-card::after{
+
+  content:
+    "—  □  ×";
+
+  position:absolute;
+
+  top:3px;
+  right:4px;
+
+  padding:
+    1px 5px;
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  background:
+    #c5c2b5;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    3px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-card-image{
+
+  border:
+    1px solid
+    var(--vc-green-dim);
+
+  border-radius:
+    0;
+
+  background:
+    #010604;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-card-body{
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-name{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-title{
+
+  color:
+    var(--vc-amber);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-tags span,
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-training-list span{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    rgba(116,223,100,.04);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-small-heading{
+
+  color:
+    var(--vc-green-muted);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.npc-details-copy{
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/* =====================================================
+   OBJECTIVES
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-header-actions{
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-favorite-summary{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-card{
+
+  position:relative;
+
+  padding-top:
+    37px !important;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-card::before{
+
+  content:
+    "OBJECTIVE_RECORD.DAT" !important;
+
+  position:absolute !important;
+
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+
+  width:auto !important;
+  height:25px !important;
+
+  margin:0 !important;
+
+  border:0 !important;
+
+  border-bottom:
+    2px solid
+    #181d18 !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    ) !important;
+
+  color:
+    var(--vc-cream);
+
+  font-size:
+    8px;
+
+  letter-spacing:
+    .08em;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-card::after{
+
+  content:
+    "—  □  ×";
+
+  position:absolute;
+
+  top:3px;
+  right:4px;
+
+  padding:
+    1px 5px;
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  background:
+    #c5c2b5;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    3px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-card h2{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-description,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-no-subitems{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-subitem{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    #061009;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-source-badge{
+
+  border-radius:
+    0;
+
+  background:
+    rgba(116,223,100,.07);
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* =====================================================
+   WORLD
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-bar{
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-plastic);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-button{
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  border-radius:
+    0;
+
+  background:
+    #bdb9aa;
+
+  color:
+    #1f2821;
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-button.is-active{
+
+  border-style:
+    inset;
+
+  background:
+    #1b211b;
+
+  color:
+    var(--vc-green-bright);
+
+  box-shadow:
+    inset 0 0 12px
+    rgba(116,223,100,.05);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-hero,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-overview-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-rings-section{
+
+  position:relative;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-hero{
+
+  padding-top:
+    41px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-hero::before{
+
+  content:
+    "WORLD_DIRECTORY.EXE";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:25px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding-left:
+    9px;
+
+  border-bottom:
+    2px solid
+    #181d18;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    );
+
+  color:
+    var(--vc-cream);
+
+  font-size:
+    8px;
+
+  letter-spacing:
+    .08em;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-hero::after{
+
+  content:
+    "—  □  ×";
+
+  position:absolute;
+
+  top:3px;
+  right:4px;
+
+  width:auto;
+  height:17px;
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  border-radius:
+    0;
+
+  background:
+    #c5c2b5;
+
+  box-shadow:none;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    9px;
+
+  line-height:
+    13px;
+
+  letter-spacing:
+    3px;
+
+  padding:
+    0 5px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-hero h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-overview-copy h1,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-section-heading h2{
+
+  color:
+    var(--vc-amber);
+
+  font-family:
+    inherit;
+
+  font-style:
+    normal;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-eyebrow{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-hero p,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-overview-description,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-section-heading p{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* world ring */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-diagram{
+
+  filter:
+    brightness(.8)
+    saturate(.55);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring{
+
+  box-shadow:
+    none;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    #061009;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item strong{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item span{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* category cards */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-category-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-unbound-key-item{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-category-card strong,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-unbound-key-item strong{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+/* =====================================================
+   WORLD DETAIL OVERLAY
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty){
+
+  background:
+    rgba(0,0,0,.82);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-panel{
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-header{
+
+  background:
+    var(--vc-titlebar) !important;
+
+  color:
+    var(--vc-green);
+
+  box-shadow:
+    none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-detail-header h2{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-notes-panel,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-detail-description,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-downtime-panel{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    #061009;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/* =====================================================
+   JOURNAL
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-composer,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-search,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post{
+
+  position:relative;
+
+  padding-top:
+    39px !important;
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+  box-shadow:
+    var(--vc-window-shadow);
+
+}
+
+
+/* title bars */
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-composer::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-search::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post::before{
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:25px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding-left:
+    9px;
+
+  border-bottom:
+    2px solid
+    #181d18;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    );
+
+  color:
+    var(--vc-cream);
+
+  font-size:
+    8px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .08em;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-composer::before{
+  content:"NEW_TRANSMISSION.EXE";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-search::before{
+  content:"SEARCH_ARCHIVE.EXE";
+}
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post::before{
+  content:"TRANSMISSION_RECORD.LOG";
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-composer::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-search::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post::after{
+
+  content:
+    "—  □  ×";
+
+  position:absolute;
+
+  top:3px;
+  right:4px;
+
+  padding:
+    1px 5px;
+
+  border:
+    2px outset
+    #d8d4c5;
+
+  background:
+    #c5c2b5;
+
+  color:
+    #222720;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    3px;
+
+}
+
+
+/* composer */
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-composer textarea,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-search input{
+
+  background:
+    #020704 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+/* journal posts */
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post-author{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post-meta{
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post-text{
+
+  border:
+    1px solid
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    #061009;
+
+  color:
+    var(--vc-green);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-live-badge{
+
+  color:
+    #17301a !important;
+
+}
+
+
+/* =====================================================
+   JOURNAL EDIT DIALOG
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-edit-dialog-inner{
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-edit-dialog-header{
+
+  border-bottom:
+    2px solid
+    var(--vc-line);
+
+  background:
+    var(--vc-titlebar);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-edit-dialog-title{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:
+    inherit;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-edit-textarea{
+
+  background:
+    #020704 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+/* =====================================================
+   MODALS ACROSS THESE PAGES
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-modal-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-modal-card{
+
+  border:
+    3px solid
+    var(--vc-border);
+
+  border-radius:
+    1px;
+
+  background:
+    var(--vc-plastic);
+
+  color:
+    var(--vc-dark);
+
+  box-shadow:
+    0 24px 80px
+    rgba(0,0,0,.55);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-modal-header,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-header,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-modal-header{
+
+  border-bottom:
+    2px solid
+    var(--vc-border);
+
+  background:
+    var(--vc-titlebar);
+
+  color:
+    var(--vc-cream);
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-modal-header h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-header h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objective-modal-header h2{
+
+  color:
+    var(--vc-green-bright);
+
+  font-family:
+    inherit;
+
+}
+
+
+/* =====================================================
+   EMPTY / ERROR STATES
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-empty,
+
+body[data-campaign="villain"][data-reality="cast"]
+.objectives-error,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-empty,
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-loading,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-category-empty,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-load-error{
+
+  border:
+    2px dashed
+    var(--vc-line);
+
+  border-radius:
+    0;
+
+  background:
+    var(--vc-screen);
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+/* =====================================================
+   VILLAIN CAST — FINAL COLOR / READABILITY CLEANUP
+   Visual only.
+   ===================================================== */
+
+
+/* =====================================================
+   1. JOURNAL
+   Remove remaining blue from Post button
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post-action{
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #18231b !important;
+
+  border:
+    2px outset
+    #d7d3c4 !important;
+
+  border-radius:
+    1px !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post-action:hover{
+
+  background:
+    #cbc7b7 !important;
+
+  color:
+    #111811 !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.journal-post-action:active{
+
+  border-style:
+    inset !important;
+
+}
+
+
+
+/* =====================================================
+   2. WORLD
+   Kill remaining blue buttons / blue text
+   ===================================================== */
+
+/* general World buttons */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view button:not(
+  .world-detail-close
+):not(
+  .world-category-card
+):not(
+  .world-ring-key-item
+):not(
+  .world-unbound-key-item
+):not(
+  .world-unbound-node
+):not(
+  .world-ring
+){
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #18231b !important;
+
+  border-color:
+    #d7d3c4 !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* active main world tab */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-tab-button.is-active{
+
+  background:
+    #171c17 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  border:
+    2px inset
+    #9e9b90 !important;
+
+}
+
+
+/* links / clickable text that inherited Hero blue */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view a,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view [role="button"]{
+
+  color:
+    var(--vc-green-bright);
+
+}
+
+
+/* World card headings */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view h1,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view h3,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view h4{
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+/* secondary labels */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-eyebrow,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-detail-eyebrow,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-section-kicker{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* detail / breadcrumb links */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-detail-breadcrumbs,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-detail-breadcrumbs button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-detail-breadcrumbs a{
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+/* improve World body copy readability */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view p,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view li{
+
+  color:
+    #a6cda1;
+
+}
+
+
+
+/* =====================================================
+   3. COMPANY FILE
+   Personal File editor windows
+   ===================================================== */
+
+/* Personality Traits, Appearance, Ideals, etc. */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-writing-title{
+
+  background:
+    #151a15 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+  font-weight:
+    700 !important;
+
+  text-shadow:
+    none !important;
+
+}
+
+
+/* catch title/header elements inside each editor */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-writing-card h3,
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-writing-card h4{
+
+  background:
+    #151a15 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+/* toolbar itself */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-text-toolbar{
+
+  background:
+    #aaa79b !important;
+
+  border:
+    1px solid
+    #66685f !important;
+
+}
+
+
+/* B / I / U / list buttons */
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-text-toolbar button{
+
+  background:
+    #c4c1b5 !important;
+
+  color:
+    #172018 !important;
+
+  border:
+    2px outset
+    #e0ddcf !important;
+
+  border-radius:
+    1px !important;
+
+  box-shadow:
+    none !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-text-toolbar button:hover{
+
+  background:
+    #d0cdc0 !important;
+
+  color:
+    #101610 !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.company-text-toolbar button:active{
+
+  border-style:
+    inset !important;
+
+}
+
+
+
+/* =====================================================
+   4. PERFORMANCE RECORD
+   Remove orange typography
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view h1,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view h3,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view h4{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  text-shadow:
+    none !important;
+
+}
+
+
+/* section labels */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .section-title,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-section-title,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-kicker{
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+
+/* =====================================================
+   PERFORMANCE RECORD
+   Replace leftover gray/blue-gray panels
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-summary,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-stat,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-status,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-status-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-abilities,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-inventory{
+
+  background:
+    var(--vc-screen) !important;
+
+  color:
+    var(--vc-green) !important;
+
+  border-color:
+    var(--vc-line) !important;
+
+}
+
+
+/* white/gray value fields */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .character-stat-value,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .status-value{
+
+  background:
+    #071009 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  border-color:
+    var(--vc-line) !important;
+
+}
+
+
+
+/* =====================================================
+   5. PERFORMANCE RECORD DICE
+   Remove rainbow die colors
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .skill-die,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .skill-die-display,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view [class*="die-display"]{
+
+  background:
+    #101b12 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  border:
+    2px solid
+    var(--vc-green-dim) !important;
+
+  box-shadow:
+    inset 0 0 12px
+    rgba(116,223,100,.08) !important;
+
+}
+
+
+/* catch individual skill color inheritance */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .skill-card{
+
+  --skill-color:
+    var(--vc-green-bright) !important;
+
+  --skill-accent:
+    var(--vc-green-muted) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .skill-card h3,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .skill-card .skill-name{
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+
+/* =====================================================
+   6. PERFORMANCE RECORD
+   Gray controls → workstation controls
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view button{
+
+  border-radius:
+    1px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .skill-control,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .tracker-control{
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #18231b !important;
+
+  border:
+    2px outset
+    #d7d3c4 !important;
+
+}
+
+
+
+/* =====================================================
+   7. HOME
+   Authorized Explorer label
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-view .authorized-explorer,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-view [class*="authorized-explorer"]{
+
+  background:
+    #101710 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  border:
+    1px solid
+    var(--vc-green-dim) !important;
+
+  text-shadow:
+    none !important;
+
+}
+
+
+/* If the label itself is nested */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-view .authorized-explorer *,
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-view [class*="authorized-explorer"] *{
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+
+/* =====================================================
+   FINAL GLOBAL VILLAIN CAST COLOR GUARDRAILS
+
+   Prevent Hero Cast blue/orange accent colors from
+   resurfacing inside these pages.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .company-file-view,
+  .people-view,
+  .objectives-view,
+  .world-view,
+  .journal-view,
+  .character-view
+)
+.accent-text{
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .company-file-view,
+  .people-view,
+  .objectives-view,
+  .world-view,
+  .journal-view,
+  .character-view
+)
+.accent-button{
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #18231b !important;
+
+  border:
+    2px outset
+    #d7d3c4 !important;
+
+}
+
+/* =====================================================
+   VILLAIN CAST
+   SCREEN / CHASSIS CORRECTION
+
+   Final strong overrides for:
+   - Performance Record
+   - Personnel editor
+   - World directories
+
+   Gray = computer hardware
+   Black = screen
+   Green = displayed information
+   ===================================================== */
+
+
+/* =====================================================
+   PERFORMANCE RECORD
+   REMOVE HERO PAPER / NOTEBOOK SURFACE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view{
+
+  background:
+    #020503 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+/*
+  The large top Performance Record module.
+
+  Previously the whole interior was beige.
+  Now the hardware frame remains gray while the
+  actual content becomes a black CRT screen.
+*/
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-hero{
+
+  position:relative;
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    var(--vc-screen) !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    var(--vc-window-shadow) !important;
+
+}
+
+
+/* kill notebook line / paper decoration */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-hero::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-hero::after{
+
+  background-image:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* specifically remove red/pink notebook rules */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-hero .notebook-margin,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-hero .margin-line{
+
+  content:none !important;
+
+  display:none !important;
+
+  border:0 !important;
+
+  background:none !important;
+
+}
+
+
+
+/* =====================================================
+   PERFORMANCE RECORD HEADER TEXT
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-heading,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-heading *{
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-heading h1,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-heading h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-heading strong{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-style:
+    normal !important;
+
+  text-shadow:
+    0 0 7px
+    rgba(116,223,100,.20) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-kicker{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+
+/* =====================================================
+   PERFORMANCE RECORD CORE STAT BOXES
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-core-stat,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-stat,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-stat-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-tracker,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-inspiration{
+
+  border:
+    1px solid
+    var(--vc-line) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    #041008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    inset 0 0 14px
+    rgba(116,223,100,.025) !important;
+
+}
+
+
+/* generic labels */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view label,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .stat-label,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .tracker-label{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* values */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .stat-value,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view .tracker-value{
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+/* remove lingering Hero blue numbers */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view
+:is(
+  #levelValue,
+  #alignmentValue,
+  #exhaustionValue,
+  #inspirationValue
+){
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+
+/* =====================================================
+   PERFORMANCE RECORD BUTTONS
+   Retro workstation controls, not modern blue/white
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view button{
+
+  border:
+    2px outset
+    #d7d3c4 !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #172018 !important;
+
+  box-shadow:
+    none !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view button:hover{
+
+  background:
+    #cbc8ba !important;
+
+  color:
+    #111811 !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view button:active{
+
+  border-style:
+    inset !important;
+
+}
+
+
+
+/* =====================================================
+   CAST STATUS
+
+   Turn the whole inner area into a screen.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-status,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-status-section{
+
+  background:
+    #041008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-status h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-status-section h2{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    inherit !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-status
+:is(
+  p,
+  div,
+  span
+),
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-status-section
+:is(
+  p,
+  div,
+  span
+){
+
+  color:
+    var(--vc-green-muted);
+
+}
+
+
+/* white "No Exhaustion penalty" box */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-condition-message,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-condition-copy,
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-empty{
+
+  border:
+    1px solid
+    var(--vc-line) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020704 !important;
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+
+/* =====================================================
+   ABILITIES / INVENTORY
+
+   Beige was the biggest remaining offender.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section{
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  background:
+    var(--vc-screen) !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section h2,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section h3,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section-title{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section p,
+
+body[data-campaign="villain"][data-reality="cast"]
+.sheet-section .character-empty{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+
+/* =====================================================
+   SKILLS
+   NO COLORFUL HERO DICE
+   ===================================================== */
+
+/*
+  The shared Cast engine carries individual skill colors
+  for Dreamlight, Heartline, etc. We intentionally
+  flatten those only in Villain Cast.
+*/
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card{
+
+  --skill-color:
+    var(--vc-green) !important;
+
+  --skill-accent:
+    var(--vc-green-muted) !important;
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  background:
+    var(--vc-screen) !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card[style]{
+
+  --skill-color:
+    var(--vc-green) !important;
+
+  --skill-accent:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* die circles */
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-die,
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-die-button,
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-die-display,
+
+body[data-campaign="villain"][data-reality="cast"]
+.die-button{
+
+  border:
+    2px solid
+    var(--vc-green-dim) !important;
+
+  background:
+
+    radial-gradient(
+      circle,
+      #0b1c0e,
+      #020704
+    ) !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  box-shadow:
+
+    inset 0 0 10px
+    rgba(116,223,100,.08),
+
+    0 0 7px
+    rgba(116,223,100,.08) !important;
+
+}
+
+
+/* catch inline die color */
+
+body[data-campaign="villain"][data-reality="cast"]
+.skill-card
+[style*="background"]{
+
+  background-color:
+    transparent !important;
+
+}
+
+
+
+/* =====================================================
+   PERFORMANCE RECORD
+   EXHAUSTION HEART
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-view
+:is(
+  #exhaustionValue,
+  .exhaustion-value,
+  .exhaustion-heart
+){
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+
+/* =====================================================
+   PERSONNEL MODAL
+
+   Gray belongs to the outer window.
+   Black belongs inside form/input regions.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-card{
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  background:
+    var(--vc-plastic) !important;
+
+  color:
+    var(--vc-dark) !important;
+
+}
+
+
+/* modal header should itself be a black terminal window */
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-header{
+
+  border:
+    2px solid
+    var(--vc-border) !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.025) 0,
+      rgba(116,223,100,.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #041008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-header h2{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-header p{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/*
+  Section headings should NOT be handwritten Hero blue.
+*/
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-card
+:is(
+  h2,
+  h3,
+  h4,
+  legend
+){
+
+  color:
+    #27302a !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+/* field labels belong on gray chassis */
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-card label{
+
+  color:
+    #283028 !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-weight:
+    700;
+
+}
+
+
+/* inputs themselves are screens */
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-card
+:is(
+  input,
+  textarea,
+  select
+){
+
+  border:
+    2px inset
+    #77786f !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020704 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+
+    inset 0 0 10px
+    rgba(0,0,0,.7) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+}
+
+
+/* placeholders */
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-card
+:is(
+  input,
+  textarea
+)::placeholder{
+
+  color:
+    #738274 !important;
+
+  opacity:1;
+
+}
+
+
+/* select options */
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-card select option{
+
+  background:
+    #071009;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/* divider lines */
+
+body[data-campaign="villain"][data-reality="cast"]
+.people-modal-card hr{
+
+  border:0;
+
+  border-top:
+    1px solid
+    #8d8c81;
+
+}
+
+
+
+/* =====================================================
+   WORLD DIRECTORY
+
+   Current screenshots show green text on gray.
+   Reverse that: gray is the frame, black is the screen.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-category-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-unbound-key-item{
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.018) 0,
+      rgba(116,223,100,.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #041008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    var(--vc-window-shadow) !important;
+
+}
+
+
+/* kill old decorative circle in card corner */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-category-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item::after{
+
+  content:none !important;
+
+  display:none !important;
+
+}
+
+
+/* card headings */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-category-card strong,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item strong,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-unbound-key-item strong{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+}
+
+
+/* descriptive copy */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-category-card span,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item span,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-unbound-key-item span{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* hover */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-category-card:hover,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item:hover,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-unbound-key-item:hover{
+
+  border-color:
+    var(--vc-green-dim) !important;
+
+  background:
+    #07150c !important;
+
+  transform:
+    translateY(-1px);
+
+}
+
+
+
+/* =====================================================
+   WORLD SYSTEM GROUP LABELS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-system-group-title{
+
+  color:
+    var(--vc-cream) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  letter-spacing:
+    .08em;
+
+}
+
+
+
+/* =====================================================
+   WORLD RING DIRECTORY KEY
+
+   Same correction as system cards.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key{
+
+  gap:
+    10px;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-ring-key-item{
+
+  padding:
+    15px 16px !important;
+
+}
+
+
+
+/* =====================================================
+   WORLD BUTTONS
+
+   Actual navigation/action controls remain physical gray.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view
+button:not(
+  .world-category-card
+):not(
+  .world-ring-key-item
+):not(
+  .world-unbound-key-item
+):not(
+  .world-unbound-node
+):not(
+  .world-ring
+){
+
+  border:
+    2px outset
+    #d7d3c4 !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #172018 !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* selected tab remains dark */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-tab-button.is-active{
+
+  border:
+    2px inset
+    #9b998f !important;
+
+  background:
+    #141a14 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+
+/* =====================================================
+   FINAL FONT CLEANUP
+
+   Prevent Hero handwriting from slipping back into
+   Performance, Personnel, or World.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-view,
+  .people-modal-card,
+  .world-view
+)
+:is(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  button,
+  label,
+  strong,
+  input,
+  textarea,
+  select
+){
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+/* =====================================================
+   VILLAIN CAST
+   WORLD + POPUP FINAL PASS
+
+   VISUAL ONLY.
+   No layout, behavior, HTML, or JS changes.
+   ===================================================== */
+
+
+/* =====================================================
+   WORLD
+   DIRECTORY CARDS ARE SCREENS, NOT GRAY PAPER
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-category-card,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key-item,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-unbound-key-item,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key button{
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.018) 0,
+      rgba(116,223,100,.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #031008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    3px 4px 0
+    rgba(0,0,0,.20) !important;
+
+}
+
+
+/* remove inherited Hero decorative corner arcs */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-category-card::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-category-card::after,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key-item::before,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key-item::after{
+
+  background-image:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* World card names */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-category-card strong,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key-item strong,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-unbound-key-item strong,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key button strong{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+/* supporting World copy */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-category-card span,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key-item span,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-unbound-key-item span,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key button span{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* remove orange/blue side strips */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key-item,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key button{
+
+  border-left:
+    3px solid
+    var(--vc-green-dim) !important;
+
+}
+
+
+/* section category labels */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-system-group-title{
+
+  color:
+    var(--vc-cream) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-weight:
+    700 !important;
+
+  letter-spacing:
+    .08em;
+
+}
+
+
+/* hover feels like an active terminal */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-category-card:hover,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key-item:hover,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-unbound-key-item:hover,
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view .world-ring-key button:hover{
+
+  border-color:
+    var(--vc-green-dim) !important;
+
+  background:
+    #07180d !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+/* =====================================================
+   WORLD DETAIL OVERLAY
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty){
+
+  background:
+    rgba(0,0,0,.86) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-panel{
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    #020704 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    8px 10px 0
+    rgba(0,0,0,.28) !important;
+
+}
+
+
+/* sticky detail header */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-header{
+
+  border-bottom:
+    2px solid
+    #181d18 !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    ) !important;
+
+  color:
+    var(--vc-cream) !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* Transportation, Theme Park, neighborhood names, etc. */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-header h2{
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-header
+:is(
+  .world-eyebrow,
+  .world-detail-eyebrow,
+  .world-breadcrumb,
+  .world-breadcrumb *
+){
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* close button */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-close{
+
+  border:
+    2px outset
+    #d8d4c5 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #c5c2b5 !important;
+
+  color:
+    #172018 !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* overview copy */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-description,
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-description *{
+
+  color:
+    #a8cda3 !important;
+
+}
+
+
+/* =====================================================
+   WORLD SHARED NOTES
+   REMOVE WHITE DOCUMENT
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-panel,
+  .world-shared-notes,
+  .world-campaign-record
+){
+
+  border:
+    1px solid
+    var(--vc-line) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #041008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-panel,
+  .world-shared-notes,
+  .world-campaign-record
+)
+:is(
+  h2,
+  h3,
+  strong
+){
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    inherit !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-panel,
+  .world-shared-notes,
+  .world-campaign-record
+)
+p{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* rich text note editor */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+[contenteditable="true"],
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+textarea{
+
+  border:
+    1px solid
+    var(--vc-line) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #010604 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    inset 0 0 14px
+    rgba(0,0,0,.65) !important;
+
+}
+
+
+/* World note formatting buttons */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-note-toolbar,
+  .world-notes-toolbar,
+  .rich-toolbar
+)
+button{
+
+  border:
+    2px outset
+    #d8d4c5 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #172018 !important;
+
+}
+
+
+/* =====================================================
+   ALL PLAYER POPUP BACKDROPS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-backdrop,
+  .company-modal-backdrop,
+  .people-modal-backdrop,
+  .objective-modal-backdrop,
+  .journal-edit-dialog,
+  .roll-backdrop
+){
+
+  background:
+    rgba(0,0,0,.82) !important;
+
+  backdrop-filter:
+    blur(3px);
+
+}
+
+
+/* =====================================================
+   ALL POPUP OUTER WINDOWS
+   Gray plastic chassis
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner,
+  .roll-card
+){
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    var(--vc-plastic) !important;
+
+  color:
+    var(--vc-dark) !important;
+
+  box-shadow:
+    8px 10px 0
+    rgba(0,0,0,.28),
+    0 22px 70px
+    rgba(0,0,0,.38) !important;
+
+}
+
+
+/* =====================================================
+   POPUP HEADERS
+   Black CRT banner instead of cream / white
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-header,
+  .character-modal-head,
+  .company-modal-header,
+  .company-modal-head,
+  .people-modal-header,
+  .people-modal-head,
+  .objective-modal-header,
+  .objective-modal-head,
+  .journal-edit-dialog-header,
+  .roll-header
+){
+
+  border:
+    2px inset
+    #676a61 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.025) 0,
+      rgba(116,223,100,.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #041008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+/* popup kicker */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner
+)
+:is(
+  .character-kicker,
+  .company-modal-kicker,
+  .people-modal-kicker,
+  .objective-modal-kicker,
+  .journal-edit-kicker
+){
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* popup titles */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-header,
+  .character-modal-head,
+  .company-modal-header,
+  .company-modal-head,
+  .people-modal-header,
+  .people-modal-head,
+  .objective-modal-header,
+  .objective-modal-head,
+  .journal-edit-dialog-header,
+  .roll-header
+)
+:is(
+  h1,
+  h2,
+  h3
+){
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+  text-shadow:
+    0 0 7px
+    rgba(116,223,100,.15) !important;
+
+}
+
+
+/* popup header descriptive text */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-header,
+  .character-modal-head,
+  .company-modal-header,
+  .company-modal-head,
+  .people-modal-header,
+  .people-modal-head,
+  .objective-modal-header,
+  .objective-modal-head,
+  .journal-edit-dialog-header
+)
+p{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* =====================================================
+   POPUP SECTION TITLES
+
+   Identity, Images, Details, etc.
+   These live on gray chassis, so they use dark ink.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner
+)
+:is(
+  legend,
+  .modal-section-title,
+  .people-form-section-title,
+  .company-form-section-title,
+  .objective-form-section-title
+){
+
+  color:
+    #222b24 !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+  font-weight:
+    700 !important;
+
+}
+
+
+/* catch handwritten section headings */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card
+)
+> :is(
+  h2,
+  h3,
+  h4
+){
+
+  color:
+    #222b24 !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+/* =====================================================
+   POPUP LABELS
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner
+)
+label{
+
+  color:
+    #202820 !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-weight:
+    700 !important;
+
+}
+
+
+/* explanatory copy on gray hardware */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card
+)
+:is(
+  .help-text,
+  .modal-help,
+  .field-help
+){
+
+  color:
+    #4d5c50 !important;
+
+}
+
+
+/* =====================================================
+   POPUP INPUTS
+   Black inset CRT fields
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner,
+  .roll-card
+)
+:is(
+  input,
+  textarea,
+  select,
+  [contenteditable="true"]
+){
+
+  border:
+    2px inset
+    #85867d !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    linear-gradient(
+      rgba(116,223,100,.012),
+      rgba(116,223,100,.012)
+    ),
+
+    #010604 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    inset 0 0 12px
+    rgba(0,0,0,.68) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+}
+
+
+/* placeholders */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner
+)
+:is(
+  input,
+  textarea
+)::placeholder{
+
+  color:
+    #718174 !important;
+
+  opacity:1;
+
+}
+
+
+/* select menus */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card
+)
+select option{
+
+  background:
+    #071009;
+
+  color:
+    var(--vc-green);
+
+}
+
+
+/* =====================================================
+   POPUP ACTION BUTTONS
+   Remove remaining navy / blue
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner,
+  .roll-card
+)
+button{
+
+  border:
+    2px outset
+    #d8d4c5 !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #18231b !important;
+
+  box-shadow:
+    none !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-weight:
+    700;
+
+}
+
+
+/* destructive actions remain visibly destructive */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner
+)
+:is(
+  .danger,
+  .delete,
+  [data-action="delete"]
+){
+
+  color:
+    #5a1717 !important;
+
+}
+
+
+/* pressed control */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner,
+  .roll-card
+)
+button:active{
+
+  border-style:
+    inset !important;
+
+}
+
+
+/* =====================================================
+   CHARACTER INVENTORY / ABILITY MODALS
+   Screenshot-specific cleanup
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-modal-card{
+
+  background:
+    var(--vc-plastic) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.character-modal-card
+:is(
+  .modal-title,
+  .character-modal-title
+){
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+/* horizontal separators */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card
+)
+hr{
+
+  border:0 !important;
+
+  border-top:
+    1px solid
+    #8e8e84 !important;
+
+}
+
+
+/* =====================================================
+   AUTHORIZED EXPLORER
+   LAST HOME COLOR LEAK
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .authorized-explorer,
+  .home-authorized-badge,
+  .home-id-badge
+){
+
+  border:
+    1px solid
+    var(--vc-green-dim) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #071009 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  text-shadow:
+    none !important;
+
+}
+
+
+/* =====================================================
+   FINAL HERO FONT GUARDRAIL FOR POPUPS + WORLD
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+:is(
+  .world-view,
+  .character-modal-card,
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner
+)
+:is(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  strong,
+  label,
+  button,
+  input,
+  textarea,
+  select
+){
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+/* =====================================================
+   VILLAIN CAST
+   LAST THREE VISUAL FIXES
+   ===================================================== */
+
+
+/* =====================================================
+   1. HOME
+   AUTHORIZED EXPLORER BADGE
+
+   Remove yellow-on-yellow / orange-on-yellow.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-card
+:is(
+  .authorized-explorer,
+  .home-authorized-badge,
+  .home-id-badge,
+  .home-id-stamp
+){
+
+  border:
+    1px solid
+    var(--vc-green-dim) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #071009 !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+.home-id-card
+:is(
+  .authorized-explorer,
+  .home-authorized-badge,
+  .home-id-badge,
+  .home-id-stamp
+)
+*{
+
+  background:
+    transparent !important;
+
+  color:
+    var(--vc-green-bright) !important;
+
+  text-shadow:
+    none !important;
+
+}
+
+
+
+/* =====================================================
+   2. WORLD
+   OUTER RINGS + SYSTEMS & SOCIETY
+
+   Their hover state already looks right.
+   Make that the normal state too.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view
+:is(
+  .world-category-card,
+  .world-system-card,
+  .world-outer-card,
+  .world-reference-card
+){
+
+  border:
+    3px solid
+    var(--vc-border) !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.018) 0,
+      rgba(116,223,100,.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #07180d !important;
+
+  color:
+    var(--vc-green) !important;
+
+  box-shadow:
+    3px 4px 0
+    rgba(0,0,0,.20) !important;
+
+}
+
+
+/* card titles */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view
+:is(
+  .world-category-card,
+  .world-system-card,
+  .world-outer-card,
+  .world-reference-card
+)
+:is(
+  strong,
+  h2,
+  h3
+){
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+/* secondary copy */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view
+:is(
+  .world-category-card,
+  .world-system-card,
+  .world-outer-card,
+  .world-reference-card
+)
+:is(
+  span,
+  p
+){
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* preserve the nice hover animation */
+
+body[data-campaign="villain"][data-reality="cast"]
+.world-view
+:is(
+  .world-category-card,
+  .world-system-card,
+  .world-outer-card,
+  .world-reference-card
+):hover{
+
+  border-color:
+    var(--vc-green-bright) !important;
+
+  background:
+    #0a2111 !important;
+
+  transform:
+    translateY(-1px);
+
+}
+
+
+
+/* =====================================================
+   3. WORLD POPUP
+   MAKE EVERY INTERNAL SECTION READABLE
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-panel{
+
+  background:
+    #020704 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+/* header */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-header{
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vc-titlebar-light),
+      var(--vc-titlebar)
+    ) !important;
+
+  color:
+    var(--vc-cream) !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-detail-header h2{
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+/* Overview block */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-detail-overview,
+  .world-detail-description,
+  .world-overview-block
+){
+
+  border:
+    1px solid
+    rgba(116,223,100,.12) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #041008 !important;
+
+  color:
+    #a8cda3 !important;
+
+}
+
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-detail-overview,
+  .world-detail-description,
+  .world-overview-block
+)
+:is(
+  h2,
+  h3,
+  strong
+){
+
+  color:
+    var(--vc-green-bright) !important;
+
+}
+
+
+/* =====================================================
+   CAMPAIGN RECORD / SHARED NOTES
+
+   This is the remaining bright white area.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-panel,
+  .world-shared-notes,
+  .world-campaign-record,
+  .world-notes-section
+){
+
+  border:
+    1px solid
+    var(--vc-line) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #041008 !important;
+
+  color:
+    var(--vc-green) !important;
+
+}
+
+
+/* top area containing Campaign Record + Shared Notes */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-panel,
+  .world-shared-notes,
+  .world-campaign-record,
+  .world-notes-section
+)
+:is(
+  header,
+  .world-notes-header
+){
+
+  background:
+    #06140b !important;
+
+  color:
+    var(--vc-green) !important;
+
+  border-bottom:
+    1px solid
+    var(--vc-line) !important;
+
+}
+
+
+/* Campaign Record */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-panel,
+  .world-shared-notes,
+  .world-campaign-record,
+  .world-notes-section
+)
+:is(
+  .smallcaps,
+  .world-eyebrow,
+  .world-notes-kicker
+){
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* Shared Notes */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-panel,
+  .world-shared-notes,
+  .world-campaign-record,
+  .world-notes-section
+)
+:is(
+  h2,
+  h3
+){
+
+  color:
+    var(--vc-green-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+/* explanatory note */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-panel,
+  .world-shared-notes,
+  .world-campaign-record,
+  .world-notes-section
+)
+p{
+
+  color:
+    var(--vc-green-muted) !important;
+
+}
+
+
+/* =====================================================
+   WORLD NOTES TOOLBAR
+
+   No white toolbar strip.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-note-toolbar,
+  .world-notes-toolbar,
+  .rich-toolbar,
+  .world-rich-toolbar
+){
+
+  border-top:
+    1px solid
+    var(--vc-line) !important;
+
+  border-bottom:
+    1px solid
+    var(--vc-line) !important;
+
+  background:
+    #aaa79b !important;
+
+}
+
+
+/* formatting buttons */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-note-toolbar,
+  .world-notes-toolbar,
+  .rich-toolbar,
+  .world-rich-toolbar
+)
+button{
+
+  border:
+    2px outset
+    #d8d4c5 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #172018 !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* Save Notes */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+button[data-world-action="save-notes"],
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+.world-save-notes{
+
+  border:
+    2px outset
+    #d8d4c5 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #bbb8aa !important;
+
+  color:
+    #172018 !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* =====================================================
+   ACTUAL SHARED-NOTES EDITOR
+
+   Kill the giant white writing surface.
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-editor,
+  .world-note-editor,
+  .world-rich-editor,
+  [contenteditable="true"],
+  textarea
+){
+
+  border:
+    1px solid
+    var(--vc-line) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,223,100,.016) 0,
+      rgba(116,223,100,.016) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #010604 !important;
+
+  color:
+    var(--vc-green) !important;
+
+  caret-color:
+    var(--vc-green-bright);
+
+  box-shadow:
+    inset 0 0 16px
+    rgba(0,0,0,.7) !important;
+
+}
+
+
+/* placeholder */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-notes-editor,
+  .world-note-editor,
+  .world-rich-editor,
+  [contenteditable="true"],
+  textarea
+):empty::before{
+
+  color:
+    #718174 !important;
+
+}
+
+
+/* =====================================================
+   WORLD POPUP FINAL TEXT GUARDRAIL
+   ===================================================== */
+
+body[data-campaign="villain"][data-reality="cast"]
+#worldDetailMount:not(:empty)
+:is(
+  h1,
+  h2,
+  h3,
+  h4,
+  strong,
+  button,
+  textarea,
+  [contenteditable="true"]
+){
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}

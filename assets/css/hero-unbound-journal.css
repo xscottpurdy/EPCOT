@@ -1,0 +1,865 @@
+/* =====================================================
+   EPCOT DND
+   HERO UNBOUND JOURNAL
+   ===================================================== */
+
+
+/* =====================================================
+   JOURNAL VIEW
+   ===================================================== */
+
+.journal-view{
+
+  margin-left:46px;
+
+  padding:
+    18px
+    20px
+    28px;
+
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.journal-header{
+
+  position:relative;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:24px;
+
+  margin-bottom:16px;
+
+  padding:
+    20px
+    22px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(199,90,145,.08),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      145deg,
+      #09131d,
+      #141425 62%,
+      #0a1b18
+    );
+
+}
+
+
+.journal-header::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:9px;
+
+  height:1px;
+
+  opacity:.35;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--pink),
+      var(--teal),
+      transparent
+    );
+
+}
+
+
+.journal-kicker{
+
+  color:
+    var(--teal);
+
+  font-size:11px;
+
+  font-weight:800;
+
+  line-height:1.35;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+.journal-header h1{
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(--cream);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:31px;
+
+  font-weight:400;
+
+}
+
+
+.journal-header p{
+
+  max-width:680px;
+
+  margin:
+    9px 0 0;
+
+  color:#bdb5a6;
+
+  font-size:14px;
+
+  line-height:1.65;
+
+}
+
+
+/* =====================================================
+   LIVE BADGE
+   ===================================================== */
+
+.journal-live-badge{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  min-height:38px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.34);
+
+  background:
+    rgba(47,197,191,.06);
+
+  color:
+    var(--teal);
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+}
+
+
+.journal-live-dot{
+
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:
+    var(--teal);
+
+  box-shadow:
+    0 0 10px
+    rgba(47,197,191,.65);
+
+}
+
+
+/* =====================================================
+   COMPOSER
+   ===================================================== */
+
+.journal-composer{
+
+  display:grid;
+
+  grid-template-columns:
+    64px
+    minmax(0,1fr);
+
+  gap:14px;
+
+  margin-bottom:16px;
+
+  padding:
+    17px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  background:
+
+    radial-gradient(
+      circle at 86% 10%,
+      rgba(199,90,145,.05),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      155deg,
+      #0a111a,
+      #161322 65%,
+      #081713
+    );
+
+  box-shadow:
+    0 10px 26px
+    rgba(0,0,0,.20);
+
+}
+
+
+/* =====================================================
+   COMPOSER AVATAR
+   ===================================================== */
+
+.journal-composer-avatar{
+
+  width:64px;
+  height:64px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(199,90,145,.34);
+
+  background:#071018;
+
+}
+
+
+.journal-composer-avatar img{
+
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+}
+
+
+.journal-avatar-placeholder{
+
+  display:grid;
+
+  place-items:center;
+
+  width:100%;
+  height:100%;
+
+  color:
+    var(--pink);
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:24px;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(199,90,145,.10),
+      transparent 45%
+    ),
+
+    #071018;
+
+}
+
+
+/* =====================================================
+   COMPOSER BODY
+   ===================================================== */
+
+.journal-composer-main{
+
+  min-width:0;
+
+}
+
+
+.journal-composer-name{
+
+  color:#aaa294;
+
+  font-size:12px;
+
+  line-height:1.4;
+
+}
+
+
+.journal-composer-name strong{
+
+  color:
+    var(--pink);
+
+  font-size:14px;
+
+}
+
+
+.journal-composer textarea{
+
+  width:100%;
+
+  min-height:120px;
+
+  margin-top:10px;
+
+  padding:
+    12px 13px;
+
+  resize:vertical;
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  background:#060d14;
+
+  color:
+    var(--cream);
+
+  font:inherit;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  outline:none;
+
+}
+
+
+.journal-composer textarea:focus{
+
+  border-color:
+    var(--teal);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(47,197,191,.06);
+
+}
+
+
+.journal-composer textarea::placeholder{
+
+  color:#666a68;
+
+}
+
+
+/* =====================================================
+   COMPOSER FOOTER
+   ===================================================== */
+
+.journal-composer-footer{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin-top:10px;
+
+}
+
+
+.journal-composer-footer > div{
+
+  display:flex;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+
+  color:#8d887e;
+
+  font-size:11px;
+
+}
+
+
+.journal-keyboard-hint{
+
+  color:#6f716d;
+
+}
+
+
+#journalPostButton{
+
+  min-height:38px;
+
+  padding:
+    0 15px;
+
+  border:
+    1px solid
+    rgba(199,90,145,.42);
+
+  background:
+    rgba(199,90,145,.08);
+
+  color:
+    var(--pink);
+
+  font:inherit;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.journal-search{
+
+  display:grid;
+
+  gap:7px;
+
+  margin-bottom:16px;
+
+  padding:
+    14px 16px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.18);
+
+  background:
+    rgba(47,197,191,.025);
+
+}
+
+
+.journal-search label{
+
+  color:
+    var(--teal);
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.09em;
+
+  text-transform:uppercase;
+
+}
+
+
+.journal-search input{
+
+  width:100%;
+
+  min-height:40px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.22);
+
+  background:#060d14;
+
+  color:
+    var(--cream);
+
+  font:inherit;
+
+  font-size:14px;
+
+  outline:none;
+
+}
+
+
+.journal-search input:focus{
+
+  border-color:
+    var(--teal);
+
+}
+
+
+/* =====================================================
+   FEED
+   ===================================================== */
+
+.journal-feed{
+
+  display:grid;
+
+  gap:13px;
+
+}
+
+
+/* =====================================================
+   POST
+   ===================================================== */
+
+.journal-post{
+
+  display:grid;
+
+  grid-template-columns:
+    58px
+    minmax(0,1fr);
+
+  gap:13px;
+
+  padding:
+    15px 16px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.20);
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(47,197,191,.025),
+      rgba(199,90,145,.02)
+    ),
+
+    #091119;
+
+  box-shadow:
+    0 7px 18px
+    rgba(0,0,0,.16);
+
+}
+
+
+/* =====================================================
+   POST AVATAR
+   ===================================================== */
+
+.journal-post-avatar{
+
+  width:58px;
+  height:58px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(199,90,145,.28);
+
+  background:#071018;
+
+}
+
+
+.journal-post-avatar img{
+
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+}
+
+
+/* =====================================================
+   POST CONTENT
+   ===================================================== */
+
+.journal-post-content{
+
+  min-width:0;
+
+}
+
+
+.journal-post-heading{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+}
+
+
+.journal-post-author{
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:18px;
+
+  line-height:1.25;
+
+}
+
+
+.journal-post-meta{
+
+  display:flex;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:3px;
+
+  color:#8f897f;
+
+  font-size:11px;
+
+  line-height:1.4;
+
+}
+
+
+.journal-post-meta span:last-child{
+
+  color:
+    var(--teal);
+
+  text-transform:uppercase;
+
+  letter-spacing:.05em;
+
+}
+
+
+.journal-post-text{
+
+  margin-top:11px;
+
+  color:#d4caba;
+
+  font-size:14px;
+
+  line-height:1.7;
+
+  white-space:pre-wrap;
+
+  overflow-wrap:anywhere;
+
+}
+
+
+/* =====================================================
+   EMPTY / LOADING STATES
+   ===================================================== */
+
+.journal-empty,
+.journal-loading{
+
+  padding:
+    45px 24px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.22);
+
+  background:
+    #091119;
+
+  color:#a39c90;
+
+  font-size:13px;
+
+  text-align:center;
+
+}
+
+
+.journal-empty strong{
+
+  display:block;
+
+  color:
+    var(--pink);
+
+  font-size:18px;
+
+}
+
+
+.journal-empty p{
+
+  margin:
+    7px 0 0;
+
+  font-size:13px;
+
+}
+
+
+.journal-loading-more,
+.journal-end-message{
+
+  padding:
+    18px;
+
+  color:#817d75;
+
+  font-size:12px;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   SCROLL SENTINEL
+   ===================================================== */
+
+.journal-scroll-sentinel{
+
+  width:100%;
+
+  height:2px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:680px){
+
+  .journal-view{
+
+    margin-left:0;
+
+    padding:15px;
+
+  }
+
+
+  .journal-header{
+
+    flex-direction:column;
+
+  }
+
+
+  .journal-composer{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .journal-composer-avatar{
+
+    width:58px;
+    height:58px;
+
+  }
+
+
+  .journal-post{
+
+    grid-template-columns:
+      48px
+      minmax(0,1fr);
+
+  }
+
+
+  .journal-post-avatar{
+
+    width:48px;
+    height:48px;
+
+  }
+
+
+  .journal-composer-footer{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+  }
+
+
+  #journalPostButton{
+
+    width:100%;
+
+  }
+
+}

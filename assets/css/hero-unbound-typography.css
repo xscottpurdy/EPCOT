@@ -1,0 +1,599 @@
+/* =====================================================
+   EPCOT DND
+   HERO UNBOUND
+   GLOBAL TYPOGRAPHY SYSTEM
+
+   PURPOSE:
+   Keep Unbound visually distinct from Cast
+   without making the interface harder to read.
+
+   This stylesheet intentionally loads LAST so it
+   controls typography across every Unbound module.
+   ===================================================== */
+
+
+/* =====================================================
+   GLOBAL TYPE SCALE
+   ===================================================== */
+
+:root{
+
+  --unbound-text-xs:11px;
+
+  --unbound-text-sm:12px;
+
+  --unbound-text-base:14px;
+
+  --unbound-text-md:16px;
+
+  --unbound-text-lg:20px;
+
+  --unbound-text-xl:26px;
+
+  --unbound-text-display:34px;
+
+}
+
+
+/* =====================================================
+   BODY
+   ===================================================== */
+
+body{
+
+  font-size:
+    var(--unbound-text-base);
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   NAVIGATION TABS
+
+   This is one of the biggest current offenders.
+   ===================================================== */
+
+.nav button{
+
+  min-height:52px;
+
+  padding:
+    14px 8px
+    12px;
+
+  font-size:
+    12px;
+
+  line-height:1.2;
+
+  letter-spacing:.055em;
+
+}
+
+
+/* =====================================================
+   SMALL CAPS / EYEBROWS / KICKERS
+
+   Still visually secondary, but actually readable.
+   ===================================================== */
+
+.eyebrow,
+
+.unbound-identity-kicker,
+
+.people-kicker,
+
+.objectives-kicker,
+
+.world-eyebrow,
+
+.people-modal-kicker,
+
+.unbound-module-code{
+
+  font-size:
+    11px;
+
+  line-height:1.35;
+
+  letter-spacing:.12em;
+
+}
+
+
+/* =====================================================
+   HEADER SECONDARY TEXT
+   ===================================================== */
+
+.subbrand{
+
+  font-size:
+    13px;
+
+  line-height:1.35;
+
+}
+
+
+.status .small{
+
+  font-size:
+    11px;
+
+  line-height:1.4;
+
+}
+
+
+/* =====================================================
+   STANDARD PARAGRAPHS
+   ===================================================== */
+
+.people-header p,
+
+.objectives-subtitle,
+
+.world-section-heading p,
+
+.world-overview-description,
+
+.world-detail-description div,
+
+.world-notes-header p,
+
+.world-downtime-panel p,
+
+.portal-help{
+
+  font-size:
+    14px;
+
+  line-height:1.65;
+
+}
+
+
+/* =====================================================
+   STANDARD SECONDARY TEXT
+   ===================================================== */
+
+.unbound-player-name,
+
+.npc-title,
+
+.objective-source-badge,
+
+.world-overview-subtitle,
+
+.world-detail-subtitle,
+
+.world-directory-subtitle,
+
+.world-section-card-subtitle,
+
+.people-form-help,
+
+.world-muted{
+
+  font-size:
+    12px;
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   CARD LABELS / SUBHEADINGS
+   ===================================================== */
+
+.npc-small-heading,
+
+.objective-subeditor-title,
+
+.world-directory-group h3,
+
+.world-detail-description h3,
+
+.world-detail-sections h3,
+
+.npc-details-editor-label,
+
+.people-form-section-title{
+
+  font-size:
+    11px;
+
+  line-height:1.35;
+
+  letter-spacing:.09em;
+
+}
+
+
+/* =====================================================
+   BUTTON TEXT
+   ===================================================== */
+
+.people-add-button,
+
+.npc-edit-button,
+
+.npc-details-button,
+
+.objectives-view-button,
+
+.objectives-primary-button,
+
+.objective-card-actions button,
+
+.objective-add-subitem,
+
+.objective-modal-actions button,
+
+.world-open-button,
+
+.world-save-notes-button,
+
+.portal-controls button,
+
+.people-modal-actions button{
+
+  font-size:
+    11px;
+
+  line-height:1.2;
+
+}
+
+
+/* =====================================================
+   FORM LABELS
+   ===================================================== */
+
+.portal-controls label,
+
+.people-form-grid label,
+
+.objective-form > label{
+
+  font-size:
+    11px;
+
+  line-height:1.35;
+
+  letter-spacing:.07em;
+
+}
+
+
+/* =====================================================
+   FORM INPUTS
+   ===================================================== */
+
+.portal-controls input,
+
+.people-form-grid input,
+
+.people-form-grid select,
+
+.objective-form input,
+
+.objective-form textarea{
+
+  font-size:
+    14px;
+
+  line-height:1.45;
+
+}
+
+
+/* =====================================================
+   PERSONNEL
+   ===================================================== */
+
+.npc-name{
+
+  font-size:
+    24px;
+
+}
+
+
+.npc-tags span{
+
+  font-size:
+    11px;
+
+}
+
+
+.npc-training-list span,
+
+.npc-training-list .npc-none{
+
+  font-size:
+    12px;
+
+}
+
+
+.npc-details-copy{
+
+  font-size:
+    14px;
+
+  line-height:1.65;
+
+}
+
+
+.npc-relationship{
+
+  font-size:
+    10px;
+
+}
+
+
+/* =====================================================
+   OBJECTIVES
+   ===================================================== */
+
+.objective-card-title-wrap h2{
+
+  font-size:
+    23px;
+
+}
+
+
+.objective-description{
+
+  font-size:
+    14px;
+
+  line-height:1.65;
+
+}
+
+
+.objective-subitem-name{
+
+  font-size:
+    14px;
+
+}
+
+
+.objective-no-subitems{
+
+  font-size:
+    12px;
+
+}
+
+
+.objective-favorite-summary{
+
+  font-size:
+    12px;
+
+}
+
+
+.objective-archive-date{
+
+  font-size:
+    11px;
+
+}
+
+
+/* =====================================================
+   WORLD DIRECTORY
+   ===================================================== */
+
+.world-directory-card-head strong{
+
+  font-size:
+    18px;
+
+}
+
+
+.world-directory-count{
+
+  font-size:
+    11px;
+
+}
+
+
+.world-ring-key-item strong{
+
+  font-size:
+    16px;
+
+}
+
+
+.world-ring-key-item span{
+
+  font-size:
+    13px;
+
+}
+
+
+.world-section-card-title{
+
+  font-size:
+    16px;
+
+}
+
+
+.world-downtime-badge,
+.world-map-badge{
+
+  font-size:
+    10px;
+
+}
+
+
+/* =====================================================
+   WORLD NOTES
+   ===================================================== */
+
+.world-notes-editor{
+
+  font-size:
+    14px;
+
+  line-height:1.7;
+
+}
+
+
+.world-format-toolbar button,
+
+.npc-editor-toolbar button{
+
+  font-size:
+    11px;
+
+}
+
+
+/* =====================================================
+   MODALS
+   ===================================================== */
+
+.people-modal-header p{
+
+  font-size:
+    12px;
+
+  line-height:1.55;
+
+}
+
+
+.npc-rich-text-editor{
+
+  font-size:
+    14px;
+
+  line-height:1.65;
+
+}
+
+
+.objective-draft-empty{
+
+  font-size:
+    12px;
+
+}
+
+
+/* =====================================================
+   CHARACTER PORTAL
+   ===================================================== */
+
+.portal-title{
+
+  font-size:
+    14px;
+
+}
+
+
+.empty-title{
+
+  font-size:
+    23px;
+
+}
+
+
+.empty-text{
+
+  font-size:
+    14px;
+
+  line-height:1.65;
+
+}
+
+
+/* =====================================================
+   DOCK
+
+   Small, because it really is chrome rather than
+   gameplay information, but no longer microscopic.
+   ===================================================== */
+
+.dock{
+
+  font-size:
+    12px;
+
+}
+
+
+.dock-right{
+
+  font-size:
+    12px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+
+   Avoid shrinking the interface back into dust.
+   ===================================================== */
+
+@media(max-width:680px){
+
+  :root{
+
+    --unbound-text-base:
+      14px;
+
+  }
+
+
+  .nav button{
+
+    min-height:48px;
+
+    font-size:
+      11px;
+
+  }
+
+
+  .eyebrow,
+
+  .unbound-identity-kicker,
+
+  .people-kicker,
+
+  .objectives-kicker,
+
+  .world-eyebrow{
+
+    font-size:
+      10px;
+
+  }
+
+}

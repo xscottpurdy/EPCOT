@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
+  <title>
+    VistaCorp Control Center
+  </title>
+
+
+  <link
+    rel="stylesheet"
+    href="assets/css/dm/dm-shell.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/dm/dm-home.css"
+  >
+
+  <link
+  rel="stylesheet"
+  href="assets/css/dm/dm-adventures.css"
+>
+
+<link
+  rel="stylesheet"
+  href="assets/css/dm/dm-adventure-maps.css"
+>
+
+<link
+  rel="stylesheet"
+  href="assets/css/dm/dm-widgets.css"
+>
+
+<link
+  rel="stylesheet"
+  href="assets/css/dm/dm-timeline.css"
+>
+
+</head>
+
+
+<body class="dm-body">
+
+
+  <!-- =================================================
+       AUTH GATE
+       ================================================= -->
+
+  <div
+    class="dm-auth-screen"
+    id="dmAuthScreen"
+  >
+
+    <div class="dm-auth-indicator">
+
+      <div class="dm-auth-pulse"></div>
+
+      <div>
+        Verifying Executive Credentials...
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =================================================
+       VISTACORP APPLICATION
+       ================================================= -->
+
+  <div
+    class="dm-app"
+    id="dmApp"
+    hidden
+  >
+
+
+    <!-- =================================================
+         HEADER
+         ================================================= -->
+
+    <header class="dm-header">
+
+
+      <div class="dm-brand">
+
+        <div
+          class="dm-vistacorp-mark"
+          aria-hidden="true"
+        >
+
+          <div class="dm-logo-globe"></div>
+
+          <div class="dm-logo-camera">
+            <span></span>
+          </div>
+
+        </div>
+
+
+        <div class="dm-brand-copy">
+
+          <div class="dm-brand-name">
+            VISTACORP
+          </div>
+
+          <div class="dm-brand-network">
+            Executive Information Network
+          </div>
+
+          <div class="dm-brand-subtitle">
+            EPCOT Perception Management
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="dm-terminal-status">
+
+        <div class="dm-terminal-row">
+
+          <span>
+            Terminal ID
+          </span>
+
+          <strong>
+            VC-EXEC-001
+          </strong>
+
+        </div>
+
+
+        <div class="dm-terminal-row">
+
+          <span>
+            Clearance
+          </span>
+
+          <strong>
+            Executive
+          </strong>
+
+        </div>
+
+
+        <div class="dm-terminal-row">
+
+          <span>
+            Network Status
+          </span>
+
+          <strong class="dm-online-text">
+            ● Online
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="dm-user-area">
+
+        <div class="dm-user-portrait-placeholder">
+
+          <span>
+            EXEC
+          </span>
+
+        </div>
+
+
+        <div class="dm-user-copy">
+
+          <span>
+            Authorized Executive
+          </span>
+
+          <strong id="dmProfileName">
+            Loading...
+          </strong>
+
+          <small>
+            Director of Reality Management
+          </small>
+
+        </div>
+
+
+        <button
+          class="dm-logout-button"
+          id="dmLogoutButton"
+          type="button"
+        >
+          Log Out
+        </button>
+
+      </div>
+
+
+    </header>
+
+
+
+    <!-- =================================================
+         NAVIGATION
+         ================================================= -->
+
+<nav
+  class="dm-nav"
+  aria-label="DM Control Center Navigation"
+>
+
+  <button
+    class="dm-nav-button active"
+    data-dm-view="home"
+    type="button"
+  >
+    Home
+  </button>
+
+  <button
+    class="dm-nav-button"
+    data-dm-view="performance"
+    type="button"
+  >
+    Performance Record
+  </button>
+
+  <button
+    class="dm-nav-button"
+    data-dm-view="personnel"
+    type="button"
+  >
+    Personnel
+  </button>
+
+  <button
+    class="dm-nav-button"
+    data-dm-view="objectives"
+    type="button"
+  >
+    Objectives
+  </button>
+
+  <button
+    class="dm-nav-button"
+    data-dm-view="world"
+    type="button"
+  >
+    World
+  </button>
+
+  <button
+    class="dm-nav-button"
+    data-dm-view="timeline"
+    type="button"
+  >
+    Timeline
+  </button>
+
+  <button
+    class="dm-nav-button"
+    data-dm-view="journal"
+    type="button"
+  >
+    Journal
+  </button>
+
+<button
+  class="dm-nav-button"
+  data-dm-view="missions"
+  type="button"
+>
+  Missions
+</button>
+
+  <button
+    class="dm-nav-button"
+    data-dm-view="widgets"
+    type="button"
+  >
+    Widgets
+  </button>
+
+</nav>
+
+    <!-- =================================================
+         MAIN
+         ================================================= -->
+
+    <main class="dm-main">
+
+
+      <!-- =================================================
+           HOME
+           ================================================= -->
+
+      <section
+        class="dm-view"
+        id="dmHomeView"
+        data-dm-page="home"
+      >
+
+        <div class="dm-home-grid">
+
+
+          <section
+            class="
+              dm-console-panel
+              dm-reality-panel
+            "
+            id="dmRealityControlMount"
+          >
+
+            <div class="dm-module-loading">
+              Loading Reality Control...
+            </div>
+
+          </section>
+
+
+
+          <section
+            class="
+              dm-console-panel
+              dm-feed-panel
+            "
+            id="dmFieldFeedsMount"
+          >
+
+            <div class="dm-module-loading">
+              Establishing Live Field Feeds...
+            </div>
+
+          </section>
+
+
+
+          <section
+            class="
+              dm-console-panel
+              dm-tonight-panel
+            "
+            id="dmTonightControlMount"
+          >
+
+            <div class="dm-module-loading">
+              Preparing Tonight's Control Deck...
+            </div>
+
+          </section>
+
+
+
+          <section
+            class="
+              dm-console-panel
+              dm-adventures-panel
+            "
+            id="dmCurrentAdventuresMount"
+          >
+
+            <div class="dm-module-loading">
+              Loading Current Adventures...
+            </div>
+
+          </section>
+
+
+
+          <section
+            class="
+              dm-console-panel
+              dm-alert-panel
+            "
+            id="dmAlertFeedMount"
+          >
+
+            <div class="dm-module-loading">
+              Loading Recent Journal Activity...
+            </div>
+
+          </section>
+
+
+
+          <section
+            class="
+              dm-console-panel
+              dm-attention-panel
+            "
+            id="dmAttentionRequiredMount"
+            hidden
+          >
+          </section>
+
+
+
+          <div class="dm-home-analytics-divider">
+
+            <span>
+              VISTACORP ANALYTICS
+            </span>
+
+            <strong>
+              SYSTEM INTELLIGENCE
+            </strong>
+
+          </div>
+
+
+
+          <section
+            class="
+              dm-console-panel
+              dm-system-panel
+            "
+            id="dmSystemOverviewMount"
+          >
+
+            <div class="dm-module-loading">
+              Compiling Explorer Analytics...
+            </div>
+
+          </section>
+
+
+
+          <section
+            class="
+              dm-console-panel
+              dm-conscience-panel
+            "
+            id="dmConscienceNetworkMount"
+          >
+
+            <div class="dm-module-loading">
+              Connecting to Conscience Network...
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </section>
+
+<!-- =================================================
+     MISSIONS
+     ================================================= -->
+
+<section
+  class="dm-view"
+  id="dmMissionsView"
+  data-dm-page="missions"
+  hidden
+>
+
+  <header class="dm-page-header">
+
+    <div>
+
+      <div class="dm-page-kicker">
+        Campaign Direction // Mission Control
+      </div>
+
+      <h1>
+        Missions
+      </h1>
+
+      <p>
+        Build campaign adventures, crossover operations,
+        and flexible stand-alone missions.
+      </p>
+
+    </div>
+
+    <div class="dm-page-code">
+      VC-MSN
+    </div>
+
+  </header>
+
+
+  <nav
+    class="dm-mission-tabs"
+    aria-label="Mission campaign"
+  >
+
+    <button
+      class="dm-mission-tab is-active"
+      type="button"
+      data-mission-campaign="hero"
+    >
+      Hero
+    </button>
+
+    <button
+      class="dm-mission-tab"
+      type="button"
+      data-mission-campaign="villain"
+    >
+      Villain
+    </button>
+
+    <button
+      class="dm-mission-tab"
+      type="button"
+      data-mission-campaign="combined"
+    >
+      Either / Combined
+    </button>
+
+  </nav>
+
+
+  <section
+    class="dm-mission-panel"
+    data-mission-panel="hero"
+  >
+
+    <div id="dmHeroAdventuresMount">
+
+      <div class="dm-module-loading">
+        Hero Mission Desk awaiting connection.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section
+    class="dm-mission-panel"
+    data-mission-panel="villain"
+    hidden
+  >
+
+    <div id="dmVillainAdventuresMount">
+
+      <div class="dm-module-loading">
+        Villain Mission Desk awaiting connection.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section
+    class="dm-mission-panel"
+    data-mission-panel="combined"
+    hidden
+  >
+
+    <div id="dmCombinedAdventuresMount">
+
+      <div class="dm-module-loading">
+        Combined Mission Desk awaiting connection.
+      </div>
+
+    </div>
+
+  </section>
+
+</section>
+
+
+      <!-- =================================================
+           PERSONNEL
+           ================================================= -->
+
+      <section
+        class="dm-view"
+        id="dmPersonnelView"
+        data-dm-page="personnel"
+        hidden
+      >
+
+        <header class="dm-page-header">
+
+          <div>
+
+            <div class="dm-page-kicker">
+              Behavioral Oversight // Personnel Archive
+            </div>
+
+            <h1>
+              Personnel
+            </h1>
+
+            <p>
+              Manage NPC records, skill training,
+              relationships, DM notes, and secrets.
+            </p>
+
+          </div>
+
+          <div class="dm-page-code">
+            VC-PER // ARCHIVE
+          </div>
+
+        </header>
+
+
+        <div id="dmPersonnelMount">
+
+          <div class="dm-module-loading">
+            Personnel controls awaiting connection.
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           WORLD
+           ================================================= -->
+
+      <section
+        class="dm-view"
+        id="dmWorldView"
+        data-dm-page="world"
+        hidden
+      >
+
+        <header class="dm-page-header">
+
+          <div>
+
+            <div class="dm-page-kicker">
+              Visibility Administration // EPCOT
+            </div>
+
+            <h1>
+              World Control
+            </h1>
+
+            <p>
+              Publish information, reveal restricted areas,
+              administer maps, and maintain classified notes.
+            </p>
+
+          </div>
+
+          <div class="dm-page-code">
+            VC-WORLD // VISIBLE
+          </div>
+
+        </header>
+
+
+        <div id="dmWorldMount">
+
+          <div class="dm-module-loading">
+            World controls awaiting connection.
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           OBJECTIVES
+           ================================================= -->
+
+      <section
+        class="dm-view"
+        id="dmObjectivesView"
+        data-dm-page="objectives"
+        hidden
+      >
+
+        <header class="dm-page-header">
+
+          <div>
+
+            <div class="dm-page-kicker">
+              Directive Administration
+            </div>
+
+            <h1>
+              Objectives
+            </h1>
+
+            <p>
+              Create, assign, archive, and supervise
+              Hero and Villain objectives.
+            </p>
+
+          </div>
+
+          <div class="dm-page-code">
+            VC-OBJ // DIRECTIVE
+          </div>
+
+        </header>
+
+
+        <div id="dmObjectivesMount">
+
+          <div class="dm-module-loading">
+            Objective controls awaiting connection.
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           PERFORMANCE RECORD
+           ================================================= -->
+
+      <section
+        class="dm-view"
+        id="dmPerformanceView"
+        data-dm-page="performance"
+        hidden
+      >
+
+        <header class="dm-page-header">
+
+          <div>
+
+            <div class="dm-page-kicker">
+              Explorer Performance Administration
+            </div>
+
+            <h1>
+              Performance Record
+            </h1>
+
+            <p>
+              Review every Explorer's NSBI Performance Record
+              and Unbound character portal.
+            </p>
+
+          </div>
+
+          <div class="dm-page-code">
+            VC-PERF // RECORD
+          </div>
+
+        </header>
+
+
+        <div id="dmPerformanceMount">
+
+          <div class="dm-module-loading">
+            Performance Record administration awaiting connection.
+          </div>
+
+        </div>
+
+      </section>
+
+<!-- =================================================
+     TIMELINE
+     ================================================= -->
+
+<section
+  class="dm-view"
+  id="dmTimelineView"
+  data-dm-page="timeline"
+  hidden
+>
+
+  <header class="dm-page-header">
+
+    <div>
+
+      <div class="dm-page-kicker">
+        Temporal Oversight // Shared Reality
+      </div>
+
+      <h1>
+        Timeline
+      </h1>
+
+      <p>
+        Track the history, present,
+        planned future, Personnel activity,
+        and convergence of EPCOT.
+      </p>
+
+    </div>
+
+    <div class="dm-page-code">
+      VC-TIME // ROSE
+    </div>
+
+  </header>
+
+
+  <div id="dmTimelineMount">
+
+    <div class="dm-module-loading">
+      Synchronizing temporal records...
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =================================================
+     WIDGETS
+     ================================================= -->
+
+<section
+  class="dm-view"
+  id="dmWidgetsView"
+  data-dm-page="widgets"
+  hidden
+>
+
+  <header class="dm-page-header">
+
+    <div>
+
+      <div class="dm-page-kicker">
+        Auxiliary Systems
+      </div>
+
+      <h1>
+        Widgets
+      </h1>
+
+      <p>
+        Campaign calculators, generators,
+        downtime systems, and executive utilities.
+      </p>
+
+    </div>
+
+    <div class="dm-page-code">
+      VC-WGT // AUXILIARY
+    </div>
+
+  </header>
+
+
+  <div class="dm-widgets-summary">
+
+    <div>
+
+      <div class="dm-page-kicker">
+        MODULAR TOOL LIBRARY
+      </div>
+
+      <strong>
+        One console. Independent systems.
+      </strong>
+
+      <p>
+        Each tool operates independently and can
+        be expanded without rebuilding this page.
+      </p>
+
+    </div>
+
+    <div>
+
+      <div
+        class="dm-widgets-count"
+        id="dmWidgetCount"
+      >
+        00
+      </div>
+
+      <div class="dm-page-kicker">
+        INSTALLED
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <section class="dm-widget-access-panel">
+
+
+    <div class="dm-widget-access-panel-header">
+
+
+      <div>
+
+        <div class="dm-page-kicker">
+          PLAYER ACCESS
+        </div>
+
+        <strong>
+          Explorer Widget Authorization
+        </strong>
+
+        <p>
+          Turn on only the tools players should
+          be able to use. Downtime tools enabled
+          here are also available from World
+          locations that permit Downtime.
+        </p>
+
+      </div>
+
+
+      <div class="dm-page-code">
+        LIVE
+      </div>
+
+
+    </div>
+
+
+    <div
+      class="dm-widget-access-list"
+      id="dmWidgetAccessList"
+    ></div>
+
+
+  </section>
+
+
+  <div
+    class="dm-widgets-grid"
+    id="dmWidgetGrid"
+  ></div>
+
+</section>
+
+<!-- =================================================
+     TIMELINE
+     ================================================= -->
+
+<section
+  class="dm-view"
+  id="dmTimelineView"
+  data-dm-page="timeline"
+  hidden
+>
+
+  <header class="dm-page-header">
+
+    <div>
+
+      <div class="dm-page-kicker">
+        Temporal Oversight // Shared World State
+      </div>
+
+      <h1>
+        Timeline
+      </h1>
+
+      <p>
+        Track EPCOT history, living NPC plans,
+        and the global Rose Clock.
+      </p>
+
+    </div>
+
+    <div class="dm-page-code">
+      VC-TIME // CONVERGENCE
+    </div>
+
+  </header>
+
+
+  <div id="dmTimelineMount">
+
+    <div class="dm-module-loading">
+      Synchronizing temporal records...
+    </div>
+
+  </div>
+
+</section>
+
+      <!-- =================================================
+           JOURNAL
+           ================================================= -->
+
+      <section
+        class="dm-view"
+        id="dmJournalView"
+        data-dm-page="journal"
+        hidden
+      >
+
+        <header class="dm-page-header">
+
+          <div>
+
+            <div class="dm-page-kicker">
+              Campaign Communications Archive
+            </div>
+
+            <h1>
+              Journal
+            </h1>
+
+            <p>
+              Review Hero and Villain journal entries
+              across all Explorer accounts.
+            </p>
+
+          </div>
+
+          <div class="dm-page-code">
+            VC-JRN // OBSERVE
+          </div>
+
+        </header>
+
+
+        <div id="dmJournalMount">
+
+          <div class="dm-module-loading">
+            Journal archive awaiting connection.
+          </div>
+
+        </div>
+
+      </section>
+
+
+    </main>
+
+
+
+    <!-- =================================================
+         FOOTER
+         ================================================= -->
+
+    <footer class="dm-footer">
+
+      <div>
+        VISTACORP
+      </div>
+
+      <div>
+        Executive Information Network
+        //
+        Internal Use Only
+        //
+        Perception Is Policy
+      </div>
+
+      <div>
+        VC-EXEC v1.0
+      </div>
+
+    </footer>
+
+
+  </div>
+
+
+
+  <!-- =================================================
+       SCRIPTS
+       ================================================= -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script
+    src="assets/js/auth.js"
+  ></script>
+
+  <script
+    src="assets/js/dm/dm-shell.js"
+  ></script>
+
+  <script
+    src="assets/js/dm/dm-home.js"
+  ></script>
+
+  <script
+    src="assets/js/dm/dm-reality-control.js"
+  ></script>
+
+  <script
+    src="assets/js/dm/dm-objectives.js"
+  ></script>
+
+  <script
+    src="assets/js/dm/dm-world.js"
+  ></script>
+
+  <script
+    src="assets/js/dm/dm-journal.js"
+  ></script>
+
+  <script
+    src="assets/js/dm/dm-performance.js"
+  ></script>
+
+  <script
+    src="assets/js/dm/dm-personnel.js"
+  ></script>
+
+ <script
+  src="assets/js/dm/dm-timeline.js"
+></script> 
+
+  <script
+  src="assets/js/dm/dm-adventures.js"
+></script>
+
+<script
+  src="assets/js/dm/dm-adventure-maps.js"
+></script>
+
+<script
+  src="assets/js/dm/dm-widgets.js"
+></script>
+
+<script
+  src="assets/js/dm/dm-widget-access.js"
+></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2078 @@
+/* =====================================================
+   EPCOT DND
+   HERO UNBOUND WORLD
+   ===================================================== */
+
+
+/* =====================================================
+   WORLD VIEW
+   ===================================================== */
+
+.world-view{
+
+  margin-left:46px;
+
+  padding:
+    18px
+    20px
+    28px;
+
+}
+
+
+/* =====================================================
+   PAGE HEADING
+   ===================================================== */
+
+.world-section-heading{
+
+  position:relative;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:24px;
+
+  margin-bottom:16px;
+
+  padding:
+    20px
+    22px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.28);
+
+  background:
+
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(199,90,145,.08),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      145deg,
+      #09131d,
+      #141425 62%,
+      #0a1b18
+    );
+
+}
+
+
+.world-section-heading::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:9px;
+
+  height:1px;
+
+  opacity:.35;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--pink),
+      var(--teal),
+      transparent
+    );
+
+}
+
+
+.world-eyebrow{
+
+  color:
+    var(--teal);
+
+  font-size:9px;
+
+  font-weight:800;
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+}
+
+
+.world-section-heading h2{
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(--cream);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:31px;
+
+  font-weight:400;
+
+}
+
+
+.world-section-heading p{
+
+  max-width:680px;
+
+  margin:
+    9px 0 0;
+
+  color:#bdb5a6;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+}
+
+
+/* =====================================================
+   EPCOT OVERVIEW
+   ===================================================== */
+
+.world-overview-card{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.2fr)
+    minmax(280px,.8fr);
+
+  gap:20px;
+
+  align-items:stretch;
+
+  margin-bottom:18px;
+
+  padding:
+    20px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.26);
+
+  background:
+
+    radial-gradient(
+      circle at 82% 10%,
+      rgba(47,197,191,.05),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      155deg,
+      #0a111a,
+      #161322 65%,
+      #081713
+    );
+
+  box-shadow:
+    0 12px 28px
+    rgba(0,0,0,.24);
+
+}
+
+
+.world-overview-copy h1{
+
+  margin:
+    6px 0 0;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:30px;
+
+  font-weight:400;
+
+}
+
+
+.world-overview-subtitle{
+
+  margin-top:5px;
+
+  color:#aaa396;
+
+  font-size:12px;
+
+  letter-spacing:.05em;
+
+  text-transform:uppercase;
+
+}
+
+
+.world-overview-description{
+
+  margin-top:14px;
+
+  color:#d2c8b8;
+
+  font-size:13px;
+
+  line-height:1.65;
+
+}
+
+
+.world-muted{
+
+  color:#7f7a72;
+
+  font-style:italic;
+
+}
+
+
+.world-open-button{
+
+  margin-top:16px;
+
+  min-height:38px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid
+    rgba(199,90,145,.42);
+
+  background:
+    rgba(199,90,145,.07);
+
+  color:
+    var(--pink);
+
+  font:inherit;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   MAPS
+   ===================================================== */
+
+.world-map-preview{
+
+  margin:0;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.26);
+
+  background:#070e15;
+
+}
+
+
+.world-map-preview img{
+
+  display:block;
+
+  width:100%;
+
+  max-height:520px;
+
+  object-fit:contain;
+
+  background:#070e15;
+
+  filter:
+    saturate(.88)
+    contrast(1.05);
+
+}
+
+
+.world-map-preview.is-compact img{
+
+  height:100%;
+
+  min-height:260px;
+
+  object-fit:cover;
+
+}
+
+
+.world-map-preview figcaption{
+
+  padding:
+    8px 10px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.14);
+
+  color:#8f897e;
+
+  font-size:9px;
+
+  line-height:1.4;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   RINGS SECTION
+   ===================================================== */
+
+.world-rings-section{
+
+  margin-top:18px;
+
+}
+
+
+.world-rings-layout{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(320px,.9fr)
+    minmax(0,1.1fr);
+
+  gap:20px;
+
+  align-items:center;
+
+}
+
+
+/* =====================================================
+   RINGS
+   Unbound presentation / Cast geometry
+   ===================================================== */
+
+
+/* =====================================================
+   RING DIAGRAM
+   ===================================================== */
+
+.world-rings-layout{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(420px,.9fr)
+    minmax(0,1.1fr);
+
+  gap:54px;
+
+  align-items:center;
+
+}
+
+
+.world-ring-diagram{
+
+  position:relative;
+
+  width:
+    min(500px,100%);
+
+  aspect-ratio:1;
+
+  margin:auto;
+
+  border-radius:50%;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(199,90,145,.08),
+      transparent 21%
+    ),
+
+    radial-gradient(
+      circle at center,
+      transparent 31%,
+      rgba(199,90,145,.12) 31.5%,
+      rgba(199,90,145,.12) 32%,
+      transparent 32.5%
+    ),
+
+    radial-gradient(
+      circle at center,
+      transparent 49%,
+      rgba(47,197,191,.10) 49.5%,
+      rgba(47,197,191,.10) 50%,
+      transparent 50.5%
+    ),
+
+    #071019;
+
+  box-shadow:
+
+    inset 0 0 75px
+    rgba(0,0,0,.55),
+
+    0 12px 30px
+    rgba(0,0,0,.28);
+
+}
+
+
+/* =====================================================
+   SHARED RING
+   ===================================================== */
+
+.world-ring{
+
+  position:absolute;
+
+  padding:0;
+
+  border-radius:50%;
+
+  background:
+    transparent;
+
+  color:
+    var(--cream);
+
+  font:inherit;
+
+  cursor:pointer;
+
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+
+}
+
+
+/* =====================================================
+   SHARED LABEL
+   ===================================================== */
+
+.world-ring span{
+
+  position:absolute;
+
+  z-index:5;
+
+  display:block;
+
+  padding:
+    8px 13px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.22);
+
+  background:
+    rgba(5,10,16,.96);
+
+  box-shadow:
+    0 4px 12px
+    rgba(0,0,0,.34);
+
+  font-size:13px;
+
+  font-weight:900;
+
+  line-height:1.2;
+
+  letter-spacing:.06em;
+
+  text-align:center;
+
+  text-transform:uppercase;
+
+  white-space:nowrap;
+
+}
+
+
+/* =====================================================
+   RESIDENTIAL RING
+   Outer ring
+   ===================================================== */
+
+.world-ring-residential{
+
+  inset:5%;
+
+  border:
+    1px solid
+    rgba(224,179,79,.38);
+
+}
+
+
+.world-ring-residential span{
+
+  left:50%;
+
+  top:3%;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    var(--gold);
+
+  border-color:
+    rgba(224,179,79,.30);
+
+}
+
+
+/* =====================================================
+   GREEN BELT
+   Middle ring
+   ===================================================== */
+
+.world-ring-green{
+
+  inset:23%;
+
+  border:
+    1px solid
+    rgba(47,197,191,.48);
+
+}
+
+
+.world-ring-green span{
+
+  left:50%;
+
+  top:5%;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    var(--teal);
+
+  border-color:
+    rgba(47,197,191,.30);
+
+}
+
+
+/* =====================================================
+   HUB
+   Center
+   ===================================================== */
+
+.world-ring-hub{
+
+  inset:39%;
+
+  border:
+    1px solid
+    rgba(199,90,145,.58);
+
+  background:
+    rgba(199,90,145,.045);
+
+}
+
+
+.world-ring-hub span{
+
+  left:50%;
+
+  top:50%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  color:
+    var(--pink);
+
+  border-color:
+    rgba(199,90,145,.34);
+
+  font-size:14px;
+
+}
+
+
+/* =====================================================
+   RING INTERACTION
+   ===================================================== */
+
+.world-ring-residential:hover{
+
+  border-color:
+    rgba(224,179,79,.75);
+
+  box-shadow:
+    0 0 22px
+    rgba(224,179,79,.10);
+
+}
+
+
+.world-ring-green:hover{
+
+  border-color:
+    rgba(47,197,191,.78);
+
+  box-shadow:
+    0 0 22px
+    rgba(47,197,191,.11);
+
+}
+
+
+.world-ring-hub:hover{
+
+  border-color:
+    rgba(199,90,145,.82);
+
+  box-shadow:
+    0 0 22px
+    rgba(199,90,145,.13);
+
+}
+
+
+/* =====================================================
+   RING KEY
+   ===================================================== */
+
+.world-ring-key{
+
+  display:grid;
+
+  gap:12px;
+
+}
+
+
+/* =====================================================
+   SHARED KEY CARD
+   ===================================================== */
+
+.world-ring-key-item{
+
+  position:relative;
+
+  display:grid;
+
+  gap:6px;
+
+  min-height:84px;
+
+  padding:
+    16px 18px
+    16px 22px;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(224,179,79,.18);
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.018),
+      transparent 55%
+    ),
+
+    #09111b;
+
+  color:
+    var(--cream);
+
+  text-align:left;
+
+  cursor:pointer;
+
+  transition:
+    transform .16s ease,
+    border-color .16s ease,
+    background .16s ease;
+
+}
+
+
+/* colored stripe */
+
+.world-ring-key-item::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  bottom:0;
+
+  width:4px;
+
+  background:
+    var(--ring-accent);
+
+}
+
+
+/* =====================================================
+   RING-SPECIFIC KEY COLORS
+
+   world.js renders the key in:
+   Hub → Green Belt → Residential Ring order
+   ===================================================== */
+
+.world-ring-key-item:nth-child(1){
+
+  --ring-accent:
+    var(--pink);
+
+}
+
+
+.world-ring-key-item:nth-child(2){
+
+  --ring-accent:
+    var(--teal);
+
+}
+
+
+.world-ring-key-item:nth-child(3){
+
+  --ring-accent:
+    var(--gold);
+
+}
+
+
+/* =====================================================
+   KEY TEXT
+   ===================================================== */
+
+.world-ring-key-item strong{
+
+  color:
+    var(--ring-accent);
+
+  font-size:15px;
+
+  font-weight:800;
+
+  line-height:1.3;
+
+}
+
+
+.world-ring-key-item span{
+
+  color:#aaa294;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   KEY HOVER
+   ===================================================== */
+
+.world-ring-key-item:hover{
+
+  transform:
+    translateX(3px);
+
+  border-color:
+    var(--ring-accent);
+
+  background:
+
+    linear-gradient(
+      90deg,
+      color-mix(
+        in srgb,
+        var(--ring-accent) 7%,
+        transparent
+      ),
+      transparent 55%
+    ),
+
+    #09111b;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE RINGS
+   ===================================================== */
+
+@media(max-width:1100px){
+
+  .world-rings-layout{
+
+    grid-template-columns:1fr;
+
+    gap:26px;
+
+  }
+
+
+  .world-ring-key{
+
+    width:
+      min(650px,100%);
+
+    margin:auto;
+
+  }
+
+}
+
+
+@media(max-width:680px){
+
+  .world-ring-diagram{
+
+    width:
+      min(390px,100%);
+
+  }
+
+
+  .world-ring span{
+
+    padding:
+      6px 9px;
+
+    font-size:10px;
+
+  }
+
+
+  .world-ring-hub span{
+
+    font-size:11px;
+
+  }
+
+}
+
+/* =====================================================
+   DIRECTORY
+   ===================================================== */
+
+.world-directory{
+
+  margin-top:22px;
+
+}
+
+
+.world-directory-group{
+
+  margin-top:18px;
+
+}
+
+
+.world-directory-group h3{
+
+  margin:
+    0 0 10px;
+
+  color:
+    var(--gold);
+
+  font-size:10px;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+.world-directory-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
+
+  gap:12px;
+
+}
+
+
+.world-directory-card{
+
+  min-height:120px;
+
+  padding:
+    14px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.22);
+
+  background:
+
+    radial-gradient(
+      circle at 86% 10%,
+      rgba(199,90,145,.05),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      150deg,
+      #0a111a,
+      #141320
+    );
+
+  color:
+    var(--cream);
+
+  text-align:left;
+
+  cursor:pointer;
+
+}
+
+
+.world-directory-card-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  align-items:flex-start;
+
+}
+
+
+.world-directory-card-head strong{
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:17px;
+
+  line-height:1.2;
+
+}
+
+
+.world-directory-arrow{
+
+  color:
+    var(--teal);
+
+  font-size:22px;
+
+  line-height:1;
+
+}
+
+
+.world-directory-subtitle{
+
+  display:block;
+
+  margin-top:7px;
+
+  color:#aaa294;
+
+  font-size:11px;
+
+  line-height:1.45;
+
+}
+
+
+.world-directory-count{
+
+  display:block;
+
+  margin-top:13px;
+
+  color:#7f817b;
+
+  font-size:9px;
+
+  letter-spacing:.06em;
+
+  text-transform:uppercase;
+
+}
+
+/* =====================================================
+   WORLD DIRECTORY
+   CATEGORY COLOR SYSTEM
+
+   Calendar          = Hub Pink
+   Outer Ring        = Residential Gold
+   Systems & Society = Green Belt Teal
+
+   world.js renders the directory groups in this order:
+   1. Calendar
+   2. Outer Ring
+   3. Systems & Society
+   ===================================================== */
+
+
+/* =====================================================
+   CALENDAR
+   Hub Pink
+   ===================================================== */
+
+.world-directory-group:nth-child(1){
+
+  --directory-accent:
+    var(--pink);
+
+}
+
+
+/* =====================================================
+   OUTER RING
+   Residential Gold
+   ===================================================== */
+
+.world-directory-group:nth-child(2){
+
+  --directory-accent:
+    var(--gold);
+
+}
+
+
+/* =====================================================
+   SYSTEMS & SOCIETY
+   Green Belt Teal
+   ===================================================== */
+
+.world-directory-group:nth-child(3){
+
+  --directory-accent:
+    var(--teal);
+
+}
+
+
+/* =====================================================
+   CATEGORY HEADING
+   ===================================================== */
+
+.world-directory-group h3{
+
+  color:
+    var(--directory-accent);
+
+}
+
+
+/* =====================================================
+   DIRECTORY CARDS
+   ===================================================== */
+
+.world-directory-group
+.world-directory-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+
+/* Category stripe */
+
+.world-directory-group
+.world-directory-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:4px;
+
+  background:
+    var(--directory-accent);
+
+}
+
+
+/* Card title */
+
+.world-directory-group
+.world-directory-card-head strong{
+
+  color:
+    var(--directory-accent);
+
+}
+
+
+/* Arrow */
+
+.world-directory-group
+.world-directory-arrow{
+
+  color:
+    var(--directory-accent);
+
+}
+
+
+/* =====================================================
+   HOVER
+   ===================================================== */
+
+.world-directory-group
+.world-directory-card:hover{
+
+  border-color:
+    var(--directory-accent);
+
+  box-shadow:
+
+    0 0 0 1px
+    color-mix(
+      in srgb,
+      var(--directory-accent) 15%,
+      transparent
+    ),
+
+    0 8px 20px
+    rgba(0,0,0,.20);
+
+}
+
+/* =====================================================
+   WORLD DETAIL
+   CATEGORY ACCENTS
+   ===================================================== */
+
+.world-detail-header{
+
+  --detail-accent:
+    var(--pink);
+
+}
+
+
+/* Calendar / Hub family */
+
+.world-detail-header.world-accent-calendar{
+
+  --detail-accent:
+    var(--pink);
+
+}
+
+
+/* Outer Ring */
+
+.world-detail-header.world-accent-outer{
+
+  --detail-accent:
+    var(--gold);
+
+}
+
+
+/* Systems & Society */
+
+.world-detail-header.world-accent-systems{
+
+  --detail-accent:
+    var(--teal);
+
+}
+
+
+/* =====================================================
+   APPLY DETAIL ACCENT
+   ===================================================== */
+
+.world-detail-header h2{
+
+  color:
+    var(--detail-accent);
+
+}
+
+
+.world-detail-header
+.world-eyebrow{
+
+  color:
+    var(--detail-accent);
+
+}
+
+
+.world-detail-header::after{
+
+  content:"";
+
+  display:block;
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:-10px;
+
+  height:2px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--detail-accent),
+      transparent
+    );
+
+  opacity:.65;
+
+}
+
+
+.world-detail-panel{
+
+  --detail-accent:
+    var(--pink);
+
+}
+
+
+.world-detail-panel:has(
+  .world-accent-calendar
+){
+
+  --detail-accent:
+    var(--pink);
+
+}
+
+
+.world-detail-panel:has(
+  .world-accent-outer
+){
+
+  --detail-accent:
+    var(--gold);
+
+}
+
+
+.world-detail-panel:has(
+  .world-accent-systems
+){
+
+  --detail-accent:
+    var(--teal);
+
+}
+
+
+/* Section headings */
+
+.world-detail-panel
+.world-detail-description h3,
+
+.world-detail-panel
+.world-detail-sections h3{
+
+  color:
+    var(--detail-accent);
+
+}
+
+
+/* Child cards */
+
+.world-detail-panel
+.world-section-card-title{
+
+  color:
+    var(--detail-accent);
+
+}
+
+
+/* Shared notes */
+
+.world-detail-panel
+.world-notes-header h3{
+
+  color:
+    var(--detail-accent);
+
+}
+
+
+.world-detail-panel
+.world-save-notes-button{
+
+  color:
+    var(--detail-accent);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--detail-accent) 45%,
+      transparent
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--detail-accent) 7%,
+      transparent
+    );
+
+}
+
+/* =====================================================
+   DETAIL PANEL
+   ===================================================== */
+
+.world-detail-panel{
+
+  margin-top:22px;
+
+  padding:
+    20px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.30);
+
+  background:
+
+    radial-gradient(
+      circle at 88% 7%,
+      rgba(199,90,145,.06),
+      transparent 26%
+    ),
+
+    linear-gradient(
+      155deg,
+      #0a111a,
+      #151221 66%,
+      #081713
+    );
+
+  box-shadow:
+    0 14px 34px
+    rgba(0,0,0,.26);
+
+}
+
+
+.world-detail-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:20px;
+
+  margin-bottom:16px;
+
+}
+
+
+.world-detail-header h2{
+
+  margin:
+    6px 0 0;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:28px;
+
+  font-weight:400;
+
+}
+
+
+.world-detail-subtitle{
+
+  margin-top:5px;
+
+  color:#aaa294;
+
+  font-size:12px;
+
+}
+
+
+.world-detail-close{
+
+  display:grid;
+
+  place-items:center;
+
+  width:36px;
+  height:36px;
+
+  padding:0;
+
+  border:
+    1px solid
+    rgba(224,179,79,.26);
+
+  background:
+    rgba(7,14,21,.68);
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   BREADCRUMB
+   ===================================================== */
+
+.world-breadcrumb{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-bottom:12px;
+
+  color:#827d74;
+
+  font-size:10px;
+
+}
+
+
+.world-breadcrumb button{
+
+  padding:0;
+
+  border:0;
+
+  background:transparent;
+
+  color:
+    var(--teal);
+
+  font:inherit;
+
+  cursor:pointer;
+
+}
+
+
+.world-breadcrumb strong{
+
+  color:#aaa294;
+
+}
+
+
+/* =====================================================
+   DETAIL DESCRIPTION
+   ===================================================== */
+
+.world-detail-description{
+
+  margin-top:18px;
+
+  padding-top:15px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.13);
+
+}
+
+
+.world-detail-description h3{
+
+  margin:
+    0 0 8px;
+
+  color:
+    var(--gold);
+
+  font-size:10px;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+
+}
+
+
+.world-detail-description div{
+
+  color:#d2c8b8;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+}
+
+
+/* =====================================================
+   CHILD SECTIONS
+   ===================================================== */
+
+.world-detail-sections{
+
+  margin-top:18px;
+
+  padding-top:15px;
+
+  border-top:
+    1px solid
+    rgba(224,179,79,.13);
+
+}
+
+
+.world-detail-sections h3{
+
+  margin:
+    0 0 10px;
+
+  color:
+    var(--gold);
+
+  font-size:10px;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+
+}
+
+
+.world-section-card-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
+
+  gap:10px;
+
+}
+
+
+.world-section-card{
+
+  min-height:105px;
+
+  padding:
+    13px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.18);
+
+  background:
+    rgba(47,197,191,.025);
+
+  color:
+    var(--cream);
+
+  text-align:left;
+
+  cursor:pointer;
+
+}
+
+
+.world-section-card-title{
+
+  color:
+    var(--pink);
+
+  font-size:14px;
+
+  font-weight:800;
+
+}
+
+
+.world-section-card-subtitle{
+
+  margin-top:5px;
+
+  color:#aaa294;
+
+  font-size:10px;
+
+  line-height:1.45;
+
+}
+
+
+.world-downtime-badge,
+.world-map-badge{
+
+  display:inline-block;
+
+  margin:
+    9px 5px 0 0;
+
+  padding:
+    4px 6px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.20);
+
+  color:
+    var(--gold);
+
+  font-size:8px;
+
+  letter-spacing:.05em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   DOWNTIME PANEL
+   ===================================================== */
+
+.world-downtime-panel{
+
+  margin-top:18px;
+
+  padding:
+    15px;
+
+  border:
+    1px solid
+    rgba(199,90,145,.23);
+
+  background:
+    rgba(199,90,145,.035);
+
+}
+
+
+.world-downtime-panel h3{
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(--pink);
+
+  font-size:18px;
+
+}
+
+
+.world-downtime-panel p{
+
+  margin:
+    8px 0 0;
+
+  color:#b6ad9d;
+
+  font-size:11px;
+
+  line-height:1.55;
+
+}
+
+
+/* =====================================================
+   CAMPAIGN NOTES
+   ===================================================== */
+
+.world-notes-panel{
+
+  margin-top:20px;
+
+  padding:
+    17px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.22);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(47,197,191,.035),
+      rgba(199,90,145,.025)
+    ),
+
+    #081018;
+
+}
+
+
+.world-notes-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:16px;
+
+}
+
+
+.world-notes-header h3{
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:20px;
+
+  font-weight:400;
+
+}
+
+
+.world-notes-header p{
+
+  margin:
+    6px 0 0;
+
+  color:#aaa294;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+}
+
+
+.world-save-notes-button{
+
+  flex:
+    0 0 auto;
+
+  min-height:36px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.35);
+
+  background:
+    rgba(47,197,191,.06);
+
+  color:
+    var(--teal);
+
+  font:inherit;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   NOTES TOOLBAR
+   ===================================================== */
+
+.world-format-toolbar{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:13px;
+
+}
+
+
+.world-format-toolbar button{
+
+  min-height:29px;
+
+  padding:
+    0 9px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.20);
+
+  background:
+    rgba(224,179,79,.03);
+
+  color:
+    var(--gold);
+
+  font:inherit;
+
+  font-size:9px;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   NOTES EDITOR
+   ===================================================== */
+
+.world-notes-editor{
+
+  min-height:180px;
+
+  margin-top:9px;
+
+  padding:
+    13px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.24);
+
+  background:#060d14;
+
+  color:#d3c9b8;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+  outline:none;
+
+}
+
+
+.world-notes-editor:focus{
+
+  border-color:
+    var(--teal);
+
+}
+
+
+/* =====================================================
+   LOAD ERROR
+   ===================================================== */
+
+.world-load-error{
+
+  padding:
+    35px 20px;
+
+  border:
+    1px solid
+    rgba(186,77,89,.30);
+
+  background:
+    rgba(186,77,89,.04);
+
+  color:#d5a2a7;
+
+  text-align:center;
+
+}
+
+
+.world-load-error strong{
+
+  display:block;
+
+  color:#dc7580;
+
+  font-size:14px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:1100px){
+
+  .world-overview-card{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .world-rings-layout{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .world-directory-grid{
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      );
+
+  }
+
+
+  .world-section-card-grid{
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      );
+
+  }
+
+}
+
+
+@media(max-width:680px){
+
+  .world-view{
+
+    margin-left:0;
+
+    padding:15px;
+
+  }
+
+
+  .world-directory-grid,
+  .world-section-card-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .world-notes-header,
+  .world-detail-header{
+
+    flex-direction:column;
+
+  }
+
+
+  .world-save-notes-button{
+
+    width:100%;
+
+  }
+
+}

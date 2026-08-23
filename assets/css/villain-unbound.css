@@ -1,0 +1,3991 @@
+/* =====================================================
+   EPCOT DND
+   VILLAIN UNBOUND
+
+   THE LAST WORKING SYSTEM
+
+   Visual concept:
+   Villain Cast's corporate workstation survived
+   the end of the world.
+
+   The Faeriewild did not.
+
+   It got inside.
+
+   IMPORTANT:
+   This file must load LAST after every Hero Unbound
+   stylesheet.
+
+   VISUAL ONLY.
+   No layout or functionality changes.
+   ===================================================== */
+
+
+/* =====================================================
+   CORE SYSTEM VARIABLES
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]{
+
+  --vu-black:#010203;
+  --vu-black-2:#030405;
+  --vu-black-3:#07080a;
+
+  --vu-screen:#020706;
+  --vu-screen-soft:#06100d;
+  --vu-screen-purple:#0c0710;
+
+  --vu-chassis:#25252a;
+  --vu-chassis-light:#39363d;
+  --vu-chassis-dark:#131316;
+
+  --vu-titlebar:#312a33;
+  --vu-titlebar-light:#493b49;
+
+  --vu-border:#64576a;
+  --vu-border-dark:#332d35;
+
+  --vu-cream:#e7ddc8;
+  --vu-muted:#899b94;
+
+  --vu-gold:#c9a160;
+  --vu-gold-bright:#efd18d;
+
+  --vu-teal:#45cfc3;
+  --vu-teal-bright:#91fff2;
+  --vu-teal-muted:#57988f;
+
+  --vu-pink:#bf4d86;
+  --vu-pink-bright:#ff8ac1;
+  --vu-pink-dark:#632442;
+
+  --vu-virus:#8dff73;
+  --vu-virus-dim:#4e9b46;
+
+  --vu-blood:#ad3d4c;
+
+  --vu-shadow:
+    6px 7px 0 rgba(0,0,0,.33),
+    0 18px 38px rgba(0,0,0,.32);
+
+  margin:0 !important;
+
+  background:
+
+    radial-gradient(
+      circle at 13% 7%,
+      rgba(69,207,195,.05),
+      transparent 26%
+    ),
+
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(191,77,134,.065),
+      transparent 27%
+    ),
+
+    linear-gradient(
+      145deg,
+      #010203 0%,
+      #050407 55%,
+      #09050b 100%
+    ) !important;
+
+  color:
+    var(--vu-cream) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace !important;
+
+}
+
+
+/* =====================================================
+   GLOBAL TYPOGRAPHY OVERRIDE
+
+   hero-unbound-typography.css is intentionally broad.
+   Villain Unbound takes control here.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  button,
+  input,
+  textarea,
+  select,
+  label,
+  strong,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5
+){
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+}
+
+
+/* =====================================================
+   GLOBAL APOCALYPSE TEXTURE
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]::before{
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99990;
+
+  pointer-events:none;
+
+  opacity:.045;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.13) 0,
+      rgba(141,255,115,.13) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]::after{
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99989;
+
+  pointer-events:none;
+
+  background:
+
+    radial-gradient(
+      ellipse at center,
+      transparent 57%,
+      rgba(0,0,0,.25) 82%,
+      rgba(0,0,0,.55) 100%
+    );
+
+}
+
+
+/* =====================================================
+   DESTROY HERO NOTEBOOK SPINE
+
+   Villain Unbound is a ruined machine.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.spine{
+
+  display:none !important;
+
+}
+
+
+/* =====================================================
+   MAIN MACHINE CHASSIS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.unbound-shell{
+
+  margin:
+    14px !important;
+
+  overflow:hidden !important;
+
+  border:
+    3px solid
+    #4c444f !important;
+
+  border-radius:
+    2px !important;
+
+  background:
+    #020304 !important;
+
+  box-shadow:
+
+    8px 9px 0
+    rgba(0,0,0,.30),
+
+    0 0 55px
+    rgba(191,77,134,.055) !important;
+
+}
+
+
+/* =====================================================
+   HEADER
+   RUINED SYSTEM BOOT SCREEN
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.header{
+
+  position:relative !important;
+
+  min-height:
+    190px !important;
+
+  overflow:hidden !important;
+
+  border:
+    0 !important;
+
+  border-bottom:
+    3px solid
+    #4d434f !important;
+
+  background:
+
+    radial-gradient(
+      circle at 83% 16%,
+      rgba(239,209,141,.10),
+      transparent 16%
+    ),
+
+    radial-gradient(
+      circle at 72% 72%,
+      rgba(191,77,134,.09),
+      transparent 26%
+    ),
+
+    radial-gradient(
+      circle at 16% 70%,
+      rgba(69,207,195,.05),
+      transparent 28%
+    ),
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.015) 0,
+      rgba(141,255,115,.015) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    linear-gradient(
+      135deg,
+      #010304,
+      #09060c 43%,
+      #160b19 72%,
+      #06100b
+    ) !important;
+
+}
+
+
+/* damaged glass / fracture bands */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.header::before{
+
+  content:"" !important;
+
+  position:absolute !important;
+
+  inset:0 !important;
+
+  z-index:1 !important;
+
+  pointer-events:none !important;
+
+  opacity:.35 !important;
+
+  background:
+
+    linear-gradient(
+      113deg,
+      transparent 0 62%,
+      rgba(141,255,115,.12) 62.1% 62.3%,
+      transparent 62.4%
+    ),
+
+    linear-gradient(
+      72deg,
+      transparent 0 78%,
+      rgba(191,77,134,.15) 78.1% 78.35%,
+      transparent 78.45%
+    ),
+
+    repeating-linear-gradient(
+      7deg,
+      transparent 0 9px,
+      rgba(255,255,255,.018) 10px,
+      transparent 11px
+    ) !important;
+
+}
+
+
+/* corrupted data tears */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.header::after{
+
+  content:"" !important;
+
+  position:absolute !important;
+
+  left:0 !important;
+  right:0 !important;
+  top:67px !important;
+
+  z-index:2 !important;
+
+  height:112px !important;
+
+  opacity:.62 !important;
+
+  pointer-events:none !important;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent 0 3%,
+      var(--vu-pink) 3% 7%,
+      transparent 7% 18%,
+      var(--vu-teal) 18% 22%,
+      transparent 22% 38%,
+      var(--vu-virus) 38% 41%,
+      transparent 41% 60%,
+      var(--vu-gold) 60% 64%,
+      transparent 64% 82%,
+      var(--vu-pink) 82% 84%,
+      transparent 84%
+    ) !important;
+
+  background-size:
+    245px 2px !important;
+
+  background-repeat:
+    repeat !important;
+
+  mask-image:
+
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 10px,
+      black 11px 12px,
+      transparent 13px 21px
+    ) !important;
+
+}
+
+
+/* =====================================================
+   HEADER GRID
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.header-grid{
+
+  position:relative !important;
+
+  z-index:5 !important;
+
+  margin:
+    11px !important;
+
+  padding:
+    18px !important;
+
+  border:
+    1px solid
+    rgba(201,161,96,.22) !important;
+
+  background:
+    rgba(0,0,0,.20) !important;
+
+}
+
+
+/* =====================================================
+   ORBIT LOGO
+   OLD SYSTEM EMBLEM, NOW INFECTED
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit{
+
+  filter:
+
+    drop-shadow(
+      0 0 7px
+      rgba(69,207,195,.20)
+    )
+
+    drop-shadow(
+      3px 0 5px
+      rgba(191,77,134,.13)
+    ) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit .r1{
+
+  border-color:
+    var(--vu-gold) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit .r2{
+
+  border-color:
+    rgba(69,207,195,.65) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit .r3{
+
+  border-color:
+    rgba(191,77,134,.75) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit .star{
+
+  background:
+    var(--vu-cream) !important;
+
+  filter:
+    drop-shadow(
+      0 0 6px
+      rgba(141,255,115,.20)
+    ) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit .d1{
+
+  background:
+    var(--vu-blood) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit .d2{
+
+  background:
+    var(--vu-gold) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit .d3{
+
+  background:
+    #613878 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.orbit .d4{
+
+  background:
+    var(--vu-teal) !important;
+
+}
+
+
+/* =====================================================
+   HEADER TYPOGRAPHY
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.eyebrow{
+
+  color:
+    var(--vu-virus) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-size:
+    9px !important;
+
+  letter-spacing:
+    .17em !important;
+
+}
+
+
+/* Kill Hero Unbound handwritten title */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.title{
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace !important;
+
+  font-size:
+    clamp(
+      30px,
+      4.4vw,
+      52px
+    ) !important;
+
+  font-weight:
+    700 !important;
+
+  line-height:
+    .94 !important;
+
+  letter-spacing:
+    -.035em !important;
+
+  text-transform:
+    uppercase !important;
+
+  transform:
+    none !important;
+
+  color:
+    var(--vu-cream) !important;
+
+  text-shadow:
+
+    3px 0
+    rgba(69,207,195,.42),
+
+    -3px 0
+    rgba(191,77,134,.43),
+
+    0 0 13px
+    rgba(141,255,115,.09) !important;
+
+}
+
+
+/* corrupted old title ghost */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.title-old{
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-size:
+    clamp(
+      25px,
+      3.6vw,
+      43px
+    ) !important;
+
+  font-weight:
+    700 !important;
+
+  color:
+    var(--vu-pink) !important;
+
+  opacity:.30 !important;
+
+  transform:
+    translate(8px,4px)
+    skewX(-8deg) !important;
+
+  text-decoration:
+
+    line-through
+    var(--vu-virus)
+    2px !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.subbrand{
+
+  color:
+    var(--vu-teal-muted) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  letter-spacing:
+    .13em !important;
+
+}
+
+
+/* =====================================================
+   HEADER MESSAGE
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.note{
+
+  position:absolute !important;
+
+  right:0 !important;
+  top:4px !important;
+
+  z-index:10 !important;
+
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+
+  transform:none !important;
+
+  border:
+    2px solid
+    #4c414f !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.022) 0,
+      rgba(141,255,115,.022) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #020706 !important;
+
+  color:
+    var(--vu-teal-bright) !important;
+
+  box-shadow:
+
+    inset 0 0 20px
+    rgba(0,0,0,.80),
+
+    0 0 10px
+    rgba(191,77,134,.04) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.note::before{
+
+  display:none !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.note::after{
+
+  content:
+    "WARNING://CLUBHOUSE PROCESS HAS ROOT ACCESS" !important;
+
+  display:block !important;
+
+  position:static !important;
+
+  margin-top:
+    8px !important;
+
+  color:
+    var(--vu-virus) !important;
+
+  font-size:
+    7px !important;
+
+  letter-spacing:
+    .08em !important;
+
+  background:none !important;
+
+}
+
+
+/* =====================================================
+   REALITY STATUS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.status{
+
+  position:relative !important;
+
+  overflow:hidden !important;
+
+  border:
+    2px solid
+    #4e4350 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.022) 0,
+      rgba(141,255,115,.022) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #020706 !important;
+
+  box-shadow:
+
+    inset 0 0 22px
+    rgba(0,0,0,.82) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.status::before{
+
+  content:
+    "REALITY_KERNEL.EXE";
+
+  position:absolute;
+
+  top:5px;
+  left:7px;
+
+  color:
+    rgba(141,255,115,.34);
+
+  font-size:
+    6px;
+
+  letter-spacing:
+    .08em;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.status .small{
+
+  color:
+    var(--vu-teal-muted) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.status .big{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  text-shadow:
+
+    2px 0
+    rgba(69,207,195,.32),
+
+    -2px 0
+    rgba(141,255,115,.14) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.status .unknown{
+
+  color:
+    var(--vu-virus) !important;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+   INFECTED APPLICATION LAUNCHER
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.nav{
+
+  border:
+    0 !important;
+
+  border-bottom:
+    3px solid
+    #4b454d !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #39343b,
+      #1d1a20
+    ) !important;
+
+  box-shadow:
+
+    inset 0 1px 0
+    rgba(255,255,255,.04) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.nav button{
+
+  border:
+    0 !important;
+
+  border-right:
+    1px solid
+    #4f4851 !important;
+
+  border-bottom:
+    3px solid
+    transparent !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #c6c1ba !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-size:
+    9px !important;
+
+  font-weight:
+    700 !important;
+
+  text-transform:
+    uppercase !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.nav button:hover{
+
+  border-bottom-color:
+    var(--vu-teal) !important;
+
+  background:
+    rgba(69,207,195,.055) !important;
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.nav button.active{
+
+  border-bottom-color:
+    var(--vu-virus) !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      rgba(191,77,134,.21),
+      rgba(141,255,115,.025)
+    ) !important;
+
+  color:
+    var(--vu-pink-bright) !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+/* =====================================================
+   MAIN DESKTOP
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.unbound-view,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#homeView,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#widgetsView{
+
+  background:
+
+    radial-gradient(
+      circle at 7% 14%,
+      rgba(191,77,134,.035),
+      transparent 25%
+    ),
+
+    radial-gradient(
+      circle at 93% 83%,
+      rgba(69,207,195,.025),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      135deg,
+      #010203,
+      #050407
+    ) !important;
+
+}
+
+
+/* =====================================================
+   COMPUTER WINDOW SYSTEM
+
+   These are the actual modules in the current HTML.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .home-card,
+  .performance-header,
+  .hero-sheet-section,
+  .unbound-identity,
+  .portal-controls,
+  .portal-stage,
+  .company-file-header,
+  .company-profile,
+  .company-writing-card,
+  .people-header,
+  .npc-card,
+  .objectives-header,
+  .objective-card,
+  .world-tab-hero,
+  .world-overview-card,
+  .world-rings-section,
+  .journal-header,
+  .journal-composer,
+  .journal-search,
+  .journal-post,
+  .unbound-widgets-placeholder
+){
+
+  position:relative !important;
+
+  overflow:hidden !important;
+
+  padding-top:
+    31px !important;
+
+  border:
+    3px solid
+    #4b454d !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+  color:
+    var(--vu-cream) !important;
+
+  box-shadow:
+    var(--vu-shadow) !important;
+
+  transform:none !important;
+
+}
+
+
+/* =====================================================
+   UNIVERSAL WINDOW TITLE BARS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .home-card,
+  .performance-header,
+  .hero-sheet-section,
+  .unbound-identity,
+  .portal-controls,
+  .company-file-header,
+  .company-profile,
+  .company-writing-card,
+  .people-header,
+  .npc-card,
+  .objectives-header,
+  .objective-card,
+  .world-tab-hero,
+  .world-overview-card,
+  .world-rings-section,
+  .journal-header,
+  .journal-composer,
+  .journal-search,
+  .journal-post,
+  .unbound-widgets-placeholder
+)::before{
+
+  content:
+    "WDI_SYSTEM://INFECTED";
+
+  position:absolute !important;
+
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:auto !important;
+
+  width:auto !important;
+  height:25px !important;
+
+  margin:0 !important;
+
+  display:flex !important;
+
+  align-items:center !important;
+
+  padding:
+    0 8px !important;
+
+  box-sizing:
+    border-box !important;
+
+  transform:none !important;
+
+  border:
+    0 !important;
+
+  border-bottom:
+    2px solid
+    #161419 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      var(--vu-titlebar-light),
+      var(--vu-titlebar)
+    ) !important;
+
+  background-image:
+
+    linear-gradient(
+      90deg,
+      transparent 0 55%,
+      rgba(141,255,115,.055) 55% 58%,
+      transparent 58% 74%,
+      rgba(191,77,134,.075) 74% 77%,
+      transparent 77%
+    ),
+
+    linear-gradient(
+      180deg,
+      var(--vu-titlebar-light),
+      var(--vu-titlebar)
+    ) !important;
+
+  color:
+    var(--vu-gold-bright) !important;
+
+  box-shadow:
+    none !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-size:
+    7px !important;
+
+  font-weight:
+    700 !important;
+
+  line-height:
+    25px !important;
+
+  letter-spacing:
+    .08em !important;
+
+  text-transform:
+    uppercase !important;
+
+}
+
+
+/* =====================================================
+   WINDOW CONTROLS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .home-card,
+  .performance-header,
+  .hero-sheet-section,
+  .unbound-identity,
+  .portal-controls,
+  .company-file-header,
+  .company-profile,
+  .company-writing-card,
+  .people-header,
+  .npc-card,
+  .objectives-header,
+  .objective-card,
+  .world-tab-hero,
+  .world-overview-card,
+  .world-rings-section,
+  .journal-header,
+  .journal-composer,
+  .journal-search,
+  .journal-post,
+  .unbound-widgets-placeholder
+)::after{
+
+  content:
+    "—  □  ×" !important;
+
+  position:absolute !important;
+
+  top:3px !important;
+  right:4px !important;
+  left:auto !important;
+  bottom:auto !important;
+
+  z-index:
+    20 !important;
+
+  width:auto !important;
+  height:18px !important;
+
+  display:flex !important;
+
+  align-items:center !important;
+  justify-content:center !important;
+
+  margin:0 !important;
+
+  padding:
+    0 5px !important;
+
+  box-sizing:
+    border-box !important;
+
+  transform:none !important;
+
+  border:
+    1px solid
+    #6b5a6b !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #514653,
+      #2b272e
+    ) !important;
+
+  color:
+    #ddcedb !important;
+
+  box-shadow:
+    none !important;
+
+  font-family:
+    Arial,
+    sans-serif !important;
+
+  font-size:
+    9px !important;
+
+  font-weight:
+    700 !important;
+
+  line-height:
+    15px !important;
+
+  letter-spacing:
+    3px !important;
+
+  pointer-events:none !important;
+
+}
+
+
+/* =====================================================
+   CRT WINDOW INTERIORS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-card-inner,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.hero-sheet-status,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-status-grid,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.portal-grid,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-writing-card > :not(style),
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.npc-card-body{
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    radial-gradient(
+      circle at 86% 12%,
+      rgba(191,77,134,.035),
+      transparent 25%
+    ),
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.014) 0,
+      rgba(141,255,115,.014) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #020706 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+/* =====================================================
+   SPECIFIC WINDOW NAMES
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-id-card::before{
+
+  content:
+    "EXPLORER_RECORD.INFECTED" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-adventure-card::before{
+
+  content:
+    "DIRECTIVES.CORRUPT" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-journal-card::before{
+
+  content:
+    "TRANSMISSION_ARCHIVE.LOG" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-status-card::before{
+
+  content:
+    "REALITY_METRICS.SYS" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-curious-card::before{
+
+  content:
+    "FUTURE_PROTOCOL.EXE" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-header::before{
+
+  content:
+    "CHARACTER_RECORD.CORRUPT" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.unbound-identity::before{
+
+  content:
+    "EXTERNAL_IDENTITY.LINK" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.portal-controls::before{
+
+  content:
+    "DDB_PORTAL.UNSTABLE" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-file-header::before{
+
+  content:
+    "PERSONNEL_RECORD.INFECTED" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.people-header::before{
+
+  content:
+    "SURVIVOR_ARCHIVE.EXE" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.objectives-header::before{
+
+  content:
+    "ACTIVE_DIRECTIVES.CORRUPT" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-tab-hero::before{
+
+  content:
+    "WORLD_DIRECTORY.DAMAGED" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-header::before{
+
+  content:
+    "TRANSMISSIONS.RECOVERED" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.unbound-widgets-placeholder::before{
+
+  content:
+    "APPLICATION_DIRECTORY.ERR" !important;
+
+}
+
+
+/* =====================================================
+   HEADINGS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .home-card h1,
+  .home-card h2,
+  .home-card h3,
+  .performance-view h1,
+  .performance-view h2,
+  .performance-view h3,
+  .company-file-view h1,
+  .company-file-view h2,
+  .company-file-view h3,
+  .people-view h1,
+  .people-view h2,
+  .people-view h3,
+  .objectives-view h1,
+  .objectives-view h2,
+  .objectives-view h3,
+  .world-view h1,
+  .world-view h2,
+  .world-view h3,
+  .journal-view h1,
+  .journal-view h2,
+  .journal-view h3,
+  #widgetsView h1,
+  #widgetsView h2
+){
+
+  color:
+    var(--vu-pink-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-style:
+    normal !important;
+
+  text-shadow:
+
+    1px 0
+    rgba(69,207,195,.30),
+
+    -1px 0
+    rgba(141,255,115,.11) !important;
+
+}
+
+
+/* =====================================================
+   KICKERS / FILE LABELS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .home-kicker,
+  .performance-kicker,
+  .company-file-kicker,
+  .people-kicker,
+  .objectives-kicker,
+  .world-eyebrow,
+  .journal-kicker,
+  .unbound-module-code,
+  .unbound-module-notice
+){
+
+  color:
+    var(--vu-virus) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  letter-spacing:
+    .09em !important;
+
+}
+
+
+/* =====================================================
+   HOME ID
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-id-card{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-id-copy h1{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-id-title{
+
+  display:inline-block !important;
+
+  border:
+    1px solid
+    var(--vu-virus-dim) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    rgba(141,255,115,.035) !important;
+
+  color:
+    var(--vu-virus) !important;
+
+  text-shadow:
+    0 0 7px
+    rgba(141,255,115,.14) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-id-label{
+
+  color:
+    var(--vu-teal-muted) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-id-value{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+/* =====================================================
+   OBJECTIVES
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-objective-item,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.objective-subitem{
+
+  border:
+    1px solid
+    rgba(69,207,195,.14) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #030a08 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-objective-copy strong,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.objective-card strong{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-objective-copy span,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.objective-description{
+
+  color:
+    var(--vu-muted) !important;
+
+}
+
+
+/* =====================================================
+   PROGRAM METRICS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-status-block{
+
+  border:
+    1px solid
+    rgba(69,207,195,.15) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020806 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-status-label{
+
+  color:
+    var(--vu-teal-muted) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-alignment-meter{
+
+  border:
+    1px solid
+    rgba(191,77,134,.30) !important;
+
+  background:
+    #010303 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-alignment-center{
+
+  background:
+    #020605 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-alignment-value{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-exhaustion-heart{
+
+  color:
+    #38272c !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-exhaustion-heart.is-filled{
+
+  color:
+    var(--vu-blood) !important;
+
+  text-shadow:
+    0 0 8px
+    rgba(173,61,76,.30) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-inspiration-icon.is-active{
+
+  color:
+    var(--vu-virus) !important;
+
+}
+
+
+/* =====================================================
+   JOURNAL HOME CARD
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-journal-content{
+
+  border:
+    1px solid
+    rgba(69,207,195,.12) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020706 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-journal-head strong{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+/* =====================================================
+   FUTURE PROTOCOL
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-curious-card
+.home-card-inner{
+
+  background:
+
+    radial-gradient(
+      circle at 78% 30%,
+      rgba(141,255,115,.07),
+      transparent 26%
+    ),
+
+    radial-gradient(
+      circle at 21% 80%,
+      rgba(191,77,134,.09),
+      transparent 31%
+    ),
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.025) 0,
+      rgba(141,255,115,.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #010404 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-curious-copy h2{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+  text-transform:
+    uppercase !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.future-is-yours-button{
+
+  border:
+    1px solid
+    var(--vu-virus) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    rgba(141,255,115,.035) !important;
+
+  color:
+    var(--vu-virus) !important;
+
+  box-shadow:
+
+    inset 0 0 12px
+    rgba(141,255,115,.03),
+
+    0 0 11px
+    rgba(141,255,115,.07) !important;
+
+}
+
+
+/* =====================================================
+   PERFORMANCE RECORD
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-view{
+
+  background:
+    #010203 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-header{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-character-name{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-reality-stamp{
+
+  border:
+    1px solid
+    var(--vu-virus-dim) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    rgba(141,255,115,.035) !important;
+
+  color:
+    var(--vu-virus) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-stat-card,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-inspiration-card{
+
+  border:
+    1px solid
+    rgba(69,207,195,.15) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020806 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-stat-label{
+
+  color:
+    var(--vu-teal-muted) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-stat-value,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.performance-inspiration-value{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+/* =====================================================
+   CHARACTER / D&D BEYOND PORTAL
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.unbound-identity{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.hero-sheet-heading{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.portal-controls{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.portal-title{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.portal-help{
+
+  color:
+    var(--vu-muted) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.sheet-frame{
+
+  border:
+    2px solid
+    #504752 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #010203 !important;
+
+  box-shadow:
+
+    inset 0 0 28px
+    rgba(0,0,0,.80) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.empty-state{
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(191,77,134,.08),
+      transparent 23%
+    ),
+
+    radial-gradient(
+      circle at center,
+      transparent 32%,
+      rgba(141,255,115,.10) 32.4% 32.8%,
+      transparent 33.2%
+    ),
+
+    #010404 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.empty-title{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+}
+
+
+/* =====================================================
+   BUTTON HARDWARE
+
+   Villain Cast ancestry remains visible.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .portal-controls,
+  .company-file-view,
+  .people-view,
+  .objectives-view,
+  .world-view,
+  .journal-view,
+  .performance-view,
+  #homeView
+)
+button:not(.nav button){
+
+  border:
+    2px outset
+    #675c69 !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #453f47,
+      #262329
+    ) !important;
+
+  color:
+    var(--vu-cream) !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .portal-controls,
+  .company-file-view,
+  .people-view,
+  .objectives-view,
+  .world-view,
+  .journal-view,
+  .performance-view,
+  #homeView
+)
+button:not(.nav button):hover{
+
+  border-color:
+    var(--vu-virus) !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #36363a,
+      #1e2021
+    ) !important;
+
+  color:
+    var(--vu-virus) !important;
+
+}
+
+
+/* =====================================================
+   INPUT / EDITOR SCREENS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  input,
+  textarea,
+  select,
+  [contenteditable="true"]
+){
+
+  border:
+    1px solid
+    rgba(201,161,96,.36) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.015) 0,
+      rgba(141,255,115,.015) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #010403 !important;
+
+  color:
+    var(--vu-teal-bright) !important;
+
+  caret-color:
+    var(--vu-virus) !important;
+
+  box-shadow:
+
+    inset 0 0 14px
+    rgba(0,0,0,.78) !important;
+
+}
+
+
+/* =====================================================
+   COMPANY FILE
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-file-view{
+
+  background:
+    #010203 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-profile{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-profile-name{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-profile-title{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-profile-tags span{
+
+  border:
+    1px solid
+    rgba(69,207,195,.18) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020806 !important;
+
+  color:
+    var(--vu-teal) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-writing-card{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-writing-title{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-rich-editor{
+
+  background:
+    #010403 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-text-toolbar{
+
+  border:
+    1px solid
+    #4d454f !important;
+
+  background:
+    #242126 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.company-text-toolbar button{
+
+  border:
+    1px solid
+    #655a67 !important;
+
+  background:
+    #373239 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+/* =====================================================
+   PERSONNEL
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.people-view{
+
+  background:
+    #010203 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.people-empty-state,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.people-loading{
+
+  border:
+    1px solid
+    rgba(69,207,195,.14) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020706 !important;
+
+  color:
+    var(--vu-muted) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.npc-card{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.npc-name{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.npc-title{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+/* =====================================================
+   OBJECTIVES PAGE
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.objectives-view{
+
+  background:
+    #010203 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.objective-card{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.objective-card::before{
+
+  content:
+    "OBJECTIVE_RECORD.CORRUPT" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.objective-source-badge{
+
+  border:
+    1px solid
+    rgba(191,77,134,.22) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    rgba(191,77,134,.05) !important;
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+/* =====================================================
+   WORLD
+
+   IMPORTANT:
+   world.js injects Unbound CSS after page load.
+   These selectors intentionally use html + body attrs
+   + !important to outrank it.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-view{
+
+  background:
+    #010203 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-tab-bar{
+
+  border:
+    2px solid
+    #4d464f !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #211e23 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-tab-button{
+
+  border:
+    1px solid
+    #5e5361 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #332e35 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-tab-button.is-active{
+
+  background:
+    #020806 !important;
+
+  color:
+    var(--vu-virus) !important;
+
+  border-color:
+    var(--vu-virus-dim) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-category-card,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-ring-key-item,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-unbound-key-item{
+
+  border:
+    2px solid
+    #4d4650 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(191,77,134,.05),
+      transparent 25%
+    ),
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.014) 0,
+      rgba(141,255,115,.014) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #020706 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+  box-shadow:
+    3px 4px 0
+    rgba(0,0,0,.25) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-category-card:hover,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-ring-key-item:hover,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-unbound-key-item:hover{
+
+  border-color:
+    var(--vu-virus) !important;
+
+  background:
+    #05100b !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-category-card strong,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-ring-key-item strong,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-unbound-key-item strong{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-category-card span,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-ring-key-item span,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.world-unbound-key-item span{
+
+  color:
+    var(--vu-muted) !important;
+
+}
+
+
+/* =====================================================
+   WORLD DETAIL
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#worldDetailMount:not(:empty){
+
+  background:
+    rgba(0,0,0,.88) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#worldDetailMount:not(:empty)
+.world-detail-panel{
+
+  border:
+    3px solid
+    #504753 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #010304 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#worldDetailMount:not(:empty)
+.world-detail-header{
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #4a3d4b,
+      #29242b
+    ) !important;
+
+  border-bottom:
+    2px solid
+    #151217 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#worldDetailMount:not(:empty)
+.world-detail-header h2{
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#worldDetailMount:not(:empty)
+:is(
+  .world-detail-description,
+  .world-notes-panel,
+  .world-downtime-panel
+){
+
+  border:
+    1px solid
+    rgba(69,207,195,.13) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020706 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+/* =====================================================
+   JOURNAL
+
+   journal.js also injects Unbound CSS.
+   Same specificity strategy as World.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-view{
+
+  background:
+    #010203 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-composer,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-search,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-post{
+
+  background:
+    var(--vu-chassis-dark) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-composer::before{
+
+  content:
+    "NEW_TRANSMISSION.UNSTABLE" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-search::before{
+
+  content:
+    "RECOVER_ARCHIVE.EXE" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-post::before{
+
+  content:
+    "TRANSMISSION.FRAGMENT" !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-post-author{
+
+  color:
+    var(--vu-teal-bright) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-post-meta{
+
+  color:
+    var(--vu-virus-dim) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.journal-post-text{
+
+  border:
+    1px solid
+    rgba(69,207,195,.12) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #020706 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+}
+
+
+/* =====================================================
+   WIDGETS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#widgetsView{
+
+  background:
+    #010203 !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.unbound-widgets-symbol{
+
+  border-color:
+    var(--vu-virus-dim) !important;
+
+  color:
+    var(--vu-virus) !important;
+
+  text-shadow:
+    0 0 12px
+    rgba(141,255,115,.20) !important;
+
+}
+
+
+/* =====================================================
+   MODALS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .company-modal,
+  .people-modal,
+  .objective-modal,
+  .journal-edit-dialog
+){
+
+  background:
+    rgba(0,0,0,.84) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .company-modal-card,
+  .people-modal-card,
+  .objective-modal-card,
+  .journal-edit-dialog-inner
+){
+
+  border:
+    3px solid
+    #504753 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #151217 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+  box-shadow:
+
+    7px 9px 0
+    rgba(0,0,0,.35),
+
+    0 28px 80px
+    rgba(0,0,0,.55) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .company-modal-header,
+  .people-modal-header,
+  .objective-modal-header,
+  .journal-edit-dialog-header
+){
+
+  border-bottom:
+    2px solid
+    #19151a !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #493c49,
+      #272229
+    ) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .company-modal-header,
+  .people-modal-header,
+  .objective-modal-header,
+  .journal-edit-dialog-header
+)
+:is(
+  h1,
+  h2,
+  h3
+){
+
+  color:
+    var(--vu-pink-bright) !important;
+
+}
+
+
+/* =====================================================
+   PLAYER HEADER CONTROLS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#epcotPlayerHeaderControls button{
+
+  border:
+    1px solid
+    #5c505e !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    #252229 !important;
+
+  color:
+    var(--vu-teal) !important;
+
+  box-shadow:
+    none !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+#epcotPlayerHeaderControls button:hover{
+
+  border-color:
+    var(--vu-virus) !important;
+
+  color:
+    var(--vu-virus) !important;
+
+}
+
+
+/* =====================================================
+   TASKBAR
+   SAME ANCESTRY AS VILLAIN CAST
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.dock{
+
+  min-height:
+    38px !important;
+
+  border:
+    0 !important;
+
+  border-top:
+    3px solid
+    #4b444d !important;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #39343c,
+      #1b181e
+    ) !important;
+
+  color:
+    #aaa2aa !important;
+
+  box-shadow:
+
+    inset 0 1px 0
+    rgba(255,255,255,.035) !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.dock-left::before{
+
+  content:
+    "☣ SYSTEM";
+
+  display:inline-flex;
+
+  align-items:center;
+
+  height:
+    23px;
+
+  margin-right:
+    9px;
+
+  padding:
+    0 8px;
+
+  border:
+    1px solid
+    #5d5360;
+
+  background:
+    #29252c;
+
+  color:
+    var(--vu-virus);
+
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+}
+
+
+/* =====================================================
+   VIRAL MODULE HOVER
+
+   Fae corruption wakes when approached.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .home-card,
+  .objective-card,
+  .npc-card,
+  .journal-post,
+  .company-writing-card
+):hover{
+
+  border-color:
+    rgba(141,255,115,.48) !important;
+
+  box-shadow:
+
+    6px 7px 0
+    rgba(0,0,0,.33),
+
+    0 0 14px
+    rgba(141,255,115,.055) !important;
+
+}
+
+
+/* =====================================================
+   SCROLLBARS
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+*{
+
+  scrollbar-color:
+    var(--vu-pink-dark)
+    #080609;
+
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  html body[data-campaign="villain"][data-reality="unbound"]
+  .unbound-shell{
+
+    margin:
+      5px !important;
+
+  }
+
+
+  html body[data-campaign="villain"][data-reality="unbound"]
+  .title{
+
+    font-size:
+      27px !important;
+
+  }
+
+}
+
+/* =====================================================
+   VILLAIN UNBOUND
+   HOME + HEADER FINAL IDENTITY PASS
+   ===================================================== */
+
+
+/* =====================================================
+   1. HEADER
+   REMOVE HERO UNBOUND CASTLE / FOREST LANGUAGE
+
+   Villain Unbound gets system-collapse imagery instead:
+   dead screen glow, corruption fractures, signal loss.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+:is(
+  .castle,
+  .moon,
+  .forest,
+  .branch
+){
+
+  display:none !important;
+
+}
+
+
+/*
+  Replace the lost scenic layer with a ruined
+  monitor / reality-breach field.
+*/
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.header{
+
+  background:
+
+    radial-gradient(
+      ellipse at 82% 42%,
+      rgba(141,255,115,.08),
+      transparent 16%
+    ),
+
+    radial-gradient(
+      ellipse at 78% 46%,
+      transparent 0 17%,
+      rgba(191,77,134,.10) 17.5% 18%,
+      transparent 18.5%
+    ),
+
+    radial-gradient(
+      circle at 18% 72%,
+      rgba(69,207,195,.045),
+      transparent 25%
+    ),
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.018) 0,
+      rgba(141,255,115,.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    linear-gradient(
+      135deg,
+      #010203 0%,
+      #07060a 43%,
+      #120914 72%,
+      #041008 100%
+    ) !important;
+
+}
+
+
+/*
+  Large broken circular "breach" on the right.
+  More system apocalypse, less haunted castle.
+*/
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.header-grid::after{
+
+  content:"";
+
+  position:absolute;
+
+  z-index:0;
+
+  right:5%;
+  top:50%;
+
+  width:170px;
+  height:170px;
+
+  transform:
+    translateY(-50%);
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(141,255,115,.20);
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent 0 18%,
+      rgba(69,207,195,.12) 18% 19%,
+      transparent 19% 48%,
+      rgba(191,77,134,.13) 48% 50%,
+      transparent 50% 75%,
+      rgba(141,255,115,.11) 75% 76%,
+      transparent 76%
+    ),
+
+    repeating-radial-gradient(
+      circle,
+      transparent 0 19px,
+      rgba(201,161,96,.08) 20px,
+      transparent 21px 34px
+    );
+
+  box-shadow:
+
+    0 0 35px
+    rgba(141,255,115,.035),
+
+    inset 0 0 40px
+    rgba(191,77,134,.035);
+
+  opacity:.70;
+
+  pointer-events:none;
+
+}
+
+
+/* keep actual header content above breach */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.header-grid > *{
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+
+/* =====================================================
+   2. EXPLORER RECORD
+   REMOVE BADGE HOLE
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-id-card
+.home-card-inner::before{
+
+  content:none !important;
+
+  display:none !important;
+
+  width:0 !important;
+  height:0 !important;
+
+  border:0 !important;
+
+  background:none !important;
+
+  box-shadow:none !important;
+
+}
+
+
+/* =====================================================
+   3. REMOVE ALL HERO TAPE
+
+   Stay Lost + From Beyond the Last Path
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.tape,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-curious-card
+.home-card-inner::before,
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.home-curious-card
+.home-card-inner::after{
+
+  content:none !important;
+
+  display:none !important;
+
+  background:none !important;
+
+  box-shadow:none !important;
+
+}
+
+
+/* =====================================================
+   4. FROM BEYOND THE LAST PATH
+
+   This module uses .panel.message rather than
+   .home-card, which is why it escaped our window system.
+   ===================================================== */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.panel.message{
+
+  position:relative !important;
+
+  overflow:hidden !important;
+
+  min-height:300px;
+
+  padding:
+    47px 30px
+    30px !important;
+
+  border:
+    3px solid
+    #4b454d !important;
+
+  border-radius:
+    1px !important;
+
+  background:
+
+    radial-gradient(
+      circle at 89% 18%,
+      rgba(191,77,134,.055),
+      transparent 28%
+    ),
+
+    repeating-linear-gradient(
+      180deg,
+      rgba(141,255,115,.014) 0,
+      rgba(141,255,115,.014) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    #020706 !important;
+
+  color:
+    var(--vu-cream) !important;
+
+  box-shadow:
+    var(--vu-shadow) !important;
+
+  transform:none !important;
+
+}
+
+
+/* application title bar */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.panel.message::before{
+
+  content:
+    "LAST_PATH.TRANSMISSION" !important;
+
+  position:absolute !important;
+
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:auto !important;
+
+  width:auto !important;
+  height:25px !important;
+
+  display:flex !important;
+
+  align-items:center !important;
+
+  padding:
+    0 8px !important;
+
+  margin:0 !important;
+
+  box-sizing:border-box !important;
+
+  transform:none !important;
+
+  border:
+    0 !important;
+
+  border-bottom:
+    2px solid
+    #161419 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent 0 57%,
+      rgba(141,255,115,.06) 57% 60%,
+      transparent 60% 76%,
+      rgba(191,77,134,.08) 76% 79%,
+      transparent 79%
+    ),
+
+    linear-gradient(
+      180deg,
+      var(--vu-titlebar-light),
+      var(--vu-titlebar)
+    ) !important;
+
+  color:
+    var(--vu-gold-bright) !important;
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace !important;
+
+  font-size:
+    7px !important;
+
+  font-weight:
+    700 !important;
+
+  line-height:
+    25px !important;
+
+  letter-spacing:
+    .08em !important;
+
+  text-transform:
+    uppercase !important;
+
+  box-shadow:none !important;
+
+}
+
+
+/* window controls */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.panel.message::after{
+
+  content:
+    "—  □  ×" !important;
+
+  position:absolute !important;
+
+  top:3px !important;
+  right:4px !important;
+  left:auto !important;
+  bottom:auto !important;
+
+  z-index:20 !important;
+
+  width:auto !important;
+  height:18px !important;
+
+  display:flex !important;
+
+  align-items:center !important;
+  justify-content:center !important;
+
+  margin:0 !important;
+
+  padding:
+    0 5px !important;
+
+  box-sizing:border-box !important;
+
+  transform:none !important;
+
+  border:
+    1px solid
+    #6b5a6b !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #514653,
+      #2b272e
+    ) !important;
+
+  color:
+    #ddcedb !important;
+
+  font-family:
+    Arial,
+    sans-serif !important;
+
+  font-size:
+    9px !important;
+
+  font-weight:
+    700 !important;
+
+  line-height:
+    15px !important;
+
+  letter-spacing:
+    3px !important;
+
+  pointer-events:none;
+
+}
+
+
+/* kill remaining Hero message typography */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.panel.message
+:is(
+  .smallcaps,
+  .message-quote,
+  .message-copy
+){
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    Consolas,
+    monospace !important;
+
+  font-style:normal !important;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.panel.message
+.smallcaps{
+
+  color:
+    var(--vu-virus) !important;
+
+  letter-spacing:.10em;
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.panel.message
+.message-quote{
+
+  max-width:620px;
+
+  margin-top:18px;
+
+  padding:0 !important;
+
+  background:none !important;
+
+  color:
+    var(--vu-pink-bright) !important;
+
+  font-size:
+    clamp(
+      20px,
+      2vw,
+      27px
+    ) !important;
+
+  line-height:1.30;
+
+  text-shadow:
+
+    1px 0
+    rgba(69,207,195,.28),
+
+    -1px 0
+    rgba(141,255,115,.10);
+
+}
+
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.panel.message
+.message-copy{
+
+  max-width:620px;
+
+  padding:0 !important;
+
+  background:none !important;
+
+  color:
+    #b7c8c1 !important;
+
+  font-size:
+    12px !important;
+
+  line-height:
+    1.7 !important;
+
+}
+
+
+/* tape inside message */
+
+html body[data-campaign="villain"][data-reality="unbound"]
+.panel.message
+.tape{
+
+  display:none !important;
+
+}
+
+
+/* =====================================================
+   5. VILLAIN UNBOUND FOLLOW THE LIGHTS
+
+   Reality breach / virus bloom animation.
+
+   Three visual layers:
+   - corrupted data fragments
+   - fae spores
+   - root/virus streaks
+   ===================================================== */
+
+.vu-breach-layer{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:50000;
+
+  overflow:hidden;
+
+  pointer-events:none;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(141,255,115,.025),
+      transparent 35%
+    ),
+
+    rgba(1,2,3,.08);
+
+  animation:
+    vuScreenBreachPulse
+    4.7s ease
+    forwards;
+
+}
+
+
+/* DATA FRAGMENTS */
+
+.vu-breach-fragment{
+
+  position:absolute;
+
+  color:
+    var(--vu-virus);
+
+  font-family:
+    "Lucida Console",
+    "Courier New",
+    monospace;
+
+  font-weight:700;
+
+  white-space:nowrap;
+
+  text-shadow:
+
+    2px 0
+    rgba(69,207,195,.60),
+
+    -2px 0
+    rgba(191,77,134,.58),
+
+    0 0 8px
+    rgba(141,255,115,.40);
+
+  animation:
+    vuFragmentRise
+    linear
+    forwards;
+
+}
+
+
+/* SPORES */
+
+.vu-breach-spore{
+
+  position:absolute;
+
+  width:
+    var(--vu-spore-size);
+
+  height:
+    var(--vu-spore-size);
+
+  border-radius:50%;
+
+  background:
+    var(--vu-spore-color);
+
+  box-shadow:
+    0 0 12px
+    var(--vu-spore-color);
+
+  animation:
+    vuSporeDrift
+    ease-in-out
+    forwards;
+
+}
+
+
+/* ROOT / VIRUS STREAK */
+
+.vu-breach-root{
+
+  position:absolute;
+
+  left:
+    var(--vu-root-x);
+
+  bottom:-10vh;
+
+  width:2px;
+
+  height:
+    var(--vu-root-height);
+
+  transform-origin:
+    bottom center;
+
+  transform:
+    rotate(
+      var(--vu-root-angle)
+    );
+
+  background:
+
+    linear-gradient(
+      to top,
+      transparent,
+      var(--vu-virus-dim) 18%,
+      var(--vu-virus) 62%,
+      transparent
+    );
+
+  box-shadow:
+    0 0 8px
+    rgba(141,255,115,.26);
+
+  animation:
+    vuRootGrow
+    2.6s ease-out
+    forwards;
+
+}
+
+
+/* occasional horizontal corrupted scan bar */
+
+.vu-breach-scan{
+
+  position:absolute;
+
+  left:-10vw;
+
+  width:120vw;
+
+  height:
+    var(--vu-scan-height);
+
+  top:
+    var(--vu-scan-y);
+
+  opacity:.42;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(69,207,195,.30),
+      rgba(191,77,134,.40),
+      rgba(141,255,115,.34),
+      transparent
+    );
+
+  animation:
+    vuScanBreak
+    1.6s steps(2,end)
+    forwards;
+
+}
+
+
+@keyframes vuFragmentRise{
+
+  0%{
+
+    transform:
+      translate3d(
+        0,
+        12vh,
+        0
+      )
+      rotate(-4deg);
+
+    opacity:0;
+
+  }
+
+  12%{
+
+    opacity:.90;
+
+  }
+
+  65%{
+
+    opacity:.72;
+
+  }
+
+  100%{
+
+    transform:
+      translate3d(
+        var(--vu-fragment-drift),
+        -115vh,
+        0
+      )
+      rotate(
+        var(--vu-fragment-spin)
+      );
+
+    opacity:0;
+
+  }
+
+}
+
+
+@keyframes vuSporeDrift{
+
+  0%{
+
+    transform:
+      translate3d(
+        0,
+        12vh,
+        0
+      )
+      scale(.2);
+
+    opacity:0;
+
+  }
+
+  18%{
+
+    opacity:.8;
+
+  }
+
+  60%{
+
+    transform:
+      translate3d(
+        var(--vu-spore-drift),
+        -48vh,
+        0
+      )
+      scale(1);
+
+    opacity:.72;
+
+  }
+
+  100%{
+
+    transform:
+      translate3d(
+        calc(
+          var(--vu-spore-drift) * 1.6
+        ),
+        -110vh,
+        0
+      )
+      scale(.35);
+
+    opacity:0;
+
+  }
+
+}
+
+
+@keyframes vuRootGrow{
+
+  0%{
+
+    transform:
+      rotate(
+        var(--vu-root-angle)
+      )
+      scaleY(0);
+
+    opacity:0;
+
+  }
+
+  15%{
+
+    opacity:.85;
+
+  }
+
+  70%{
+
+    transform:
+      rotate(
+        var(--vu-root-angle)
+      )
+      scaleY(1);
+
+    opacity:.65;
+
+  }
+
+  100%{
+
+    transform:
+      rotate(
+        var(--vu-root-angle)
+      )
+      scaleY(1);
+
+    opacity:0;
+
+  }
+
+}
+
+
+@keyframes vuScanBreak{
+
+  0%{
+
+    transform:
+      translateX(-8vw);
+
+    opacity:0;
+
+  }
+
+  18%{
+
+    opacity:.55;
+
+  }
+
+  38%{
+
+    transform:
+      translateX(8vw);
+
+  }
+
+  42%{
+
+    transform:
+      translateX(-3vw);
+
+  }
+
+  74%{
+
+    transform:
+      translateX(5vw);
+
+    opacity:.32;
+
+  }
+
+  100%{
+
+    transform:
+      translateX(0);
+
+    opacity:0;
+
+  }
+
+}
+
+
+@keyframes vuScreenBreachPulse{
+
+  0%{
+
+    backdrop-filter:
+      none;
+
+  }
+
+  10%{
+
+    backdrop-filter:
+      contrast(1.15)
+      saturate(1.22);
+
+  }
+
+  18%{
+
+    backdrop-filter:
+      hue-rotate(8deg)
+      contrast(1.32);
+
+  }
+
+  27%{
+
+    backdrop-filter:
+      hue-rotate(-7deg)
+      contrast(1.12);
+
+  }
+
+  100%{
+
+    backdrop-filter:
+      none;
+
+  }
+
+}

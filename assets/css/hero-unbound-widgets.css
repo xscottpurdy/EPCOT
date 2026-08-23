@@ -1,0 +1,263 @@
+/* =====================================================
+   EPCOT DND
+   HERO UNBOUND WIDGETS
+   ===================================================== */
+
+
+#widgetsView{
+
+  margin-left:46px;
+
+  padding:
+    24px
+    22px
+    32px;
+
+}
+
+
+/* =====================================================
+   WIDGETS PLACEHOLDER
+   ===================================================== */
+
+.unbound-widgets-shell{
+
+  display:grid;
+
+  place-items:center;
+
+  min-height:
+    calc(100vh - 150px);
+
+}
+
+
+.unbound-widgets-placeholder{
+
+  position:relative;
+
+  width:
+    min(720px, 100%);
+
+  padding:
+    52px
+    42px;
+
+  box-sizing:border-box;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(47,197,191,.24);
+
+  background:
+
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(199,90,145,.08),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 12% 88%,
+      rgba(47,197,191,.06),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      150deg,
+      #091119,
+      #141522 65%,
+      #0a1117
+    );
+
+  box-shadow:
+    0 14px 36px
+    rgba(0,0,0,.28);
+
+  text-align:center;
+
+}
+
+
+.unbound-widgets-placeholder::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:4px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--teal),
+      var(--pink),
+      var(--gold),
+      var(--teal)
+    );
+
+}
+
+
+.unbound-widgets-kicker{
+
+  margin-bottom:10px;
+
+  color:
+    var(--teal);
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+}
+
+
+.unbound-widgets-placeholder h1{
+
+  margin:
+    0 0 16px;
+
+  color:
+    var(--pink);
+
+  font-family:
+    "Segoe Print",
+    "Comic Sans MS",
+    cursive;
+
+  font-size:34px;
+
+  font-weight:400;
+
+  line-height:1.15;
+
+}
+
+
+.unbound-widgets-placeholder p{
+
+  max-width:500px;
+
+  margin:
+    0 auto;
+
+  color:
+    #c8c0b4;
+
+  font-size:15px;
+
+  line-height:1.7;
+
+}
+
+
+.unbound-widgets-symbol{
+
+  display:grid;
+
+  place-items:center;
+
+  width:84px;
+  height:84px;
+
+  margin:
+    0 auto 24px;
+
+  border:
+    1px solid
+    rgba(47,197,191,.35);
+
+  border-radius:50%;
+
+  background:
+    rgba(4,12,18,.65);
+
+  color:
+    var(--gold);
+
+  font-size:32px;
+
+  box-shadow:
+
+    0 0 0 7px
+    rgba(47,197,191,.025),
+
+    0 0 24px
+    rgba(47,197,191,.08);
+
+}
+
+
+.unbound-widgets-symbol::before{
+
+  content:"✦";
+
+}
+
+
+.unbound-widgets-status{
+
+  display:inline-block;
+
+  margin-top:25px;
+
+  padding:
+    7px 12px;
+
+  border:
+    1px solid
+    rgba(224,179,79,.25);
+
+  background:
+    rgba(224,179,79,.05);
+
+  color:
+    var(--gold);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:650px){
+
+  #widgetsView{
+
+    margin-left:0;
+
+    padding:16px;
+
+  }
+
+
+  .unbound-widgets-placeholder{
+
+    padding:
+      42px
+      24px;
+
+  }
+
+}

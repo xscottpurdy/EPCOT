@@ -1,0 +1,1303 @@
+/* =====================================================
+   EPCOT DND
+   DM TIMELINE
+   ===================================================== */
+
+
+/* =====================================================
+   TIME CONTROL HEADER
+   ===================================================== */
+
+.dm-time-control-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr)
+    minmax(300px,.9fr);
+
+  gap:14px;
+
+  margin-bottom:18px;
+
+}
+
+
+.dm-time-card{
+
+  padding:16px;
+
+}
+
+
+.dm-time-value{
+
+  margin-top:6px;
+
+  font-size:1.55rem;
+
+  font-weight:900;
+
+}
+
+
+.dm-time-muted{
+
+  margin-top:5px;
+
+  opacity:.62;
+
+  font-size:.78rem;
+
+}
+
+
+.dm-time-actions{
+
+  display:flex;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+
+  margin-top:12px;
+
+}
+
+
+/* =====================================================
+   ACTUAL ROSE CLOCK
+   ===================================================== */
+
+.dm-rose-clock-card{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+}
+
+
+.dm-rose-clock{
+
+  position:relative;
+
+  width:190px;
+
+  height:190px;
+
+  flex:
+    0
+    0
+    190px;
+
+  border:
+    2px solid
+    rgba(214,166,75,.55);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(214,166,75,.08),
+      rgba(0,0,0,.15) 58%,
+      rgba(0,0,0,.38)
+    );
+
+}
+
+
+.dm-rose-clock::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  width:11px;
+
+  height:11px;
+
+  transform:
+    translate(-50%,-50%);
+
+  border-radius:50%;
+
+  background:
+    var(--vc-gold-bright);
+
+  z-index:5;
+
+}
+
+
+.dm-rose-number{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  width:30px;
+
+  height:30px;
+
+  margin:
+    -15px
+    0
+    0
+    -15px;
+
+  display:grid;
+
+  place-items:center;
+
+  transform:
+    rotate(
+      calc(
+        var(--rose-index) *
+        30deg
+      )
+    )
+    translateY(-76px)
+    rotate(
+      calc(
+        var(--rose-index) *
+        -30deg
+      )
+    );
+
+  border:0;
+
+  border-radius:50%;
+
+  background:transparent;
+
+  color:#6597a2;
+
+  font:inherit;
+
+  font-size:.72rem;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+.dm-rose-number.passed{
+  color:rgba(214,166,75,.5);
+}
+
+
+.dm-rose-number.current{
+
+  color:#071218;
+
+  background:
+    var(--vc-gold-bright);
+
+}
+
+
+.dm-rose-hand{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  width:3px;
+
+  height:62px;
+
+  transform-origin:
+    50%
+    100%;
+
+  transform:
+    translate(-50%,-100%)
+    rotate(
+      var(--rose-angle)
+    );
+
+  background:
+    var(--vc-gold-bright);
+
+  border-radius:999px;
+
+  z-index:4;
+
+  transition:
+    transform .28s ease;
+
+}
+
+
+.dm-rose-clock.hour-zero
+.dm-rose-hand{
+  display:none;
+}
+
+
+.dm-rose-clock-center{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  width:94px;
+
+  transform:
+    translate(-50%,-50%);
+
+  text-align:center;
+
+  pointer-events:none;
+
+}
+
+
+.dm-rose-clock-center strong{
+
+  display:block;
+
+  font-size:.84rem;
+
+}
+
+
+.dm-rose-clock-center span{
+
+  display:block;
+
+  margin-top:3px;
+
+  font-size:.61rem;
+
+  opacity:.64;
+
+}
+
+
+/* =====================================================
+   DUE EVENTS
+   ===================================================== */
+
+.dm-timeline-due-panel{
+
+  margin-bottom:18px;
+
+  padding:14px 16px;
+
+  border:
+    1px solid rgba(214,166,75,.36);
+
+  background:
+    rgba(214,166,75,.055);
+
+}
+
+
+.dm-timeline-due-count{
+
+  display:inline-block;
+
+  margin-left:7px;
+
+  padding:
+    2px
+    7px;
+
+  border-radius:999px;
+
+  background:
+    rgba(214,166,75,.18);
+
+}
+
+
+/* =====================================================
+   FILTERS
+   ===================================================== */
+
+.dm-timeline-filter-panel{
+
+  padding:14px;
+
+  margin-bottom:18px;
+
+}
+
+.dm-timeline-filter-toolbar{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:16px;
+
+  margin-bottom:14px;
+
+}
+
+
+.dm-timeline-range-actions{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:flex-end;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+
+}
+
+
+.dm-timeline-range-actions button:disabled{
+
+  opacity:.35;
+
+  cursor:not-allowed;
+
+}
+
+.dm-timeline-filters{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      6,
+      minmax(0,1fr)
+    );
+
+  gap:10px;
+
+}
+
+
+.dm-timeline-field{
+
+  display:grid;
+
+  gap:5px;
+
+}
+
+
+.dm-timeline-field span{
+
+  font-size:.68rem;
+
+  font-weight:800;
+
+  letter-spacing:.07em;
+
+  text-transform:uppercase;
+
+  opacity:.68;
+
+}
+
+
+.dm-timeline-field input,
+.dm-timeline-field select,
+.dm-timeline-field textarea{
+
+  width:100%;
+
+  box-sizing:border-box;
+
+  min-height:39px;
+
+  padding:
+    8px
+    9px;
+
+  border:
+    1px solid var(--vc-line);
+
+  background:#071b24;
+
+  color:#e5f1f2;
+
+  font:inherit;
+
+}
+
+
+/*
+  Browser-native dropdown menu.
+  Explicit dark text prevents the old
+  white-on-light-grey problem.
+*/
+
+.dm-timeline-field select option{
+
+  background:#f3f3f3;
+
+  color:#111;
+
+}
+
+
+/* =====================================================
+   VISUAL TIMELINE
+   ===================================================== */
+
+.dm-timeline-visual-panel{
+
+  padding:16px;
+
+  margin-bottom:18px;
+
+}
+
+
+.dm-timeline-visual-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:18px;
+
+  margin-bottom:12px;
+
+}
+
+
+.dm-timeline-scroll{
+
+  overflow-x:auto;
+
+  overflow-y:hidden;
+
+  padding-bottom:10px;
+
+}
+
+
+.dm-timeline-stage{
+
+  position:relative;
+
+  min-width:100%;
+
+  height:360px;
+
+}
+
+
+.dm-timeline-axis{
+
+  position:absolute;
+
+  left:0;
+
+  right:0;
+
+  top:177px;
+
+  height:2px;
+
+  background:
+    rgba(214,166,75,.35);
+
+}
+
+
+.dm-timeline-axis::after{
+
+  content:"";
+
+  position:absolute;
+
+  right:-1px;
+
+  top:-4px;
+
+  border-left:
+    8px solid
+    rgba(214,166,75,.55);
+
+  border-top:
+    5px solid transparent;
+
+  border-bottom:
+    5px solid transparent;
+
+}
+
+
+.dm-timeline-anchor{
+
+  position:absolute;
+
+  top:143px;
+
+  width:2px;
+
+  height:70px;
+
+  background:
+    rgba(255,255,255,.33);
+
+}
+
+
+.dm-timeline-anchor strong{
+
+  position:absolute;
+
+  top:72px;
+
+  left:50%;
+
+  transform:
+    translateX(-50%);
+
+  white-space:nowrap;
+
+  font-size:.67rem;
+
+}
+
+
+.dm-timeline-anchor.present{
+
+  width:3px;
+
+  background:
+    var(--vc-gold-bright);
+
+}
+
+
+.dm-timeline-anchor.founder{
+
+  background:
+    var(--vc-cyan-bright);
+
+}
+
+
+.dm-timeline-node{
+
+  position:absolute;
+
+  width:14px;
+
+  height:14px;
+
+  padding:0;
+
+  transform:
+    translate(-50%,-50%);
+
+  border:
+    2px solid
+    #06131a;
+
+  border-radius:50%;
+
+  background:
+    #8aa7ad;
+
+  cursor:pointer;
+
+  z-index:5;
+
+}
+
+
+.dm-timeline-node.occurred{
+  background:#6597a2;
+}
+
+
+.dm-timeline-node.planned{
+  background:var(--vc-gold);
+}
+
+
+.dm-timeline-node.disrupted{
+
+  background:#793b45;
+
+  opacity:.65;
+
+}
+
+
+.dm-timeline-node.revised{
+
+  background:#856d9b;
+
+}
+
+
+.dm-timeline-node.is-due{
+
+  box-shadow:
+    0 0 0 5px
+    rgba(214,166,75,.18);
+
+}
+
+
+.dm-timeline-stem{
+
+  position:absolute;
+
+  left:50%;
+
+  width:1px;
+
+  background:
+    rgba(255,255,255,.25);
+
+  pointer-events:none;
+
+}
+
+
+.dm-timeline-label{
+
+  position:absolute;
+
+  left:50%;
+
+  width:140px;
+
+  transform:
+    translateX(-50%);
+
+  text-align:center;
+
+  font-size:.68rem;
+
+  line-height:1.25;
+
+  pointer-events:none;
+
+}
+
+
+.dm-timeline-tooltip{
+
+  position:absolute;
+
+  left:50%;
+
+  bottom:
+    calc(100% + 12px);
+
+  width:280px;
+
+  transform:
+    translateX(-50%);
+
+  padding:11px;
+
+  border:
+    1px solid var(--vc-line);
+
+  background:#06151d;
+
+  color:#e9f3f4;
+
+  text-align:left;
+
+  line-height:1.4;
+
+  opacity:0;
+
+  visibility:hidden;
+
+  pointer-events:none;
+
+  z-index:50;
+
+}
+
+
+.dm-timeline-node:hover
+.dm-timeline-tooltip{
+
+  opacity:1;
+
+  visibility:visible;
+
+}
+
+
+/* =====================================================
+   UNDATED EVENTS
+   ===================================================== */
+
+.dm-timeline-undated{
+
+  margin-top:14px;
+
+}
+
+
+.dm-timeline-undated-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(220px,1fr)
+    );
+
+  gap:9px;
+
+  margin-top:10px;
+
+}
+
+
+.dm-timeline-undated-card{
+
+  padding:11px;
+
+  border:
+    1px solid var(--vc-line);
+
+  background:
+    rgba(255,255,255,.025);
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   ROSE DETAIL
+   ===================================================== */
+
+.dm-rose-detail-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
+
+  gap:14px;
+
+}
+
+
+.dm-rose-detail-panel{
+
+  padding:15px;
+
+}
+
+
+.dm-rose-detail-list{
+
+  display:grid;
+
+  gap:8px;
+
+  margin-top:10px;
+
+}
+
+
+.dm-rose-detail-item{
+
+  width:100%;
+
+  padding:10px;
+
+  border:
+    1px solid var(--vc-line);
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:inherit;
+
+  text-align:left;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+
+.dm-timeline-modal-backdrop{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:10000;
+
+  display:grid;
+
+  place-items:center;
+
+  padding:24px;
+
+  background:
+    rgba(0,0,0,.76);
+
+}
+
+
+.dm-timeline-modal{
+
+  width:
+    min(
+      1050px,
+      96vw
+    );
+
+  max-height:90vh;
+
+  display:flex;
+
+  flex-direction:column;
+
+  border:
+    1px solid var(--vc-line);
+
+  background:#06171f;
+
+}
+
+
+.dm-timeline-modal-head{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:14px;
+
+  padding:
+    15px
+    18px;
+
+  border-bottom:
+    1px solid var(--vc-line);
+
+}
+
+
+.dm-timeline-modal-head h2{
+  margin:3px 0 0;
+}
+
+
+.dm-timeline-modal-body{
+
+  overflow:auto;
+
+  padding:18px;
+
+}
+
+
+.dm-timeline-modal-actions{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+
+  padding:14px 18px;
+
+  border-top:
+    1px solid var(--vc-line);
+
+}
+
+
+.dm-timeline-close{
+
+  width:38px;
+
+  height:38px;
+
+  border:
+    1px solid var(--vc-line);
+
+  background:transparent;
+
+  color:inherit;
+
+  font-size:1.3rem;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   EVENT EDITOR
+   ===================================================== */
+
+.dm-timeline-form{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+
+}
+
+
+.dm-timeline-field.wide{
+  grid-column:1 / -1;
+}
+
+
+.dm-timeline-category-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
+
+  gap:7px;
+
+}
+
+
+.dm-timeline-check{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  padding:7px;
+
+  border:
+    1px solid var(--vc-line);
+
+  background:
+    rgba(255,255,255,.025);
+
+}
+
+
+.dm-timeline-check input{
+  width:auto;
+  min-height:0;
+}
+
+
+.dm-timeline-npc-list{
+
+  max-height:230px;
+
+  overflow:auto;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0,1fr)
+    );
+
+  gap:6px;
+
+  padding:8px;
+
+  border:
+    1px solid var(--vc-line);
+
+}
+
+
+/* =====================================================
+   PERSONNEL INTELLIGENCE
+   ===================================================== */
+
+.dm-intelligence-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+
+}
+
+
+.dm-intelligence-panel{
+
+  padding:13px;
+
+  border:
+    1px solid var(--vc-line);
+
+}
+
+
+.dm-intelligence-readonly{
+
+  margin-top:8px;
+
+  min-height:80px;
+
+  padding:10px;
+
+  background:
+    rgba(255,255,255,.025);
+
+}
+
+
+.dm-intelligence-secret{
+
+  display:grid;
+
+  gap:6px;
+
+  margin-top:14px;
+
+}
+
+
+.dm-intelligence-secret textarea,
+.dm-intelligence-rose-note textarea{
+
+  width:100%;
+
+  box-sizing:border-box;
+
+  padding:9px;
+
+  border:
+    1px solid var(--vc-line);
+
+  background:#071b24;
+
+  color:#e5f1f2;
+
+  font:inherit;
+
+}
+
+
+.dm-intelligence-hours{
+
+  display:grid;
+
+  gap:9px;
+
+  margin-top:12px;
+
+}
+
+
+.dm-intelligence-hour{
+
+  padding:10px;
+
+  border:
+    1px solid var(--vc-line);
+
+}
+
+
+.dm-intelligence-hour.current{
+
+  outline:
+    2px solid
+    var(--vc-gold);
+
+}
+
+
+.dm-intelligence-hour-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-bottom:8px;
+
+}
+
+
+.dm-intelligence-events{
+
+  display:grid;
+
+  gap:5px;
+
+  margin-bottom:8px;
+
+}
+
+
+.dm-intelligence-event{
+
+  width:100%;
+
+  padding:7px 10px;
+
+  border:
+    1px solid
+    rgba(214,166,75,.28);
+
+  border-left:
+    3px solid
+    var(--vc-gold);
+
+  background:
+    rgba(214,166,75,.05);
+
+  color:
+    var(--vc-text);
+
+  text-align:left;
+
+  font:inherit;
+
+  cursor:pointer;
+
+}
+
+
+.dm-intelligence-event strong{
+
+  display:block;
+
+  color:
+    var(--vc-gold);
+
+  margin-bottom:3px;
+
+}
+
+
+.dm-intelligence-event:hover{
+
+  background:
+    rgba(214,166,75,.12);
+
+  border-color:
+    rgba(214,166,75,.55);
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:1000px){
+
+  .dm-time-control-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .dm-rose-clock-card{
+    grid-column:1 / -1;
+  }
+
+  .dm-timeline-filters{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+.dm-timeline-filter-toolbar{
+
+  align-items:flex-start;
+
+  flex-direction:column;
+
+}
+
+
+.dm-timeline-range-actions{
+
+  justify-content:flex-start;
+
+}
+
+@media(max-width:700px){
+
+  .dm-time-control-grid,
+  .dm-rose-detail-grid,
+  .dm-timeline-form,
+  .dm-intelligence-grid{
+    grid-template-columns:1fr;
+  }
+
+
+  .dm-rose-clock-card{
+    grid-column:auto;
+  }
+
+
+  .dm-timeline-filters{
+    grid-template-columns:1fr;
+  }
+
+
+  .dm-timeline-category-grid,
+  .dm-timeline-npc-list{
+    grid-template-columns:1fr;
+  }
+
+
+  .dm-rose-clock-card{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}

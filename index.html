@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>World Discovery</title>
+
+
+<style>
+
+:root{
+  --cream:#f7ecd5;
+  --navy:#073a55;
+  --teal:#2ea6a0;
+  --gold:#efb84b;
+  --orange:#e96b32;
+}
+
+
+/* =====================================================
+   PAGE RESET
+   ===================================================== */
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  margin:0;
+}
+
+body{
+  overflow:hidden;
+
+  font-family:
+    "Avenir Next",
+    "Trebuchet MS",
+    "Gill Sans",
+    sans-serif;
+
+  background:#05080c;
+}
+
+
+/* =====================================================
+   LANDING SCREEN
+   ===================================================== */
+
+.landing{
+  position:relative;
+
+  width:100%;
+  height:100%;
+
+  cursor:pointer;
+
+  overflow:hidden;
+}
+
+
+.background{
+  position:absolute;
+
+  inset:0;
+
+  background-image:
+    url("assets/landing-background.jpg");
+
+  background-size:cover;
+  background-position:center;
+
+  transform:scale(1.01);
+
+  transition:
+    filter .8s ease,
+    transform 1.2s ease;
+}
+
+
+.background::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.05),
+      rgba(0,0,0,.10) 55%,
+      rgba(0,0,0,.65)
+    );
+}
+
+
+/* =====================================================
+   START MESSAGE
+   ===================================================== */
+
+.start-message{
+  position:absolute;
+
+  z-index:5;
+
+  left:50%;
+  bottom:42px;
+
+  transform:
+    translateX(-50%);
+
+  color:white;
+
+  text-align:center;
+
+  pointer-events:none;
+
+  transition:
+    opacity .4s ease,
+    transform .4s ease;
+
+  animation:
+    pulse 3s ease-in-out infinite;
+}
+
+
+.start-message .line{
+  width:90px;
+  height:2px;
+
+  margin:
+    0 auto
+    15px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      transparent
+    );
+}
+
+
+.start-message strong{
+  display:block;
+
+  font-size:12px;
+
+  letter-spacing:.28em;
+
+  font-weight:500;
+
+  text-transform:uppercase;
+
+  text-shadow:
+    0 2px 10px rgba(0,0,0,.75);
+}
+
+
+.start-message span{
+  display:block;
+
+  margin-top:8px;
+
+  font-size:9px;
+
+  letter-spacing:.15em;
+
+  opacity:.75;
+
+  text-transform:uppercase;
+}
+
+
+@keyframes pulse{
+
+  0%{
+    opacity:.65;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:.65;
+  }
+
+}
+
+
+/* =====================================================
+   LOGIN MODE
+   ===================================================== */
+
+.landing.login-open
+.background{
+
+  filter:
+    brightness(.36)
+    blur(7px);
+
+  transform:
+    scale(1.05);
+}
+
+
+.landing.login-open
+.start-message{
+
+  opacity:0;
+
+  transform:
+    translateX(-50%)
+    translateY(15px);
+
+  animation:none;
+}
+
+
+/* =====================================================
+   LOGIN OVERLAY
+   ===================================================== */
+
+.login-overlay{
+  position:absolute;
+
+  inset:0;
+
+  z-index:10;
+
+  display:grid;
+
+  place-items:center;
+
+  padding:25px;
+
+  opacity:0;
+
+  visibility:hidden;
+
+  pointer-events:none;
+
+  transition:
+    opacity .5s ease,
+    visibility .5s ease;
+}
+
+
+.landing.login-open
+.login-overlay{
+
+  opacity:1;
+
+  visibility:visible;
+
+  pointer-events:auto;
+}
+
+
+/* =====================================================
+   LOGIN CARD
+   ===================================================== */
+
+.login-card{
+  position:relative;
+
+  width:min(
+    420px,
+    100%
+  );
+
+  padding:
+    35px
+    34px
+    30px;
+
+  background:
+    rgba(
+      250,
+      245,
+      231,
+      .96
+    );
+
+  color:var(--navy);
+
+  border-radius:24px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .65
+    );
+
+  box-shadow:
+    0 25px 70px
+    rgba(
+      0,
+      0,
+      0,
+      .45
+    );
+
+  cursor:default;
+}
+
+
+.login-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  right:-30px;
+  top:-35px;
+
+  width:115px;
+  height:115px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(
+      46,
+      166,
+      160,
+      .25
+    );
+
+  box-shadow:
+    inset 0 0 0 18px
+    rgba(
+      239,
+      184,
+      75,
+      .06
+    );
+}
+
+
+/* =====================================================
+   LOGIN HEADER
+   ===================================================== */
+
+.login-eyebrow{
+  font-size:9px;
+
+  letter-spacing:.24em;
+
+  text-transform:uppercase;
+
+  color:#6b818b;
+}
+
+
+.login-title{
+  margin-top:6px;
+
+  font-family:
+    "Segoe Script",
+    "Brush Script MT",
+    "Lucida Handwriting",
+    cursive;
+
+  font-size:31px;
+
+  color:var(--navy);
+}
+
+
+.login-subtitle{
+  margin-top:8px;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+  color:#607681;
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.login-form{
+  margin-top:25px;
+
+  display:grid;
+
+  gap:17px;
+}
+
+
+.field label{
+  display:block;
+
+  margin-bottom:7px;
+
+  font-size:9px;
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+  color:#657d87;
+}
+
+
+.field input{
+  width:100%;
+
+  padding:
+    13px
+    14px;
+
+  border-radius:12px;
+
+  border:
+    1px solid
+    rgba(
+      7,
+      58,
+      85,
+      .20
+    );
+
+  background:white;
+
+  color:var(--navy);
+
+  font:inherit;
+
+  outline:none;
+}
+
+
+.field input:focus{
+  border-color:
+    var(--teal);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      46,
+      166,
+      160,
+      .10
+    );
+}
+
+
+/* =====================================================
+   BUTTON
+   ===================================================== */
+
+.login-button{
+  margin-top:5px;
+
+  padding:
+    14px
+    18px;
+
+  border:0;
+
+  border-radius:999px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--orange),
+      #d8582b
+    );
+
+  font:inherit;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 6px 16px
+    rgba(
+      233,
+      107,
+      50,
+      .25
+    );
+}
+
+
+.login-button:hover{
+  transform:
+    translateY(-1px);
+}
+
+
+.login-button:active{
+  transform:
+    translateY(1px);
+}
+
+
+.login-button:disabled{
+  opacity:.62;
+
+  cursor:wait;
+
+  transform:none;
+}
+
+
+/* =====================================================
+   LOGIN STATUS
+   ===================================================== */
+
+.login-status{
+  min-height:18px;
+
+  text-align:center;
+
+  font-size:11px;
+
+  line-height:1.4;
+
+  color:#af3e3e;
+}
+
+
+.login-status.success{
+  color:#357568;
+}
+
+
+/* =====================================================
+   SMALL FOOTER
+   ===================================================== */
+
+.login-footer{
+  margin-top:20px;
+
+  padding-top:16px;
+
+  text-align:center;
+
+  border-top:
+    1px solid
+    rgba(
+      7,
+      58,
+      85,
+      .10
+    );
+
+  font-size:8px;
+
+  letter-spacing:.17em;
+
+  text-transform:uppercase;
+
+  color:#809098;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:600px){
+
+  .start-message{
+    bottom:28px;
+  }
+
+
+  .login-card{
+    padding:
+      30px
+      24px
+      25px;
+  }
+
+
+  .login-title{
+    font-size:27px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div
+  class="landing"
+  id="landing"
+>
+
+
+  <div class="background"></div>
+
+
+
+  <div
+    class="start-message"
+    id="startMessage"
+  >
+
+    <div class="line"></div>
+
+    <strong>
+      Click Anywhere to Start
+    </strong>
+
+    <span>
+      World Discovery Network
+    </span>
+
+  </div>
+
+
+
+  <div
+    class="login-overlay"
+    id="loginOverlay"
+  >
+
+
+    <div
+      class="login-card"
+      id="loginCard"
+    >
+
+
+      <div class="login-eyebrow">
+        World Discovery Network
+      </div>
+
+
+      <div class="login-title">
+        Welcome Back
+      </div>
+
+
+      <div class="login-subtitle">
+
+        Enter your Explorer credentials
+        to continue your story.
+
+      </div>
+
+
+
+      <form
+        class="login-form"
+        id="loginForm"
+      >
+
+
+        <div class="field">
+
+          <label
+            for="identifier"
+          >
+            Username
+          </label>
+
+
+          <input
+            id="identifier"
+            type="text"
+            autocomplete="username"
+            placeholder="Explorer username"
+            required
+          >
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label
+            for="password"
+          >
+            Password
+          </label>
+
+
+          <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Password"
+            required
+          >
+
+        </div>
+
+
+
+        <button
+          class="login-button"
+          id="loginButton"
+          type="submit"
+        >
+          Enter
+        </button>
+
+
+
+        <div
+          class="login-status"
+          id="loginStatus"
+        ></div>
+
+
+      </form>
+
+
+
+      <div class="login-footer">
+        Tomorrow Begins Here
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+
+<script
+  src="assets/js/auth.js"
+></script>
+
+
+
+<script>
+
+
+/* =====================================================
+   EPCOT DND
+   LANDING + SIMPLE LOGIN ROUTER
+
+   Login identity:
+     public.accounts
+
+   Character identity:
+     public.company_files
+
+   No Supabase Auth.
+   ===================================================== */
+
+
+/* =====================================================
+   ELEMENTS
+   ===================================================== */
+
+const landing =
+  document.getElementById(
+    'landing'
+  );
+
+
+const loginCard =
+  document.getElementById(
+    'loginCard'
+  );
+
+
+const loginForm =
+  document.getElementById(
+    'loginForm'
+  );
+
+
+const loginStatus =
+  document.getElementById(
+    'loginStatus'
+  );
+
+
+const loginButton =
+  document.getElementById(
+    'loginButton'
+  );
+
+
+const identifierInput =
+  document.getElementById(
+    'identifier'
+  );
+
+
+const passwordInput =
+  document.getElementById(
+    'password'
+  );
+
+
+/* =====================================================
+   OPEN LOGIN
+   ===================================================== */
+
+landing.addEventListener(
+  'click',
+  () => {
+
+    landing.classList.add(
+      'login-open'
+    );
+
+
+    window.setTimeout(
+      () => {
+
+        identifierInput.focus();
+
+      },
+      250
+    );
+
+  }
+);
+
+
+loginCard.addEventListener(
+  'click',
+  event => {
+
+    event.stopPropagation();
+
+  }
+);
+
+
+/* =====================================================
+   WORLD ROUTES
+   ===================================================== */
+
+const EPCOT_WORLD_ROUTES = {
+
+  hero_cast:
+    'Hero Cast World.html',
+
+  hero_unbound:
+    'Hero Unbound World.html',
+
+  villain_cast:
+    'Villain Cast World.html',
+
+  villain_unbound:
+    'Villain Unbound World.html'
+
+};
+
+
+/* =====================================================
+   CLEAR ACTIVE CHARACTER
+
+   Account login may survive between pages, but active
+   character information should always be rebuilt from
+   the current Reality Control assignment.
+   ===================================================== */
+
+function clearEpcotActiveCharacter(){
+
+  sessionStorage.removeItem(
+    'epcot-active-character-id'
+  );
+
+
+  sessionStorage.removeItem(
+    'epcot-active-character-name'
+  );
+
+
+  sessionStorage.removeItem(
+    'epcot-active-campaign'
+  );
+
+
+  sessionStorage.removeItem(
+    'epcot-active-reality'
+  );
+
+}
+
+
+/* =====================================================
+   ROUTE PLAYER
+   ===================================================== */
+
+async function routeEpcotPlayer(){
+
+  loginStatus.className =
+    'login-status';
+
+
+  loginStatus.textContent =
+    'Reading current reality assignment...';
+
+
+  const context =
+    await window.epcotAuth
+      .getPlayerContext();
+
+
+  if(!context){
+
+    throw new Error(
+      'Player access information could not be loaded.'
+    );
+
+  }
+
+
+  const {
+    assignments,
+    reality
+  } =
+    context;
+
+
+  if(!assignments){
+
+    throw new Error(
+      'No characters were found for this player.'
+    );
+
+  }
+
+
+  if(!reality){
+
+    throw new Error(
+      'No Reality Control state has been assigned to this player.'
+    );
+
+  }
+
+
+  const campaign =
+    reality.campaign === 'villain'
+      ? 'villain'
+      : 'hero';
+
+
+  const realityMode =
+    reality.reality === 'unbound'
+      ? 'unbound'
+      : 'cast';
+
+
+  const routeKey =
+    `${campaign}_${realityMode}`;
+
+
+  const route =
+    EPCOT_WORLD_ROUTES[
+      routeKey
+    ];
+
+
+  if(!route){
+
+    throw new Error(
+      'The assigned world does not have a valid route.'
+    );
+
+  }
+
+
+  const activeCharacterId =
+    campaign === 'villain'
+
+      ? assignments.villain_character_id
+
+      : assignments.hero_character_id;
+
+
+  if(!activeCharacterId){
+
+    const campaignName =
+      campaign === 'villain'
+        ? 'Villain'
+        : 'Hero';
+
+
+    throw new Error(
+      `No ${campaignName} character exists for this account.`
+    );
+
+  }
+
+
+  /*
+    IMPORTANT:
+
+    We do NOT read characters.name.
+
+    That field no longer exists.
+
+    All visible character identity comes from
+    company_files.
+  */
+
+  const identity =
+    await window.epcotAuth
+      .getCharacterIdentity(
+        activeCharacterId,
+        realityMode
+      );
+
+
+  if(!identity){
+
+    throw new Error(
+      'Your character identity could not be loaded from Company File.'
+    );
+
+  }
+
+
+  clearEpcotActiveCharacter();
+
+
+  sessionStorage.setItem(
+    'epcot-active-character-id',
+    activeCharacterId
+  );
+
+
+  sessionStorage.setItem(
+    'epcot-active-character-name',
+    identity.name
+  );
+
+
+  sessionStorage.setItem(
+    'epcot-active-campaign',
+    campaign
+  );
+
+
+  sessionStorage.setItem(
+    'epcot-active-reality',
+    realityMode
+  );
+
+
+  window.location.href =
+    route;
+
+}
+
+
+/* =====================================================
+   ROUTE ACCOUNT
+   ===================================================== */
+
+async function routeEpcotAccount(
+  account
+){
+
+  if(!account){
+
+    throw new Error(
+      'No EPCOT account was found.'
+    );
+
+  }
+
+
+  if(
+    account.active !== true
+  ){
+
+    throw new Error(
+      'This EPCOT account is inactive.'
+    );
+
+  }
+
+
+  if(
+    account.role === 'dm'
+  ){
+
+    clearEpcotActiveCharacter();
+
+
+    window.location.href =
+      'DM Dashboard.html';
+
+    return;
+
+  }
+
+
+  if(
+    account.role === 'player'
+  ){
+
+    await routeEpcotPlayer();
+
+    return;
+
+  }
+
+
+  throw new Error(
+    'This account has an unknown EPCOT role.'
+  );
+
+}
+
+
+/* =====================================================
+   RESTORE EXISTING SIMPLE SESSION
+   ===================================================== */
+
+async function checkExistingLogin(){
+
+  try{
+
+    const account =
+      await window.epcotAuth
+        .getCurrentAccount();
+
+
+    if(!account){
+      return;
+    }
+
+
+    loginStatus.className =
+      'login-status success';
+
+
+    loginStatus.textContent =
+      `Welcome back, ${account.display_name}.`;
+
+
+    await routeEpcotAccount(
+      account
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      'Existing EPCOT session check failed:',
+      error
+    );
+
+
+    /*
+      If an old or malformed browser session survives,
+      clear it instead of trapping the user.
+    */
+
+    await window.epcotAuth
+      .logout();
+
+
+    landing.classList.add(
+      'login-open'
+    );
+
+
+    loginStatus.className =
+      'login-status';
+
+
+    loginStatus.textContent =
+      error?.message ||
+      'Your previous session could not be restored.';
+
+
+    loginButton.disabled =
+      false;
+
+  }
+
+}
+
+
+/* =====================================================
+   LOGIN
+   ===================================================== */
+
+loginForm.addEventListener(
+  'submit',
+  async event => {
+
+    event.preventDefault();
+
+
+    const username =
+      identifierInput
+        .value
+        .trim();
+
+
+    const password =
+      passwordInput.value;
+
+
+    loginButton.disabled =
+      true;
+
+
+    loginStatus.className =
+      'login-status';
+
+
+    loginStatus.textContent =
+      'Checking credentials...';
+
+
+    try{
+
+      const result =
+        await window.epcotAuth
+          .login(
+            username,
+            password
+          );
+
+
+      const account =
+        result.account;
+
+
+      loginStatus.className =
+        'login-status success';
+
+
+      loginStatus.textContent =
+        `Welcome, ${account.display_name}.`;
+
+
+      await routeEpcotAccount(
+        account
+      );
+
+    }
+    catch(error){
+
+      console.error(
+        'EPCOT login failed:',
+        error
+      );
+
+
+      /*
+        A failed login should never leave behind a
+        half-created application session.
+      */
+
+      await window.epcotAuth
+        .logout();
+
+
+      loginStatus.className =
+        'login-status';
+
+
+      loginStatus.textContent =
+        error?.message ||
+        'Login failed. Please check your credentials.';
+
+
+      loginButton.disabled =
+        false;
+
+
+      passwordInput.value =
+        '';
+
+
+      passwordInput.focus();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   STARTUP
+   ===================================================== */
+
+checkExistingLogin();
+
+
+</script>
+
+
+</body>
+
+</html>

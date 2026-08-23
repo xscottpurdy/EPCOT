@@ -1,0 +1,283 @@
+@import url("dm/dm-widgets.css");
+
+
+/* =====================================================
+   EPCOT DND
+   SHARED PLAYER WIDGETS
+   ===================================================== */
+
+:root{
+  --vc-line:rgba(113,140,150,.32);
+  --vc-line-strong:rgba(113,140,150,.58);
+  --vc-gold:#b8862d;
+  --vc-gold-bright:#d6a64b;
+  --vc-cyan-bright:#3ba8b8;
+  --vc-muted:#74838a;
+}
+
+
+.player-widgets-page-shell{
+  display:grid;
+  gap:20px;
+  width:min(
+    1180px,
+    calc(100% - 28px)
+  );
+  margin:0 auto 34px;
+}
+
+
+.player-widgets-intro{
+  padding:18px 20px;
+  border:
+    1px solid
+    var(--vc-line);
+  background:
+    rgba(255,255,255,.72);
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.08);
+}
+
+
+.player-widgets-intro h1,
+.player-widget-group-header h2,
+.player-widgets-empty h2{
+  margin:.25rem 0 .35rem;
+}
+
+
+.player-widgets-intro p,
+.player-widgets-empty p{
+  margin:0;
+}
+
+
+.player-widgets-kicker{
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.72;
+}
+
+
+#playerWidgetGrid{
+  display:grid;
+  gap:20px;
+}
+
+
+.player-widget-group{
+  display:grid;
+  gap:12px;
+}
+
+
+.player-widget-group-header{
+  display:flex;
+  justify-content:
+    space-between;
+  gap:14px;
+  align-items:end;
+  padding-bottom:8px;
+  border-bottom:
+    1px solid
+    var(--vc-line);
+}
+
+
+.player-widget-group-header > span{
+  min-width:44px;
+  padding:5px 7px;
+  border:
+    1px solid
+    var(--vc-line-strong);
+  text-align:center;
+  font-weight:800;
+}
+
+
+.player-widget-group-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(270px,1fr)
+    );
+  gap:16px;
+  align-items:start;
+}
+
+
+.player-widgets-empty{
+  padding:42px 24px;
+  text-align:center;
+  border:
+    1px dashed
+    var(--vc-line-strong);
+  background:
+    rgba(255,255,255,.55);
+}
+
+
+.player-widgets-empty-symbol{
+  font-size:2rem;
+  margin-bottom:8px;
+}
+
+
+.player-widget-launcher{
+  position:fixed;
+  inset:0;
+  z-index:99990;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:
+    rgba(0,0,0,.62);
+  backdrop-filter:
+    blur(5px);
+}
+
+
+.player-widget-launcher[hidden]{
+  display:none !important;
+}
+
+
+.player-widget-launcher-panel{
+  width:min(
+    620px,
+    100%
+  );
+  max-height:
+    min(
+      780px,
+      92vh
+    );
+  overflow:auto;
+  border:
+    1px solid
+    var(--vc-line-strong);
+  background:#0b2028;
+  box-shadow:
+    0 24px 70px
+    rgba(0,0,0,.4);
+}
+
+
+.player-widget-launcher-topbar{
+  position:sticky;
+  top:0;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:
+    space-between;
+  gap:16px;
+  padding:12px 14px;
+  border-bottom:
+    1px solid
+    var(--vc-line);
+  background:#091a21;
+  color:#f6f2e8;
+}
+
+
+.player-widget-launcher-topbar > div{
+  display:grid;
+  gap:2px;
+}
+
+
+.player-widget-launcher-topbar small{
+  opacity:.62;
+  letter-spacing:.12em;
+}
+
+
+.player-widget-launcher-topbar button{
+  width:36px;
+  height:36px;
+  border:
+    1px solid
+    var(--vc-line-strong);
+  background:transparent;
+  color:inherit;
+  font-size:1.35rem;
+  cursor:pointer;
+}
+
+
+.player-widget-launcher-body
+.dm-widget-card{
+  border:0;
+  box-shadow:none;
+  min-height:0;
+}
+
+
+.world-downtime-widget-list{
+  display:grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(210px,1fr)
+    );
+  gap:10px;
+  margin-top:12px;
+}
+
+
+.world-downtime-widget-button{
+  display:grid;
+  gap:4px;
+  padding:12px 13px;
+  border:
+    1px solid
+    var(--vc-line-strong);
+  background:
+    rgba(255,255,255,.68);
+  text-align:left;
+  cursor:pointer;
+}
+
+
+.world-downtime-widget-button:hover{
+  transform:
+    translateY(-1px);
+}
+
+
+.world-downtime-widget-button span,
+.world-downtime-locked{
+  font-size:.78rem;
+  opacity:.72;
+}
+
+
+.world-downtime-locked{
+  margin-top:10px;
+  padding:10px 12px;
+  border:
+    1px dashed
+    var(--vc-line);
+}
+
+
+@media (max-width:700px){
+
+  .player-widgets-page-shell{
+    width:
+      min(
+        calc(100% - 16px),
+        1180px
+      );
+  }
+
+
+  .player-widget-group-grid{
+    grid-template-columns:1fr;
+  }
+
+}
