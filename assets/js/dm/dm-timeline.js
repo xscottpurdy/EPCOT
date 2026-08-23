@@ -4,7 +4,7 @@
 
    FOUNDATIONAL RULES
 
-   Founder's Day
+  Progress Day
    = permanent Campaign Day 0 anchor.
 
    Present Date
@@ -1177,7 +1177,7 @@ const filters = {
           </div>
 
           <div class="dm-time-muted">
-            Founder's Day · Campaign Day 0
+            Progress Day · Campaign Day 0
           </div>
 
 
@@ -1190,8 +1190,8 @@ const filters = {
             >
               ${
                 foundersDay
-                  ? 'Edit Founder’s Day'
-                  : 'Set Founder’s Day'
+                  ? 'Edit Progress Day'
+                  : 'Set Progress Day'
               }
             </button>
 
@@ -1316,8 +1316,8 @@ const filters = {
       }
       title="${
         foundersDay && presentDate
-          ? 'Show Founder’s Day through Present.'
-          : 'Set Founder’s Day and Present Date first.'
+          ? 'Show Progress Day through Present.'
+          : 'Set Progress Day and Present Date first.'
       }"
     >
       Campaign
@@ -1733,7 +1733,7 @@ function setTimelineRange(
 
   /* ---------------------------------------------
      CAMPAIGN
-     Founder’s Day through Present only
+     Progress Day through Present only
      --------------------------------------------- */
 
   if(
@@ -1747,7 +1747,7 @@ function setTimelineRange(
     ){
 
       alert(
-        'Set both Founder’s Day and Present Date before using the Campaign range.'
+        'Set both Progress Day and Present Date before using the Campaign range.'
       );
 
       return;
@@ -2076,7 +2076,7 @@ function setTimelineRange(
                       "
                     >
                       <strong>
-                        FOUNDER'S DAY
+                        PROGRESS DAY
                       </strong>
                     </div>
                   `
@@ -2726,14 +2726,14 @@ function setTimelineRange(
           'CAMPAIGN EPOCH',
 
         title:
-          'Founder’s Day',
+          'Progress Day',
 
         body:`
 
           <label class="dm-timeline-field">
 
             <span>
-              Founder’s Day
+              Progress Day
             </span>
 
             <input
@@ -2749,7 +2749,7 @@ function setTimelineRange(
 
 
           <p>
-            Founder’s Day is Campaign Day 0.
+            Progress Day is Campaign Day 0.
             Once you establish it,
             every campaign date can be measured
             against this anchor.
@@ -2771,7 +2771,7 @@ function setTimelineRange(
             type="button"
             data-save-founders-day
           >
-            Save Founder’s Day
+            Save Progress Day
           </button>
         `
 
@@ -2801,7 +2801,7 @@ function setTimelineRange(
             foundersDay
             &&
             !confirm(
-              'Founder’s Day is the permanent Campaign Day 0 anchor. Changing it will recalculate every relative campaign date. Continue?'
+              'Progress Day is the permanent Campaign Day 0 anchor. Changing it will recalculate every relative campaign date. Continue?'
             )
           ){
             return;
@@ -3758,7 +3758,7 @@ function setTimelineRange(
                 : ''
             }
           >
-            Relative to Founder’s Day
+            Relative to Progress Day
           </option>
 
           <option
@@ -3805,7 +3805,7 @@ function setTimelineRange(
       >
 
         <span>
-          Days from Founder’s Day
+          Days from Progress Day
         </span>
 
         <input

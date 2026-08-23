@@ -529,6 +529,14 @@ class EpcotAdventureMapBoard{
       null;
 
 
+    /*
+      Prevent duplicate pin INSERTS while
+      one placement is already being saved.
+    */
+    this.creatingPin =
+      false;
+
+
     this.pinNoteEditor =
       null;
 
@@ -3888,123 +3896,180 @@ ${
     y
   ){
 
-    const map =
-      this.activeMap;
+    /*
+      A single physical click must never
+      produce multiple database rows.
 
-
-    const db =
-      adventureMapDb();
-
+      This lock is set synchronously before
+      the Supabase request begins, so any
+      duplicate click handlers that fire
+      while the first INSERT is pending
+      simply stop here.
+    */
 
     if(
-      !map ||
-      !db
+      this.creatingPin
     ){
-
       return;
-
     }
 
 
-    const existingPins =
-      this.activePins;
+    this.creatingPin =
+      true;
 
 
-    const nextNumber =
-      existingPins.length +
-      1;
+    try{
+
+      const map =
+        this.activeMap;
 
 
-    const nextOrder =
-      existingPins.length
+      const db =
+        adventureMapDb();
 
-        ? (
-            Math.max(
-              ...existingPins.map(
-                pin =>
-                  Number(
-                    pin.sort_order ||
-                    0
-                  )
+
+      if(
+        !map ||
+        !db
+      ){
+        return;
+      }
+
+
+      const existingPins =
+        this.activePins;
+
+
+      /*
+        Use the highest existing numeric
+        label rather than pins.length.
+
+        This prevents numbering collisions
+        if old duplicate pins are deleted.
+      */
+
+      const existingNumbers =
+        existingPins
+          .map(
+            pin =>
+              Number(
+                pin.label
               )
-            ) +
-            100
+          )
+          .filter(
+            number =>
+              Number.isFinite(
+                number
+              )
+          );
+
+
+      const nextNumber =
+        existingNumbers.length
+
+          ? Math.max(
+              ...existingNumbers
+            ) + 1
+
+          : 1;
+
+
+      const nextOrder =
+        existingPins.length
+
+          ? (
+              Math.max(
+                ...existingPins.map(
+                  pin =>
+                    Number(
+                      pin.sort_order ||
+                      0
+                    )
+                )
+              ) +
+              100
+            )
+
+          : 100;
+
+
+      const {
+        data,
+        error
+      } =
+        await db
+
+          .from(
+            'adventure_map_pins'
           )
 
-        : 100;
+          .insert({
+
+            map_id:
+              map.id,
+
+            label:
+              String(
+                nextNumber
+              ),
+
+            title:
+              `Location ${nextNumber}`,
+
+            pin_type:
+              'room',
+
+            x_percent:
+              x,
+
+            y_percent:
+              y,
+
+            note_html:
+              '',
+
+            sort_order:
+              nextOrder
+
+          })
+
+          .select('*')
+
+          .single();
 
 
-    const {
-      data,
-      error
-    } =
-      await db
+      if(error){
 
-        .from(
-          'adventure_map_pins'
-        )
-
-        .insert({
-
-          map_id:
-            map.id,
-
-          label:
-            String(
-              nextNumber
-            ),
-
-          title:
-            `Location ${nextNumber}`,
-
-          pin_type:
-            'room',
-
-          x_percent:
-            x,
-
-          y_percent:
-            y,
-
-          note_html:
-            '',
-
-          sort_order:
-            nextOrder
-
-        })
-
-        .select('*')
-
-        .single();
+        window.alert(
+          `Could not create map note: ${error.message}`
+        );
 
 
-    if(error){
+        return;
+      }
 
-      window.alert(
-        `Could not create map note: ${error.message}`
+
+      this.pins.push(
+        data
       );
 
 
-      return;
+      this.activePinId =
+        data.id;
+
+
+      this.render();
+
+    }
+    finally{
+
+      this.creatingPin =
+        false;
 
     }
 
-
-    this.pins.push(
-      data
-    );
-
-
-    this.activePinId =
-      data.id;
-
-
-    this.render();
-
   }
-
-
+  
   /* ===================================================
      PIN DRAWER
      =================================================== */
