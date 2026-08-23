@@ -4834,6 +4834,29 @@ function adventureMapFindCampaign(
   element
 ){
 
+  const normalizeCampaign =
+    value => {
+
+      if(
+        value === 'villain' ||
+        value === 'combined'
+      ){
+        return value;
+      }
+
+
+      if(
+        value === 'hero'
+      ){
+        return 'hero';
+      }
+
+
+      return null;
+
+    };
+
+
   const desk =
     element.closest(
       '[data-adventure-desk]'
@@ -4845,12 +4868,9 @@ function adventureMapFindCampaign(
       .adventureDesk
   ){
 
-    return (
+    return normalizeCampaign(
       desk.dataset
-        .adventureDesk ===
-        'villain'
-        ? 'villain'
-        : 'hero'
+        .adventureDesk
     );
 
   }
@@ -4867,12 +4887,9 @@ function adventureMapFindCampaign(
       .campaign
   ){
 
-    return (
+    return normalizeCampaign(
       popout.dataset
-        .campaign ===
-        'villain'
-        ? 'villain'
-        : 'hero'
+        .campaign
     );
 
   }
