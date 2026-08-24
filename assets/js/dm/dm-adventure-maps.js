@@ -528,6 +528,27 @@ class EpcotAdventureMapBoard{
     this.draggingPinId =
       null;
 
+/*
+  Map Board camera state.
+
+  Pins remain stored as percentage coordinates
+  on the original map. These values only control
+  how the map is viewed.
+*/
+this.mapView = {
+
+  zoom:1,
+
+  panX:0,
+
+  panY:0
+
+};
+
+
+this.panningMap =
+  false;      
+
 
     /*
       Prevent duplicate pin INSERTS while
@@ -1788,58 +1809,132 @@ ${
 
             ? `
 
-              <div
-                class="dm-map-board-stage-wrap"
-              >
+<div
+  class="dm-map-board-stage-wrap"
+  data-map-viewport
+>
 
-                <div
-                  class="dm-map-board-stage"
-                  data-map-stage
-                >
+  <div
+    class="dm-map-board-controls"
+  >
 
-<img
-  src="${adventureMapEscape(
-    adventureMapResolveImageUrl(
-      map.image_url
-    )
-  )}"
-                    alt="${adventureMapEscape(
-                      map.title ||
-                      'Adventure Map'
-                    )}"
-                    draggable="false"
-                    data-map-image
-                  >
+    <button
+      type="button"
+      data-map-zoom-out
+      title="Zoom out"
+      aria-label="Zoom out"
+    >
+      −
+    </button>
 
-                  <div
-                    class="dm-map-board-pin-layer"
-                    data-map-pin-layer
-                  >
+    <span
+      class="dm-map-board-zoom-label"
+      data-map-zoom-label
+    >
+      ${Math.round(
+        this.mapView.zoom * 100
+      )}%
+    </span>
 
-                    ${
-                      this.activePins
-                        .map(
-                          pin =>
-                            this.buildPinMarkup(
-                              pin
-                            )
-                        )
-                        .join('')
-                    }
+    <label
+  class="dm-map-board-pin-size-control"
+>
 
-                  </div>
+  <span>
+    Pin Size
+  </span>
 
-                </div>
+  <input
+    type="range"
+    min="0.45"
+    max="1.6"
+    step="0.05"
+    value="${Number(
+      map.pin_scale ||
+      1
+    )}"
+    data-map-pin-size
+  >
 
-              </div>
+</label>
+
+    <button
+      type="button"
+      data-map-zoom-in
+      title="Zoom in"
+      aria-label="Zoom in"
+    >
+      +
+    </button>
+
+    <button
+      type="button"
+      class="dm-map-board-reset-view"
+      data-map-reset-view
+    >
+      Reset View
+    </button>
+
+  </div>
 
 
-              <div
-                class="dm-map-board-stage-caption"
-              >
-                Click map to add a note.
-                Drag pins to reposition.
-              </div>
+  <div
+    class="dm-map-board-camera"
+    data-map-camera
+  >
+
+    <div
+      class="dm-map-board-stage"
+      data-map-stage
+    >
+
+      <img
+        src="${adventureMapEscape(
+          adventureMapResolveImageUrl(
+            map.image_url
+          )
+        )}"
+        alt="${adventureMapEscape(
+          map.title ||
+          'Adventure Map'
+        )}"
+        draggable="false"
+        data-map-image
+      >
+
+      <div
+        class="dm-map-board-pin-layer"
+        data-map-pin-layer
+      >
+
+        ${
+          this.activePins
+            .map(
+              pin =>
+                this.buildPinMarkup(
+                  pin
+                )
+            )
+            .join('')
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="dm-map-board-stage-caption"
+>
+  Click to add a note ·
+  Drag a pin to reposition ·
+  Drag empty space to move ·
+  Scroll to zoom
+</div>
 
             `
 
@@ -1898,14 +1993,19 @@ ${
         "
         data-map-pin="${pin.id}"
         style="
-          left:${Number(
-            pin.x_percent
-          )}%;
+  left:${Number(
+    pin.x_percent
+  )}%;
 
-          top:${Number(
-            pin.y_percent
-          )}%;
-        "
+  top:${Number(
+    pin.y_percent
+  )}%;
+
+  --map-pin-scale:${Number(
+    this.activeMap?.pin_scale ||
+    1
+  )};
+"
         title="${adventureMapEscape(
           pin.title ||
           'Map Note'
@@ -3271,313 +3371,877 @@ ${
      MAP STAGE
      =================================================== */
 
-  connectMapStage(){
+connectMapStage(){
 
-    const stage =
-      this.overlay
-        ?.querySelector(
-          '[data-map-stage]'
+  const stage =
+    this.overlay
+      ?.querySelector(
+        '[data-map-stage]'
+      );
+
+
+  const image =
+    this.overlay
+      ?.querySelector(
+        '[data-map-image]'
+      );
+
+
+  const viewport =
+    this.overlay
+      ?.querySelector(
+        '[data-map-viewport]'
+      );
+
+
+  const camera =
+    this.overlay
+      ?.querySelector(
+        '[data-map-camera]'
+      );
+
+
+  const zoomLabel =
+    this.overlay
+      ?.querySelector(
+        '[data-map-zoom-label]'
+      );
+
+
+  const pinSizeInput =
+    this.overlay
+      ?.querySelector(
+        '[data-map-pin-size]'
+      );
+
+
+  if(
+    !stage ||
+    !image ||
+    !viewport ||
+    !camera
+  ){
+
+    return;
+
+  }
+
+
+  const applyView =
+    () => {
+
+      camera.style.transform =
+        `translate(${this.mapView.panX}px, ${this.mapView.panY}px) scale(${this.mapView.zoom})`;
+
+
+      if(zoomLabel){
+
+        zoomLabel.textContent =
+          `${Math.round(
+            this.mapView.zoom *
+            100
+          )}%`;
+
+      }
+
+    };
+
+
+  const clampZoom =
+    value =>
+      adventureMapClamp(
+        value,
+        0.5,
+        5
+      );
+
+
+  const setZoom =
+    (
+      nextZoom,
+      clientX = null,
+      clientY = null
+    ) => {
+
+      const oldZoom =
+        this.mapView.zoom;
+
+
+      nextZoom =
+        clampZoom(
+          nextZoom
         );
 
 
-    const image =
-      this.overlay
-        ?.querySelector(
-          '[data-map-image]'
-        );
+      if(
+        nextZoom ===
+        oldZoom
+      ){
+
+        return;
+
+      }
 
 
-    if(
-      !stage ||
-      !image
-    ){
+      if(
+        clientX !== null &&
+        clientY !== null
+      ){
 
-      return;
+        const viewportRect =
+          viewport
+            .getBoundingClientRect();
 
-    }
+
+        const cursorX =
+          clientX -
+          viewportRect.left;
 
 
-    stage.addEventListener(
+        const cursorY =
+          clientY -
+          viewportRect.top;
+
+
+        const ratio =
+          nextZoom /
+          oldZoom;
+
+
+        this.mapView.panX =
+          cursorX -
+          (
+            cursorX -
+            this.mapView.panX
+          ) *
+          ratio;
+
+
+        this.mapView.panY =
+          cursorY -
+          (
+            cursorY -
+            this.mapView.panY
+          ) *
+          ratio;
+
+      }
+
+
+      this.mapView.zoom =
+        nextZoom;
+
+
+      applyView();
+
+    };
+
+
+  applyView();
+
+
+  /* ===================================================
+     ZOOM CONTROLS
+     =================================================== */
+
+  this.overlay
+    ?.querySelector(
+      '[data-map-zoom-in]'
+    )
+    ?.addEventListener(
       'click',
-      async event => {
+      event => {
 
-        if(
-          event.target.closest(
-            '[data-map-pin]'
-          )
-        ){
-
-          return;
-
-        }
+        event.stopPropagation();
 
 
-        const point =
-          this.getStagePercentPosition(
-            image,
-            event.clientX,
-            event.clientY
-          );
-
-
-        if(!point){
-          return;
-        }
-
-
-        await this.createPin(
-          point.x,
-          point.y
+        setZoom(
+          this.mapView.zoom *
+          1.25
         );
 
       }
     );
 
 
-    stage
-      .querySelectorAll(
-        '[data-map-pin]'
-      )
-      .forEach(
-        pinElement => {
+  this.overlay
+    ?.querySelector(
+      '[data-map-zoom-out]'
+    )
+    ?.addEventListener(
+      'click',
+      event => {
 
-          const pinId =
-            pinElement.dataset
-              .mapPin;
-
-
-          let moved =
-            false;
+        event.stopPropagation();
 
 
-          let startX =
-            0;
+        setZoom(
+          this.mapView.zoom /
+          1.25
+        );
+
+      }
+    );
 
 
-          let startY =
-            0;
+  this.overlay
+    ?.querySelector(
+      '[data-map-reset-view]'
+    )
+    ?.addEventListener(
+      'click',
+      event => {
+
+        event.stopPropagation();
 
 
-          pinElement.addEventListener(
-            'pointerdown',
-            event => {
-
-              event.preventDefault();
-
-              event.stopPropagation();
+        this.mapView.zoom =
+          1;
 
 
-              this.draggingPinId =
-                pinId;
+        this.mapView.panX =
+          0;
 
 
-              moved =
-                false;
+        this.mapView.panY =
+          0;
 
 
-              startX =
-                event.clientX;
+        applyView();
+
+      }
+    );
 
 
-              startY =
-                event.clientY;
+  /* ===================================================
+     PIN SIZE
+     =================================================== */
 
+  pinSizeInput
+    ?.addEventListener(
+      'input',
+      () => {
+
+        const map =
+          this.activeMap;
+
+
+        if(!map){
+          return;
+        }
+
+
+        map.pin_scale =
+          Number(
+            pinSizeInput.value
+          );
+
+
+        stage
+          .querySelectorAll(
+            '[data-map-pin]'
+          )
+          .forEach(
+            pinElement => {
+
+              pinElement.style
+                .setProperty(
+                  '--map-pin-scale',
+                  map.pin_scale
+                );
+
+            }
+          );
+
+
+        this.setMapStatus(
+          'Unsaved Changes'
+        );
+
+
+        this.scheduleMapSave(
+          false
+        );
+
+      }
+    );
+
+
+  /* ===================================================
+     WHEEL ZOOM
+     =================================================== */
+
+  viewport.addEventListener(
+    'wheel',
+    event => {
+
+      event.preventDefault();
+
+
+      const factor =
+        event.deltaY < 0
+          ? 1.12
+          : 1 / 1.12;
+
+
+      setZoom(
+        this.mapView.zoom *
+        factor,
+        event.clientX,
+        event.clientY
+      );
+
+    },
+    {
+      passive:false
+    }
+  );
+
+
+  /* ===================================================
+     PAN + CLICK-TO-PLACE
+     =================================================== */
+
+  let pointerId =
+    null;
+
+
+  let startClientX =
+    0;
+
+
+  let startClientY =
+    0;
+
+
+  let startPanX =
+    0;
+
+
+  let startPanY =
+    0;
+
+
+  let moved =
+    false;
+
+
+  viewport.addEventListener(
+    'pointerdown',
+    event => {
+
+      if(
+        event.target.closest(
+          '[data-map-pin]'
+        ) ||
+        event.target.closest(
+          '.dm-map-board-controls'
+        )
+      ){
+
+        return;
+
+      }
+
+
+      pointerId =
+        event.pointerId;
+
+
+      startClientX =
+        event.clientX;
+
+
+      startClientY =
+        event.clientY;
+
+
+      startPanX =
+        this.mapView.panX;
+
+
+      startPanY =
+        this.mapView.panY;
+
+
+      moved =
+        false;
+
+
+      this.panningMap =
+        false;
+
+    }
+  );
+
+
+  viewport.addEventListener(
+    'pointermove',
+    event => {
+
+      if(
+        pointerId !==
+        event.pointerId
+      ){
+
+        return;
+
+      }
+
+
+      const deltaX =
+        event.clientX -
+        startClientX;
+
+
+      const deltaY =
+        event.clientY -
+        startClientY;
+
+
+      if(
+        !moved &&
+        (
+          Math.abs(
+            deltaX
+          ) > 4 ||
+          Math.abs(
+            deltaY
+          ) > 4
+        )
+      ){
+
+        moved =
+          true;
+
+
+        this.panningMap =
+          true;
+
+
+        viewport.classList.add(
+          'panning'
+        );
+
+
+        try{
+
+          viewport
+            .setPointerCapture(
+              event.pointerId
+            );
+
+        }
+        catch(error){
+          /* no-op */
+        }
+
+      }
+
+
+      if(!moved){
+        return;
+      }
+
+
+      event.preventDefault();
+
+
+      this.mapView.panX =
+        startPanX +
+        deltaX;
+
+
+      this.mapView.panY =
+        startPanY +
+        deltaY;
+
+
+      applyView();
+
+    }
+  );
+
+
+  viewport.addEventListener(
+    'pointerup',
+    async event => {
+
+      if(
+        pointerId !==
+        event.pointerId
+      ){
+
+        return;
+
+      }
+
+
+      const wasMoved =
+        moved;
+
+
+      pointerId =
+        null;
+
+
+      viewport.classList.remove(
+        'panning'
+      );
+
+
+      try{
+
+        viewport
+          .releasePointerCapture(
+            event.pointerId
+          );
+
+      }
+      catch(error){
+        /* no-op */
+      }
+
+
+      this.panningMap =
+        false;
+
+
+      /*
+        If we moved the pointer,
+        this interaction was a PAN.
+
+        If we did not move it,
+        this interaction was a PIN PLACEMENT.
+      */
+      if(wasMoved){
+
+        return;
+
+      }
+
+
+      if(
+        event.target.closest(
+          '[data-map-pin]'
+        ) ||
+        event.target.closest(
+          '.dm-map-board-controls'
+        )
+      ){
+
+        return;
+
+      }
+
+
+      const point =
+        this.getStagePercentPosition(
+          image,
+          event.clientX,
+          event.clientY
+        );
+
+
+      if(!point){
+
+        return;
+
+      }
+
+
+      await this.createPin(
+        point.x,
+        point.y
+      );
+
+    }
+  );
+
+
+  viewport.addEventListener(
+    'pointercancel',
+    event => {
+
+      if(
+        pointerId !==
+        event.pointerId
+      ){
+
+        return;
+
+      }
+
+
+      pointerId =
+        null;
+
+
+      moved =
+        false;
+
+
+      this.panningMap =
+        false;
+
+
+      viewport.classList.remove(
+        'panning'
+      );
+
+    }
+  );
+
+
+  /* ===================================================
+     EXISTING PIN DRAGGING
+     =================================================== */
+
+  stage
+    .querySelectorAll(
+      '[data-map-pin]'
+    )
+    .forEach(
+      pinElement => {
+
+        const pinId =
+          pinElement.dataset
+            .mapPin;
+
+
+        let pinMoved =
+          false;
+
+
+        let pinStartX =
+          0;
+
+
+        let pinStartY =
+          0;
+
+
+        pinElement.addEventListener(
+          'pointerdown',
+          event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            this.draggingPinId =
+              pinId;
+
+
+            pinMoved =
+              false;
+
+
+            pinStartX =
+              event.clientX;
+
+
+            pinStartY =
+              event.clientY;
+
+
+            pinElement
+              .setPointerCapture(
+                event.pointerId
+              );
+
+
+            pinElement
+              .classList
+              .add(
+                'dragging'
+              );
+
+          }
+        );
+
+
+        pinElement.addEventListener(
+          'pointermove',
+          event => {
+
+            if(
+              this.draggingPinId !==
+              pinId
+            ){
+
+              return;
+
+            }
+
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            if(
+              Math.abs(
+                event.clientX -
+                pinStartX
+              ) > 3 ||
+              Math.abs(
+                event.clientY -
+                pinStartY
+              ) > 3
+            ){
+
+              pinMoved =
+                true;
+
+            }
+
+
+            const point =
+              this.getStagePercentPosition(
+                image,
+                event.clientX,
+                event.clientY
+              );
+
+
+            if(!point){
+
+              return;
+
+            }
+
+
+            pinElement.style.left =
+              `${point.x}%`;
+
+
+            pinElement.style.top =
+              `${point.y}%`;
+
+
+            const pin =
+              this.pins.find(
+                item =>
+                  item.id ===
+                  pinId
+              );
+
+
+            if(pin){
+
+              pin.x_percent =
+                point.x;
+
+
+              pin.y_percent =
+                point.y;
+
+            }
+
+          }
+        );
+
+
+        pinElement.addEventListener(
+          'pointerup',
+          async event => {
+
+            if(
+              this.draggingPinId !==
+              pinId
+            ){
+
+              return;
+
+            }
+
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            this.draggingPinId =
+              null;
+
+
+            pinElement
+              .classList
+              .remove(
+                'dragging'
+              );
+
+
+            try{
 
               pinElement
-                .setPointerCapture(
+                .releasePointerCapture(
                   event.pointerId
                 );
 
-
-              pinElement
-                .classList
-                .add(
-                  'dragging'
-                );
-
             }
-          );
-
-
-          pinElement.addEventListener(
-            'pointermove',
-            event => {
-
-              if(
-                this.draggingPinId !==
-                pinId
-              ){
-
-                return;
-
-              }
-
-
-              event.preventDefault();
-
-              event.stopPropagation();
-
-
-              if(
-                Math.abs(
-                  event.clientX -
-                  startX
-                ) > 3 ||
-                Math.abs(
-                  event.clientY -
-                  startY
-                ) > 3
-              ){
-
-                moved =
-                  true;
-
-              }
-
-
-              const point =
-                this.getStagePercentPosition(
-                  image,
-                  event.clientX,
-                  event.clientY
-                );
-
-
-              if(!point){
-                return;
-              }
-
-
-              pinElement.style.left =
-                `${point.x}%`;
-
-
-              pinElement.style.top =
-                `${point.y}%`;
-
-
-              const pin =
-                this.pins.find(
-                  item =>
-                    item.id ===
-                    pinId
-                );
-
-
-              if(pin){
-
-                pin.x_percent =
-                  point.x;
-
-
-                pin.y_percent =
-                  point.y;
-
-              }
-
+            catch(error){
+              /* no-op */
             }
-          );
 
 
-          pinElement.addEventListener(
-            'pointerup',
-            async event => {
-
-              if(
-                this.draggingPinId !==
-                pinId
-              ){
-
-                return;
-
-              }
+            const pin =
+              this.pins.find(
+                item =>
+                  item.id ===
+                  pinId
+              );
 
 
-              event.preventDefault();
+            if(
+              pinMoved &&
+              pin
+            ){
 
-              event.stopPropagation();
-
-
-              this.draggingPinId =
-                null;
-
-
-              pinElement
-                .classList
-                .remove(
-                  'dragging'
-                );
-
-
-              try{
-
-                pinElement
-                  .releasePointerCapture(
-                    event.pointerId
-                  );
-
-              }
-              catch(error){
-                /* no-op */
-              }
-
-
-              const pin =
-                this.pins.find(
-                  item =>
-                    item.id ===
-                    pinId
-                );
-
-
-              if(
-                moved &&
+              await this.savePinPosition(
                 pin
-              ){
-
-                await this.savePinPosition(
-                  pin
-                );
-
-              }
-              else{
-
-                this.activePinId =
-                  pinId;
-
-
-                this.renderPinDrawer();
-
-                this.refreshPinSelection();
-
-              }
+              );
 
             }
-          );
+            else{
+
+              this.activePinId =
+                pinId;
 
 
-          pinElement.addEventListener(
-            'pointercancel',
-            () => {
+              this.renderPinDrawer();
 
-              this.draggingPinId =
-                null;
-
-
-              pinElement
-                .classList
-                .remove(
-                  'dragging'
-                );
+              this.refreshPinSelection();
 
             }
-          );
 
-        }
-      );
+          }
+        );
 
-  }
 
+        pinElement.addEventListener(
+          'pointercancel',
+          () => {
+
+            this.draggingPinId =
+              null;
+
+
+            pinElement
+              .classList
+              .remove(
+                'dragging'
+              );
+
+          }
+        );
+
+      }
+    );
+
+}
 
   getStagePercentPosition(
     image,
@@ -3597,6 +4261,17 @@ ${
       return null;
 
     }
+
+    if(
+  clientX < rect.left ||
+  clientX > rect.right ||
+  clientY < rect.top ||
+  clientY > rect.bottom
+){
+
+  return null;
+
+}
 
 
     const x =
@@ -3721,25 +4396,30 @@ ${
         .from(
           'adventure_maps'
         )
+.update({
 
-        .update({
+  title:
+    String(
+      map.title ||
+      ''
+    )
+      .trim() ||
+    'Untitled Map',
 
-          title:
-            String(
-              map.title ||
-              ''
-            )
-              .trim() ||
-            'Untitled Map',
+  image_url:
+    String(
+      map.image_url ||
+      ''
+    )
+      .trim(),
 
-          image_url:
-            String(
-              map.image_url ||
-              ''
-            )
-              .trim(),
+  pin_scale:
+    Number(
+      map.pin_scale ||
+      1
+    ),
 
-          updated_at:
+  updated_at:
             new Date()
               .toISOString()
 
