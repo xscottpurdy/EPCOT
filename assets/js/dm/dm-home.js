@@ -374,6 +374,35 @@ function dmHomeTruncate(
 
 function dmHomeNavigate(view){
 
+  const missionCampaign =
+    view === 'hero-adventures'
+      ? 'hero'
+      : view === 'villain-adventures'
+        ? 'villain'
+        : null;
+
+
+  if(missionCampaign){
+
+    document
+      .querySelector(
+        '.dm-nav-button[data-dm-view="missions"]'
+      )
+      ?.click();
+
+
+    document
+      .querySelector(
+        `[data-mission-campaign="${missionCampaign}"]`
+      )
+      ?.click();
+
+
+    return;
+
+  }
+
+
   document
     .querySelector(
       `.dm-nav-button[data-dm-view="${view}"]`

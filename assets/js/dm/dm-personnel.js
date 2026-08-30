@@ -95,6 +95,27 @@ let dmPersonnelCampaignStates = [];
 let dmPersonnelEditingId = null;
 
 
+const dmPersonnelFilters = {
+
+  search:'',
+
+  company:'',
+
+  domain:'',
+
+  neighborhood:'',
+
+  skill:'',
+
+  campaign:'',
+
+  relationship:'',
+
+  status:''
+
+};
+
+
 /* =====================================================
    HELPERS
    ===================================================== */
@@ -166,6 +187,363 @@ function dmPersonnelOptions(
 
 }
 
+/* =====================================================
+   FILTER HELPERS
+   ===================================================== */
+
+function dmPersonnelUniqueValues(key){
+
+  return Array.from(
+
+    new Set(
+
+      dmPersonnelNpcs
+        .map(
+          row => row?.[key]
+        )
+        .filter(Boolean)
+
+    )
+
+  )
+    .sort(
+      (a,b) =>
+        String(a)
+          .localeCompare(
+            String(b)
+          )
+    );
+
+}
+
+
+function dmPersonnelMatchesCampaign(
+  npc,
+  filter
+){
+
+  if(!filter){
+    return true;
+  }
+
+
+  const hero =
+    dmPersonnelCampaignState(
+      npc.id,
+      'hero'
+    );
+
+
+  const villain =
+    dmPersonnelCampaignState(
+      npc.id,
+      'villain'
+    );
+
+
+  if(filter === 'hero-known'){
+
+    return Boolean(
+      hero?.is_visible
+    );
+
+  }
+
+
+  if(filter === 'villain-known'){
+
+    return Boolean(
+      villain?.is_visible
+    );
+
+  }
+
+
+  if(filter === 'both-known'){
+
+    return Boolean(
+      hero?.is_visible &&
+      villain?.is_visible
+    );
+
+  }
+
+
+  if(filter === 'undiscovered'){
+
+    return (
+      !hero?.is_visible &&
+      !villain?.is_visible
+    );
+
+  }
+
+
+  return true;
+
+}
+
+
+function dmPersonnelMatchesRelationship(
+  npc,
+  filter
+){
+
+  if(!filter){
+    return true;
+  }
+
+
+  return [
+    'hero',
+    'villain'
+  ]
+    .some(
+      campaign => {
+
+        const state =
+          dmPersonnelCampaignState(
+            npc.id,
+            campaign
+          );
+
+
+        if(
+          !state ||
+          !state.is_visible
+        ){
+          return false;
+        }
+
+
+        return (
+          dmPersonnelRelationshipLabel(
+            state.relationship_score
+          ) === filter
+        );
+
+      }
+    );
+
+}
+
+
+function getFilteredDmPersonnel(){
+
+  const search =
+    dmPersonnelFilters
+      .search
+      .trim()
+      .toLowerCase();
+
+
+  return dmPersonnelNpcs.filter(
+    npc => {
+
+      const skills =
+        Array.isArray(
+          npc.skill_training
+        )
+          ? npc.skill_training
+              .filter(Boolean)
+          : [];
+
+
+      const hero =
+        dmPersonnelCampaignState(
+          npc.id,
+          'hero'
+        );
+
+
+      const villain =
+        dmPersonnelCampaignState(
+          npc.id,
+          'villain'
+        );
+
+
+      /* SEARCH */
+
+      if(search){
+
+        const haystack = [
+
+          npc.name_cast,
+
+          npc.name_unbound,
+
+          npc.title,
+
+          npc.company_association,
+
+          npc.magic_domain,
+
+          npc.neighborhood,
+
+          ...skills,
+
+          hero?.details,
+
+          villain?.details
+
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .replace(
+            /<[^>]*>/g,
+            ' '
+          )
+          .toLowerCase();
+
+
+        if(
+          !haystack.includes(
+            search
+          )
+        ){
+          return false;
+        }
+
+      }
+
+
+      /* COMPANY */
+
+      if(
+        dmPersonnelFilters.company &&
+        npc.company_association !==
+          dmPersonnelFilters.company
+      ){
+        return false;
+      }
+
+
+      /* DOMAIN */
+
+      if(
+        dmPersonnelFilters.domain &&
+        npc.magic_domain !==
+          dmPersonnelFilters.domain
+      ){
+        return false;
+      }
+
+
+      /* NEIGHBORHOOD */
+
+      if(
+        dmPersonnelFilters.neighborhood &&
+        npc.neighborhood !==
+          dmPersonnelFilters.neighborhood
+      ){
+        return false;
+      }
+
+
+      /* SKILL */
+
+      if(
+        dmPersonnelFilters.skill &&
+        !skills.includes(
+          dmPersonnelFilters.skill
+        )
+      ){
+        return false;
+      }
+
+
+      /* CAMPAIGN DISCOVERY */
+
+      if(
+        !dmPersonnelMatchesCampaign(
+          npc,
+          dmPersonnelFilters.campaign
+        )
+      ){
+        return false;
+      }
+
+
+      /* RELATIONSHIP */
+
+      if(
+        !dmPersonnelMatchesRelationship(
+          npc,
+          dmPersonnelFilters.relationship
+        )
+      ){
+        return false;
+      }
+
+
+      /* ACTIVE / REASSIGNED */
+
+      if(
+        dmPersonnelFilters.status ===
+          'active' &&
+        npc.is_reassigned
+      ){
+        return false;
+      }
+
+
+      if(
+        dmPersonnelFilters.status ===
+          'reassigned' &&
+        !npc.is_reassigned
+      ){
+        return false;
+      }
+
+
+      return true;
+
+    }
+  );
+
+}
+
+
+function dmPersonnelFilterOptions(
+  options,
+  selected,
+  label
+){
+
+  return `
+
+    <option value="">
+      ${dmPersonnelEscape(label)}
+    </option>
+
+    ${options
+      .map(
+        option => `
+
+          <option
+            value="${dmPersonnelEscape(
+              option
+            )}"
+            ${
+              option === selected
+                ? 'selected'
+                : ''
+            }
+          >
+            ${dmPersonnelEscape(
+              option
+            )}
+          </option>
+
+        `
+      )
+      .join('')
+    }
+
+  `;
+
+}
 
 /* =====================================================
    RELATIONSHIP SYSTEM
@@ -395,6 +773,91 @@ function installDmPersonnelStyles(){
       margin-bottom:18px;
     }
 
+.dm-personnel-filter-panel{
+  padding:16px;
+  margin-bottom:18px;
+}
+
+.dm-personnel-search-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:end;
+  margin-bottom:12px;
+}
+
+.dm-personnel-filter-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(165px,1fr));
+  gap:10px;
+}
+
+.dm-personnel-filter-field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.dm-personnel-filter-field span{
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  opacity:.72;
+}
+
+.dm-personnel-filter-field input,
+.dm-personnel-filter-field select{
+  width:100%;
+  min-height:42px;
+  box-sizing:border-box;
+  border-radius:8px;
+  border:
+    1px solid
+    rgba(255,255,255,.18);
+  background:
+    rgba(0,0,0,.18);
+  color:inherit;
+  padding:9px 11px;
+  font:inherit;
+}
+
+.dm-personnel-filter-field
+select option{
+  color:#111;
+}
+
+.dm-personnel-empty{
+  padding:20px;
+}
+
+.dm-personnel-card-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.dm-personnel-portraits{
+  display:flex;
+  gap:8px;
+  flex:0 0 auto;
+}
+
+.dm-personnel-portrait-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.dm-personnel-portrait-label{
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-align:center;
+  opacity:.65;
+}
+
     .dm-personnel-primary,
     .dm-personnel-secondary,
     .dm-personnel-danger{
@@ -437,11 +900,12 @@ function installDmPersonnelStyles(){
       gap:14px;
     }
 
-    .dm-personnel-card-head{
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-    }
+.dm-personnel-card-head{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
 
     .dm-personnel-portrait{
       width:76px;
@@ -728,42 +1192,82 @@ async function loadDmPersonnelNpcs(){
   }
 
 
-  const {
-    data,
-    error
-  } =
-    await client
-      .from('npcs')
-.select(`
-  id,
-  name_cast,
-  name_unbound,
-  cast_image_url,
-  unbound_image_url,
-  company_association,
-  title,
-  magic_domain,
-  neighborhood,
-  skill_training,
-  visibility,
-  is_reassigned,
-  created_at
-`)
-      .order(
-        'name_cast',
-        {
-          ascending:true
-        }
-      );
+  const pageSize =
+    1000;
 
 
-  if(error){
-    throw error;
+  let from =
+    0;
+
+
+  let allRows = [];
+
+
+  while(true){
+
+    const {
+      data,
+      error
+    } =
+      await client
+        .from('npcs')
+        .select(`
+          id,
+          name_cast,
+          name_unbound,
+          cast_image_url,
+          unbound_image_url,
+          company_association,
+          title,
+          magic_domain,
+          neighborhood,
+          skill_training,
+          visibility,
+          is_reassigned,
+          created_at
+        `)
+        .order(
+          'name_cast',
+          {
+            ascending:true
+          }
+        )
+        .range(
+          from,
+          from + pageSize - 1
+        );
+
+
+    if(error){
+      throw error;
+    }
+
+
+    const rows =
+      data || [];
+
+
+    allRows.push(
+      ...rows
+    );
+
+
+    if(
+      rows.length <
+      pageSize
+    ){
+      break;
+    }
+
+
+    from +=
+      pageSize;
+
   }
 
 
   dmPersonnelNpcs =
-    data || [];
+    allRows;
 
 }
 
@@ -774,30 +1278,81 @@ async function loadDmPersonnelCampaignStates(){
     dmPersonnelClient();
 
 
-  const {
-    data,
-    error
-  } =
-    await client
-      .from('npc_campaign_state')
-.select(`
-  id,
-  npc_id,
-  campaign,
-  details,
-  relationship_tag,
-  relationship_score,
-  is_visible
-`)
+  if(!client){
+
+    throw new Error(
+      'Supabase client is unavailable.'
+    );
+
+  }
 
 
-  if(error){
-    throw error;
+  const pageSize =
+    1000;
+
+
+  let from =
+    0;
+
+
+  let allRows = [];
+
+
+  while(true){
+
+    const {
+      data,
+      error
+    } =
+      await client
+        .from(
+          'npc_campaign_state'
+        )
+        .select(`
+          id,
+          npc_id,
+          campaign,
+          details,
+          relationship_tag,
+          relationship_score,
+          is_visible
+        `)
+        .range(
+          from,
+          from + pageSize - 1
+        );
+
+
+    if(error){
+      throw error;
+    }
+
+
+    const rows =
+      data || [];
+
+
+    allRows.push(
+      ...rows
+    );
+
+
+    if(
+      rows.length <
+      pageSize
+    ){
+      break;
+    }
+
+
+    from +=
+      pageSize;
+
   }
 
 
   dmPersonnelCampaignStates =
-    data || [];
+    allRows;
 
 }
 
@@ -830,19 +1385,56 @@ function renderDmPersonnelCard(npc){
       : [];
 
 
-  const portrait =
-    npc.cast_image_url
-      ? `
-          <img
-            src="${dmPersonnelEscape(
-              npc.cast_image_url
-            )}"
-            alt="${dmPersonnelEscape(
-              npc.name_cast
-            )}"
-          >
-        `
-      : '?';
+function portraitMarkup(
+  label,
+  url,
+  alt
+){
+
+  return `
+
+    <div
+      class="dm-personnel-portrait-wrap"
+    >
+
+      <div
+        class="dm-personnel-portrait-label"
+      >
+        ${label}
+      </div>
+
+
+      <div
+        class="dm-personnel-portrait"
+      >
+
+        ${
+          url
+            ? `
+                <img
+                  src="${dmPersonnelEscape(
+                    url
+                  )}"
+                  alt="${dmPersonnelEscape(
+                    alt ||
+                    label
+                  )}"
+                >
+              `
+            : `
+                <span>
+                  ?
+                </span>
+              `
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
 
 
   function campaignCard(
@@ -971,14 +1563,28 @@ return `
         : ''
     }
 
-      <div class="dm-personnel-card-head">
+<div class="dm-personnel-card-head">
 
-        <div class="dm-personnel-portrait">
-          ${portrait}
-        </div>
+  <div class="dm-personnel-portraits">
+
+    ${portraitMarkup(
+      'CAST',
+      npc.cast_image_url,
+      npc.name_cast
+    )}
 
 
-        <div>
+    ${portraitMarkup(
+      'UNBOUND',
+      npc.unbound_image_url,
+      npc.name_unbound ||
+      npc.name_cast
+    )}
+
+  </div>
+
+
+  <div>
 
           <div class="dm-page-kicker">
             PERSONNEL RECORD
@@ -1140,6 +1746,82 @@ return `
    MAIN RENDER
    ===================================================== */
 
+function renderDmPersonnelResults(){
+
+  const resultsMount =
+    dmPersonnelById(
+      'dmPersonnelResults'
+    );
+
+
+  const count =
+    dmPersonnelById(
+      'dmPersonnelResultCount'
+    );
+
+
+  if(!resultsMount){
+    return;
+  }
+
+
+  const filtered =
+    getFilteredDmPersonnel();
+
+
+  if(count){
+
+    count.textContent =
+      `${filtered.length} of ${dmPersonnelNpcs.length} records`;
+
+  }
+
+
+  resultsMount.innerHTML =
+
+    filtered.length
+
+      ? `
+
+          <div
+            class="dm-personnel-grid"
+          >
+
+            ${filtered
+              .map(
+                renderDmPersonnelCard
+              )
+              .join('')
+            }
+
+          </div>
+
+        `
+
+      : `
+
+          <div
+            class="
+              dm-console-panel
+              dm-personnel-empty
+            "
+          >
+
+            <strong>
+              No matching Personnel records
+            </strong>
+
+            <p>
+              Try clearing one or more filters.
+            </p>
+
+          </div>
+
+        `;
+
+}
+
+
 function renderDmPersonnel(){
 
   const mount =
@@ -1153,9 +1835,34 @@ function renderDmPersonnel(){
   }
 
 
+  const relationships = [
+
+    'HOSTILE',
+
+    'AGGRESSIVE',
+
+    'UNFRIENDLY',
+
+    'DISLIKED',
+
+    'NEUTRAL',
+
+    'LIKED',
+
+    'FRIENDLY',
+
+    'TRUSTWORTHY',
+
+    'LOYAL'
+
+  ];
+
+
   mount.innerHTML = `
 
-    <div class="dm-personnel-toolbar">
+    <div
+      class="dm-personnel-toolbar"
+    >
 
       <div>
 
@@ -1163,16 +1870,12 @@ function renderDmPersonnel(){
           PERSONNEL DATABASE
         </div>
 
-        <div class="dm-personnel-muted">
-
+        <div
+          class="dm-personnel-muted"
+          id="dmPersonnelResultCount"
+        >
           ${dmPersonnelNpcs.length}
-          personnel
-          ${
-            dmPersonnelNpcs.length === 1
-              ? 'record'
-              : 'records'
-          }
-
+          records
         </div>
 
       </div>
@@ -1189,40 +1892,303 @@ function renderDmPersonnel(){
     </div>
 
 
-    ${
-      dmPersonnelNpcs.length
-        ? `
-            <div class="dm-personnel-grid">
+    <div
+      class="
+        dm-personnel-filter-panel
+        dm-console-panel
+      "
+    >
 
-              ${dmPersonnelNpcs
-                .map(
-                  renderDmPersonnelCard
-                )
-                .join('')
+      <div
+        class="dm-personnel-search-row"
+      >
+
+        <label
+          class="
+            dm-personnel-filter-field
+            dm-personnel-search
+          "
+        >
+
+          <span>
+            Search Personnel
+          </span>
+
+          <input
+            id="dmPersonnelSearch"
+            type="search"
+            value="${dmPersonnelEscape(
+              dmPersonnelFilters.search
+            )}"
+            placeholder="Cast name, Unbound name, title, tag, or notes..."
+            autocomplete="off"
+          >
+
+        </label>
+
+
+        <button
+          class="dm-personnel-secondary"
+          type="button"
+          data-dm-personnel-action="clear-filters"
+        >
+          Clear Filters
+        </button>
+
+      </div>
+
+
+      <div
+        class="dm-personnel-filter-grid"
+      >
+
+        <label
+          class="dm-personnel-filter-field"
+        >
+
+          <span>
+            Company
+          </span>
+
+          <select
+            id="dmPersonnelCompanyFilter"
+          >
+
+            ${dmPersonnelFilterOptions(
+              dmPersonnelUniqueValues(
+                'company_association'
+              ),
+              dmPersonnelFilters.company,
+              'All Companies'
+            )}
+
+          </select>
+
+        </label>
+
+
+        <label
+          class="dm-personnel-filter-field"
+        >
+
+          <span>
+            Magic Domain
+          </span>
+
+          <select
+            id="dmPersonnelDomainFilter"
+          >
+
+            ${dmPersonnelFilterOptions(
+              dmPersonnelUniqueValues(
+                'magic_domain'
+              ),
+              dmPersonnelFilters.domain,
+              'All Domains'
+            )}
+
+          </select>
+
+        </label>
+
+
+        <label
+          class="dm-personnel-filter-field"
+        >
+
+          <span>
+            Neighborhood
+          </span>
+
+          <select
+            id="dmPersonnelNeighborhoodFilter"
+          >
+
+            ${dmPersonnelFilterOptions(
+              dmPersonnelUniqueValues(
+                'neighborhood'
+              ),
+              dmPersonnelFilters.neighborhood,
+              'All Neighborhoods'
+            )}
+
+          </select>
+
+        </label>
+
+
+        <label
+          class="dm-personnel-filter-field"
+        >
+
+          <span>
+            Skill
+          </span>
+
+          <select
+            id="dmPersonnelSkillFilter"
+          >
+
+            ${dmPersonnelFilterOptions(
+              DM_PERSONNEL_SKILLS,
+              dmPersonnelFilters.skill,
+              'All Skills'
+            )}
+
+          </select>
+
+        </label>
+
+
+        <label
+          class="dm-personnel-filter-field"
+        >
+
+          <span>
+            Discovery
+          </span>
+
+          <select
+            id="dmPersonnelCampaignFilter"
+          >
+
+            <option value="">
+              Any Discovery
+            </option>
+
+            <option
+              value="hero-known"
+              ${
+                dmPersonnelFilters.campaign ===
+                'hero-known'
+                  ? 'selected'
+                  : ''
               }
-
-            </div>
-          `
-        : `
-            <div
-              class="dm-console-panel"
-              style="padding:20px;"
             >
+              Known by Hero
+            </option>
 
-              <strong>
-                No Personnel Records
-              </strong>
+            <option
+              value="villain-known"
+              ${
+                dmPersonnelFilters.campaign ===
+                'villain-known'
+                  ? 'selected'
+                  : ''
+              }
+            >
+              Known by Villain
+            </option>
 
-              <p>
-                Add the first Personnel record
-                to begin the archive.
-              </p>
+            <option
+              value="both-known"
+              ${
+                dmPersonnelFilters.campaign ===
+                'both-known'
+                  ? 'selected'
+                  : ''
+              }
+            >
+              Known by Both
+            </option>
 
-            </div>
-          `
-    }
+            <option
+              value="undiscovered"
+              ${
+                dmPersonnelFilters.campaign ===
+                'undiscovered'
+                  ? 'selected'
+                  : ''
+              }
+            >
+              Undiscovered by Both
+            </option>
+
+          </select>
+
+        </label>
+
+
+        <label
+          class="dm-personnel-filter-field"
+        >
+
+          <span>
+            Relationship
+          </span>
+
+          <select
+            id="dmPersonnelRelationshipFilter"
+          >
+
+            ${dmPersonnelFilterOptions(
+              relationships,
+              dmPersonnelFilters.relationship,
+              'Any Relationship'
+            )}
+
+          </select>
+
+        </label>
+
+
+        <label
+          class="dm-personnel-filter-field"
+        >
+
+          <span>
+            Status
+          </span>
+
+          <select
+            id="dmPersonnelStatusFilter"
+          >
+
+            <option value="">
+              Any Status
+            </option>
+
+            <option
+              value="active"
+              ${
+                dmPersonnelFilters.status ===
+                'active'
+                  ? 'selected'
+                  : ''
+              }
+            >
+              Active
+            </option>
+
+            <option
+              value="reassigned"
+              ${
+                dmPersonnelFilters.status ===
+                'reassigned'
+                  ? 'selected'
+                  : ''
+              }
+            >
+              Reassigned
+            </option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="dmPersonnelResults"
+    ></div>
 
   `;
+
+
+  renderDmPersonnelResults();
 
 }
 
@@ -2438,6 +3404,31 @@ function handleDmPersonnelClick(event){
     button.dataset
       .dmPersonnelAction;
 
+if(
+  action ===
+  'clear-filters'
+){
+
+  Object
+    .keys(
+      dmPersonnelFilters
+    )
+    .forEach(
+      key => {
+
+        dmPersonnelFilters[key] =
+          '';
+
+      }
+    );
+
+
+  renderDmPersonnel();
+
+
+  return;
+
+}
 
   if(action === 'add'){
 
@@ -2488,6 +3479,55 @@ function handleDmPersonnelClick(event){
 
 function handleDmPersonnelChange(event){
 
+  const filterMap = {
+
+    dmPersonnelCompanyFilter:
+      'company',
+
+    dmPersonnelDomainFilter:
+      'domain',
+
+    dmPersonnelNeighborhoodFilter:
+      'neighborhood',
+
+    dmPersonnelSkillFilter:
+      'skill',
+
+    dmPersonnelCampaignFilter:
+      'campaign',
+
+    dmPersonnelRelationshipFilter:
+      'relationship',
+
+    dmPersonnelStatusFilter:
+      'status'
+
+  };
+
+
+  const filterKey =
+    filterMap[
+      event.target.id
+    ];
+
+
+  if(filterKey){
+
+    dmPersonnelFilters[
+      filterKey
+    ] =
+      event.target.value ||
+      '';
+
+
+    renderDmPersonnelResults();
+
+
+    return;
+
+  }
+
+
   if(
     event.target.matches(
       '#dmNpcHeroKnown, #dmNpcVillainKnown'
@@ -2506,6 +3546,22 @@ function handleDmPersonnelInput(event){
   const target =
     event.target;
 
+    if(
+  target.id ===
+  'dmPersonnelSearch'
+){
+
+  dmPersonnelFilters.search =
+    target.value ||
+    '';
+
+
+  renderDmPersonnelResults();
+
+
+  return;
+
+}
 
   if(
     target.id ===
