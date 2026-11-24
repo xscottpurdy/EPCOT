@@ -75,7 +75,7 @@ const COMPANY_FILE_NEIGHBORHOODS = [
   'Chapman Gate',
   'Baxter Forge',
   'Crump Works',
-  'Burns Gardens'
+  'Burns Preserve'
 ];
 
 
@@ -97,7 +97,8 @@ const COMPANY_FILE_NEIGHBORHOOD_CODES = {
   'Chapman Gate': '1115',
   'Baxter Forge': '1116',
   'Crump Works': '1117',
-  'Burns Gardens': '1118'
+  'Burns Gardens': '1118',
+  'Burns Preserve': '1118'
 };
 
 

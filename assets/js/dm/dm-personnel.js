@@ -54,7 +54,9 @@ const DM_PERSONNEL_NEIGHBORHOODS = [
   'Chapman Gate',
   'Baxter Forge',
   'Crump Works',
-  'Burns Gardens'
+  'Burns Preserve',
+  'Underground',
+  'Unaffiliated'
 ];
 
 
@@ -91,6 +93,21 @@ const DM_PERSONNEL_SKILLS = [
 let dmPersonnelNpcs = [];
 
 let dmPersonnelCampaignStates = [];
+let dmPersonnelFavoriteAccounts=new Map();
+let dmPersonnelNotesSnapshot={};
+const dmFavoriteFilterOptions=[['yes','My DM favorites'],['players','Any player favorites'],['hero-favorites','Hero player favorites'],['villain-favorites','Villain player favorites']];
+function dmFavoriteIds(state){return Array.isArray(state?.favorite_account_ids)?state.favorite_account_ids:[];}
+function dmFavoriteNames(state){return dmFavoriteIds(state).map(id=>dmPersonnelFavoriteAccounts.get(id)||'Unknown player');}
+async function loadDmPersonnelFavoriteAccounts(){
+ const {data,error}=await dmPersonnelClient().from('accounts').select('id,display_name,username').eq('role','player');
+ if(error){console.warn('Could not load player favorite names:',error.message);return;}
+ dmPersonnelFavoriteAccounts=new Map((data||[]).map(a=>[a.id,a.display_name||a.username||'Player']));
+}
+function dmFavoriteSummary(hero,villain){
+ const rows=[['Hero',hero],['Villain',villain]].map(([label,state])=>{const names=dmFavoriteNames(state);return names.length?`<div><strong>★ ${label}:</strong> ${names.map(dmPersonnelEscape).join(', ')}</div>`:'';}).join('');
+ return `<div class="dm-player-favorites" aria-label="Player favorites">${rows||'<span>No player favorites</span>'}</div>`;
+}
+
 
 let dmPersonnelEditingId = null;
 
@@ -111,7 +128,8 @@ const dmPersonnelFilters = {
 
   relationship:'',
 
-  status:''
+  status:'',
+  favorites:''
 
 };
 
@@ -328,10 +346,10 @@ function dmPersonnelMatchesRelationship(
 }
 
 
-function getFilteredDmPersonnel(){
+function getFilteredDmPersonnel(filters=dmPersonnelFilters){
 
   const search =
-    dmPersonnelFilters
+    filters
       .search
       .trim()
       .toLowerCase();
@@ -363,6 +381,10 @@ function getFilteredDmPersonnel(){
         );
 
 
+      if(filters.favorites==='yes'&&!window.epcotPersonnelTools.favorites('dm').has(String(npc.id)))return false;
+      if(filters.favorites==='players'&&!dmFavoriteIds(hero).length&&!dmFavoriteIds(villain).length)return false;
+      if(filters.favorites==='hero-favorites'&&!dmFavoriteIds(hero).length)return false;
+      if(filters.favorites==='villain-favorites'&&!dmFavoriteIds(villain).length)return false;
       /* SEARCH */
 
       if(search){
@@ -379,7 +401,7 @@ function getFilteredDmPersonnel(){
 
           npc.magic_domain,
 
-          npc.neighborhood,
+          window.epcotPersonnelTools.neighborhood(npc.neighborhood),
 
           ...skills,
 
@@ -411,9 +433,9 @@ function getFilteredDmPersonnel(){
       /* COMPANY */
 
       if(
-        dmPersonnelFilters.company &&
+        filters.company &&
         npc.company_association !==
-          dmPersonnelFilters.company
+          filters.company
       ){
         return false;
       }
@@ -422,9 +444,9 @@ function getFilteredDmPersonnel(){
       /* DOMAIN */
 
       if(
-        dmPersonnelFilters.domain &&
+        filters.domain &&
         npc.magic_domain !==
-          dmPersonnelFilters.domain
+          filters.domain
       ){
         return false;
       }
@@ -433,9 +455,9 @@ function getFilteredDmPersonnel(){
       /* NEIGHBORHOOD */
 
       if(
-        dmPersonnelFilters.neighborhood &&
-        npc.neighborhood !==
-          dmPersonnelFilters.neighborhood
+        filters.neighborhood &&
+        window.epcotPersonnelTools.neighborhood(npc.neighborhood) !==
+          filters.neighborhood
       ){
         return false;
       }
@@ -444,9 +466,9 @@ function getFilteredDmPersonnel(){
       /* SKILL */
 
       if(
-        dmPersonnelFilters.skill &&
+        filters.skill &&
         !skills.includes(
-          dmPersonnelFilters.skill
+          filters.skill
         )
       ){
         return false;
@@ -458,7 +480,7 @@ function getFilteredDmPersonnel(){
       if(
         !dmPersonnelMatchesCampaign(
           npc,
-          dmPersonnelFilters.campaign
+          filters.campaign
         )
       ){
         return false;
@@ -470,7 +492,7 @@ function getFilteredDmPersonnel(){
       if(
         !dmPersonnelMatchesRelationship(
           npc,
-          dmPersonnelFilters.relationship
+          filters.relationship
         )
       ){
         return false;
@@ -480,7 +502,7 @@ function getFilteredDmPersonnel(){
       /* ACTIVE / REASSIGNED */
 
       if(
-        dmPersonnelFilters.status ===
+        filters.status ===
           'active' &&
         npc.is_reassigned
       ){
@@ -489,7 +511,7 @@ function getFilteredDmPersonnel(){
 
 
       if(
-        dmPersonnelFilters.status ===
+        filters.status ===
           'reassigned' &&
         !npc.is_reassigned
       ){
@@ -1267,7 +1289,7 @@ async function loadDmPersonnelNpcs(){
 
 
   dmPersonnelNpcs =
-    allRows;
+    allRows.map(npc=>({...npc,neighborhood:window.epcotPersonnelTools.neighborhood(npc.neighborhood)}));
 
 }
 
@@ -1315,7 +1337,8 @@ async function loadDmPersonnelCampaignStates(){
           details,
           relationship_tag,
           relationship_score,
-          is_visible
+          is_visible,
+          favorite_account_ids
         `)
         .range(
           from,
@@ -1411,7 +1434,7 @@ function portraitMarkup(
         ${
           url
             ? `
-                <img
+                <img tabindex="0" role="button" aria-label="Enlarge portrait"
                   src="${dmPersonnelEscape(
                     url
                   )}"
@@ -1602,14 +1625,14 @@ return `
           ${
             npc.name_unbound
               ? `
-                  <div class="dm-personnel-muted">
+                  <h2 class="dm-personnel-name">
 
                     Unbound:
                     ${dmPersonnelEscape(
                       npc.name_unbound
                     )}
 
-                  </div>
+                  </h2>
                 `
               : ''
           }
@@ -1660,7 +1683,7 @@ return `
             ? `
                 <span class="dm-personnel-chip">
                   ${dmPersonnelEscape(
-                    npc.neighborhood
+                    window.epcotPersonnelTools.neighborhood(npc.neighborhood)
                   )}
                 </span>
               `
@@ -1705,6 +1728,7 @@ return `
         )}
 
       </div>
+      ${dmFavoriteSummary(heroState,villainState)}
 
 
 <div
@@ -1722,6 +1746,7 @@ return `
   >
     View Intelligence
   </button>
+  <button type="button" class="epcot-favorite-button" data-dm-personnel-action="favorite" data-npc-id="${npc.id}" aria-pressed="${window.epcotPersonnelTools.favorites('dm').has(String(npc.id))}">${window.epcotPersonnelTools.favorites('dm').has(String(npc.id))?'★':'☆'} Favorite</button>
 
 
   <button
@@ -1941,6 +1966,7 @@ function renderDmPersonnel(){
       <div
         class="dm-personnel-filter-grid"
       >
+        <label class="dm-personnel-filter-field"><span>Favorites</span><select id="dmPersonnelFavoritesFilter"><option value="">All Personnel</option>${dmFavoriteFilterOptions.map(([value,label])=>`<option value="${value}" ${dmPersonnelFilters.favorites===value?'selected':''}>${label}</option>`).join('')}</select></label>
 
         <label
           class="dm-personnel-filter-field"
@@ -2005,9 +2031,7 @@ function renderDmPersonnel(){
           >
 
             ${dmPersonnelFilterOptions(
-              dmPersonnelUniqueValues(
-                'neighborhood'
-              ),
+              [...new Set([...DM_PERSONNEL_NEIGHBORHOODS,...dmPersonnelUniqueValues('neighborhood').map(window.epcotPersonnelTools.neighborhood)])].sort(),
               dmPersonnelFilters.neighborhood,
               'All Neighborhoods'
             )}
@@ -2845,6 +2869,7 @@ function openDmPersonnelModal(
   );
 
 
+  dmPersonnelNotesSnapshot={hero:{raw:heroState?.details??'',initial:dmPersonnelCleanHtml(dmPersonnelById('dmNpcHeroDetails')?.innerHTML||'')},villain:{raw:villainState?.details??'',initial:dmPersonnelCleanHtml(dmPersonnelById('dmNpcVillainDetails')?.innerHTML||'')}};
   updateDmPersonnelCampaignEditors();
 
   updateDmRelationshipPreview(
@@ -3003,21 +3028,14 @@ async function saveDmPersonnelCampaignState(
 
   if(existing){
 
-    const {
-      error
-    } =
-      await client
-        .from('npc_campaign_state')
-        .update(body)
-        .eq(
-          'id',
-          existing.id
-        );
-
-
-    if(error){
-      throw error;
-    }
+    const snapshot=dmPersonnelNotesSnapshot[campaign];
+    let query=client.from('npc_campaign_state');
+    if(snapshot&&body.details===snapshot.initial){delete body.details;}
+    query=query.update(body).eq('id',existing.id);
+    if(snapshot&&Object.prototype.hasOwnProperty.call(body,'details'))query=query.eq('details',snapshot.raw);
+    const {data,error}=await query.select('id');
+    if(error)throw error;
+    if(!data?.length)throw Error('The '+campaign+' notes changed while this form was open. Copy your draft, then reopen the Personnel File before editing the notes.');
 
 
     return;
@@ -3430,6 +3448,8 @@ if(
 
 }
 
+  if(action==='favorite'){window.epcotPersonnelTools.toggle('dm',button.dataset.npcId);renderDmPersonnelResults();return;}
+
   if(action === 'add'){
 
     openDmPersonnelModal();
@@ -3480,6 +3500,9 @@ if(
 function handleDmPersonnelChange(event){
 
   const filterMap = {
+
+    dmPersonnelFavoritesFilter:
+      'favorites',
 
     dmPersonnelCompanyFilter:
       'company',
@@ -3681,7 +3704,8 @@ async function loadDmPersonnel(){
 
     await Promise.all([
       loadDmPersonnelNpcs(),
-      loadDmPersonnelCampaignStates()
+      loadDmPersonnelCampaignStates(),
+      loadDmPersonnelFavoriteAccounts()
     ]);
 
 
@@ -3753,7 +3777,11 @@ document.addEventListener(
 
 
     loadDmPersonnel();
-
+    const client=dmPersonnelClient();let timer,refreshBusy=false;
+    const refresh=async()=>{if(refreshBusy||document.hidden)return;refreshBusy=true;try{await loadDmPersonnelCampaignStates();renderDmPersonnelResults();window.dispatchEvent(new CustomEvent('epcot:personnel-favorites-refreshed'));}catch(e){console.warn('Personnel refresh failed:',e.message);}finally{refreshBusy=false;}};
+    const schedule=()=>{clearTimeout(timer);timer=setTimeout(refresh,250);};
+    client?.channel('dm-personnel-live-campaigns').on('postgres_changes',{event:'*',schema:'public',table:'npc_campaign_state'},schedule).subscribe();
+    setInterval(refresh,15000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
   }
 );
 

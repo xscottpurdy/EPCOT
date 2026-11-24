@@ -105,6 +105,8 @@ const HOME_NEIGHBORHOOD_CODES = {
     '1117',
 
   'Burns Gardens':
+    '1118',
+  'Burns Preserve':
     '1118'
 
 };

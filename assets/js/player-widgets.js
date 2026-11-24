@@ -9,19 +9,22 @@
 
   const PLAYER_ELIGIBLE_IDS = [
     'downtime-training',
+    'downtime-shopping',
+    'downtime-day-activities',
     'downtime-gathering',
     'downtime-crafting',
     'downtime-social',
     'downtime-potion-brewing',
     'product-solution-generator',
     'fallen-revived-consequences',
-    'common-rules',
-    'reserve-personnel'
+    'common-rules'
   ];
 
 
   const WORLD_DOWNTIME_IDS = [
     'downtime-training',
+    'downtime-shopping',
+    'downtime-day-activities',
     'downtime-gathering',
     'downtime-crafting',
     'downtime-social',

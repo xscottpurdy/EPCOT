@@ -59,7 +59,8 @@ const DM_WORLD_SYSTEM_KEYS = [
   'annual_holidays',
   'quarterly_celebrations',
   'species',
-  'language'
+  'language',
+  'lore'
 ];
 
 
@@ -93,6 +94,8 @@ const DM_WORLD_DISPLAY_TYPES = [
   'hidden'
 ];
 const DM_WORLD_DOWNTIME_WIDGETS = [
+  {id:'downtime-shopping',name:'City Hub Shopping'},
+  {id:'downtime-day-activities',name:'EPCOT Day Activities'},
 
   {
     id:'downtime-training',
@@ -198,6 +201,7 @@ function dmWorldEscape(value){
   return String(
     value ?? ''
   )
+    .replaceAll('Burns Gardens','Burns Preserve')
     .replaceAll(
       '&',
       '&amp;'
@@ -3219,7 +3223,8 @@ function renderDmWorldExplorerSystems(
 
       keys: [
         'species',
-        'language'
+        'language',
+        'lore'
       ]
     }
 
@@ -3557,6 +3562,13 @@ function renderDmWorldDetailOverlay(){
 }
 
 
+function dmWorldDetailArrows(type,item){
+ const siblings=(type==='section'?dmWorldSectionsFor(item.supersection_id):dmWorldSupersectionsForTab(DM_WORLD.tab)).filter(x=>dmWorldIsVisible(type,x));
+ const index=siblings.findIndex(x=>x.id===item.id);if(index<0)return '';
+ const arrow=(target,label)=>`<button type="button" class="dm-world-detail-close" style="position:static" ${target?`data-dm-world-action="explorer-${type}" data-world-id="${dmWorldEscape(target.id)}"`:'disabled'} aria-label="${label}" title="${target?dmWorldEscape(target.name):label}">${label==='Previous'?'←':'→'}</button>`;
+ return `<div style="display:flex;gap:8px;align-items:center">${arrow(siblings[index-1],'Previous')}${arrow(siblings[index+1],'Next')}</div>`;
+}
+
 function renderDmWorldSupersectionDetail(
   id
 ){
@@ -3629,13 +3641,13 @@ function renderDmWorldSupersectionDetail(
         </div>
 
 
-        <button
+        <div style="display:flex;gap:8px;align-items:center">${dmWorldDetailArrows('supersection',item)}<button
           class="dm-world-detail-close"
           type="button"
           data-dm-world-action="close-detail"
         >
           ×
-        </button>
+        </button></div>
 
       </header>
 
@@ -3651,17 +3663,13 @@ function renderDmWorldSupersectionDetail(
           OVERVIEW
         </div>
 
-        <div class="dm-world-detail-description">
-
-          ${
+        <div class="dm-world-detail-description">${
             item.description
               ? dmWorldEscape(
-                  item.description
+                  String(item.description).trim().replace(/^[ \t]+/gm,'')
                 )
               : 'No published information yet.'
-          }
-
-        </div>
+          }</div>
 
 
         ${
@@ -3795,13 +3803,13 @@ function renderDmWorldSectionDetail(
         </div>
 
 
-        <button
+        <div style="display:flex;gap:8px;align-items:center">${dmWorldDetailArrows('section',item)}<button
           class="dm-world-detail-close"
           type="button"
           data-dm-world-action="close-detail"
         >
           ×
-        </button>
+        </button></div>
 
       </header>
 
@@ -3818,17 +3826,13 @@ function renderDmWorldSectionDetail(
           OVERVIEW
         </div>
 
-        <div class="dm-world-detail-description">
-
-          ${
+        <div class="dm-world-detail-description">${
             item.description
               ? dmWorldEscape(
-                  item.description
+                  String(item.description).trim().replace(/^[ \t]+/gm,'')
                 )
               : 'No published information yet.'
-          }
-
-        </div>
+          }</div>
 
 
         ${

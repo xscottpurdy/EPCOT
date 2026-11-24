@@ -66,7 +66,9 @@ const NPC_NEIGHBORHOODS = [
   'Chapman Gate',
   'Baxter Forge',
   'Crump Works',
-  'Burns Gardens'
+  'Burns Preserve',
+  'Underground',
+  'Unaffiliated'
 ];
 
 
@@ -75,6 +77,25 @@ const NPC_NEIGHBORHOODS = [
    ===================================================== */
 
 let npcRecords = [];
+const playerPersonnelFilter={search:'',neighborhood:'',favorites:false};
+function playerFavorites(){const id=window.epcotPersonnelTools.accountId();return new Set(npcCampaignStates.filter(s=>id&&(s.favorite_account_ids||[]).includes(id)).map(s=>String(s.npc_id)));}
+let playerFavoriteImportBusy=false;
+async function importPlayerFavorites(){
+ if(playerFavoriteImportBusy)return;playerFavoriteImportBusy=true;
+ const tools=window.epcotPersonnelTools,campaign=getCurrentCampaign();
+ try{for(const id of tools.favorites(campaign)){
+  const state=getNpcCampaignState(id);if(!state?.is_visible)continue;
+  try{state.favorite_account_ids=await tools.setPlayerFavorite(state,true);tools.forgetLocal(campaign,id);}catch(e){console.warn('Local favorite not yet imported:',e.message);}
+ }}finally{playerFavoriteImportBusy=false;}
+}
+
+function renderPlayerPersonnelFilters(){
+ const grid=peopleById('npcGrid'); if(!grid||peopleById('playerPersonnelFilters'))return;
+ const panel=document.createElement('div');panel.id='playerPersonnelFilters';panel.className='epcot-personnel-filters';
+ panel.innerHTML=`<label>Search Personnel<input type="search" placeholder="Name, title, skill, notes…" data-personnel-search></label><label>Neighborhood<select data-personnel-neighborhood><option value="">All Neighborhoods</option>${NPC_NEIGHBORHOODS.map(x=>`<option>${peopleEscapeHtml(x)}</option>`).join('')}</select></label><label>Favorites<select data-personnel-favorites><option value="">All Personnel</option><option value="yes">Favorites only</option></select></label>`;
+ grid.before(panel);panel.addEventListener('input',()=>{playerPersonnelFilter.search=panel.querySelector('[data-personnel-search]').value.trim().toLowerCase();playerPersonnelFilter.neighborhood=panel.querySelector('[data-personnel-neighborhood]').value;playerPersonnelFilter.favorites=panel.querySelector('[data-personnel-favorites]').value==='yes';renderPeople();});
+}
+
 
 let npcCampaignStates = [];
 
@@ -85,6 +106,8 @@ let peopleNpcChannel = null;
 let peopleCampaignChannel = null;
 
 let peopleRealtimeRefreshTimer = null;
+let peopleLoadBusy=false;
+let playerNoteEditor=null;
 
 
 /* =====================================================
@@ -357,7 +380,7 @@ function getNpcImageMarkup(npc){
       <img
         src="${peopleEscapeHtml(imageUrl)}"
         alt="${peopleEscapeHtml(getNpcDisplayName(npc))}"
-        loading="lazy"
+        loading="lazy" tabindex="0" role="button" aria-label="Enlarge portrait"
       >
     `;
 
@@ -413,8 +436,7 @@ function getSkillTraining(npc){
 
 
   return npc.skill_training
-    .filter(Boolean)
-    .slice(0,3);
+    .filter(Boolean);
 
 }
 
@@ -437,9 +459,12 @@ function renderPeople(){
 
 
   const visibleNpcs =
-    npcRecords.filter(
-      npcIsVisible
-    );
+    npcRecords.filter(npc=>{
+      if(!npcIsVisible(npc))return false;
+      const state=getNpcCampaignState(npc.id);
+      const text=[getNpcDisplayName(npc),npc.title,npc.company_association,npc.magic_domain,window.epcotPersonnelTools.neighborhood(npc.neighborhood),...getSkillTraining(npc),state?.details?.replace(/<[^>]*>/g,' ')].filter(Boolean).join(' ').toLowerCase();
+      return (!playerPersonnelFilter.search||text.includes(playerPersonnelFilter.search))&&(!playerPersonnelFilter.neighborhood||window.epcotPersonnelTools.neighborhood(npc.neighborhood)===playerPersonnelFilter.neighborhood)&&(!playerPersonnelFilter.favorites||playerFavorites().has(String(npc.id)));
+    });
 
 
   if(!visibleNpcs.length){
@@ -448,12 +473,11 @@ function renderPeople(){
       <div class="people-empty-state">
 
         <strong>
-          No personnel discovered yet.
+          No matching personnel.
         </strong>
 
         <p>
-          Add someone this campaign has met
-          to begin the Personnel archive.
+          Try different filters, or ask the DM to reveal personnel your campaign has met.
         </p>
 
       </div>
@@ -599,14 +623,7 @@ return `
 
 
 
-                <button
-                  class="npc-edit-button"
-                  type="button"
-                  data-npc-action="edit"
-                  data-npc-id="${npc.id}"
-                >
-                  Edit
-                </button>
+                <button class="epcot-favorite-button" type="button" data-npc-action="favorite" data-npc-id="${npc.id}" aria-pressed="${playerFavorites().has(String(npc.id))}">${playerFavorites().has(String(npc.id))?'★':'☆'} Favorite</button>
 
 
               </div>
@@ -647,7 +664,7 @@ return `
                     ? `
                         <span>
                           ${peopleEscapeHtml(
-                            npc.neighborhood
+                            window.epcotPersonnelTools.neighborhood(npc.neighborhood)
                           )}
                         </span>
                       `
@@ -715,16 +732,10 @@ return `
                   }
 
                 </div>
+                <button class="npc-details-button" type="button" data-npc-action="note" data-npc-id="${peopleEscapeHtml(npc.id)}">Edit Notes</button>
 
 
-                <button
-                  class="npc-details-button"
-                  type="button"
-                  data-npc-action="details"
-                  data-npc-id="${npc.id}"
-                >
-                  Edit Notes
-                </button>
+                
 
 
               </div>
@@ -748,673 +759,6 @@ return `
    SELECT OPTIONS
    ===================================================== */
 
-function makeOptions(
-  values,
-  selectedValue,
-  placeholder
-){
-
-  return `
-    <option value="">
-      ${placeholder}
-    </option>
-
-    ${
-      values.map(
-        value => `
-          <option
-            value="${peopleEscapeHtml(value)}"
-            ${
-              value === selectedValue
-                ? 'selected'
-                : ''
-            }
-          >
-            ${peopleEscapeHtml(value)}
-          </option>
-        `
-      ).join('')
-    }
-  `;
-
-}
-
-
-/* =====================================================
-   OPEN NEW NPC
-   ===================================================== */
-
-function openNewNpc(){
-
-  npcBeingEdited =
-    null;
-
-
-  const title =
-    peopleById(
-      'npcEditorTitle'
-    );
-
-
-  if(title){
-
-    title.textContent =
-      'Add Personnel File';
-
-  }
-
-
-  fillNpcEditor(
-    null
-  );
-
-
-  openPeopleModal(
-    'npcEditorModal'
-  );
-
-}
-
-
-/* =====================================================
-   OPEN NPC EDITOR
-   ===================================================== */
-
-function openNpcEditor(
-  npcId
-){
-
-  const npc =
-    npcRecords.find(
-      item =>
-        item.id === npcId
-    );
-
-
-  if(!npc){
-    return;
-  }
-
-
-  npcBeingEdited =
-    npc;
-
-
-  const title =
-    peopleById(
-      'npcEditorTitle'
-    );
-
-
-  if(title){
-
-    title.textContent =
-      'Edit Personnel File';
-
-  }
-
-
-  fillNpcEditor(
-    npc
-  );
-
-
-  openPeopleModal(
-    'npcEditorModal'
-  );
-
-}
-
-
-/* =====================================================
-   FILL NPC EDITOR
-   ===================================================== */
-
-function fillNpcEditor(npc){
-
-  const castName =
-    peopleById(
-      'npcNameCast'
-    );
-
-
-  if(castName){
-
-    castName.value =
-      npc?.name_cast ||
-      '';
-
-  }
-
-
-  const unboundName =
-    peopleById(
-      'npcNameUnbound'
-    );
-
-
-  if(unboundName){
-
-    unboundName.value =
-      npc?.name_unbound ||
-      '';
-
-  }
-
-
-  const castImage =
-    peopleById(
-      'npcCastImageUrl'
-    );
-
-
-  if(castImage){
-
-    castImage.value =
-      npc?.cast_image_url ||
-      '';
-
-  }
-
-
-  const unboundImage =
-    peopleById(
-      'npcUnboundImageUrl'
-    );
-
-
-  if(unboundImage){
-
-    unboundImage.value =
-      npc?.unbound_image_url ||
-      '';
-
-  }
-
-
-  const title =
-    peopleById(
-      'npcTitle'
-    );
-
-
-  if(title){
-
-    title.value =
-      npc?.title ||
-      '';
-
-  }
-
-
-  const company =
-    peopleById(
-      'npcCompany'
-    );
-
-
-  if(company){
-
-    company.innerHTML =
-      makeOptions(
-        NPC_COMPANIES,
-        npc?.company_association || '',
-        'Choose company...'
-      );
-
-  }
-
-
-  const domain =
-    peopleById(
-      'npcMagicDomain'
-    );
-
-
-  if(domain){
-
-    domain.innerHTML =
-      makeOptions(
-        NPC_MAGIC_DOMAINS,
-        npc?.magic_domain || '',
-        'Choose Magic Domain...'
-      );
-
-  }
-
-
-  const neighborhood =
-    peopleById(
-      'npcNeighborhood'
-    );
-
-
-  if(neighborhood){
-
-    neighborhood.innerHTML =
-      makeOptions(
-        NPC_NEIGHBORHOODS,
-        npc?.neighborhood || '',
-        'Choose neighborhood...'
-      );
-
-  }
-
-}
-
-
-/* =====================================================
-   SAVE NPC
-   ===================================================== */
-
-async function saveNpc(){
-
-  const castName =
-    peopleById(
-      'npcNameCast'
-    )?.value.trim();
-
-
-  const unboundName =
-    peopleById(
-      'npcNameUnbound'
-    )?.value.trim() ||
-    '';
-
-
-  if(!castName){
-
-    alert(
-      'Please enter the NPC’s Cast name.'
-    );
-
-    return;
-
-  }
-
-
-  const body = {
-
-    name_cast:
-      castName,
-
-    name_unbound:
-      unboundName || null,
-
-    cast_image_url:
-      peopleById(
-        'npcCastImageUrl'
-      )?.value.trim() ||
-      null,
-
-    unbound_image_url:
-      peopleById(
-        'npcUnboundImageUrl'
-      )?.value.trim() ||
-      null,
-
-    company_association:
-      peopleById(
-        'npcCompany'
-      )?.value ||
-      null,
-
-    title:
-      peopleById(
-        'npcTitle'
-      )?.value.trim() ||
-      null,
-
-    magic_domain:
-      peopleById(
-        'npcMagicDomain'
-      )?.value ||
-      null,
-
-    neighborhood:
-      peopleById(
-        'npcNeighborhood'
-      )?.value ||
-      null
-
-  };
-
-
-  try{
-
-    if(npcBeingEdited){
-
-      await supabasePatch(
-        `npcs?id=eq.${npcBeingEdited.id}`,
-        body
-      );
-
-    }
-    else{
-
-      const inserted =
-        await supabasePost(
-          'npcs',
-          body
-        );
-
-
-      if(!inserted[0]){
-
-        throw new Error(
-          'Supabase did not return the new NPC.'
-        );
-
-      }
-
-
-      const newNpc =
-        inserted[0];
-
-
-      /*
-        The campaign-state row is what causes the
-        NPC to become visible to THIS campaign.
-      */
-
-      await supabasePost(
-        'npc_campaign_state',
-        {
-
-          npc_id:
-            newNpc.id,
-
-          campaign:
-            getCurrentCampaign(),
-
-          details:
-            '',
-
-          relationship_tag:
-            'NEUTRAL'
-
-        }
-      );
-
-    }
-
-
-    closePeopleModal(
-      'npcEditorModal'
-    );
-
-
-    npcBeingEdited =
-      null;
-
-
-    await loadPeople(
-      false
-    );
-
-  }
-  catch(error){
-
-    showPeopleError(
-      npcBeingEdited
-        ? 'NPC could not be updated.'
-        : 'NPC could not be added.',
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   DELETE NPC
-
-   IMPORTANT:
-   This still deletes the GLOBAL NPC.
-
-   We will eventually reserve true global deletion
-   for the DM interface.
-   ===================================================== */
-
-async function deleteNpc(){
-
-  if(!npcBeingEdited){
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      `Delete ${getNpcDisplayName(npcBeingEdited)} completely?`
-    );
-
-
-  if(!confirmed){
-    return;
-  }
-
-
-  try{
-
-    await supabaseDelete(
-      `npcs?id=eq.${npcBeingEdited.id}`
-    );
-
-
-    closePeopleModal(
-      'npcEditorModal'
-    );
-
-
-    npcBeingEdited =
-      null;
-
-
-    await loadPeople(
-      false
-    );
-
-  }
-  catch(error){
-
-    showPeopleError(
-      'NPC could not be deleted.',
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   OPEN NPC DETAILS
-   ===================================================== */
-
-function openNpcDetails(
-  npcId
-){
-
-  const npc =
-    npcRecords.find(
-      item =>
-        item.id === npcId
-    );
-
-
-  if(!npc){
-    return;
-  }
-
-
-  const state =
-    getNpcCampaignState(
-      npcId
-    );
-
-
-  const title =
-    peopleById(
-      'npcDetailsTitle'
-    );
-
-
-  if(title){
-
-    title.textContent =
-      getNpcDisplayName(
-        npc
-      );
-
-  }
-
-
-  const editor =
-    peopleById(
-      'npcDetailsText'
-    );
-
-
-  if(editor){
-
-    editor.innerHTML =
-      sanitizeNpcNotes(
-        state?.details ||
-        ''
-      );
-
-  }
-
-
-  const modal =
-    peopleById(
-      'npcDetailsModal'
-    );
-
-
-  if(modal){
-
-    modal.dataset.npcId =
-      npcId;
-
-  }
-
-
-  openPeopleModal(
-    'npcDetailsModal'
-  );
-
-}
-
-
-/* =====================================================
-   SAVE NPC DETAILS
-   ===================================================== */
-
-async function saveNpcDetails(){
-
-  const modal =
-    peopleById(
-      'npcDetailsModal'
-    );
-
-
-  const npcId =
-    modal?.dataset.npcId;
-
-
-  if(!npcId){
-    return;
-  }
-
-
-  const details =
-    sanitizeNpcNotes(
-      peopleById(
-        'npcDetailsText'
-      )?.innerHTML ||
-      ''
-    );
-
-
-  const campaign =
-    getCurrentCampaign();
-
-
-  const state =
-    getNpcCampaignState(
-      npcId
-    );
-
-
-  try{
-
-    if(state){
-
-      await supabasePatch(
-        `npc_campaign_state?id=eq.${state.id}`,
-        {
-          details
-        }
-      );
-
-    }
-    else{
-
-      await supabasePost(
-        'npc_campaign_state',
-        {
-
-          npc_id:
-            npcId,
-
-          campaign,
-
-          details,
-
-          relationship_tag:
-            'NEUTRAL'
-
-        }
-      );
-
-    }
-
-
-    closePeopleModal(
-      'npcDetailsModal'
-    );
-
-
-    await loadPeople(
-      false
-    );
-
-  }
-  catch(error){
-
-    showPeopleError(
-      'NPC notes could not be saved.',
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   LOAD PERSONNEL
-
-   1. Load campaign-state rows FIRST.
-   2. Those rows determine which NPCs this campaign knows.
-   3. Load only the required NPC records.
-
-   This means Hero does not render Villain-only NPCs,
-   and Villain does not render Hero-only NPCs.
-   ===================================================== */
-
 async function loadPeople(
   showLoading = true
 ){
@@ -1429,6 +773,9 @@ async function loadPeople(
     return;
   }
 
+
+  if(peopleLoadBusy)return;
+  peopleLoadBusy=true;
 
   if(showLoading){
 
@@ -1449,9 +796,12 @@ async function loadPeople(
 
 npcCampaignStates =
   await supabaseGet(
-    `npc_campaign_state?select=id,npc_id,campaign,details,relationship_tag,relationship_score,is_visible&campaign=eq.${campaign}&is_visible=eq.true`
+    `npc_campaign_state?select=id,npc_id,campaign,details,relationship_tag,relationship_score,is_visible,favorite_account_ids&campaign=eq.${campaign}&is_visible=eq.true`
   );
 
+
+    await importPlayerFavorites();
+    playerNoteEditor?.refresh();
 
     const npcIds =
       npcCampaignStates
@@ -1493,6 +843,7 @@ npcCampaignStates =
   }
   catch(error){
 
+    if(!showLoading){console.warn("Personnel refresh failed",error);return;}
     showPeopleError(
       'Personnel could not be loaded.',
       error
@@ -1515,7 +866,7 @@ npcCampaignStates =
       </div>
     `;
 
-  }
+  }finally{peopleLoadBusy=false;}
 
 }
 
@@ -1524,103 +875,31 @@ npcCampaignStates =
    RICH TEXT TOOLBAR
    ===================================================== */
 
-function connectNpcNotesToolbar(){
-
-  document
-    .querySelectorAll(
-      '[data-note-command]'
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          'click',
-          () => {
-
-            const editor =
-              peopleById(
-                'npcDetailsText'
-              );
-
-
-            if(!editor){
-              return;
-            }
-
-
-            editor.focus();
-
-
-            document.execCommand(
-              button.dataset.noteCommand,
-              false,
-              null
-            );
-
-          }
-        );
-
-      }
-    );
-
+function openPlayerNpcNote(npcId){
+ const npc=npcRecords.find(n=>String(n.id)===String(npcId)),state=getNpcCampaignState(npcId),campaign=getCurrentCampaign();if(!npc||!state?.is_visible||playerNoteEditor)return;
+ const dialog=document.createElement('dialog');dialog.className='epcot-note-dialog';
+ dialog.innerHTML=`<h3>Shared Personnel Notes</h3><p>${peopleEscapeHtml(getNpcDisplayName(npc))} · ${peopleEscapeHtml(campaign.toUpperCase())}</p><p>Everyone in this campaign shares these notes. Edit, add, or remove any text, then save to sync.</p><div class="epcot-note-toolbar" aria-label="Formatting"><button type="button" data-format="bold"><b>B</b></button> <button type="button" data-format="italic"><i>I</i></button> <button type="button" data-format="insertUnorderedList">• List</button></div><div data-note-editor class="epcot-note-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Campaign notes"></div><p data-note-status role="status"></p><div><button type="button" data-note-save>Save Changes</button> <button type="button" data-note-clear>Clear Notes</button> <button type="button" data-note-reload>Reload Latest</button> <button type="button" data-note-close>Close</button></div>`;
+ document.body.append(dialog);const q=x=>dialog.querySelector(x),editor=q('[data-note-editor]'),save=q('[data-note-save]'),close=q('[data-note-close]'),status=q('[data-note-status]'),reload=q('[data-note-reload]'),clear=q('[data-note-clear]');let base=state.details??'',initial='',busy=false,conflict=false;
+ function dirty(){return sanitizeNpcNotes(editor.innerHTML)!==initial;}
+ function setBase(value){base=value??'';editor.innerHTML=sanitizeNpcNotes(base);initial=sanitizeNpcNotes(editor.innerHTML);conflict=false;status.textContent='Up to date.';save.disabled=true;}
+ function refresh(){if(busy)return;const current=getNpcCampaignState(npcId);if(!current?.is_visible){conflict=true;save.disabled=true;status.textContent='This Personnel File is no longer visible.';return;}if((current.details??'')!==base){if(dirty()){conflict=true;save.disabled=true;status.textContent='Someone changed these notes. Copy your draft if needed, then Reload Latest to merge your changes.';}else setBase(current.details);}}
+ playerNoteEditor={refresh};setBase(base);dialog.addEventListener('close',()=>{playerNoteEditor=null;dialog.remove();},{once:true});
+ editor.addEventListener('input',()=>{save.disabled=busy||conflict||!dirty();if(!conflict)status.textContent=dirty()?'Unsaved changes.':'Up to date.';});
+ editor.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain'));});
+ dialog.querySelectorAll('[data-format]').forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>{editor.focus();document.execCommand(b.dataset.format,false,null);editor.dispatchEvent(new Event('input'));};});
+ clear.onclick=()=>{if(!busy&&confirm('Clear the shared notes for this campaign? Save Changes to publish.')){editor.innerHTML='';editor.dispatchEvent(new Event('input'));}};
+ function canClose(){return !busy&&(!dirty()||confirm('Discard unsaved changes?'));}close.onclick=()=>{if(canClose())dialog.close();};dialog.addEventListener('cancel',e=>{if(!canClose())e.preventDefault();});
+ const fetchLatest=async()=>{const {data,error}=await window.epcotAuth.client.from('npc_campaign_state').select('details,is_visible').eq('id',state.id).eq('npc_id',npcId).eq('campaign',campaign).eq('is_visible',true).maybeSingle();if(error)throw error;if(!data?.is_visible)throw Error('Personnel File is no longer visible.');return data;};
+ reload.onclick=async()=>{if(busy||(dirty()&&!confirm('Discard your unsaved draft and load the latest shared notes?')))return;busy=true;editor.contentEditable='false';try{setBase((await fetchLatest()).details);}catch(e){status.textContent=e.message;}finally{busy=false;editor.contentEditable='true';save.disabled=conflict||!dirty();}};
+ save.onclick=async()=>{if(busy||conflict||!dirty())return;busy=true;save.disabled=true;editor.contentEditable='false';try{
+  const client=window.epcotAuth.client,latest=await fetchLatest();if((latest.details??'')!==base){conflict=true;throw Error('Someone changed the notes. Copy your draft if needed, then Reload Latest.');}
+  const clean=sanitizeNpcNotes(editor.innerHTML),details=editor.textContent.trim()?clean:'';
+  let query=client.from('npc_campaign_state').update({details}).eq('id',state.id).eq('npc_id',npcId).eq('campaign',campaign).eq('is_visible',true);query=latest.details===null?query.is('details',null):query.eq('details',latest.details);
+  const {data,error}=await query.select('id');if(error)throw error;if(!data?.length){conflict=true;throw Error('Someone changed the notes. Your draft is preserved; reload before saving.');}
+  const current=getNpcCampaignState(npcId);if(current)current.details=details;setBase(details);renderPeople();status.textContent='Saved and shared with your campaign.';schedulePeopleRealtimeRefresh();
+ }catch(e){status.textContent=e.message;}finally{busy=false;editor.contentEditable='true';save.disabled=conflict||!dirty();}};
+ dialog.showModal();editor.focus();
 }
-
-
-/* =====================================================
-   MODAL HELPERS
-   ===================================================== */
-
-function openPeopleModal(id){
-
-  const modal =
-    peopleById(id);
-
-
-  if(!modal){
-    return;
-  }
-
-
-  modal.classList.add(
-    'open'
-  );
-
-
-  modal.setAttribute(
-    'aria-hidden',
-    'false'
-  );
-
-}
-
-
-function closePeopleModal(id){
-
-  const modal =
-    peopleById(id);
-
-
-  if(!modal){
-    return;
-  }
-
-
-  modal.classList.remove(
-    'open'
-  );
-
-
-  modal.setAttribute(
-    'aria-hidden',
-    'true'
-  );
-
-}
-
-
-/* =====================================================
-   CARD EVENTS
-   ===================================================== */
 
 function connectPeopleGrid(){
 
@@ -1637,7 +916,7 @@ function connectPeopleGrid(){
 
   grid.addEventListener(
     'click',
-    event => {
+    async event => {
 
       const button =
         event.target.closest(
@@ -1658,21 +937,10 @@ function connectPeopleGrid(){
         button.dataset.npcId;
 
 
-      if(action === 'edit'){
-
-        openNpcEditor(
-          npcId
-        );
-
-      }
-
-
-      if(action === 'details'){
-
-        openNpcDetails(
-          npcId
-        );
-
+      if(action==='note'){openPlayerNpcNote(npcId);return;}
+      if(action==='favorite' && npcRecords.some(n=>String(n.id)===npcId&&npcIsVisible(n))){
+        const state=getNpcCampaignState(npcId);if(button.disabled||!state)return;button.disabled=true;
+        try{const tools=window.epcotPersonnelTools;const desired=!playerFavorites().has(npcId);const ids=await tools.setPlayerFavorite(state,desired);const current=getNpcCampaignState(npcId);if(current)current.favorite_account_ids=ids;try{tools.forgetLocal(getCurrentCampaign(),npcId);}catch{}renderPeople();schedulePeopleRealtimeRefresh();}catch(e){alert('Favorite could not be saved: '+e.message);}finally{button.disabled=false;}
       }
 
     }
@@ -1683,179 +951,6 @@ function connectPeopleGrid(){
 
 /* =====================================================
    EDITOR EVENTS
-   ===================================================== */
-
-function connectNpcEditor(){
-
-  const add =
-    peopleById(
-      'addNpcButton'
-    );
-
-
-  if(add){
-
-    add.addEventListener(
-      'click',
-      openNewNpc
-    );
-
-  }
-
-
-  const save =
-    peopleById(
-      'saveNpcButton'
-    );
-
-
-  if(save){
-
-    save.addEventListener(
-      'click',
-      saveNpc
-    );
-
-  }
-
-
-  const cancel =
-    peopleById(
-      'cancelNpcButton'
-    );
-
-
-  if(cancel){
-
-    cancel.addEventListener(
-      'click',
-      () => {
-
-        npcBeingEdited =
-          null;
-
-
-        closePeopleModal(
-          'npcEditorModal'
-        );
-
-      }
-    );
-
-  }
-
-
-  const remove =
-    peopleById(
-      'deleteNpcButton'
-    );
-
-
-  if(remove){
-
-    remove.addEventListener(
-      'click',
-      deleteNpc
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   DETAILS EVENTS
-   ===================================================== */
-
-function connectNpcDetails(){
-
-  const save =
-    peopleById(
-      'saveNpcDetailsButton'
-    );
-
-
-  if(save){
-
-    save.addEventListener(
-      'click',
-      saveNpcDetails
-    );
-
-  }
-
-
-  const cancel =
-    peopleById(
-      'cancelNpcDetailsButton'
-    );
-
-
-  if(cancel){
-
-    cancel.addEventListener(
-      'click',
-      () => {
-
-        closePeopleModal(
-          'npcDetailsModal'
-        );
-
-      }
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   MODAL BACKDROPS
-   ===================================================== */
-
-function connectPeopleModalBackdrops(){
-
-  [
-    'npcEditorModal',
-    'npcDetailsModal'
-  ]
-  .forEach(
-    id => {
-
-      const modal =
-        peopleById(id);
-
-
-      if(!modal){
-        return;
-      }
-
-
-      modal.addEventListener(
-        'click',
-        event => {
-
-          if(
-            event.target === modal
-          ){
-
-            closePeopleModal(
-              id
-            );
-
-          }
-
-        }
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   REALTIME REFRESH
    ===================================================== */
 
 function schedulePeopleRealtimeRefresh(){
@@ -2030,13 +1125,7 @@ async function initializePeople(){
 
   connectPeopleGrid();
 
-  connectNpcEditor();
-
-  connectNpcDetails();
-
-  connectNpcNotesToolbar();
-
-  connectPeopleModalBackdrops();
+  renderPlayerPersonnelFilters();
 
 
   await loadPeople(
@@ -2045,6 +1134,8 @@ async function initializePeople(){
 
 
   connectPeopleRealtime();
+  setInterval(()=>{if(!document.hidden)loadPeople(false);},15000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadPeople(false);});
 
 }
 

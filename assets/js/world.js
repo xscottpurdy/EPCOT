@@ -50,7 +50,8 @@ const WORLD_SYSTEM_KEYS = [
   'annual_holidays',
   'quarterly_celebrations',
   'species',
-  'language'
+  'language',
+  'lore'
 ];
 
 
@@ -169,6 +170,7 @@ function worldEscapeHtml(value){
   return String(
     value ?? ''
   )
+    .replaceAll('Burns Gardens','Burns Preserve')
     .replaceAll(
       '&',
       '&amp;'
@@ -527,7 +529,7 @@ function formatWorldDescription(
 
   const escaped =
     worldEscapeHtml(
-      value
+      String(value ?? '').trim().replace(/^[ \t]+/gm,'').replaceAll('Burns Gardens','Burns Preserve')
     );
 
 
@@ -3322,7 +3324,8 @@ function renderSystemsWorldTab(){
   const peopleKeys = [
 
     'species',
-    'language'
+    'language',
+    'lore'
 
   ];
 
@@ -3815,13 +3818,9 @@ function openWorldSupersection(
             ? `
                 <div>
 
-                  <p>
-
-                    ${formatWorldDescription(
+                  <p>${formatWorldDescription(
                       supersection.description
-                    )}
-
-                  </p>
+                    )}</p>
 
                 </div>
               `
@@ -4091,13 +4090,9 @@ function openWorldSection(
             ? `
                 <div>
 
-                  <p>
-
-                    ${formatWorldDescription(
+                  <p>${formatWorldDescription(
                       section.description
-                    )}
-
-                  </p>
+                    )}</p>
 
                 </div>
               `
