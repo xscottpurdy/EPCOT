@@ -1301,3 +1301,53 @@
   }
 
 }
+/* ===== READABLE TIMELINE / AGENDA ===== */
+.epcot-agenda-controls .epcot-range-row{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.epcot-range-button.active{background:#f5cb70;color:#09202a;border-color:#f5cb70;font-weight:800}
+.epcot-range-navigation{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 0;border-top:1px solid var(--vc-line);border-bottom:1px solid var(--vc-line);margin-bottom:14px}
+.epcot-range-navigation button:disabled{opacity:.35;cursor:not-allowed}
+.epcot-range-label{flex:1;min-width:180px;display:grid;text-align:center;gap:4px}
+.epcot-range-label small,.epcot-agenda-date small,.epcot-agenda-names{font-size:.76rem;color:#9abac2}
+.epcot-year-jump{min-width:170px}
+.dm-timeline-filters.epcot-agenda-filters{grid-template-columns:repeat(auto-fit,minmax(155px,1fr));align-items:start}
+.epcot-personnel-filter{grid-column:span 2}
+.epcot-custom-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-top:12px}
+.epcot-custom-row summary{cursor:pointer;color:#add3d7;font-size:.84rem;padding:8px 0}
+.epcot-custom-dates{display:flex;flex-wrap:wrap;gap:10px}
+.epcot-agenda-panel .dm-timeline-visual-head{align-items:center;flex-wrap:wrap}
+.epcot-agenda-group{margin:16px 0 24px}
+.epcot-agenda-group>header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;border-bottom:1px solid #42616b;padding:7px 1px;margin-bottom:8px}
+.epcot-agenda-group>header h3{margin:0;color:#f5cb70;font-size:1.05rem}
+.epcot-agenda-group>header span{font-size:.75rem;color:#9abac2}
+.epcot-agenda-cards{display:grid;gap:7px}
+.epcot-agenda-event{width:100%;display:grid;grid-template-columns:145px minmax(0,1fr) 16px;gap:13px;align-items:start;text-align:left;border:1px solid #254b57;border-radius:5px;background:#0c2630;color:#e5e8dc;padding:12px;cursor:pointer;font:inherit;box-sizing:border-box;margin-bottom:5px}
+.epcot-agenda-event:hover,.epcot-agenda-event:focus-visible{border-color:#f5cb70;background:#113640;outline:none}
+.epcot-agenda-date{display:grid;gap:5px;border-right:1px solid #31515a;min-height:100%;padding-right:8px}
+.epcot-agenda-date strong{font-size:.85rem;color:#d4e3e3}
+.epcot-agenda-date .epcot-now{font-weight:800;color:#f5cb70}
+.epcot-agenda-content{min-width:0;display:grid;gap:6px;overflow-wrap:anywhere}
+.epcot-agenda-content>strong{font-size:1rem;color:#f2e9d2}
+.epcot-agenda-tags{display:flex;flex-wrap:wrap;gap:5px}
+.epcot-agenda-tags span{font-size:.68rem;padding:3px 6px;border:1px solid #355b65;border-radius:3px;color:#a9c9ce}
+.epcot-agenda-tags .epcot-rose-tag{color:#f1aec0;border-color:#8b5369}
+.epcot-agenda-tags .epcot-branch-tag{color:#e8c37b;border-color:#806e48}
+.epcot-status.occurred{color:#a3dec0}.epcot-status.disrupted{color:#f2a3ab}.epcot-status.planned{color:#f5cb70}
+.epcot-agenda-preview{font-size:.82rem;color:#b4c9cc;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.epcot-agenda-chevron{font-size:1.5rem;color:#9abac2}
+.epcot-conditional{border-left:3px solid #96754d}
+.epcot-agenda-gap{border-top:1px dashed #41606a;color:#a2b8bf;font-size:.75rem;text-align:center;padding:12px 0 0;margin:22px 0 8px}
+.epcot-npc-editor{display:grid;gap:9px;min-width:0}
+.epcot-npc-summary{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.82rem;color:#d4e3e3}
+.epcot-npc-summary input{width:auto!important;min-height:0!important}
+.epcot-npc-chips{font-size:.8rem;color:#b2d4da;max-height:90px;overflow:auto;overflow-wrap:anywhere}
+.epcot-npc-editor .dm-timeline-npc-list{max-height:330px;align-content:start}
+.epcot-npc-editor .epcot-npc-item{align-items:flex-start;min-width:0;cursor:pointer;overflow-wrap:anywhere}
+.epcot-npc-item div{display:grid;gap:3px;min-width:0}.epcot-npc-item strong{font-size:.84rem}.epcot-npc-item small{font-size:.76rem;color:#b2d4da}
+.epcot-npc-item[hidden],[data-event-npc-empty][hidden]{display:none!important}
+@media(max-width:700px){.epcot-agenda-event{grid-template-columns:minmax(0,1fr) 15px;gap:8px}.epcot-agenda-date{grid-column:1/-1;border-right:none;border-bottom:1px solid #31515a;padding-bottom:5px;display:flex;flex-wrap:wrap}.epcot-personnel-filter{grid-column:auto}.epcot-range-label{min-width:130px}.epcot-custom-row{flex-wrap:wrap}}
+
+.epcot-agenda-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.epcot-agenda-compact .epcot-agenda-preview{display:none}
+.epcot-agenda-compact .epcot-agenda-event{padding:8px 11px;gap:8px}
+.epcot-agenda-compact .epcot-agenda-content{gap:4px}
+.epcot-agenda-compact .epcot-agenda-group{margin:12px 0 15px}

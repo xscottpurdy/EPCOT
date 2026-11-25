@@ -98,9 +98,18 @@ const filters = {
 
   startDate:'',
 
-  endDate:''
-
+  endDate:'',
+  type:'all',
+  branch:'all',
+  text:''
 };
+
+  let rangeMode = 'year';
+  let rangeAnchor = null;
+  let npcFilterQuery = '';
+  let compactAgenda = false;
+  const EVENT_TYPES = {history:'History',annual_holiday:'Annual holiday',quarterly_ritual:'Quarterly ritual',plot_milestone:'Plot milestone',conditional_aftermath:'Conditional aftermath',other:'Other'};
+  const BRANCHES = {always:'Always',jiminy_victory:'Jiminy victory only',jiminy_prevented:'Jiminy prevented only',alternate:'Alternate outcome'};
 
 
   /* =====================================================
@@ -582,9 +591,19 @@ const filters = {
      The app DOES NOT automatically mark it occurred.
      ===================================================== */
 
+  function branchReady(event){
+    const branch = event.branch_condition || 'always';
+    if(branch === 'always') return true;
+    const release = timelineEvents.find(e => e.timing_type === 'rose' && Number(e.rose_hour) === 12 && e.title === 'The Second Bloom: Jiminy Ascendant');
+    if(branch === 'jiminy_victory') return release?.status === 'occurred';
+    if(branch === 'jiminy_prevented') return release?.status === 'disrupted';
+    return false; // Alternate outcomes require DM adjudication.
+  }
+
   function isDue(
     event
   ){
+    if(!branchReady(event)) return false;
 
     if(
       event.status !==
@@ -856,6 +875,13 @@ const filters = {
     timelineRoseNotes =
       roseNoteResult.data ||
       [];
+
+    if(!rangeAnchor && (presentDate || foundersDay)){
+      rangeAnchor = presentDate || foundersDay;
+      applyRange();
+    } else if(['campaign','future','history'].includes(rangeMode)){
+      applyRange();
+    }
 
   }
 
@@ -1261,304 +1287,56 @@ const filters = {
      FILTERS
      ===================================================== */
 
-  function filterOptions(){
-
-    return `
-
-
-      <section
-        class="
-          dm-console-panel
-          dm-timeline-filter-panel
-        "
-      >
-
-      <div class="dm-timeline-filter-toolbar">
-
-  <div>
-
-    <div class="dm-page-kicker">
-      TIMELINE RANGE
-    </div>
-
-    <div class="dm-time-muted">
-      Quickly focus the timeline without changing event dates.
-    </div>
-
-  </div>
-
-
-  <div class="dm-timeline-range-actions">
-
-    <button
-      class="dm-personnel-secondary"
-      type="button"
-      data-timeline-range="present"
-      ${presentDate ? '' : 'disabled'}
-      title="${
-        presentDate
-          ? 'Show 30 days before Present through 90 days after Present.'
-          : 'Set Present Date first.'
-      }"
-    >
-      Around Present
-    </button>
-
-
-    <button
-      class="dm-personnel-secondary"
-      type="button"
-      data-timeline-range="campaign"
-      ${
-        foundersDay && presentDate
-          ? ''
-          : 'disabled'
-      }
-      title="${
-        foundersDay && presentDate
-          ? 'Show Progress Day through Present.'
-          : 'Set Progress Day and Present Date first.'
-      }"
-    >
-      Campaign
-    </button>
-
-
-    <button
-      class="dm-personnel-secondary"
-      type="button"
-      data-timeline-range="clear"
-    >
-      Clear Range
-    </button>
-
-  </div>
-
-</div>
-
-        <div class="dm-timeline-filters">
-
-          <label class="dm-timeline-field">
-
-            <span>
-              Status
-            </span>
-
-            <select data-filter-status>
-
-              <option value="all">
-                All
-              </option>
-
-              ${
-                [
-                  'planned',
-                  'occurred',
-                  'disrupted',
-                  'revised'
-                ]
-                  .map(
-                    value=>`
-
-                      <option
-                        value="${value}"
-                        ${
-                          filters.status ===
-                          value
-                            ? 'selected'
-                            : ''
-                        }
-                      >
-                        ${
-                          value[0]
-                            .toUpperCase()
-                          +
-                          value.slice(1)
-                        }
-                      </option>
-                    `
-                  )
-                  .join('')
-              }
-
-            </select>
-
-          </label>
-
-
-          <label class="dm-timeline-field">
-
-            <span>
-              Category
-            </span>
-
-            <select data-filter-category>
-
-              <option value="all">
-                All
-              </option>
-
-              ${EVENT_CATEGORIES
-                .map(
-                  value=>`
-
-                    <option
-                      value="${esc(
-                        value
-                      )}"
-                      ${
-                        filters.category ===
-                        value
-                          ? 'selected'
-                          : ''
-                      }
-                    >
-                      ${esc(
-                        value
-                      )}
-                    </option>
-                  `
-                )
-                .join('')
-              }
-
-            </select>
-
-          </label>
-
-
-          <label class="dm-timeline-field">
-
-            <span>
-              Personnel
-            </span>
-
-            <select data-filter-npc>
-
-              <option value="all">
-                All Personnel
-              </option>
-
-              ${timelineNpcs
-                .map(
-                  npc=>`
-
-                    <option
-                      value="${npc.id}"
-                      ${
-                        filters.npc ===
-                        npc.id
-                          ? 'selected'
-                          : ''
-                      }
-                    >
-                      ${esc(
-                        npc.name_cast
-                      )}
-                    </option>
-                  `
-                )
-                .join('')
-              }
-
-            </select>
-
-          </label>
-
-
-          <label class="dm-timeline-field">
-
-            <span>
-              Rose Hour
-            </span>
-
-            <select data-filter-rose>
-
-              <option value="all">
-                All Hours
-              </option>
-
-              ${ROSE_HOURS
-                .map(
-                  (
-                    name,
-                    hour
-                  )=>`
-
-                    <option
-                      value="${hour}"
-                      ${
-                        String(
-                          filters.rose
-                        ) ===
-                        String(
-                          hour
-                        )
-                          ? 'selected'
-                          : ''
-                      }
-                    >
-                      ${hour}
-                      ·
-                      ${esc(
-                        name
-                      )}
-                    </option>
-                  `
-                )
-                .join('')
-              }
-
-            </select>
-
-          </label>
-
-<label class="dm-timeline-field">
-
-  <span>
-    Start Date
-  </span>
-
-  <input
-    type="date"
-    data-filter-start-date
-    value="${esc(
-      filters.startDate
-    )}"
-  >
-
-</label>
-
-
-<label class="dm-timeline-field">
-
-  <span>
-    End Date
-  </span>
-
-  <input
-    type="date"
-    data-filter-end-date
-    value="${esc(
-      filters.endDate
-    )}"
-  >
-
-</label>
-
-        </div>
-
-      </section>
-    `;
-
+  function npcDisplay(npc){
+    return [npc.name_cast,npc.name_unbound].filter(Boolean).join(' / ');
   }
-
+  function npcMatches(npc,query){
+    const haystack = [npc.name_cast,npc.name_unbound,npc.title,npc.company_association].filter(Boolean).join(' ').toLowerCase();
+    return query.trim().toLowerCase().split(/\s+/).every(term=>haystack.includes(term));
+  }
+  function npcFilterOptions(){
+    const matches = timelineNpcs.filter(n=>n.id===filters.npc || npcMatches(n,npcFilterQuery));
+    return `<option value="all">All Personnel</option>${matches.map(n=>`<option value="${esc(n.id)}" ${filters.npc===n.id?'selected':''}>${esc(npcDisplay(n))}</option>`).join('')}`;
+  }
+  function selectOptions(values,selected,allLabel){
+    return `<option value="all">${esc(allLabel)}</option>`+Object.entries(values).map(([key,label])=>`<option value="${esc(key)}" ${String(selected)===String(key)?'selected':''}>${esc(label)}</option>`).join('');
+  }
+  function filterOptions(){
+    const rangeLabel = filters.startDate || filters.endDate ? `${filters.startDate?formatDate(filters.startDate):'Beginning'} to ${filters.endDate?formatDate(filters.endDate):'Latest'}` : 'All recorded dates';
+    const years = [...new Set(timelineEvents.map(eventDate).filter(Boolean).map(d=>d.getUTCFullYear()))].sort((a,b)=>a-b);
+    const yearOptions = years.map(y=>`<option value="${y}" ${rangeMode==='calendar-year' && parseDate(rangeAnchor)?.getUTCFullYear()===y?'selected':''}>${y}</option>`).join('');
+    return `<section class="dm-console-panel dm-timeline-filter-panel epcot-agenda-controls">
+      <div class="dm-page-kicker">TIMELINE NAVIGATION</div>
+      <div class="epcot-range-row">
+        ${[['present','Around present'],['month','Month'],['quarter','Quarter'],['year','Campaign year'],['campaign','Campaign to date'],['history','History'],['future','All future'],['clear','All events']].map(([key,label])=>`<button type="button" class="dm-personnel-secondary epcot-range-button ${rangeMode===key?'active':''}" aria-pressed="${rangeMode===key}" data-timeline-range="${key}">${label}</button>`).join('')}
+      </div>
+      <div class="epcot-range-navigation">
+        <button type="button" class="dm-personnel-secondary" data-agenda-shift="-1" ${['month','quarter','year','calendar-year','present'].includes(rangeMode)?'':'disabled'} aria-label="Previous period">← Previous</button>
+        <div class="epcot-range-label"><strong>${esc(rangeLabel)}</strong><small>${rangeMode==='year'?'Campaign anniversary to anniversary':rangeMode==='history'?'Before Founders Day':rangeMode==='clear'?'Includes undated events':'Selected date window'}</small></div>
+        <button type="button" class="dm-personnel-secondary" data-agenda-shift="1" ${['month','quarter','year','calendar-year','present'].includes(rangeMode)?'':'disabled'} aria-label="Next period">Next →</button>
+        <label class="dm-timeline-field epcot-year-jump"><span>Jump to calendar year</span><select data-agenda-year><option value="">Select year</option>${yearOptions}</select></label>
+      </div>
+      <div class="dm-timeline-filters epcot-agenda-filters">
+        <label class="dm-timeline-field"><span>Status</span><select data-filter-status>${selectOptions({planned:'Planned',occurred:'Occurred',disrupted:'Disrupted',revised:'Revised'},filters.status,'All statuses')}</select></label>
+        <label class="dm-timeline-field"><span>Category</span><select data-filter-category>${selectOptions(Object.fromEntries(EVENT_CATEGORIES.map(c=>[c,c])),filters.category,'All categories')}</select></label>
+        <label class="dm-timeline-field"><span>Event type</span><select data-filter-type>${selectOptions(EVENT_TYPES,filters.type,'All event types')}</select></label>
+        <label class="dm-timeline-field"><span>Story branch</span><select data-filter-branch>${selectOptions(BRANCHES,filters.branch,'All branches')}</select></label>
+        <label class="dm-timeline-field"><span>Rose hour</span><select data-filter-rose>${selectOptions(Object.fromEntries(ROSE_HOURS.map((name,h)=>[h,`${h} · ${name}`])),filters.rose,'All hours')}</select></label>
+        <div class="dm-timeline-field epcot-personnel-filter"><span>Personnel (CAST or Unbound)</span><input type="search" data-agenda-npc-search aria-label="Search personnel" placeholder="Search name, title, sponsor…" value="${esc(npcFilterQuery)}"><select data-filter-npc aria-label="Select personnel">${npcFilterOptions()}</select></div>
+        <label class="dm-timeline-field"><span>Search events</span><input data-agenda-text type="search" placeholder="Title or description…" value="${esc(filters.text)}"></label>
+      </div>
+      <div class="epcot-custom-row"><details ${rangeMode==='custom'?'open':''}><summary>Custom date range</summary><div class="epcot-custom-dates"><label class="dm-timeline-field"><span>Start date</span><input type="date" data-filter-start-date value="${esc(filters.startDate)}"></label><label class="dm-timeline-field"><span>End date</span><input type="date" data-filter-end-date value="${esc(filters.endDate)}"></label></div></details><button type="button" class="dm-personnel-secondary" data-agenda-reset>Reset filters</button></div>
+    </section>`;
+  }
 
   function filteredEvents(){
 
     return timelineEvents
       .filter(
         event=>{
+          if(filters.type !== 'all' && (event.event_type || 'other') !== filters.type) return false;
+          if(filters.branch !== 'all' && (event.branch_condition || 'always') !== filters.branch) return false;
+          if(filters.text && ![event.title,event.description,...npcsForEvent(event.id).map(npcDisplay)].filter(Boolean).join(' ').toLowerCase().includes(filters.text.toLowerCase())) return false;
 
           if(
             filters.status !==
@@ -1677,126 +1455,39 @@ if(
    TIMELINE RANGE PRESETS
    ===================================================== */
 
-function setTimelineRange(
-  preset
-){
-
-  /* ---------------------------------------------
-     AROUND PRESENT
-     Present - 30 days through Present + 90 days
-     --------------------------------------------- */
-
-  if(
-    preset ===
-    'present'
-  ){
-
-    if(!presentDate){
-
-      alert(
-        'Set the Present Date before using Around Present.'
-      );
-
-      return;
-
-    }
-
-
-    filters.startDate =
-      dateString(
-        addDays(
-          presentDate,
-          -30
-        )
-      )
-      ||
-      '';
-
-
-    filters.endDate =
-      dateString(
-        addDays(
-          presentDate,
-          90
-        )
-      )
-      ||
-      '';
-
-
-    render();
-
-    return;
-
+  function addMonths(value,count){
+    const d = value instanceof Date ? new Date(value) : parseDate(value);
+    if(!d) return null;
+    const day=d.getUTCDate(); d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth()+count);
+    const last=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)).getUTCDate();
+    d.setUTCDate(Math.min(day,last)); return d;
   }
-
-
-  /* ---------------------------------------------
-     CAMPAIGN
-     Progress Day through Present only
-     --------------------------------------------- */
-
-  if(
-    preset ===
-    'campaign'
-  ){
-
-    if(
-      !foundersDay ||
-      !presentDate
-    ){
-
-      alert(
-        'Set both Progress Day and Present Date before using the Campaign range.'
-      );
-
-      return;
-
-    }
-
-
-    filters.startDate =
-      foundersDay;
-
-
-    filters.endDate =
-      presentDate;
-
-
-    render();
-
-    return;
-
+  function applyRange(){
+    const d=parseDate(rangeAnchor || presentDate || foundersDay);
+    const f=parseDate(foundersDay), p=parseDate(presentDate);
+    let start=null,end=null;
+    if(rangeMode==='present' && d){start=addDays(d,-30);end=addDays(d,90);}
+    if(rangeMode==='month' && d){start=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),1));end=addDays(addMonths(start,1),-1);}
+    if(rangeMode==='quarter' && d){start=new Date(Date.UTC(d.getUTCFullYear(),Math.floor(d.getUTCMonth()/3)*3,1));end=addDays(addMonths(start,3),-1);}
+    if(rangeMode==='year' && d && f){let y=d.getUTCFullYear()-f.getUTCFullYear();start=addMonths(f,y*12);if(start>d)start=addMonths(start,-12);end=addDays(addMonths(start,12),-1);}
+    if(rangeMode==='calendar-year' && d){start=new Date(Date.UTC(d.getUTCFullYear(),0,1));end=new Date(Date.UTC(d.getUTCFullYear(),11,31));}
+    if(rangeMode==='campaign' && f && p){start=f;end=p;}
+    if(rangeMode==='history' && f)end=addDays(f,-1);
+    if(rangeMode==='future' && p)start=p;
+    if(rangeMode==='custom')return;
+    filters.startDate=dateString(start)||'';filters.endDate=dateString(end)||'';
   }
-
-
-  /* ---------------------------------------------
-     CLEAR RANGE
-     Leave other filters untouched
-     --------------------------------------------- */
-
-  if(
-    preset ===
-    'clear'
-  ){
-
-    filters.startDate =
-      '';
-
-
-    filters.endDate =
-      '';
-
-
-    render();
-
+  function setTimelineRange(preset){
+    rangeMode=preset;rangeAnchor=presentDate||foundersDay;applyRange();render();
   }
-
-}
-
-  /* =====================================================
-     EVENT TOOLTIP
-     ===================================================== */
+  function shiftAgenda(direction){
+    if(!rangeAnchor) return;
+    const counts={month:1,quarter:3,year:12,'calendar-year':12};
+    if(rangeMode==='present')rangeAnchor=dateString(addDays(rangeAnchor,121*direction));
+    else if(counts[rangeMode])rangeAnchor=dateString(addMonths(rangeAnchor,counts[rangeMode]*direction));
+    else return;
+    applyRange();render();
+  }
 
   function eventTooltip(
     event
@@ -1884,503 +1575,43 @@ function setTimelineRange(
      ===================================================== */
 
   function renderVisualTimeline(){
-
-    const events =
-      filteredEvents();
-
-
-    const dated =
-      events
-        .map(
-          event=>({
-
-            event,
-
-            date:
-              eventDate(
-                event
-              )
-
-          })
-        )
-        .filter(
-          item =>
-            item.date
-        )
-        .sort(
-          (
-            a,
-            b
-          ) =>
-            a.date -
-            b.date
-        );
-
-
-    const undated =
-      events.filter(
-        event =>
-          !eventDate(
-            event
-          )
-      );
-
-
-    const anchorDates = [];
-
-
-    dated.forEach(
-      item =>
-        anchorDates.push(
-          item.date
-        )
-    );
-
-
-    if(foundersDay){
-
-      anchorDates.push(
-        parseDate(
-          foundersDay
-        )
-      );
-
+    const events=filteredEvents();
+    const dated=events.map(event=>({event,date:eventDate(event)})).filter(i=>i.date).sort((a,b)=>a.date-b.date||(a.event.sort_order??1000)-(b.event.sort_order??1000)||a.event.title.localeCompare(b.event.title));
+    const undated=events.filter(e=>!eventDate(e));
+    const f=parseDate(foundersDay);
+    const p=parseDate(presentDate);
+    const start=parseDate(filters.startDate),end=parseDate(filters.endDate);
+    const narrow=start&&end&&daysBetween(start,end)<=730;
+    const groups=new Map();
+    for(const item of dated){
+      const y=item.date.getUTCFullYear();
+      const monthly=narrow || (f&&item.date>=f);
+      const key=monthly?`${y}-${String(item.date.getUTCMonth()+1).padStart(2,'0')}`:`${y}`;
+      if(!groups.has(key))groups.set(key,[]);
+      groups.get(key).push(item);
     }
-
-
-    if(presentDate){
-
-      anchorDates.push(
-        parseDate(
-          presentDate
-        )
-      );
-
+    const monthFormat=new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric',timeZone:'UTC'});
+    function card(event,date){
+      const npcs=npcsForEvent(event.id);
+      const type=EVENT_TYPES[event.event_type]||'Other';
+      const conditional=event.branch_condition&&event.branch_condition!=='always';
+      const status=event.status||'planned';
+      const when=date?formatDate(date):(event.timing_type==='rose'?`Rose Hour ${event.rose_hour} · not projected`:'Undated');
+      const day=date&&f?daysBetween(f,date):null;
+      return `<button type="button" class="epcot-agenda-event ${conditional&&!branchReady(event)?'epcot-conditional':''}" data-edit-timeline-event="${esc(event.id)}">
+        <div class="epcot-agenda-date"><strong>${esc(when)}</strong>${day!==null&&Math.abs(day)<=2000?`<small>Day ${day>=0?'+':''}${day}</small>`:''}${date&&p&&dateString(date)===dateString(p)?'<small class="epcot-now">PRESENT</small>':''}</div>
+        <div class="epcot-agenda-content"><strong>${esc(event.title)}</strong><div class="epcot-agenda-tags"><span>${esc(type)}</span><span class="epcot-status ${esc(status)}">${esc(status)}</span>${event.timing_type==='rose'?`<span class="epcot-rose-tag">Rose ${esc(event.rose_hour)}${event.rose_offset_days?` ${event.rose_offset_days>0?'+':''}${esc(event.rose_offset_days)}d`:''}</span>`:''}${conditional?`<span class="epcot-branch-tag">${esc(BRANCHES[event.branch_condition]||event.branch_condition)}${branchReady(event)?' · active':' · pending'}</span>`:''}</div>${npcs.length?`<small class="epcot-agenda-names">${esc(npcs.map(npcDisplay).join(' · '))}</small>`:''}${event.description?`<div class="epcot-agenda-preview">${esc(event.description)}</div>`:''}</div><span class="epcot-agenda-chevron" aria-hidden="true">›</span>
+      </button>`;
     }
-
-
-    let stage =
-      '';
-
-
-    if(
-      anchorDates.length
-    ){
-
-      let minimum =
-        new Date(
-          Math.min(
-            ...anchorDates.map(
-              date =>
-                date.getTime()
-            )
-          )
-        );
-
-
-      let maximum =
-        new Date(
-          Math.max(
-            ...anchorDates.map(
-              date =>
-                date.getTime()
-            )
-          )
-        );
-
-
-      minimum =
-        addDays(
-          minimum,
-          -7
-        );
-
-
-      maximum =
-        addDays(
-          maximum,
-          7
-        );
-
-
-      const span =
-        Math.max(
-          1,
-          daysBetween(
-            minimum,
-            maximum
-          )
-        );
-
-
-      const width =
-        Math.max(
-          1000,
-          Math.min(
-            7000,
-            span *
-            18
-          )
-        );
-
-
-      function position(
-        value
-      ){
-
-        const offset =
-          daysBetween(
-            minimum,
-            value
-          );
-
-
-        return (
-          offset /
-          span
-        ) *
-        100;
-
-      }
-
-
-      stage = `
-
-        <div class="dm-timeline-scroll">
-
-          <div
-            class="dm-timeline-stage"
-            style="
-              width:${width}px;
-            "
-          >
-
-            <div class="dm-timeline-axis"></div>
-
-
-            ${
-              foundersDay
-                ? `
-                    <div
-                      class="
-                        dm-timeline-anchor
-                        founder
-                      "
-                      style="
-                        left:
-                          ${position(
-                            parseDate(
-                              foundersDay
-                            )
-                          )}%;
-                      "
-                    >
-                      <strong>
-                        PROGRESS DAY
-                      </strong>
-                    </div>
-                  `
-                : ''
-            }
-
-
-            ${
-              presentDate
-                ? `
-                    <div
-                      class="
-                        dm-timeline-anchor
-                        present
-                      "
-                      style="
-                        left:
-                          ${position(
-                            parseDate(
-                              presentDate
-                            )
-                          )}%;
-                      "
-                    >
-                      <strong>
-                        PRESENT
-                      </strong>
-                    </div>
-                  `
-                : ''
-            }
-
-
-            ${dated
-              .map(
-                (
-                  item,
-                  index
-                )=>{
-
-                  const event =
-                    item.event;
-
-
-                  const upper =
-                    index %
-                    2 ===
-                    0;
-
-
-                  const lane =
-                    index %
-                    3;
-
-
-                  const y =
-                    upper
-                      ? 126 -
-                        (
-                          lane *
-                          35
-                        )
-                      : 228 +
-                        (
-                          lane *
-                          35
-                        );
-
-
-                  const axisY =
-                    178;
-
-
-                  const stemTop =
-                    Math.min(
-                      y,
-                      axisY
-                    );
-
-
-                  const stemHeight =
-                    Math.abs(
-                      y -
-                      axisY
-                    );
-
-
-                  const due =
-                    isDue(
-                      event
-                    );
-
-
-                  return `
-
-                    <div
-                      style="
-                        position:absolute;
-                        left:
-                          ${position(
-                            item.date
-                          )}%;
-                        top:0;
-                      "
-                    >
-
-                      <div
-                        class="dm-timeline-stem"
-                        style="
-                          top:${stemTop}px;
-                          height:${stemHeight}px;
-                        "
-                      ></div>
-
-
-                      <button
-                        class="
-                          dm-timeline-node
-                          ${esc(
-                            event.status
-                          )}
-                          ${
-                            due
-                              ? 'is-due'
-                              : ''
-                          }
-                        "
-                        style="
-                          top:${y}px;
-                        "
-                        type="button"
-                        data-edit-timeline-event="${event.id}"
-                      >
-
-                        <span class="dm-timeline-tooltip">
-                          ${eventTooltip(
-                            event
-                          )}
-                        </span>
-
-                      </button>
-
-
-                      <div
-                        class="dm-timeline-label"
-                        style="
-                          top:${
-                            upper
-                              ? y - 42
-                              : y + 17
-                          }px;
-                        "
-                      >
-
-                        <strong>
-                          ${esc(
-                            event.title
-                          )}
-                        </strong>
-
-                        <br>
-
-                        ${esc(
-                          formatDate(
-                            item.date
-                          )
-                        )}
-
-                      </div>
-
-                    </div>
-
-                  `;
-
-                }
-              )
-              .join('')
-            }
-
-          </div>
-
-        </div>
-      `;
-
-    }
-    else{
-
-      stage = `
-
-        <div class="dm-timeline-empty">
-
-          The timeline is ready,
-          but no calendar dates have been established yet.
-
-          You can still create undated events,
-          Rose-bound events, and Personnel plans now.
-
-        </div>
-      `;
-
-    }
-
-
-    return `
-
-      <section
-        class="
-          dm-console-panel
-          dm-timeline-visual-panel
-        "
-      >
-
-        <div class="dm-timeline-visual-head">
-
-          <div>
-
-            <div class="dm-page-kicker">
-              SHARED WORLD TIMELINE
-            </div>
-
-            <h2>
-              Reality, Past to Future
-            </h2>
-
-          </div>
-
-
-          <button
-            class="dm-personnel-primary"
-            type="button"
-            data-add-timeline-event
-          >
-            + Add Event
-          </button>
-
-        </div>
-
-
-        ${stage}
-
-
-        ${
-          undated.length
-            ? `
-                <div class="dm-timeline-undated">
-
-                  <div class="dm-page-kicker">
-                    UNDATED / UNPROJECTED
-                  </div>
-
-
-                  <div class="dm-timeline-undated-grid">
-
-                    ${undated
-                      .map(
-                        event=>`
-
-                          <button
-                            class="dm-timeline-undated-card"
-                            type="button"
-                            data-edit-timeline-event="${event.id}"
-                          >
-
-                            <strong>
-                              ${esc(
-                                event.title
-                              )}
-                            </strong>
-
-                            <div class="dm-time-muted">
-
-                              ${
-                                event.timing_type ===
-                                'rose'
-                                  ? `Rose Hour ${
-                                      event.rose_hour
-                                    } · Projection not dated`
-                                  : 'No calendar date'
-                              }
-
-                            </div>
-
-                          </button>
-                        `
-                      )
-                      .join('')
-                    }
-
-                  </div>
-
-                </div>
-              `
-            : ''
-        }
-
-      </section>
-    `;
-
+    let previous=null;
+    const content=[...groups.entries()].map(([key,items])=>{
+      const first=items[0].date,last=items[items.length-1].date;
+      const gap=previous?daysBetween(previous,first):0;previous=last;
+      const heading=key.includes('-')?monthFormat.format(first):key;
+      return `${gap>=365?`<div class="epcot-agenda-gap">${Math.floor(gap/365.2425)}+ years between recorded events</div>`:''}<section class="epcot-agenda-group"><header><h3>${esc(heading)}</h3><span>${items.length} ${items.length===1?'event':'events'}</span></header><div class="epcot-agenda-cards">${items.map(i=>card(i.event,i.date)).join('')}</div></section>`;
+    }).join('');
+    return `<section class="dm-console-panel dm-timeline-visual-panel epcot-agenda-panel ${compactAgenda?'epcot-agenda-compact':''}"><div class="dm-timeline-visual-head"><div><div class="dm-page-kicker">SHARED WORLD TIMELINE</div><h2>Reality, Past to Future</h2><div class="dm-time-muted">${events.length} of ${timelineEvents.length} events · Empty periods compressed · Select an event to edit</div></div><div class="epcot-agenda-actions"><button class="dm-personnel-secondary" type="button" data-agenda-compact aria-pressed="${compactAgenda}">${compactAgenda?'Show details':'Compact view'}</button><button class="dm-personnel-primary" type="button" data-add-timeline-event>+ Add Event</button></div></div><div class="epcot-agenda-results">${content}${undated.length?`<section class="epcot-agenda-group"><header><h3>Undated / Unprojected</h3><span>${undated.length} events</span></header>${undated.map(e=>card(e,null)).join('')}</section>`:''}${events.length?'':'<div class="dm-timeline-empty">No events in this window. Try another period or reset the filters.</div>'}</div></section>`;
   }
-
-
-  /* =====================================================
-     DUE EVENTS
-     ===================================================== */
 
   function renderDueEvents(){
 
@@ -3657,57 +2888,25 @@ function setTimelineRange(
   }
 
 
-  function npcEditor(
-    event
-  ){
-
-    const selected =
-      event.id
-        ? npcIdsForEvent(
-            event.id
-          )
-        : [];
-
-
-    return `
-
-      <div class="dm-timeline-npc-list">
-
-        ${timelineNpcs
-          .map(
-            npc=>`
-
-              <label class="dm-timeline-check">
-
-                <input
-                  type="checkbox"
-                  data-event-npc="${npc.id}"
-                  ${
-                    selected.includes(
-                      npc.id
-                    )
-                      ? 'checked'
-                      : ''
-                  }
-                >
-
-                <span>
-                  ${esc(
-                    npc.name_cast
-                  )}
-                </span>
-
-              </label>
-            `
-          )
-          .join('')
-        }
-
-      </div>
-    `;
-
+  function npcEditor(event){
+    const selected = event.id?npcIdsForEvent(event.id):[];
+    return `<div class="epcot-npc-editor"><input type="search" data-event-npc-search aria-label="Find NPC by CAST or Unbound identity" placeholder="Search CAST / Unbound name, title, sponsor…"><div class="epcot-npc-summary"><strong data-event-npc-count>${selected.length} selected</strong><label><input type="checkbox" data-event-npc-selected-only> Selected only</label></div><div data-event-npc-summary class="epcot-npc-chips">${esc(selected.map(npcById).filter(Boolean).map(npcDisplay).join(' · ')||'No personnel selected')}</div><div class="dm-timeline-npc-list">${timelineNpcs.map(npc=>`<label class="dm-timeline-check epcot-npc-item" data-npc-row="${esc(npc.id)}"><input type="checkbox" data-event-npc="${esc(npc.id)}" ${selected.includes(npc.id)?'checked':''}><div><strong>${esc(npc.name_cast)}</strong>${npc.name_unbound?`<small>${esc(npc.name_unbound)}</small>`:''}${npc.title?`<small class="dm-time-muted">${esc(npc.title)}</small>`:''}</div></label>`).join('')}</div><div data-event-npc-empty hidden class="dm-time-muted">No matching personnel.</div></div>`;
   }
-
+  function syncNpcEditor(view){
+    const query=view.querySelector('[data-event-npc-search]').value;
+    const only=view.querySelector('[data-event-npc-selected-only]').checked;
+    let shown=0;
+    const selected=[];
+    for(const row of view.querySelectorAll('[data-npc-row]')){
+      const input=row.querySelector('[data-event-npc]'),npc=npcById(input.dataset.eventNpc);
+      if(input.checked&&npc) selected.push(npcDisplay(npc));
+      row.hidden=!(npc&&npcMatches(npc,query)&&(!only||input.checked));
+      if(!row.hidden)shown++;
+    }
+    view.querySelector('[data-event-npc-count]').textContent=`${selected.length} selected · ${shown} matching`;
+    view.querySelector('[data-event-npc-summary]').textContent=selected.join(' · ')||'No personnel selected';
+    view.querySelector('[data-event-npc-empty]').hidden=shown!==0;
+  }
 
   function timingFields(
     event
@@ -3915,8 +3114,10 @@ function setTimelineRange(
         description:'',
         status:'planned',
         categories:[],
-        timing_type:'undated',
-        calendar_date:null,
+        timing_type:presentDate?'exact':'undated',
+        calendar_date:presentDate||null,
+        event_type:'other',
+        branch_condition:'always',
         founder_offset_days:0,
         rose_hour:currentRoseHour,
         rose_offset_days:0
@@ -4004,9 +3205,9 @@ function setTimelineRange(
             </label>
 
 
-            ${timingFields(
-              event
-            )}
+            <label class="dm-timeline-field"><span>Event type</span><select id="dmTimelineEventType">${Object.entries(EVENT_TYPES).map(([key,label])=>`<option value="${key}" ${(event.event_type||'other')===key?'selected':''}>${esc(label)}</option>`).join('')}</select></label>
+            <label class="dm-timeline-field"><span>Story branch</span><select id="dmTimelineEventBranch">${Object.entries(BRANCHES).map(([key,label])=>`<option value="${key}" ${(event.branch_condition||'always')===key?'selected':''}>${esc(label)}</option>`).join('')}</select></label>
+            ${timingFields(event)}
 
 
             <div
@@ -4160,7 +3361,10 @@ function setTimelineRange(
 
 
     syncTiming();
-
+    view.querySelector('[data-event-npc-search]').addEventListener('input',()=>syncNpcEditor(view));
+    view.querySelector('[data-event-npc-selected-only]').addEventListener('change',()=>syncNpcEditor(view));
+    view.querySelector('.dm-timeline-npc-list').addEventListener('change',()=>syncNpcEditor(view));
+    syncNpcEditor(view);
 
     view
       .querySelector(
@@ -4267,6 +3471,8 @@ function setTimelineRange(
         ).value,
 
       categories,
+      event_type:byId('dmTimelineEventType').value,
+      branch_condition:byId('dmTimelineEventBranch').value,
 
       timing_type:
         timing,
@@ -5165,6 +4371,10 @@ function setTimelineRange(
     'click',
     event=>{
 
+if(event.target.closest('[data-agenda-compact]')){compactAgenda=!compactAgenda;const panel=byId('dmTimelineMount')?.querySelector('.epcot-agenda-panel');if(panel)panel.outerHTML=renderVisualTimeline();return;}
+const shift=event.target.closest('[data-agenda-shift]');
+if(shift){ if(!shift.disabled)shiftAgenda(Number(shift.dataset.agendaShift));return; }
+if(event.target.closest('[data-agenda-reset]')){ Object.assign(filters,{status:'all',category:'all',npc:'all',rose:'all',type:'all',branch:'all',text:''});npcFilterQuery='';render();return; }
 const timelineRange =
   event.target.closest(
     '[data-timeline-range]'
@@ -5311,6 +4521,9 @@ if(timelineRange){
     'change',
     event=>{
 
+      if(event.target.matches('[data-agenda-year]') && event.target.value){rangeMode='calendar-year';rangeAnchor=event.target.value+'-01-01';applyRange();render();return;}
+      if(event.target.matches('[data-filter-type]')){filters.type=event.target.value;render();return;}
+      if(event.target.matches('[data-filter-branch]')){filters.branch=event.target.value;render();return;}
       if(
         event.target.matches(
           '[data-filter-status]'
@@ -5372,6 +4585,7 @@ if(
   )
 ){
 
+  rangeMode='custom';
   filters.startDate =
     event.target.value;
 
@@ -5386,6 +4600,7 @@ if(
   )
 ){
 
+  rangeMode='custom';
   filters.endDate =
     event.target.value;
 
@@ -5400,6 +4615,19 @@ if(
   /* =====================================================
      START
      ===================================================== */
+
+  document.addEventListener('input', event=>{
+    if(event.target.matches('[data-agenda-npc-search]')){
+      npcFilterQuery=event.target.value;
+      const select=byId('dmTimelineMount')?.querySelector('[data-filter-npc]');
+      if(select){select.innerHTML=npcFilterOptions();select.value=filters.npc;}
+    }
+    if(event.target.matches('[data-agenda-text]')){
+      filters.text=event.target.value;
+      const panel=byId('dmTimelineMount')?.querySelector('.epcot-agenda-panel');
+      if(panel)panel.outerHTML=renderVisualTimeline();
+    }
+  });
 
   document.addEventListener(
     'DOMContentLoaded',
